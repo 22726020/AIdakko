@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'dart:ui' as ui;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:gazou/blaze.dart';
 import 'package:gazou/display.dart';
 import 'package:quiver/async.dart';
 
@@ -30,7 +31,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   int tmp = 0;
 
   // ③ カウントダウン処理を行う関数を定義
-  void startTimer() {
+  Future <void> startTimer() async{
     CountdownTimer countDownTimer = new CountdownTimer(
       new Duration(seconds: _start), //初期値
       new Duration(seconds: 1), // 減らす幅
@@ -43,11 +44,12 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       });
     });
     // ④終了時の処理
-    sub.onDone(() {
-      final image = _controller.takePicture();
-      Navigator.push(
+    sub.onDone(()async {
+      final image = await _controller.takePicture();
+
+      await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Display(camera:widget.camera),
+                    MaterialPageRoute(builder: (context) => BlazePage(imagePath:image.path,camera:widget.camera),
               )
                     );
     });
