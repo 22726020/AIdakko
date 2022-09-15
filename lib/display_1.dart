@@ -24,7 +24,7 @@ class Display2State extends State<Display2> {
   late Future<void> _initializeControllerFuture;
   bool check = true;
   double opacity = 0.5;
-  int _start = 6;
+  int _start = 5;
   int _current = 5;
   int tmp = 0;
 
@@ -106,17 +106,7 @@ class Display2State extends State<Display2> {
               ),
             ),
           ),
-          TextButton(//やらせボタン
-          onPressed: () { Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Display2(camera:widget.camera),
-                      )
-                            ); },
-          style: TextButton.styleFrom(
-            primary: Colors.red,
-          ),
-          child: Text(''),
-          )
+          
           
         ],
       ),
@@ -125,7 +115,7 @@ class Display2State extends State<Display2> {
           // 写真を撮る
           startTimer();
           final image = await _controller.takePicture();
-          MaterialPageRoute(builder: (context) => Display2(camera:widget.camera),);
+          
         },
         child: const Icon(Icons.camera_alt),
       ),

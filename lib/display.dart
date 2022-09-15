@@ -24,15 +24,9 @@ class DisplayState extends State<Display> {
   late Future<void> _initializeControllerFuture;
   bool check = true;
   double opacity = 0.5;
-  int _start = 6;
+  int _start = 5;
   int _current = 5;
   int tmp = 0;
-
-  @override
-  void starttime(){
-    //アプリ起動時に一度だけ実行される
-    startTimer();
-  }
 
   // ③ カウントダウン処理を行う関数を定義
   void startTimer() {
@@ -90,7 +84,6 @@ class DisplayState extends State<Display> {
           FutureBuilder<void>(
             future: _initializeControllerFuture,
             builder: (context, snapshot) {
-              
               if (snapshot.connectionState == ConnectionState.done) {
                 return CameraPreview(_controller);
               } else {
@@ -113,20 +106,19 @@ class DisplayState extends State<Display> {
               ),
             ),
           ),
-          FutureBuilder<void>(
-            future: _initializeControllerFuture,
-            builder: (context, snapshot) {
-              
-              if (snapshot.connectionState == ConnectionState.done) {
-                return CameraPreview(_controller);
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
-          ),
+          
+          
         ],
       ),
-      
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // 写真を撮る
+          startTimer();
+          final image = await _controller.takePicture();
+          
+        },
+        child: const Icon(Icons.camera_alt),
+      ),
       
     );
   }
