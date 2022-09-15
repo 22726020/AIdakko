@@ -107,17 +107,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               ),
             ),
           ),
-          TextButton(//やらせボタン
-          onPressed: () { Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Display(camera:widget.camera),
-                      )
-                            ); },
-          style: TextButton.styleFrom(
-            primary: Colors.red,
-          ),
-          child: Text(''),
-          )
+          
           
         ],
       ),
