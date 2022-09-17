@@ -53,18 +53,20 @@ class _BlazePageState extends State<BlazePage> {
     });
     
     //閾値をピクセル値以上に設定する
-    var EllorXlist = listx.where((value) => value > 700).toList();
-    var EllorYlist = listy.where((value2) => value2 > 800).toList();
+    var EllorXlist = listx.where((value) => value > 700000).toList();
+    var EllorYlist = listy.where((value2) => value2 > 7000000).toList();
     print(listx);
     print(listy);
     print(EllorXlist);
     print(EllorYlist);
-    hantei = true;
+    hantei = false;
     //おかしいところ判定
-    if (EllorXlist.isEmpty || EllorYlist.isEmpty) {
-      hantei = false;
+    if (EllorXlist.isEmpty && EllorYlist.isEmpty) {
+      hantei = true;
+      //trueの時保存するコード書く
     }
     print(hantei);
+    
   }
 
   void _resetState() {
@@ -76,6 +78,7 @@ class _BlazePageState extends State<BlazePage> {
       _poseFound = false;
       _filePath = null;
     });
+    
   }
 
   Widget _showImage() {
@@ -121,8 +124,10 @@ class _BlazePageState extends State<BlazePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
+              //勝手にボタン押せるようにする
               onPressed: () => _blazePose(),
               child: const Text('Run BlazePose'),
+              
             ),
             Stack(
               children: <Widget>[_showImage(), _drawPoints()],
