@@ -6,7 +6,7 @@ import 'package:gazou/display.dart';
 import 'package:gazou/get.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
-
+//git追加テスト
 class BlazePage extends StatefulWidget {
   const BlazePage({Key? key, required this.camera,required this.imagePath}) : super(key: key);
   final CameraDescription camera;
