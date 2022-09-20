@@ -91,6 +91,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 //   child: Text('抱っこ撮影',style: TextStyle(color: Colors.black),),
                 // ),
                 ElevatedButton(
+                  onPressed: _opneUrl,
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 204, 203),
+                    elevation: 26,
+                  ),
+                  child: Text('アンケート入力',style: TextStyle(color: Colors.black)),
+                ),
+                ElevatedButton(
                   onPressed: (){
                     Navigator.push(
                     context,
@@ -116,5 +124,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         )
     );
+  }
+   void _opneUrl() async {
+    final url = Uri.parse('https://docs.google.com/forms/d/168uxibsGbr7ciBM2FsLRksgxEMEkJ_TzCcePeq9n82s/edit?usp=sharing'); //←ここに表示させたいURLを入力する
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+      );
+    } else {
+      throw 'このURLにはアクセスできません';
+    }
   }
 }
