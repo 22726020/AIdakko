@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gazou/display.dart';
 import 'package:gazou/get.dart';
 import 'package:quiver/async.dart';
+import 'package:url_launcher/url_launcher.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
