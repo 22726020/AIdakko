@@ -116,8 +116,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           // 写真を撮る
-          startTimer();
-          final image = await _controller.takePicture();
+          startTimer(
+          );
           
         },
         child: const Icon(Icons.camera_alt),
