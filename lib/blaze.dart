@@ -35,7 +35,14 @@ class _BlazePageState extends State<BlazePage> {
     String path_1 = widget.imagePath;//
     final inputImage = InputImage.fromFilePath(path_1);
     final List<Pose> poses = await poseDetector.processImage(inputImage);
-    var list = <int>[32];
+    //デバイスのサイズ取得
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    // print(deviceHeight);
+    // print(deviceWidth);
+    //初期化
+    listx = [];
+    listy = [];
 
     for (Pose pose in poses) {
       // to access all landmarks
@@ -53,8 +60,8 @@ class _BlazePageState extends State<BlazePage> {
     });
     
     //閾値をピクセル値以上に設定する
-    var EllorXlist = listx.where((value) => value > 700000).toList();
-    var EllorYlist = listy.where((value2) => value2 > 7000000).toList();
+    var EllorXlist = listx.where((valuex) => valuex > deviceWidth+100 || 0 > valuex).toList();
+    var EllorYlist = listy.where((valuey) => valuey > deviceHeight+100 || 0 > valuey).toList();
     print(listx);
     print(listy);
     print(EllorXlist);
@@ -100,7 +107,8 @@ class _BlazePageState extends State<BlazePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (hantei == false)
+    //エラー判定がfalseの時アラートダイアログを表示
+    if (hantei == false){
       Future.delayed(
         Duration.zero,
         () => showDialog(
@@ -108,15 +116,17 @@ class _BlazePageState extends State<BlazePage> {
           builder: (context) => AlertDialog(
             title: Text("姿勢がうまく取れていません"),
             content: Text("やり直してください"),
-            actions: [
-              TextButton(
-                child: Text("閉じる"),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
           ),
         ),
       );
+      //1秒後に自動で閉じる
+      Future.delayed(
+        const Duration(seconds: 1),
+        () => Navigator.pop(context),
+        );
+        //初期化
+        hantei = true;
+    }
 
     return Scaffold(
       body: Center(
