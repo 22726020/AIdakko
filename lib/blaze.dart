@@ -24,6 +24,7 @@ class _BlazePageState extends State<BlazePage> {
   var listy = [];
   bool hantei = true;
   bool hantei2 = true;
+  int count = 0;
 
   String? _extension;
   String? _fileName;
@@ -76,8 +77,47 @@ class _BlazePageState extends State<BlazePage> {
     if (listx.isEmpty && listy.isEmpty){
       hantei2 = false;
     }
-    print(hantei);
+    //エラー判定がfalseの時アラートダイアログを表示
+    //範囲外の時
+    if (hantei == false){
+      Future.delayed(
+        Duration.zero,
+        () => showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text("姿勢がうまく取れていません"),
+            content: Text("撮影し直してください"),
+          ),
+        ),
+      );
+      //1秒後に自動で閉じる
+      Future.delayed(
+        const Duration(seconds: 1),
+        () => Navigator.pop(context),
+        );
+
+    }
+      
+    //写っていないとき
+    if (hantei2 == false){
+      Future.delayed(
+        Duration.zero,
+        () => showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text("人物が写っていません"),
+            content: Text("撮影し直してください"),
+          ),
+        ),
+      );
+      //1秒後に自動で閉じる
+      Future.delayed(
+        const Duration(seconds: 1),
+        () => Navigator.pop(context),
+        );
+    }
   }
+  
 
   void _resetState() {
     if (!mounted) {
@@ -110,46 +150,26 @@ class _BlazePageState extends State<BlazePage> {
 
   @override
   Widget build(BuildContext context) {
-    //エラー判定がfalseの時アラートダイアログを表示
-    //範囲外の時
-    if (hantei == false){
-      Future.delayed(
-        Duration.zero,
-        () => showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("姿勢がうまく取れていません"),
-            content: Text("撮影し直してください"),
-          ),
-        ),
-      );
-      //1秒後に自動で閉じる
-      Future.delayed(
-        const Duration(seconds: 1),
-        () => Navigator.pop(context),
-        );
-        //初期化
-        hantei2 = true;
-    }
-    //写っていないとき
-    if (hantei2 == false){
-      Future.delayed(
-        Duration.zero,
-        () => showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("人物が写っていません"),
-            content: Text("撮影し直してください"),
-          ),
-        ),
-      );
-      //1秒後に自動で閉じる
-      Future.delayed(
-        const Duration(seconds: 1),
-        () => Navigator.pop(context),
-        );
-        //初期化
-        hantei = true;
+    if (count == 0){
+    _blazePose();
+    //再撮影させる
+      if(hantei || hantei2 == false){
+        print(hantei);
+        print(hantei2);
+        // hantei = true;
+        // hantei2 = true;
+        sleep(Duration(seconds: 1)); //3秒遅延
+        Navigator.of(context).pop(); 
+      }
+      //次の撮影へ
+      else{
+        count++;
+         Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Display(camera: widget.camera),
+          )
+          );
+      }
     }
 
     return Scaffold(
@@ -161,7 +181,6 @@ class _BlazePageState extends State<BlazePage> {
               //勝手にボタン押せるようにする
               onPressed: () => _blazePose(),
               child: const Text('Run BlazePose'),
-              
             ),
             Stack(
               children: <Widget>[_showImage(), _drawPoints()],
