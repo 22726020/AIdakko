@@ -23,6 +23,7 @@ class _BlazePageState extends State<BlazePage> {
   var listx = [];
   var listy = [];
   bool hantei = true;
+  bool hantei2 = true;
 
   String? _extension;
   String? _fileName;
@@ -48,22 +49,21 @@ class _BlazePageState extends State<BlazePage> {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
         offsets.add(Offset(landmark.x, landmark.y));
-        print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
+        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
         listx.add(landmark.x);
         listy.add(landmark.y);
       });
     }
-    print(List<Pose>);
+
     setState(() {
       _poseFound = true;
     });
-    
     //閾値をピクセル値以上に設定する
-    var EllorXlist = listx.where((valuex) => valuex > deviceWidth+100 || 0 > valuex).toList();
-    var EllorYlist = listy.where((valuey) => valuey > deviceHeight+100 || 0 > valuey).toList();
-    print(listx);
-    print(listy);
+    var EllorXlist = listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
+    var EllorYlist = listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
+    // print(listx);
+    // print(listy);
     print(EllorXlist);
     print(EllorYlist);
     hantei = false;
@@ -72,8 +72,11 @@ class _BlazePageState extends State<BlazePage> {
       hantei = true;
       //trueの時保存するコード書く
     }
+    //何も写っていない時を排除
+    if (listx.isEmpty && listy.isEmpty){
+      hantei2 = false;
+    }
     print(hantei);
-    
   }
 
   void _resetState() {
@@ -108,6 +111,7 @@ class _BlazePageState extends State<BlazePage> {
   @override
   Widget build(BuildContext context) {
     //エラー判定がfalseの時アラートダイアログを表示
+    //範囲外の時
     if (hantei == false){
       Future.delayed(
         Duration.zero,
@@ -115,7 +119,27 @@ class _BlazePageState extends State<BlazePage> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text("姿勢がうまく取れていません"),
-            content: Text("やり直してください"),
+            content: Text("撮影し直してください"),
+          ),
+        ),
+      );
+      //1秒後に自動で閉じる
+      Future.delayed(
+        const Duration(seconds: 1),
+        () => Navigator.pop(context),
+        );
+        //初期化
+        hantei2 = true;
+    }
+    //写っていないとき
+    if (hantei2 == false){
+      Future.delayed(
+        Duration.zero,
+        () => showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("人物が写っていません"),
+            content: Text("撮影し直してください"),
           ),
         ),
       );

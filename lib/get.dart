@@ -26,8 +26,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late Future<void> _initializeControllerFuture;
   bool check = true;
   double opacity = 0.5;
-  int _start = 10;
-  int _current = 10;
+  int _start = 5;
+  int _current = 5;
   int tmp = 0;
 
   // ③ カウントダウン処理を行う関数を定義
