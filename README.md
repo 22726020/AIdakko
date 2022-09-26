@@ -1,6 +1,6 @@
 # gazou
 
-A new Flutter project.
+main.dart→get.dart→display.dart→blaze.dart
 
 ## Getting Started
 
