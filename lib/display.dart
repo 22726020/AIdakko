@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gazou/display.dart';
 import 'package:gazou/display_1.dart';
 import 'package:quiver/async.dart';
+import 'package:gazou/blaze.dart';
 
 /// 写真撮影画面
 class Display extends StatefulWidget {
@@ -42,16 +43,17 @@ class DisplayState extends State<Display> {
       });
     });
     // ④終了時の処理
-    sub.onDone(() {
-      final image = _controller.takePicture();
-      Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Display(camera:widget.camera),
-              )
-                    );
+    sub.onDone(() async {
+      final image = await _controller.takePicture();
+
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                BlazePage(imagePath: image.path, camera: widget.camera),
+          ));
     });
   }
-
 
   @override
   void initState() {
@@ -100,14 +102,12 @@ class DisplayState extends State<Display> {
             child: Text(
               "$_current",
               style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 300,
-              color: Color.fromARGB(255, 50, 51, 51),
+                fontWeight: FontWeight.bold,
+                fontSize: 300,
+                color: Color.fromARGB(255, 50, 51, 51),
               ),
             ),
           ),
-          
-          
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -115,11 +115,9 @@ class DisplayState extends State<Display> {
           // 写真を撮る
           startTimer();
           final image = await _controller.takePicture();
-          
         },
         child: const Icon(Icons.camera_alt),
       ),
-      
     );
   }
 }

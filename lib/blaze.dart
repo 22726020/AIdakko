@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +5,11 @@ import 'package:gazou/display.dart';
 import 'package:gazou/get.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+
 //git追加テスト
 class BlazePage extends StatefulWidget {
-  const BlazePage({Key? key, required this.camera,required this.imagePath}) : super(key: key);
+  const BlazePage({Key? key, required this.camera, required this.imagePath})
+      : super(key: key);
   final CameraDescription camera;
   final String imagePath;
 
@@ -34,7 +35,7 @@ class _BlazePageState extends State<BlazePage> {
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
 
   Future<void> _blazePose() async {
-    String path_1 = widget.imagePath;//
+    String path_1 = widget.imagePath; //
     final inputImage = InputImage.fromFilePath(path_1);
     final List<Pose> poses = await poseDetector.processImage(inputImage);
     //デバイスのサイズ取得
@@ -61,8 +62,10 @@ class _BlazePageState extends State<BlazePage> {
       _poseFound = true;
     });
     //閾値をピクセル値以上に設定する
-    var EllorXlist = listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
-    var EllorYlist = listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
+    var EllorXlist =
+        listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
+    var EllorYlist =
+        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     // print(listx);
     // print(listy);
     print(EllorXlist);
@@ -74,12 +77,12 @@ class _BlazePageState extends State<BlazePage> {
       //trueの時保存するコード書く
     }
     //何も写っていない時を排除
-    if (listx.isEmpty && listy.isEmpty){
+    if (listx.isEmpty && listy.isEmpty) {
       hantei2 = false;
     }
     //エラー判定がfalseの時アラートダイアログを表示
     //範囲外の時
-    if (hantei == false){
+    if (hantei == false) {
       Future.delayed(
         Duration.zero,
         () => showDialog(
@@ -94,12 +97,11 @@ class _BlazePageState extends State<BlazePage> {
       Future.delayed(
         const Duration(seconds: 1),
         () => Navigator.pop(context),
-        );
-
+      );
     }
-      
+
     //写っていないとき
-    if (hantei2 == false){
+    if (hantei2 == false) {
       Future.delayed(
         Duration.zero,
         () => showDialog(
@@ -114,10 +116,9 @@ class _BlazePageState extends State<BlazePage> {
       Future.delayed(
         const Duration(seconds: 1),
         () => Navigator.pop(context),
-        );
+      );
     }
   }
-  
 
   void _resetState() {
     if (!mounted) {
@@ -128,7 +129,6 @@ class _BlazePageState extends State<BlazePage> {
       _poseFound = false;
       _filePath = null;
     });
-    
   }
 
   Widget _showImage() {
@@ -141,35 +141,40 @@ class _BlazePageState extends State<BlazePage> {
 
   Widget _drawPoints() {
     if (_poseFound) {
-      return CustomPaint(
-      );
+      return CustomPaint();
     } else {
       return const Text('');
     }
   }
 
+  void seigyo() async {
+    if (hantei || hantei2 == false) {
+      print(hantei);
+      print(hantei2);
+      // hantei = true;
+      // hantei2 = true;
+      sleep(Duration(seconds: 1)); //3秒遅延
+      Navigator.pop(context);
+      count--;
+    }
+    //次の撮影へ
+    else {
+      count++;
+      await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Display(camera: widget.camera),
+          ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (count == 0){
-    _blazePose();
-    //再撮影させる
-      if(hantei || hantei2 == false){
-        print(hantei);
-        print(hantei2);
-        // hantei = true;
-        // hantei2 = true;
-        sleep(Duration(seconds: 1)); //3秒遅延
-        Navigator.of(context).pop(); 
-      }
-      //次の撮影へ
-      else{
-        count++;
-         Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Display(camera: widget.camera),
-          )
-          );
-      }
+    if (count == 0) {
+      count++;
+      _blazePose();
+      seigyo();
+      print(count);
     }
 
     return Scaffold(
