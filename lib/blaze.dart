@@ -171,21 +171,9 @@ class _BlazePageState extends State<BlazePage> {
     }
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              //勝手にボタン押せるようにする
-              onPressed: () => _blazePose(),
-              child: const Text('Run BlazePose'),
-            ),
-            Stack(
-              children: <Widget>[_showImage(), _drawPoints()],
-            ),
-          ],
-        ),
-      ),
+      //撮った写真を表示
+      // appBar: AppBar(title: const Text('撮れた写真')),
+      body: Center(child: Image.file(File(widget.imagePath))),
     );
   }
 }
