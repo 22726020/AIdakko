@@ -95,7 +95,7 @@ class _BlazePageState extends State<BlazePage> {
       );
       //1秒後に自動で閉じる
       Future.delayed(
-        const Duration(seconds: 1),
+        const Duration(seconds: 2),
         () => Navigator.pop(context),
       );
     }
@@ -114,7 +114,7 @@ class _BlazePageState extends State<BlazePage> {
       );
       //1秒後に自動で閉じる
       Future.delayed(
-        const Duration(seconds: 1),
+        const Duration(seconds: 2),
         () => Navigator.pop(context),
       );
     }
