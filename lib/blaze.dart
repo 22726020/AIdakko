@@ -118,6 +118,7 @@ class _BlazePageState extends State<BlazePage> {
         () => Navigator.pop(context),
       );
     }
+    seigyo();
   }
 
   void _resetState() {
@@ -147,34 +148,26 @@ class _BlazePageState extends State<BlazePage> {
     }
   }
 
-  void seigyo() async {
-    if (hantei || hantei2 == false) {
-      print(hantei);
-      print(hantei2);
-      // hantei = true;
-      // hantei2 = true;
-      sleep(Duration(seconds: 1)); //3秒遅延
-      Navigator.pop(context);
-      count--;
-    }
-    //次の撮影へ
-    else {
-      count++;
+  Future<void> seigyo() async {
+    //姿勢がきちんと取れているとき次の撮影へ
+    if (hantei && hantei2 == true) {
       await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Display(camera: widget.camera),
           ));
+    } else {
+      //問題があるとき再撮影へ
+      await Future.delayed(Duration(seconds: 1));
+      Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
-      count++;
       _blazePose();
-      seigyo();
-      print(count);
+      count++;
     }
 
     return Scaffold(
