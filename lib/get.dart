@@ -29,6 +29,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   int _start = 5;
   int _current = 5;
   int tmp = 0;
+  int count = 0;
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -78,8 +79,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     super.dispose();
   }
 
-  @override
+
+
+
   Widget build(BuildContext context) {
+    if (count == 0) {
+      startTimer();
+      count++;
+    }
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -112,15 +119,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           
           
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // 写真を撮る
-          startTimer(
-          );
-          
-        },
-        child: const Icon(Icons.camera_alt),
       ),
       
     );

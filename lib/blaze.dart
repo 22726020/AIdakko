@@ -157,9 +157,14 @@ class _BlazePageState extends State<BlazePage> {
             builder: (context) => Display(camera: widget.camera),
           ));
     } else {
+
       //問題があるとき再撮影へ
-      await Future.delayed(Duration(seconds: 1));
-      Navigator.pop(context);
+      await Future.delayed(Duration(seconds: 2));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TakePictureScreen(camera: widget.camera),
+          ));
     }
   }
 
