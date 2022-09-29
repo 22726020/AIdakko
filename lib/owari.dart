@@ -6,45 +6,18 @@ import 'package:gazou/get.dart';
 import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
 //こんにちは
-Future<void> main() async {
-  // main 関数内で非同期処理を呼び出すための設定
-  WidgetsFlutterBinding.ensureInitialized();
-  // デバイスで使用可能なカメラのリストを取得
-  final cameras = await availableCameras();
-  // 利用可能なカメラのリストから特定のカメラを取得
-  final firstCamera = cameras[1];
-  runApp(MyApp(camera: firstCamera));
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({
-    Key? key,
-    required this.camera,
-  }) : super(key: key);
-  final CameraDescription camera;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home:  MyHomePage(camera:camera,title: '抱っこアプリ'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.camera,required this.title}) : super(key: key);
+class OwariPage extends StatefulWidget {
+  const OwariPage({Key? key, required this.camera,required this.title}) : super(key: key);
 
   final String title;
   final CameraDescription camera;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<OwariPage> createState() => _OwariPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _OwariPageState extends State<OwariPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -65,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(top: 32),
-              child: Text('選択してください',style: TextStyle(fontSize: 30),),
+              child: Text('撮影お疲れ様でした',style: TextStyle(fontSize: 30),),
             ),
            
            SizedBox(height: 150,),
@@ -80,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 204, 203),
                     elevation: 26,
                   ),
-                  child: Text('基本情報入力',style: TextStyle(color: Colors.black)),
+                  child: Text('ホームに戻る',style: TextStyle(color: Colors.black)),
                 ),
                 // ElevatedButton(
                 //   onPressed: () {},
@@ -96,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 204, 203),
                     elevation: 26,
                   ),
-                  child: Text('アンケート入力',style: TextStyle(color: Colors.black)),
+                  child: Text('評価する',style: TextStyle(color: Colors.black)),
                 ),
                 ElevatedButton(
                   onPressed: (){
@@ -110,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 204, 203),
                     elevation: 16,
                   ),
-                  child: Text('抱っこ撮影',style: TextStyle(color: Colors.black)),
+                  child: Text('再撮影',style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),

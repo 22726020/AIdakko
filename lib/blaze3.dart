@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/get.dart';
-import 'package:gazou/get1.dart';
-import 'package:gazou/get2.dart';
+import 'package:gazou/get3.dart';
+import 'package:gazou/owari.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
@@ -154,8 +153,8 @@ class _BlazePageState extends State<BlazePage> {
     if (hantei && hantei2 == true) {
       await Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => TakePictureScreen2(camera: widget.camera),
+          MaterialPageRoute(//owari.dartに
+            builder: (context) => OwariPage(camera: widget.camera, title: "抱っこアプリ"),
           ));
     } else {
 
@@ -164,7 +163,7 @@ class _BlazePageState extends State<BlazePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen1(camera: widget.camera),
+            builder: (context) => TakePictureScreen3(camera: widget.camera),
           ));
     }
   }

@@ -8,8 +8,8 @@ import 'package:quiver/async.dart';
 
 
 /// 写真撮影画面
-class TakePictureScreen extends StatefulWidget {
-  const TakePictureScreen({
+class TakePictureScreen1 extends StatefulWidget {
+  const TakePictureScreen1({
     Key? key,
     required this.camera,
   }) : super(key: key);
@@ -17,16 +17,16 @@ class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
 
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  TakePictureScreen1State createState() => TakePictureScreen1State();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class TakePictureScreen1State extends State<TakePictureScreen1> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   bool check = true;
   double opacity = 0.5;
-  int _start = 10;
-  int _current = 10;
+  int _start = 5;
+  int _current = 5;
   int tmp = 0;
   int count = 0;
 
