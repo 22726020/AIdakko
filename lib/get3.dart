@@ -89,7 +89,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        fit:StackFit.expand,
+        fit:StackFit.loose,
         children: [
           FutureBuilder<void>(
             future: _initializeControllerFuture,
