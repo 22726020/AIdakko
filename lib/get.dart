@@ -89,6 +89,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
+        fit:StackFit.expand,
         children: [
           FutureBuilder<void>(
             future: _initializeControllerFuture,
@@ -106,17 +107,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
-            child: Text(
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
               "$_current",
               style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 300,
               color: Color.fromARGB(255, 50, 51, 51),
               ),
+              ),
             ),
           ),
-          
-          
         ],
       ),
       

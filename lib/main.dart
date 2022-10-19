@@ -12,7 +12,7 @@ Future<void> main() async {
   // デバイスで使用可能なカメラのリストを取得
   final cameras = await availableCameras();
   // 利用可能なカメラのリストから特定のカメラを取得
-  final firstCamera = cameras[1];
+  final firstCamera = cameras[0];
   runApp(MyApp(camera: firstCamera));
 }
 
