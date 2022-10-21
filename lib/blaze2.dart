@@ -8,10 +8,11 @@ import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
 //git追加テスト
 class BlazePage extends StatefulWidget {
-  const BlazePage({Key? key, required this.camera, required this.imagePath})
+  const BlazePage({Key? key, required this.camera, required this.imagePath,required this.path1})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
+  final String path1;
 
   //パスも一緒に受け取る
   @override
@@ -154,7 +155,7 @@ class _BlazePageState extends State<BlazePage> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen3(camera: widget.camera),
+            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1, path2: widget.imagePath),
           ));
     } else {
 
@@ -163,7 +164,7 @@ class _BlazePageState extends State<BlazePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen2(camera: widget.camera),
+            builder: (context) => TakePictureScreen2(camera: widget.camera,path1:widget.path1),
           ));
     }
   }

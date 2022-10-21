@@ -8,10 +8,13 @@ import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
 //git追加テスト
 class BlazePage extends StatefulWidget {
-  const BlazePage({Key? key, required this.camera, required this.imagePath})
+  const BlazePage({Key? key, required this.camera, required this.imagePath,required this.path1, required this.path2})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
+  final String path1;
+  final String path2;
+
 
   //パスも一緒に受け取る
   @override
@@ -26,7 +29,6 @@ class _BlazePageState extends State<BlazePage> {
   bool hantei = true;
   bool hantei2 = true;
   int count = 0;
-  String path3 = "";
 
   String? _extension;
   String? _fileName;
@@ -152,11 +154,10 @@ class _BlazePageState extends State<BlazePage> {
   Future<void> seigyo() async {
     //姿勢がきちんと取れているとき次の撮影へ
     if (hantei && hantei2 == true) {
-      String path3 = widget.imagePath;
       await Navigator.push(
           context,
           MaterialPageRoute(//Save.dartに
-            builder: (context) => SavePage(camera: widget.camera, title: "抱っこアプリ",path3: path3),
+            builder: (context) => SavePage(camera: widget.camera, title: "抱っこアプリ",path1:widget.path1, path2: widget.path2,path3: widget.imagePath),
           ));
     } else {
 
@@ -165,7 +166,7 @@ class _BlazePageState extends State<BlazePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen3(camera: widget.camera),
+            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1,path2:widget.path2,),
           ));
     }
   }

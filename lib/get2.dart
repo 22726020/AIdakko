@@ -12,9 +12,11 @@ class TakePictureScreen2 extends StatefulWidget {
   const TakePictureScreen2({
     Key? key,
     required this.camera,
+    required this.path1,
   }) : super(key: key);
 
   final CameraDescription camera;
+  final String path1;
 
   @override
   TakePictureScreen2State createState() => TakePictureScreen2State();
@@ -49,7 +51,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
 
       await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BlazePage(imagePath:image.path,camera:widget.camera),
+                    MaterialPageRoute(builder: (context) => BlazePage(imagePath:image.path,camera:widget.camera,path1: widget.path1),
               )
                     );
     });
