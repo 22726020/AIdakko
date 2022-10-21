@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/get3.dart';
-import 'package:gazou/owari.dart';
+import 'package:gazou/save.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
@@ -26,6 +26,7 @@ class _BlazePageState extends State<BlazePage> {
   bool hantei = true;
   bool hantei2 = true;
   int count = 0;
+  String path3 = "";
 
   String? _extension;
   String? _fileName;
@@ -151,10 +152,11 @@ class _BlazePageState extends State<BlazePage> {
   Future<void> seigyo() async {
     //姿勢がきちんと取れているとき次の撮影へ
     if (hantei && hantei2 == true) {
+      String path3 = widget.imagePath;
       await Navigator.push(
           context,
-          MaterialPageRoute(//owari.dartに
-            builder: (context) => OwariPage(camera: widget.camera, title: "抱っこアプリ"),
+          MaterialPageRoute(//Save.dartに
+            builder: (context) => SavePage(camera: widget.camera, title: "抱っこアプリ",path3: path3),
           ));
     } else {
 
