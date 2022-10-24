@@ -28,14 +28,22 @@ class _SavePageState extends State<SavePage> {
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
-      Image.file(File(widget.path1)),
-      const Padding(padding: EdgeInsets.all(8)),
-      Image.file(File(widget.path2)),
-      const Padding(padding: EdgeInsets.all(8)),
-      Image.file(File(widget.path3)),
-
+      const Padding(padding: EdgeInsets.only(top: 10),
+      child: Text('正面',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      ),
+      Padding(padding: const EdgeInsets.all(5),
+      child: Image.file(File(widget.path1)),
+      ),
+      const Text('右',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      Padding(padding: const EdgeInsets.all(5),
+      child: Image.file(File(widget.path2)),
+      ),
+      const Text('左',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      Padding(padding: const EdgeInsets.all(5),
+      child: Image.file(File(widget.path3)),
+      ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
       ElevatedButton(
         onPressed: (){
@@ -47,7 +55,7 @@ class _SavePageState extends State<SavePage> {
         style: ElevatedButton.styleFrom(
           elevation: 26,
           ),
-          child: const Text('保存する',style: TextStyle(color: Colors.black)),
+          child: const Text('保存する',style: TextStyle(color: Colors.white)),
           ),
       ElevatedButton(
         onPressed: () {
@@ -59,7 +67,7 @@ class _SavePageState extends State<SavePage> {
         style: ElevatedButton.styleFrom(
           elevation: 26,
           ),
-          child: const Text('撮影をやり直す',style: TextStyle(color: Colors.black)),
+          child: const Text('撮影をやり直す',style: TextStyle(color: Colors.white)),
           ),
       ElevatedButton(
         onPressed: () {
@@ -71,7 +79,7 @@ class _SavePageState extends State<SavePage> {
         style: ElevatedButton.styleFrom(
           elevation: 26,
           ),
-          child: const Text('ホームへ戻る',style: TextStyle(color: Colors.black)),
+          child: const Text('ホームへ戻る',style: TextStyle(color: Colors.white)),
           ),
       ],
       ),
