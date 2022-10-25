@@ -1,10 +1,15 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'dart:io'as io;
 
 import 'package:gazou/owari.dart';
 import 'package:gazou/main.dart';
 import 'package:gazou/get.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
+import 'dart:io';//　File
+import 'dart:typed_data'; // Uint8List
+
 
 
 class SavePage extends StatefulWidget {
@@ -21,6 +26,12 @@ class SavePage extends StatefulWidget {
 }
 
 class _SavePageState extends State<SavePage> {
+  // 画像の保存したい
+  Future saveImage() async {
+    dynamic imgpath1 = io.File(widget.path1).readAsBytes;
+    Uint8List imgpath = imgpath1;
+    ImageGallerySaver.saveImage(imgpath);
+  }
  @override
   Widget build(BuildContext context) {
   return Scaffold(
@@ -29,16 +40,16 @@ class _SavePageState extends State<SavePage> {
       child:Column(
       children: <Widget>[
       const Padding(padding: EdgeInsets.only(top: 10),
-      child: Text('正面',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      child: Text('正面画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
       ),
       Padding(padding: const EdgeInsets.all(5),
       child: Image.file(File(widget.path1)),
       ),
-      const Text('右',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      const Text('左画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
       Padding(padding: const EdgeInsets.all(5),
       child: Image.file(File(widget.path2)),
       ),
-      const Text('左',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      const Text('右画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
       Padding(padding: const EdgeInsets.all(5),
       child: Image.file(File(widget.path3)),
       ),
@@ -47,6 +58,7 @@ class _SavePageState extends State<SavePage> {
         children: [
       ElevatedButton(
         onPressed: (){
+          saveImage();
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => OwariPage(camera:widget.camera,title: "抱っこアプリ"),
           )

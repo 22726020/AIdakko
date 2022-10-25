@@ -101,6 +101,11 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
               }
             },
           ),
+          Container(
+            padding: const EdgeInsets.only(top: 55),
+            alignment: Alignment.topCenter,
+            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+          ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
             child: Image.asset("assets/1.png"),
