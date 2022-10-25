@@ -40,17 +40,17 @@ class _SavePageState extends State<SavePage> {
       child:Column(
       children: <Widget>[
       const Padding(padding: EdgeInsets.only(top: 10),
-      child: Text('正面画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      child: Text('正面画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
       ),
-      Padding(padding: const EdgeInsets.all(5),
+      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path1)),
       ),
-      const Text('左画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.all(5),
+      const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path2)),
       ),
-      const Text('右画像',textAlign: TextAlign.left, style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.all(5),
+      const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path3)),
       ),
       Row(
