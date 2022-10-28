@@ -6,6 +6,8 @@ import 'package:gazou/get1.dart';
 import 'package:gazou/get2.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 
 //git追加テスト
 class BlazePage extends StatefulWidget {
@@ -20,6 +22,7 @@ class BlazePage extends StatefulWidget {
 }
 
 class _BlazePageState extends State<BlazePage> {
+  final _audio = AudioCache();
   bool _fileSelected = false;
   bool _poseFound = false;
   var listx = [];
@@ -160,7 +163,8 @@ class _BlazePageState extends State<BlazePage> {
     } else {
 
       //問題があるとき再撮影へ
-      await Future.delayed(Duration(seconds: 2));
+      _audio.play('test.mp3');
+      await Future.delayed(const Duration(seconds: 2));
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -180,6 +184,10 @@ class _BlazePageState extends State<BlazePage> {
       //撮った写真を表示
       // appBar: AppBar(title: const Text('撮れた写真')),
       body: Center(child: Image.file(File(widget.imagePath))),
+      // body: Center(child: Transform(transform: Matrix4.rotationY(pi),
+      // child: Image.file(File(widget.imagePath)),
+      // )
+      // ),
     );
   }
 }

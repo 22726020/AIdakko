@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gazou/get.dart';
 import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:audioplayers/audioplayers.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
@@ -39,12 +40,13 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
   final CameraDescription camera;
-
+  
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _audio = AudioCache();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -75,7 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _audio.play('test.mp3');
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 214, 204, 203),
                     elevation: 26,
