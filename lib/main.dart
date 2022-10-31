@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/get.dart';
+import 'package:gazou/manual.dart';
 import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -106,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: (){
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
+                    MaterialPageRoute(builder: (context) => ManualPage(title:widget.title,camera:widget.camera),
               )
                     );
                   },
