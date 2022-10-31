@@ -39,9 +39,9 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
-          elevation: 26,
+          elevation: 30,
           ),
-          child: const Text('次へ',style: TextStyle(color: Colors.white)),
+          child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),
           ),
           ],
     ),
