@@ -5,6 +5,7 @@ import 'package:gazou/get2.dart';
 import 'package:gazou/get3.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 //git追加テスト
 class BlazePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class BlazePage extends StatefulWidget {
 }
 
 class _BlazePageState extends State<BlazePage> {
+  final _audio = AudioCache();
   bool _fileSelected = false;
   bool _poseFound = false;
   var listx = [];
@@ -160,6 +162,7 @@ class _BlazePageState extends State<BlazePage> {
     } else {
 
       //問題があるとき再撮影へ
+      _audio.play('keihou.mp3');
       await Future.delayed(Duration(seconds: 2));
       Navigator.push(
           context,

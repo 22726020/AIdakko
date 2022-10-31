@@ -163,7 +163,7 @@ class _BlazePageState extends State<BlazePage> {
     } else {
 
       //問題があるとき再撮影へ
-      _audio.play('test.mp3');
+      _audio.play('keihou.mp3');
       await Future.delayed(const Duration(seconds: 2));
       Navigator.push(
           context,

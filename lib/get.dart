@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/blaze.dart';
 import 'package:quiver/async.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 
 
 /// 写真撮影画面
@@ -29,6 +29,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   int _current = 10;
   int tmp = 0;
   int count = 0;
+  final _audio = AudioCache();
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -83,6 +84,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   Widget build(BuildContext context) {
     if (count == 0) {
+      _audio.play('zensin.mp3');
       startTimer();
       count++;
     }
