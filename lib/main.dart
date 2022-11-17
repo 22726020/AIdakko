@@ -50,60 +50,50 @@ class _MyHomePageState extends State<MyHomePage> {
   final _audio = AudioCache();
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
+    return Scaffold(
+        appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: Colors.black)),
         backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-        body: new Stack(
+        body:  Stack(
           children: <Widget>[
-            new Container(
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new NetworkImage(
-                      "https://www.angeliebe.co.jp/html/upload/save_image/product/50460/50460-190_l4.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset("assets/dakko2.jpg"),),
             Column(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 32),
-              child: Text('選択してください',style: TextStyle(fontSize: 30),),
-            ),
+            // Container(
+            //   padding: EdgeInsets.only(top: 32),
+            //   child: Text('選択してください',style: TextStyle(fontSize: 30),),
+            // ),
            
-           SizedBox(height: 150,),
+           SizedBox(height: 550,),
             Row(
-              
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    _audio.play('test.mp3');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 204, 203),
-                    elevation: 26,
-                  ),
-                  child: Text('基本情報入力',style: TextStyle(color: Colors.black)),
-                ),
                 // ElevatedButton(
-                //   onPressed: () {},
+                //   onPressed: () {
+                //   },
                 //   style: ElevatedButton.styleFrom(
                 //     primary: Color.fromARGB(255, 214, 204, 203),
                 //     elevation: 26,
                 //   ),
-                //   child: Text('抱っこ撮影',style: TextStyle(color: Colors.black),),
+                //   child: Text('基本情報入力',style: TextStyle(fontSize: 20,color: Colors.black)),
                 // ),
-                ElevatedButton(
-                  onPressed: _opneUrl,
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 204, 203),
-                    elevation: 26,
-                  ),
-                  child: Text('アンケート入力',style: TextStyle(color: Colors.black)),
-                ),
-                ElevatedButton(
+                // ElevatedButton(
+                //   onPressed: _opneUrl,
+                //   style: ElevatedButton.styleFrom(
+                //     primary: Color.fromARGB(255, 214, 204, 203),
+                //     elevation: 26,
+                //   ),
+                //   child: Text('アンケート入力',style: TextStyle(fontSize: 20,color: Colors.black)),
+                // ),
+                
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+              ElevatedButton(
                   onPressed: (){
                     Navigator.push(
                     context,
@@ -112,13 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 204, 203),
+                    primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('抱っこ撮影',style: TextStyle(color: Colors.black)),
+                  child: Text('撮影を行う',style: TextStyle(fontSize: 60,color: Colors.black)),
                 ),
               ],
-            ),
+            )
           ],
         ),
             // ElevatedButton(

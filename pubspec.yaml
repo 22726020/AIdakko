@@ -73,6 +73,7 @@ flutter:
     - assets/syoumen.mp3
     - assets/zensin.mp3
     - assets/manual.png
+    - assets/dakko2.jpg
     
   # To add assets to your application, add an assets section, like this:
   # assets:

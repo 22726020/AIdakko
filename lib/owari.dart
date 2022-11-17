@@ -23,17 +23,11 @@ class _OwariPageState extends State<OwariPage> {
     return Scaffold(
         appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
         backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-        body: Stack(
+        body:  Stack(
           children: <Widget>[
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                image: NetworkImage(
-                  "https://www.angeliebe.co.jp/html/upload/save_image/product/50460/50460-190_l4.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset("assets/dakko2.jpg"),),
             Column(
           children: <Widget>[
             Container(

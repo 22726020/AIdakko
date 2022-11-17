@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/blaze.dart';
+import 'package:gazou/main.dart';
 import 'package:quiver/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -126,6 +127,22 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               ),
             ),
           ),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(padding: EdgeInsets.only(bottom: 30),
+                child:ElevatedButton(
+                  onPressed: (){
+                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                ),)
+              ],
+        ),
         ],
       ),
     );
