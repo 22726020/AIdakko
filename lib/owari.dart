@@ -31,42 +31,36 @@ class _OwariPageState extends State<OwariPage> {
             Column(
           children: <Widget>[
             Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 32),
               child: const Text('撮影お疲れ様でした',style: TextStyle(fontSize: 30),),
             ),
            
-          const SizedBox(height: 150,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, 
-                    MaterialPageRoute(builder: (context) => MyHomePage(camera:widget.camera,title: "抱っこアプリ"),
-                    )
-                    );
-                    },
-                    style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 204, 203),
-                    elevation: 26,
+          const SizedBox(height: 450,),
+                Padding(padding: EdgeInsets.only(bottom: 30),
+                child:ElevatedButton(
+                  onPressed: (){
+                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
                   ),
-          child: const Text('ホームへ戻る',style: TextStyle(color: Colors.black)),
-          ),
+                  child: Text('ホームへ戻る',style: TextStyle(fontSize: 50,color: Colors.black)),
+                ),
+                ),
                 ElevatedButton(
                   onPressed: (){},
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 204, 203),
-                    elevation: 26,
+                 style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(200, 255, 255, 255),
+                    elevation: 16,
                   ),
-                  child: Text('評価する',style: TextStyle(color: Colors.black)),
+                  child: Text('評価する',style: TextStyle(fontSize: 50,color: Colors.grey)),
                 ),
               ],
             ),
           ],
         ),
-          ],
-        )
     );
   }
 }
