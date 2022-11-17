@@ -2,20 +2,19 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/get.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:gazou/junbi.dart';
 
 
-class ManualPage extends StatefulWidget {
-  const ManualPage({Key? key, required this.camera,required this.title}) : super(key: key);
+class JunbiPage extends StatefulWidget {
+  const JunbiPage({Key? key, required this.camera,required this.title}) : super(key: key);
 
   final String title;
   final CameraDescription camera;
   
   @override
-  State<ManualPage> createState() => _ManualPageState();
+  State<JunbiPage> createState() => _JunbiPageState();
 }
 
-class _ManualPageState extends State<ManualPage> {
+class _JunbiPageState extends State<JunbiPage> {
   final _audio = AudioCache();
   @override
   Widget build(BuildContext context) {
@@ -24,14 +23,14 @@ class _ManualPageState extends State<ManualPage> {
         backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Image.asset("assets/manual.png"),
+            Image.asset("assets/sumaho.jpg"),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
       ElevatedButton(
         onPressed: (){
           Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => JunbiPage(title: widget.title,camera:widget.camera),
+          MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
           )
           );
           },

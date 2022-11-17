@@ -67,7 +67,7 @@ class _SavePageState extends State<SavePage> {
         style: ElevatedButton.styleFrom(
           elevation: 26,
           ),
-          child: const Text('保存する',style: TextStyle(color: Colors.white)),
+          child: const Text('保存する',style: TextStyle(fontSize: 25,color: Colors.white)),
           ),
       ElevatedButton(
         onPressed: () {
@@ -79,19 +79,7 @@ class _SavePageState extends State<SavePage> {
         style: ElevatedButton.styleFrom(
           elevation: 26,
           ),
-          child: const Text('撮影をやり直す',style: TextStyle(color: Colors.white)),
-          ),
-      ElevatedButton(
-        onPressed: () {
-          Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => MyHomePage(camera:widget.camera,title: "抱っこアプリ"),
-          )
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          elevation: 26,
-          ),
-          child: const Text('ホームへ戻る',style: TextStyle(color: Colors.white)),
+          child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
           ),
       ],
       ),
