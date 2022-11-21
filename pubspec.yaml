@@ -76,7 +76,7 @@ flutter:
     - assets/zensin.mp3
     - assets/manual.png
     - assets/dakko2.jpg
-    - assets/sumaho.jpg
+    - assets/manual2.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

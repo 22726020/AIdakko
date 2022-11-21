@@ -23,16 +23,30 @@ class _JunbiPageState extends State<JunbiPage> {
         backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Image.asset("assets/sumaho.jpg"),
+            Image.asset("assets/manual2.png"),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
       ElevatedButton(
-        onPressed: (){
-          Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
-          )
+        onPressed: ()async{
+showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("スマホを置きましたか？"),
+            content: Text("なるべく垂直に置き、\n全身が写るようにして下さい.\n10秒後に撮影されます"),
+            actions: [
+              GestureDetector(
+                child: Text("はい",style: TextStyle(fontSize: 30),),
+                onTap: (){
+                  Navigator.push(context, 
+                  MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
+                  )
           );
+                },
+              )
+            ],
+          ),
+        );
           },
         style: ElevatedButton.styleFrom(
           elevation: 30,
