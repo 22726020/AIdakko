@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //   child: Text('選択してください',style: TextStyle(fontSize: 30),),
             // ),
            
-           SizedBox(height: 550,),
+           SizedBox(height: 160,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,10 +90,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 
               ],
             ),
+            //隠しボタン
+            Row(
+              children: <Widget>[
+                Padding(padding: EdgeInsets.only(left: 80),
+              child: ElevatedButton(
+                  onPressed: (){
+                    _audio.play('akatyankoe.mp3');
+                  },
+                  style: ElevatedButton.styleFrom(
+               primary: Colors.transparent,
+                elevation: 0,
+                  ),
+                  child: Text('     ',style: TextStyle(fontSize: 50,color: Colors.black)),
+                ),
+                ),
+              ]
+              ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-              ElevatedButton(
+                Padding(padding: EdgeInsets.only(top: 340),
+              child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
                     context,
@@ -107,8 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: Text('撮影を行う',style: TextStyle(fontSize: 60,color: Colors.black)),
                 ),
+                ),
               ],
-            )
+            ),
           ],
         ),
             // ElevatedButton(
