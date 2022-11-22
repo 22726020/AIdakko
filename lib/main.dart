@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  MyHomePage(camera:camera,title: '抱っこアプリ'),
+      home:  MyHomePage(camera:camera,title: '抱っこ支援アプリ'),
     );
   }
 }

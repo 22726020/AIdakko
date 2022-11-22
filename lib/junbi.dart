@@ -32,9 +32,15 @@ class _JunbiPageState extends State<JunbiPage> {
 showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("スマホを置きましたか？"),
+            title: Text("スマホは置きましたか？"),
             content: Text("なるべく垂直に置き、\n全身が写るようにして下さい.\n10秒後に撮影されます"),
             actions: [
+              GestureDetector(
+                child: Text("いいえ",style: TextStyle(fontSize: 30),),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
               GestureDetector(
                 child: Text("はい",style: TextStyle(fontSize: 30),),
                 onTap: (){
@@ -43,7 +49,7 @@ showDialog(
                   )
           );
                 },
-              )
+              ),
             ],
           ),
         );

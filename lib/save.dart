@@ -60,7 +60,7 @@ class _SavePageState extends State<SavePage> {
         onPressed: (){
           saveImage();
           Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => OwariPage(camera:widget.camera,title: "抱っこアプリ"),
+          MaterialPageRoute(builder: (context) => OwariPage(camera:widget.camera,title: "抱っこ支援アプリ"),
           )
           );
           },
