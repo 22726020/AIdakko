@@ -98,7 +98,7 @@ class _BlazePageState extends State<BlazePage> {
       );
       //1秒後に自動で閉じる
       Future.delayed(
-        const Duration(seconds: 2),
+        const Duration(seconds: 4),
         () => Navigator.pop(context),
       );
     }
@@ -117,7 +117,7 @@ class _BlazePageState extends State<BlazePage> {
       );
       //1秒後に自動で閉じる
       Future.delayed(
-        const Duration(seconds: 2),
+        const Duration(seconds: 4),
         () => Navigator.pop(context),
       );
     }
@@ -163,7 +163,7 @@ class _BlazePageState extends State<BlazePage> {
 
       //問題があるとき再撮影へ
       _audio.play('keihou.mp3');
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 4));
       Navigator.push(
           context,
           MaterialPageRoute(

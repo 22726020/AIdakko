@@ -14,7 +14,7 @@ Future<void> main() async {
   // デバイスで使用可能なカメラのリストを取得
   final cameras = await availableCameras();
   // 利用可能なカメラのリストから特定のカメラを取得
-  final firstCamera = cameras[1];
+  final firstCamera = cameras[0];
   runApp(MyApp(camera: firstCamera));
 }
 
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             SizedBox(
               width: double.infinity,
-              child: Image.asset("assets/dakko2.jpg"),),
+              child: Image.asset("assets/dakko3.jpg"),),
             Column(
           children: <Widget>[
             // Container(

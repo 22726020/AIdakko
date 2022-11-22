@@ -39,6 +39,15 @@ class _OwariPageState extends State<OwariPage> {
           const SizedBox(height: 450,),
                 Padding(padding: EdgeInsets.only(bottom: 30),
                 child:ElevatedButton(
+                  onPressed: (){},
+                 style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(200, 255, 255, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('評価する',style: TextStyle(fontSize: 50,color: Colors.grey)),
+                ),
+                ),
+                ElevatedButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
@@ -47,15 +56,6 @@ class _OwariPageState extends State<OwariPage> {
                     elevation: 16,
                   ),
                   child: Text('ホームへ戻る',style: TextStyle(fontSize: 50,color: Colors.black)),
-                ),
-                ),
-                ElevatedButton(
-                  onPressed: (){},
-                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(200, 255, 255, 255),
-                    elevation: 16,
-                  ),
-                  child: Text('評価する',style: TextStyle(fontSize: 50,color: Colors.grey)),
                 ),
               ],
             ),

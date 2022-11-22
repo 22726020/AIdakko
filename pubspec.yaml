@@ -77,6 +77,7 @@ flutter:
     - assets/manual.png
     - assets/dakko2.jpg
     - assets/manual2.png
+    - assets/dakko3.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
