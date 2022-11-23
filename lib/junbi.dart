@@ -33,7 +33,7 @@ showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text("スマホは置きましたか？"),
-            content: Text("なるべく垂直に置き、\n全身が写るようにして下さい.\n10秒後に撮影されます"),
+            content: Text("なるべく垂直に置き\n全身が写るようにして下さい\n十分離れた後に\nお子さんを抱っこして下さい\n最初のみ10秒後に撮影されます"),
             actions: [
               GestureDetector(
                 child: Text("いいえ",style: TextStyle(fontSize: 30),),

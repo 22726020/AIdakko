@@ -14,6 +14,16 @@ Future<void> main() async {
   // デバイスで使用可能なカメラのリストを取得
   final cameras = await availableCameras();
   // 利用可能なカメラのリストから特定のカメラを取得
+  final firstCamera = cameras[1];
+  runApp(MyApp(camera: firstCamera));
+}
+
+Future<void> outcamera() async {
+  // main 関数内で非同期処理を呼び出すための設定
+  WidgetsFlutterBinding.ensureInitialized();
+  // デバイスで使用可能なカメラのリストを取得
+  final cameras = await availableCameras();
+  // 利用可能なカメラのリストから特定のカメラを取得
   final firstCamera = cameras[0];
   runApp(MyApp(camera: firstCamera));
 }
@@ -107,10 +117,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ]
               ),
+              Row(
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 320,left: 34),
+                  child: ElevatedButton(
+                  onPressed: (){
+                    outcamera();
+                  }, child: Text('外カメラ',style: TextStyle(fontSize: 32,color: Colors.black)))),
+                  Padding(padding: EdgeInsets.only(top: 320,left: 15),
+                  child: ElevatedButton(
+                  onPressed: (){
+                    main();
+                  }, child: Text('内カメラ',style: TextStyle(fontSize: 32,color: Colors.black)))),
+              ],
+              ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 340),
+                Padding(padding: EdgeInsets.only(top: 5),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -126,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('撮影を行う',style: TextStyle(fontSize: 60,color: Colors.black)),
                 ),
                 ),
+
               ],
             ),
           ],
