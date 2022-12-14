@@ -53,13 +53,21 @@ dev_dependencies:
   audioplayers: ^0.19.1
   gallery_saver: ^2.3.2
   image_picker: ^0.8.5+3
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/dakko3.jpg"
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
+  
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -78,6 +86,7 @@ flutter:
     - assets/dakko2.jpg
     - assets/manual2.png
     - assets/dakko3.jpg
+    - assets/pause.jpg
     - assets/akatyankoe.mp3
   # To add assets to your application, add an assets section, like this:
   # assets:

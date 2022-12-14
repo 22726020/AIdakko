@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/blaze.dart';
+import 'package:gazou/pause.dart';
 import 'package:quiver/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -127,20 +128,34 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
             ),
           ),
           ),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(bottom: 30),
-                child:ElevatedButton(
+                Padding(padding: const EdgeInsets.only(top:720,right: 20),
+                child:FloatingActionButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                  },
+                  child: const Icon(Icons.home),
+                ),
+                ),
+                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                child:ElevatedButton(
+                  onPressed: (){
+                    dispose();
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Pause1Page(title:"中断中",camera:widget.camera),
+              )
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
-                ),)
+                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                ),
+                )
               ],
         ),
         ],
