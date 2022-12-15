@@ -34,7 +34,7 @@ class _Pause1PageState extends State<Pause1Page> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TakePictureScreen1(camera: widget.camera),
+                            builder: (context) => TakePictureScreen1p1(camera: widget.camera),
                           ));
                   },
                   style: ElevatedButton.styleFrom(
@@ -84,7 +84,7 @@ class _Pause2PageState extends State<Pause2Page> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TakePictureScreen2(camera: widget.camera,path1: widget.path1,),
+                            builder: (context) => TakePictureScreen2p2(camera: widget.camera,path1: widget.path1,),
                           ));
                   },
                   style: ElevatedButton.styleFrom(
@@ -134,7 +134,7 @@ class _Pause3PageState extends State<Pause3Page> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1,path2: widget.path2),
+                            builder: (context) => TakePictureScreen3p3(camera: widget.camera,path1: widget.path1,path2: widget.path2),
                           ));
                   },
                   style: ElevatedButton.styleFrom(
