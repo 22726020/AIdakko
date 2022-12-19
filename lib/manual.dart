@@ -25,20 +25,33 @@ class _ManualPageState extends State<ManualPage> {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual.png"),
+            Text('どちらで行うか選択してください',style: TextStyle(fontSize: 22),),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
       ElevatedButton(
         onPressed: (){
           Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => JunbiPage(title: widget.title,camera:widget.camera),
+          MaterialPageRoute(builder: (context) => JunbiINPage(title: widget.title,camera:widget.camera),
           )
           );
           },
         style: ElevatedButton.styleFrom(
           elevation: 30,
           ),
-          child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),
+          child: const Text('内カメ',style: TextStyle(fontSize: 40, color: Colors.white)),
+          ),
+      ElevatedButton(
+        onPressed: (){
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context) => JunbiOUTPage(title: widget.title,camera:widget.camera),
+          )
+          );
+          },
+        style: ElevatedButton.styleFrom(
+          elevation: 30,
+          ),
+          child: const Text('外カメ',style: TextStyle(fontSize: 40, color: Colors.white)),
           ),
           ],
     ),
