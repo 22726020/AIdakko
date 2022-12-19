@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/get.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:gazou/outget.dart';
 
 class JunbiINPage extends StatefulWidget {
   const JunbiINPage({Key? key, required this.camera,required this.title}) : super(key: key);
@@ -111,7 +112,7 @@ showDialog(
                 child: Text("はい",style: TextStyle(fontSize: 30),),
                 onTap: (){
                   Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => TakePictureScreen(camera:firstCamera),
+                  MaterialPageRoute(builder: (context) => OutTakePicture1(camera:firstCamera),
                   )
           );
                 },
