@@ -7,6 +7,7 @@ import 'package:gazou/manual.dart';
 import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:gazou/improve.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
@@ -151,6 +152,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('撮影を行う',style: TextStyle(fontSize: 60,color: Colors.black)),
                 ),
                 ),
+               ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Improve()
+              )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('修正を行う',style: TextStyle(fontSize: 50,color: Colors.black)),
+                ),               
 
               ],
             ),
