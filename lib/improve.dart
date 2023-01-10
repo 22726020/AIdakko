@@ -32,17 +32,21 @@ class _PointerDrawingWidgetState extends State<PointerDrawingWidget> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: GestureDetector(
-        // child: Image.asset('dakko.jpg'),
-        
-        // TapDownイベントを検知
-        onTapDown: _addPoint,
-        // カスタムペイント
-        child: CustomPaint(
-          painter: MyPainter(_points),
-          // タッチを有効にするため、childが必要
-          child: Center(),
+      body:Stack(
+        children: <Widget>[  
+          Image.asset('assets/pause.jpg'),
+          GestureDetector(
+          // child: Image.asset('dakko.jpg'),
+          // TapDownイベントを検知
+          onTapDown: _addPoint,
+          // カスタムペイント
+          child: CustomPaint(
+            painter: MyPainter(_points),
+            // タッチを有効にするため、childが必要
+            child: Center(),
         ),
+      ),
+      ],
       ),
       floatingActionButton: FloatingActionButton(
         // 点のクリアボタン
@@ -79,7 +83,8 @@ class MyPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     // 記憶している点を描画する
     _points.forEach((offset) =>
-        canvas.drawRect(Rect.fromCenter(center: offset, width: 20.0, height: 20.0), _rectPaint));
+        // canvas.drawRect(Rect.fromCenter(center: offset, width: 20.0, height: 20.0), _rectPaint));
+        canvas.drawCircle(offset, 10, _rectPaint)); 
   }
 
   @override
