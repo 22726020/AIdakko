@@ -8,6 +8,7 @@ import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/improve.dart';
+import 'package:gazou/test.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
@@ -165,7 +166,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 16,
                   ),
                   child: Text('修正を行う',style: TextStyle(fontSize: 50,color: Colors.black)),
-                ),               
+                ), 
+
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BlazePage()
+              )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('test',style: TextStyle(fontSize: 20,color: Colors.black)),
+                ),              
 
               ],
             ),
