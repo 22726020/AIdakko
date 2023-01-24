@@ -91,6 +91,24 @@ flutter:
     - assets/junbiout.png
     - assets/human.jpg
     - assets/hand1.png
+    - assets/hand2.png
+    - assets/hand3.png
+    - assets/hand4.png
+    - assets/hand5.png
+    - assets/hand6.png
+    - assets/hand7.png
+    - assets/hand8.png
+    - assets/hand9.png
+    - assets/hand10.png
+    - assets/hand11.png
+    - assets/hand12.png
+    - assets/hand13.png
+    - assets/hand14.png
+    - assets/hand15.png
+    - assets/hand16.png
+    - assets/hand17.png
+    - assets/hand18.png
+    - assets/hand20.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

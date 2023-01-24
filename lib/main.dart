@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('腱鞘炎テスト',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('腱鞘炎チェック',style: TextStyle(fontSize: 20,color: Colors.black)),
                 ), 
 
                 ElevatedButton(
