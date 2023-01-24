@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/improve.dart';
 import 'package:gazou/test.dart';
+import 'package:gazou/hand.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
@@ -137,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 320),
+                Padding(padding: EdgeInsets.only(top: 300),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -150,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('撮影を行う',style: TextStyle(fontSize: 60,color: Colors.black)),
+                  child: Text('撮影を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
                 ),
                 ),
                ElevatedButton(
@@ -165,7 +166,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('修正を行う',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
+                ), 
+               ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HandPage()
+              )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('腱鞘炎テスト',style: TextStyle(fontSize: 20,color: Colors.black)),
                 ), 
 
                 ElevatedButton(
