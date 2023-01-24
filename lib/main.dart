@@ -10,6 +10,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/improve.dart';
 import 'package:gazou/test.dart';
 import 'package:gazou/hand.dart';
+import 'package:gazou/hand20.dart';
 //こんにちは
 Future<void> main() async {
   // main 関数内で非同期処理を呼び出すための設定
@@ -172,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: (){
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HandPage()
+                    MaterialPageRoute(builder: (context) => HandexpPage()
               )
                     );
                   },
