@@ -56,14 +56,16 @@ class _HandresultPageState extends State<HandresultPage> {
         appBar: AppBar(centerTitle: true,title: Text('結果',style:const TextStyle(color: Colors.black)),
         backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
         body: SingleChildScrollView(
-          child: Column(children: <Widget>[
-              Text('あなたの点数は'+result1+'点です'),
-              if(result<10) Image.asset('assets/hand1.png'), 
-              if(result<10) Text('腱鞘炎の可能性は低いです'),
-              if(result>20) Image.asset('assets/hand2.png'), 
-              if(result>20) Text('腱鞘炎の可能性は高いです'),
+          child: Column(
+            children: <Widget>[
+            //基準は13.0点
+            Padding(padding: EdgeInsets.all(5),child:Text('あなたの点数は'+result1+'点です',style: TextStyle(fontSize: 30,color: Colors.black)),),
+              
+              (result<13)? Image.asset('assets/maru.png'): Image.asset('assets/batu.png'),
+              (result<13)? const Text('腱鞘炎の可能性は低いです',style: TextStyle(fontSize: 28,color: Colors.black)):const Text('腱鞘炎の可能性が高いです\n医療機関で受診しましょう',style: TextStyle(fontSize: 28,color: Colors.red)),       
 
-              ElevatedButton(
+              Padding(padding: EdgeInsets.all(5),
+              child: ElevatedButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
@@ -72,7 +74,8 @@ class _HandresultPageState extends State<HandresultPage> {
                     elevation: 16,
                   ),
                   child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.black)),
-                ), 
+                ),
+              ), 
           ],
           ),
         ),
