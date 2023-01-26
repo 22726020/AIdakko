@@ -64,7 +64,69 @@ class _HandresultPageState extends State<HandresultPage> {
               (result<13)? Image.asset('assets/maru.png'): Image.asset('assets/batu.png'),
               (result<13)? const Text('腱鞘炎の可能性は低いです',style: TextStyle(fontSize: 28,color: Colors.black)):const Text('腱鞘炎の可能性が高いです\n医療機関で受診しましょう',style: TextStyle(fontSize: 28,color: Colors.red)),       
 
+              (result<13)? 
               Padding(padding: EdgeInsets.all(5),
+              child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.black)),
+                ),
+              ):
+              Padding(padding: EdgeInsets.all(5),
+              child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HandtehonPage()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('アドバイス',style: TextStyle(fontSize: 20,color: Colors.black)),
+                ),
+              ), 
+          ],
+          ),
+        ),
+    );
+  }
+}
+
+class HandtehonPage extends StatefulWidget {
+  const HandtehonPage({Key? key, }) : super(key: key);
+  
+  @override
+  State<HandtehonPage> createState() => _HandtehonPageState();
+}
+
+class _HandtehonPageState extends State<HandtehonPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(centerTitle: true,title: Text('アドバイス',style:const TextStyle(color: Colors.black)),
+        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        body: SingleChildScrollView(
+          child: Column(children: <Widget>[
+            const Padding(padding: EdgeInsets.all(10),
+            child: Text('手首に負担をかけない縦抱きのやり方',style: TextStyle(fontSize: 22,backgroundColor: Colors.orange,color: Colors.black)),
+            ),
+            Image.asset("assets/tatetehon.png"),
+            const Padding(padding: EdgeInsets.only(bottom: 10),
+            child: Text('手首は返さず、肘から手首までを使って赤ちゃんのお尻部分を支えます。こうすれば手首への負担はなく、安定感も十分です。',style: TextStyle(fontSize: 20,color: Colors.black)),
+            ),
+
+            const Padding(padding: EdgeInsets.all(10),
+            child: Text('手首に負担をかけない縦抱きのやり方',style: TextStyle(fontSize: 22,backgroundColor: Colors.orange,color: Colors.black)),
+            ),
+            Image.asset("assets/yokotehon.png"),
+            const Padding(padding: EdgeInsets.only(bottom: 5),
+            child: Text('手首を返さず、両手をつなげて抱っこをします。こうすれば安定感は十分ですし、手首にも負担がかかりません',style: TextStyle(fontSize: 20,color: Colors.black)),
+            ),
+              Padding(padding: const EdgeInsets.all(5),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
