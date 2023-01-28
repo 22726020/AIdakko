@@ -110,7 +110,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -152,10 +152,10 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
                 )
               ],
@@ -269,7 +269,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -311,10 +311,10 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
                 )
               ],
