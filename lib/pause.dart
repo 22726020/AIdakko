@@ -18,8 +18,8 @@ class _Pause1PageState extends State<Pause1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
-        backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -38,10 +38,10 @@ class _Pause1PageState extends State<Pause1Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
               ],
             ),
@@ -68,8 +68,8 @@ class _Pause2PageState extends State<Pause2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
-        backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -88,10 +88,10 @@ class _Pause2PageState extends State<Pause2Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
               ],
             ),
@@ -118,8 +118,8 @@ class _Pause3PageState extends State<Pause3Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
-        backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text(widget.title,style:TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -138,10 +138,10 @@ class _Pause3PageState extends State<Pause3Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
               ],
             ),

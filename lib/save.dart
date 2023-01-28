@@ -35,21 +35,21 @@ class _SavePageState extends State<SavePage> {
  @override
   Widget build(BuildContext context) {
   return Scaffold(
-    appBar: AppBar(title: const Text('確認画面')),
+    appBar: AppBar(title: const Text('確認画面'),backgroundColor: Colors.orange),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
       const Padding(padding: EdgeInsets.only(top: 10),
-      child: Text('正面画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      child: Text('正面画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
       ),
       Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path1)),
       ),
-      const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
       Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path3)),
       ),
-      const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.indigo ,color: Colors.white)),
+      const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
       Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
       child: Image.file(File(widget.path2)),
       ),
@@ -65,6 +65,7 @@ class _SavePageState extends State<SavePage> {
           );
           },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 26,
           ),
           child: const Text('保存する',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -77,6 +78,7 @@ class _SavePageState extends State<SavePage> {
           );
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 26,
           ),
           child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),

@@ -20,8 +20,8 @@ class _ManualPageState extends State<ManualPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text(widget.title,style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('環境説明',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual.png"),
@@ -37,6 +37,7 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 30,
           ),
           child: const Text('内カメ',style: TextStyle(fontSize: 40, color: Colors.white)),
@@ -49,6 +50,7 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 30,
           ),
           child: const Text('外カメ',style: TextStyle(fontSize: 40, color: Colors.white)),

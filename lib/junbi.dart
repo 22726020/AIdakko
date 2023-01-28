@@ -19,8 +19,8 @@ class _JunbiINPageState extends State<JunbiINPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text(widget.title,style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('内カメラ',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual2.png"),
@@ -55,6 +55,7 @@ showDialog(
         );
           },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 30,
           ),
           child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),
@@ -83,8 +84,8 @@ class _JunbiOUTPageState extends State<JunbiOUTPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text(widget.title,style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('外カメラ',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/junbiout.png"),
@@ -122,6 +123,7 @@ showDialog(
         );
           },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
           elevation: 30,
           ),
           child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),

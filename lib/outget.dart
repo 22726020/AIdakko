@@ -80,7 +80,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -195,7 +195,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -311,7 +311,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,

@@ -21,8 +21,8 @@ class _OwariPageState extends State<OwariPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.black)),
-        backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -52,10 +52,10 @@ class _OwariPageState extends State<OwariPage> {
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: Text('ホームへ戻る',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('ホームへ戻る',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
               ],
             ),

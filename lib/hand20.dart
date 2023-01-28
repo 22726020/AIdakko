@@ -13,8 +13,8 @@ class _HandexpPageState extends State<HandexpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('説明',style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('説明',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/handexp.png"),
@@ -27,10 +27,10 @@ class _HandexpPageState extends State<HandexpPage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.green,
                     elevation: 16,
                   ),
-                  child: Text('チェックを開始する',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('チェックを開始する',style: TextStyle(fontSize: 20,color: Colors.white)),
                 ), 
           ],
           ),
@@ -53,8 +53,8 @@ class _HandresultPageState extends State<HandresultPage> {
     double result = widget.result;
     String result1 = result.toString();
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('結果',style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('結果',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -71,10 +71,10 @@ class _HandresultPageState extends State<HandresultPage> {
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.green,
                     elevation: 16,
                   ),
-                  child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.white)),
                 ),
               ):
               Padding(padding: EdgeInsets.all(5),
@@ -83,10 +83,10 @@ class _HandresultPageState extends State<HandresultPage> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const HandtehonPage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.green,
                     elevation: 16,
                   ),
-                  child: Text('アドバイス',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('アドバイス',style: TextStyle(fontSize: 20,color: Colors.white)),
                 ),
               ), 
           ],
@@ -107,8 +107,8 @@ class _HandtehonPageState extends State<HandtehonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('アドバイス',style:const TextStyle(color: Colors.black)),
-        backgroundColor: const Color.fromARGB(255, 174, 168, 167)),
+        appBar: AppBar(centerTitle: true,title: Text('アドバイス',style:const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             const Padding(padding: EdgeInsets.all(10),
@@ -132,10 +132,10 @@ class _HandtehonPageState extends State<HandtehonPage> {
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.green,
                     elevation: 16,
                   ),
-                  child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('終了する',style: TextStyle(fontSize: 20,color: Colors.white)),
                 ),
               ), 
           ],

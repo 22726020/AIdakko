@@ -108,7 +108,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.indigo ,color: Colors.white)),
+            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -150,10 +150,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
                 ),
                 )
               ],

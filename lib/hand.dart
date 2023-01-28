@@ -870,6 +870,7 @@ class _HandPageState extends State<HandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text('腱鞘炎チェック'),
       ),
       body: SingleChildScrollView(
@@ -3899,10 +3900,10 @@ Column(
       _result();
     },
     style: ElevatedButton.styleFrom(
-      primary: Color.fromARGB(255, 214, 160, 255),
+      backgroundColor: Colors.green,
       elevation: 16,
     ),
-    child: Text('結果を送信する',style: TextStyle(fontSize: 20,color: Colors.black)),
+    child: Text('結果を送信する',style: TextStyle(fontSize: 20,color: Colors.white)),
   ), 
         ],
         
