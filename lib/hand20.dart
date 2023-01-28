@@ -13,11 +13,13 @@ class _HandexpPageState extends State<HandexpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('説明',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,title: Text('上肢機能評価の記入について',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Image.asset("assets/handexp.png"),
+            Text('\n  この質問表はあなたの手や腕の症状や能力を調べるためのものです。それぞれの質問に対して、先週１週間の状態を思い出して答えてください。\n\n  質問文とその内容を示したイラストがあります。各動作を行うにあたって、左右どちらの手あるいは両手を使ったかは関係ありません。あなたがどの程度できたかを選択して下さい。\n\n  普通にできたときは0を選択します。全くできなかった時は10です。半分くらいできたときは5です。10段階の中、どのあたりになるか考えて数字を選択してください。\n\n  あなたが普段は右手で字を書いていて、先週は何かのトラブルが起き左手で書いていたなら、左手で字を書く動作について最も当てはまる状態を示してください。\n\n  質問の中にあなたが先週1週間で実際に行っていないものがあった場合には、どの程度できたかを想像して、できるだけすべての質問にお答えください。',style: TextStyle(fontSize: 20,)),
+            Text('\n(例)下の例は普段の3割程度できると思ったときの位置です。顔をしかめるほどはやりにくくないけれども、普段どおりにはできない状態です。',style: TextStyle(fontSize: 20,)),
+            Image.asset("assets/hand20p.png"),
               ElevatedButton(
                   onPressed: (){
                     Navigator.push(
