@@ -136,10 +136,10 @@ class _MyHomePageState extends State<MyHomePage> {
               //     child: Text('内カメラ',style: TextStyle(fontSize: 32,color: Colors.white)))),
               // ],
               // ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 300),
+                Padding(padding: EdgeInsets.only(top: 250,right: 10),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -149,27 +149,30 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                    fixedSize:const Size(150,150),
+                    backgroundColor: Colors.orange,
                     elevation: 16,
                   ),
-                  child: Text('撮影を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
+                  child: Text('姿勢\n評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white)),
                 ),
                 ),
-               ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Improve()
-              )
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
-                    elevation: 16,
-                  ),
-                  child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
-                ), 
-               ElevatedButton(
+              //  ElevatedButton(
+              //     onPressed: (){
+              //       Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => Improve()
+              // )
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(fixedSize:const Size(100,100),
+              //       primary: Color.fromARGB(255, 214, 160, 255),
+              //       elevation: 16,
+              //     ),
+              //     child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
+              //   ), 
+              Padding(padding: EdgeInsets.only(top: 250,left: 10),
+               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
                     context,
@@ -178,26 +181,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                    fixedSize:const Size(180,150),
+                    backgroundColor: Colors.green,
                     elevation: 16,
                   ),
-                  child: Text('腱鞘炎チェック',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),textAlign: TextAlign.center,),
                 ), 
+              ),
 
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BlazePage()
-              )
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
-                    elevation: 16,
-                  ),
-                  child: Text('test',style: TextStyle(fontSize: 20,color: Colors.black)),
-                ),              
+              //   ElevatedButton(
+              //     onPressed: (){
+              //       Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => BlazePage()
+              // )
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //       primary: Color.fromARGB(255, 214, 160, 255),
+              //       elevation: 16,
+              //     ),
+              //     child: Text('test',style: TextStyle(fontSize: 20,color: Colors.black)),
+              //   ),              
 
               ],
             ),
