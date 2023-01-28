@@ -11,57 +11,18 @@ import 'package:gazou/improve.dart';
 import 'package:gazou/test.dart';
 import 'package:gazou/hand.dart';
 import 'package:gazou/hand20.dart';
-import 'package:gazou/developer.dart';
-//こんにちは
-Future<void> main() async {
-  // main 関数内で非同期処理を呼び出すための設定
-  WidgetsFlutterBinding.ensureInitialized();
-  // デバイスで使用可能なカメラのリストを取得
-  final cameras = await availableCameras();
-  // 利用可能なカメラのリストから特定のカメラを取得
-  final firstCamera = cameras[1];
-  runApp(MyApp(camera: firstCamera));
-}
 
-Future<void> outcamera() async {
-  // main 関数内で非同期処理を呼び出すための設定
-  WidgetsFlutterBinding.ensureInitialized();
-  // デバイスで使用可能なカメラのリストを取得
-  final cameras = await availableCameras();
-  // 利用可能なカメラのリストから特定のカメラを取得
-  final firstCamera = cameras[0];
-  runApp(MyApp(camera: firstCamera));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({
-    Key? key,
-    required this.camera,
-  }) : super(key: key);
-  final CameraDescription camera;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home:  MyHomePage(camera:camera,title: '抱っこ支援アプリ'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.camera,required this.title}) : super(key: key);
+class Developer extends StatefulWidget {
+  const Developer({Key? key, required this.camera,required this.title}) : super(key: key);
 
   final String title;
   final CameraDescription camera;
   
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Developer> createState() => _DeveloperState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _DeveloperState extends State<Developer> {
   final _audio = AudioCache();
   @override
   Widget build(BuildContext context) {
@@ -70,9 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromARGB(255, 174, 168, 167)),
         body:  Stack(
           children: <Widget>[
-            SizedBox(
-              width: double.infinity,
-              child: Image.asset("assets/dakko3.jpg"),),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: Image.asset("assets/dakko3.jpg"),),
             Column(
           children: <Widget>[
             // Container(
@@ -140,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 210,right: 10),
+                Padding(padding: EdgeInsets.only(top: 250,right: 10),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -158,21 +119,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('姿勢\n評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white)),
                 ),
                 ),
-              //  ElevatedButton(
-              //     onPressed: (){
-              //       Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => Improve()
-              // )
-              //       );
-              //     },
-              //     style: ElevatedButton.styleFrom(fixedSize:const Size(100,100),
-              //       primary: Color.fromARGB(255, 214, 160, 255),
-              //       elevation: 16,
-              //     ),
-              //     child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
-              //   ), 
-              Padding(padding: EdgeInsets.only(top: 210,left: 10),
+               ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Improve()
+              )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(fixedSize:const Size(100,100),
+                    primary: Color.fromARGB(255, 214, 160, 255),
+                    elevation: 16,
+                  ),
+                  child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
+                ), 
+              Padding(padding: EdgeInsets.only(top: 250,left: 10),
                child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -190,14 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),textAlign: TextAlign.center,),
                 ), 
               ),
-              ],
-            ),
-            Align(alignment: Alignment.topRight,
-                child: ElevatedButton(
+
+                ElevatedButton(
                   onPressed: (){
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Developer(title: '開発者',camera: widget.camera)
+                    MaterialPageRoute(builder: (context) => BlazePage()
               )
                     );
                   },
@@ -205,13 +164,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     primary: Color.fromARGB(255, 214, 160, 255),
                     elevation: 16,
                   ),
-                  child: Text('開発者',style: TextStyle(fontSize: 20,color: Colors.black)),
+                  child: Text('test',style: TextStyle(fontSize: 20,color: Colors.black)),
                 ),              
-            )
+
               ],
             ),
           ],
         ),
+            // ElevatedButton(
+            //   onPressed: () { /* ボタンがタップされた時の処理 */ },
+            //   child: Text('基本情報の登録',style:TextStyle(color: Colors.black)),
+              
+            //   )
+          ],
+        )
     );
   }
    void _opneUrl() async {
