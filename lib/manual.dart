@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/get.dart';
+import 'package:gazou/inget.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/junbi.dart';
 

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/get.dart';
+import 'package:gazou/inget.dart';
 import 'package:quiver/async.dart';
 import 'package:gazou/main.dart';
 //こんにちは

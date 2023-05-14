@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
+import 'package:gazou/inget.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/get1.dart';
-import 'package:gazou/get2.dart';
-import 'package:gazou/get3.dart';
 
 class Pause1Page extends StatefulWidget {
   const Pause1Page({Key? key, required this.title,required this.camera}) : super(key: key);
