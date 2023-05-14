@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/get.dart';
-import 'package:gazou/get1.dart';
-import 'package:gazou/get2.dart';
+import 'package:gazou/inget.dart';
 import 'package:quiver/async.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'dart:math';

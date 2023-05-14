@@ -2,26 +2,24 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gazou/inget.dart';
-import 'package:quiver/async.dart';
-import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
-import 'dart:math';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:gazou/outget.dart';
 import 'package:gazou/save.dart';
+import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-//git追加テスト
-class OutBlazePage1 extends StatefulWidget {
-  const OutBlazePage1({Key? key, required this.camera, required this.imagePath,})
+
+//Blaze1
+class BlazePage1 extends StatefulWidget {
+  const BlazePage1({Key? key, required this.camera, required this.imagePath,})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
 
   //パスも一緒に受け取る
   @override
-  State<OutBlazePage1> createState() => _OutBlazePage1State();
+  State<BlazePage1> createState() => _BlazePage1State();
 }
 
-class _OutBlazePage1State extends State<OutBlazePage1> {
+class _BlazePage1State extends State<BlazePage1> {
   final _audio = AudioCache();
   bool _fileSelected = false;
   bool _poseFound = false;
@@ -158,7 +156,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.imagePath),
+            builder: (context) => TakePictureScreen2(camera: widget.camera,path1: widget.imagePath),
           ));
     } else {
 
@@ -168,7 +166,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture1(camera: widget.camera),
+            builder: (context) => TakePictureScreen1(camera: widget.camera),
           ));
     }
   }
@@ -192,8 +190,9 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
   }
 }
 
-class OutBlazePage2 extends StatefulWidget {
-  const OutBlazePage2({Key? key, required this.camera, required this.imagePath,required this.path1})
+//Blaze2
+class BlazePage2 extends StatefulWidget {
+  const BlazePage2({Key? key, required this.camera, required this.imagePath,required this.path1})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
@@ -201,10 +200,10 @@ class OutBlazePage2 extends StatefulWidget {
 
   //パスも一緒に受け取る
   @override
-  State<OutBlazePage2> createState() => _OutBlazePage2State();
+  State<BlazePage2> createState() => _BlazePage2State();
 }
 
-class _OutBlazePage2State extends State<OutBlazePage2> {
+class _BlazePage2State extends State<BlazePage2> {
   final _audio = AudioCache();
   bool _fileSelected = false;
   bool _poseFound = false;
@@ -341,17 +340,17 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.imagePath),
+            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1, path2: widget.imagePath),
           ));
     } else {
 
       //問題があるとき再撮影へ
       _audio.play('keihou.mp3');
-      await Future.delayed(const Duration(seconds: 4));
+      await Future.delayed(Duration(seconds: 4));
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.path1),
+            builder: (context) => TakePictureScreen2(camera: widget.camera,path1:widget.path1),
           ));
     }
   }
@@ -367,28 +366,26 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
       //撮った写真を表示
       // appBar: AppBar(title: const Text('撮れた写真')),
       body: Center(child: Image.file(File(widget.imagePath))),
-      // body: Center(child: Transform(transform: Matrix4.rotationY(pi),
-      // child: Image.file(File(widget.imagePath)),
-      // )
-      // ),
     );
   }
 }
 
-class OutBlazePage3 extends StatefulWidget {
-  const OutBlazePage3({Key? key, required this.camera, required this.imagePath,required this.path1,required this.path2})
+//Blaze3
+class BlazePage3 extends StatefulWidget {
+  const BlazePage3({Key? key, required this.camera, required this.imagePath,required this.path1, required this.path2})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
   final String path1;
   final String path2;
 
+
   //パスも一緒に受け取る
   @override
-  State<OutBlazePage3> createState() => _OutBlazePage3State();
+  State<BlazePage3> createState() => _BlazePage3State();
 }
 
-class _OutBlazePage3State extends State<OutBlazePage3> {
+class _BlazePage3State extends State<BlazePage3> {
   final _audio = AudioCache();
   bool _fileSelected = false;
   bool _poseFound = false;
@@ -524,18 +521,18 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
     if (hantei && hantei2 == true) {
       await Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => SavePageOut(camera: widget.camera, title: "抱っこアプリ",path1:widget.path1, path2: widget.path2,path3: widget.imagePath),
+          MaterialPageRoute(//Save.dartに
+            builder: (context) => SavePageIn(camera: widget.camera, title: "抱っこアプリ",path1:widget.path1, path2: widget.path2,path3: widget.imagePath),
           ));
     } else {
 
       //問題があるとき再撮影へ
       _audio.play('keihou.mp3');
-      await Future.delayed(const Duration(seconds: 4));
+      await Future.delayed(Duration(seconds: 4));
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,),
+            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1,path2:widget.path2,),
           ));
     }
   }
@@ -551,10 +548,6 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
       //撮った写真を表示
       // appBar: AppBar(title: const Text('撮れた写真')),
       body: Center(child: Image.file(File(widget.imagePath))),
-      // body: Center(child: Transform(transform: Matrix4.rotationY(pi),
-      // child: Image.file(File(widget.imagePath)),
-      // )
-      // ),
     );
   }
 }
