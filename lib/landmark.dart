@@ -90,7 +90,7 @@ class LandmarkState extends State<Landmark> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 150),
+                Padding(padding: const EdgeInsets.only(top:620,right: 150),
                 child:FloatingActionButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
@@ -98,7 +98,7 @@ class LandmarkState extends State<Landmark> {
                   child: const Icon(Icons.home),
                 ),
                 ),
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:620,left: 30),
                 
                 child: FloatingActionButton(
                   onPressed: () async {
@@ -155,6 +155,11 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     final inputImage = InputImage.fromFilePath(path_1);
     final List<Pose> poses = await poseDetector.processImage(inputImage);
 
+    //デバイスのサイズ取得
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
+
+    
     //初期化
     listx = [];
     listy = [];
@@ -162,7 +167,8 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        offsets.add(Offset(landmark.x, landmark.y));
+        //比率を合わせる
+        offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
         listx.add(landmark.x);
@@ -193,11 +199,11 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     
     return Scaffold(
       //撮った写真を表示
-      // appBar: AppBar(title: const Text('撮れた写真')),
+      //appBar: AppBar(title: const Text('姿勢推定出力')),
       body: Stack(
-        children: <Widget>[  
-        Image.file(
-          File(widget.imagePath)
+        children: <Widget>[
+          Image.file(
+            File(widget.imagePath)
           ),
           GestureDetector(
           // カスタムペイント
@@ -225,7 +231,9 @@ class MyPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
-    
+    print(offsets);
+
+
     final Nose = offsets[0];
     final Left_eye_inner = offsets[1];
     final Left_eye = offsets[2];
