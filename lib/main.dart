@@ -194,6 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Align(alignment: Alignment.topRight,
                 child: ElevatedButton(
                   onPressed: (){
+                    outcamera();
                     Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Developer(title: '開発者',camera: widget.camera)

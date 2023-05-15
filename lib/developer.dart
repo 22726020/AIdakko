@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/inget.dart';
 import 'package:gazou/manual.dart';
 import 'package:quiver/async.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +9,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/improve.dart';
 import 'package:gazou/test.dart';
 import 'package:gazou/hand20.dart';
+import 'package:gazou/landmark.dart';
 
 class Developer extends StatefulWidget {
   const Developer({Key? key, required this.camera,required this.title}) : super(key: key);
@@ -40,7 +40,7 @@ class _DeveloperState extends State<Developer> {
             //   child: Text('選択してください',style: TextStyle(fontSize: 30),),
             // ),
            
-           SizedBox(height: 160,),
+           SizedBox(height: 16,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,25 +82,10 @@ class _DeveloperState extends State<Developer> {
                 ),
               ]
               ),
-              // Row(
-              //   children: <Widget>[
-              //     Padding(padding: EdgeInsets.only(top: 320,left: 34),
-              //     child: ElevatedButton(
-              //     onPressed: (){
-              //       outcamera();
-              //     }, child: Text('外カメラ',style: TextStyle(fontSize: 32,color: Colors.white)))),
-              //     Padding(padding: EdgeInsets.only(top: 320,left: 15),
-              //     child: ElevatedButton(
-              //     onPressed: (){
-              //       main();
-              //     }, 
-              //     child: Text('内カメラ',style: TextStyle(fontSize: 32,color: Colors.white)))),
-              // ],
-              // ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 250,right: 10),
+                Padding(padding: EdgeInsets.only(top: 5,right: 10),
               child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -132,7 +117,7 @@ class _DeveloperState extends State<Developer> {
                   ),
                   child: Text('修正を行う',style: TextStyle(fontSize: 40,color: Colors.black)),
                 ), 
-              Padding(padding: EdgeInsets.only(top: 250,left: 10),
+              Padding(padding: EdgeInsets.only(top: 25,left: 0),
                child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -143,14 +128,13 @@ class _DeveloperState extends State<Developer> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                    fixedSize:const Size(180,150),
+                    fixedSize:const Size(18,150),
                     backgroundColor: Colors.green,
-                    elevation: 16,
+                    elevation: 1,
                   ),
                   child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),textAlign: TextAlign.center,),
                 ), 
               ),
-
                 ElevatedButton(
                   onPressed: (){
                     Navigator.push(
@@ -164,7 +148,24 @@ class _DeveloperState extends State<Developer> {
                     elevation: 16,
                   ),
                   child: Text('test',style: TextStyle(fontSize: 20,color: Colors.black)),
-                ),              
+                ),   
+              
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Landmark(camera: widget.camera)
+              )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                    fixedSize:const Size(180,150),
+                    backgroundColor: Colors.green,
+                    elevation: 16,
+                  ),
+                  child: Text('landmark',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),textAlign: TextAlign.center,),
+                ),            
 
               ],
             ),
