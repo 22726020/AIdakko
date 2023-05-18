@@ -1,12 +1,9 @@
 import 'dart:io';
-import 'dart:ui' as ui;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:gazou/outblaze.dart';
-import 'package:gazou/main.dart';
-import 'package:quiver/async.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:gazou/pause.dart';
+import 'package:gazou/paint.dart';
+import 'package:gazou/evaluation.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
 
@@ -64,6 +61,7 @@ class LandmarkState extends State<Landmark> {
       count++;
     }
     return Scaffold(
+
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -146,6 +144,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
   String? _fileName;
   File? _filePath;
   var offsets = <Offset>[];
+  var offsets2 = <Offset>[];
 
   final _points = <Offset>[];
 
@@ -190,6 +189,13 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     });
   }
 
+  // タッチしたら描画をクリアする
+  void _clearPoints(){
+    setState((){
+      offsets.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
@@ -198,10 +204,12 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     }
     
     return Scaffold(
-      //撮った写真を表示
-      //appBar: AppBar(title: const Text('姿勢推定出力')),
+      appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
+      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+
       body: Stack(
         children: <Widget>[
+
           Image.file(
             File(widget.imagePath)
           ),
@@ -212,7 +220,48 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
             // タッチを有効にするため、childが必要
             child: Center(),
         ),
+        //ロングプレスしたら描画クリア
+        onLongPress: () => _clearPoints(),
+        //離したら再度blaze実行し、描画
+        onLongPressEnd: (details) => _blazePose(),
       ),
+      //→paint.dart
+      Padding(padding: EdgeInsets.only(top: 630,left: 20),
+        child: ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PaintTest(imagePath:widget.imagePath,),
+        )
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              fixedSize:const Size(180,60),
+              backgroundColor: Colors.orange,
+              elevation: 16,
+            ),
+            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+          ),
+                    ),
+      Padding(padding: EdgeInsets.only(top: 630,left: 220),
+        child: ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Evaluation(imagePath:widget.imagePath,offsets:offsets),
+        )
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              fixedSize:const Size(180,60),
+              backgroundColor: Colors.orange,
+              elevation: 16,
+            ),
+            child: Text('このまま',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+          ),
+                    ),
       ],
           ),
       // body: Center(child: Transform(transform: Matrix4.rotationY(pi),
@@ -220,6 +269,8 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
       // )
       // ),
     );
+      
+  
   }
 }
 class MyPainter extends CustomPainter{
@@ -229,10 +280,10 @@ class MyPainter extends CustomPainter{
 
   @override
   void paint(Canvas canvas, Size size) {
+    // var offsets2 = <Offset>[];
+
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
-    print(offsets);
-
 
     final Nose = offsets[0];
     final Left_eye_inner = offsets[1];
@@ -267,7 +318,22 @@ class MyPainter extends CustomPainter{
     final Right_heel = offsets[30];
     final Left_foot_index = offsets[31];
     final Right_foot_index = offsets[32];
-    
+
+    // offsets2.add(Nose);
+    // offsets2.add(Left_eye);
+    // offsets2.add(Right_eye);
+    // offsets2.add(Left_mouth);
+    // offsets2.add(Right_mouth);
+    // offsets2.add(Left_shoulder);
+    // offsets2.add(Right_shoulder);
+    // offsets2.add(Left_elbow);
+    // offsets2.add(Right_elbow);
+    // offsets2.add(Left_wrist);
+    // offsets2.add(Right_wrist);
+    // offsets2.add(Left_hip);
+    // offsets2.add(Right_hip);
+    // print(offsets2);
+
     paint.color = Colors.orange;
     canvas.drawCircle(Nose, radius, paint);
     canvas.drawCircle(Left_shoulder, radius, paint);
@@ -297,12 +363,8 @@ class MyPainter extends CustomPainter{
 
   }
 
-  // void paint(Canvas canvas, Size size) {
-  //   // 記憶している点を描画する
-  //   _points.forEach((offset) =>
-  //       // canvas.drawRect(Rect.fromCenter(center: offset, width: 20.0, height: 20.0), _rectPaint));
-  //       canvas.drawCircle(offset, 10, _rectPaint)); 
-  // }
+
+  
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
