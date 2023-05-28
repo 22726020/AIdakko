@@ -177,6 +177,8 @@ class _SavePageOutState extends State<SavePageOut> {
   );
   }
 }
+
+//正面用
 class MyPainter extends CustomPainter{
   final List<Offset> offsets;
 
@@ -266,15 +268,187 @@ class MyPainter extends CustomPainter{
     canvas.drawLine(Right_hip, Left_hip, paint);
 
   }
-
-
-  
-
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
 }
+
+//右用
+class MyPainterRight extends CustomPainter{
+  final List<Offset> offsets;
+
+  MyPainterRight(this.offsets);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // var offsets2 = <Offset>[];
+
+    final paint = Paint()..color = Colors.red;
+    final radius = size.width / 50;
+
+    final Nose = offsets[0];
+    final Left_eye_inner = offsets[1];
+    final Left_eye = offsets[2];
+    final Left_eye_outer = offsets[3];
+    final Right_eye_inner = offsets[4];
+    final Right_eye = offsets[5];
+    final Right_eye_outer = offsets[6];
+    final Left_ear = offsets[7];
+    final Right_ear = offsets[8];
+    final Left_mouth = offsets[9];
+    final Right_mouth = offsets[10];
+    final Left_shoulder = offsets[11];
+    final Right_shoulder = offsets[12];
+    final Left_elbow = offsets[13];
+    final Right_elbow = offsets[14];
+    final Left_wrist = offsets[15];
+    final Right_wrist = offsets[16];
+    final Left_pinky = offsets[17];
+    final Right_pinky = offsets[18];
+    final Left_index = offsets[19];
+    final Right_index = offsets[20];
+    final Left_thumb = offsets[21];
+    final Right_thumb = offsets[22];
+    final Left_hip = offsets[23];
+    final Right_hip = offsets[24];
+    final Left_knee = offsets[25];
+    final Right_knee = offsets[26];
+    final Left_ankle = offsets[27];
+    final Right_ankle = offsets[28];
+    final Left_heel = offsets[29];
+    final Right_heel = offsets[30];
+    final Left_foot_index = offsets[31];
+    final Right_foot_index = offsets[32];
+
+    // offsets2.add(Nose);
+    // offsets2.add(Left_eye);
+    // offsets2.add(Right_eye);
+    // offsets2.add(Left_mouth);
+    // offsets2.add(Right_mouth);
+    // offsets2.add(Left_shoulder);
+    // offsets2.add(Right_shoulder);
+    // offsets2.add(Left_elbow);
+    // offsets2.add(Right_elbow);
+    // offsets2.add(Left_wrist);
+    // offsets2.add(Right_wrist);
+    // offsets2.add(Left_hip);
+    // offsets2.add(Right_hip);
+    // print(offsets2);
+
+    paint.color = Colors.orange;
+    canvas.drawCircle(Nose, radius, paint);
+    canvas.drawCircle(Right_shoulder, radius, paint);
+    canvas.drawCircle(Right_elbow, radius, paint);
+    canvas.drawCircle(Right_wrist, radius, paint);
+    canvas.drawCircle(Right_hip, radius, paint);
+    canvas.drawCircle(Right_knee, radius, paint);
+    canvas.drawCircle(Right_ankle, radius, paint);
+    
+    paint.strokeWidth = 5;
+    paint.color = Colors.green;
+    canvas.drawLine(Nose, Right_shoulder, paint);
+    canvas.drawLine(Right_shoulder, Right_elbow, paint);
+    canvas.drawLine(Right_elbow, Right_wrist, paint);
+    canvas.drawLine(Right_shoulder, Right_hip, paint);
+    canvas.drawLine(Right_knee, Right_hip, paint);
+    canvas.drawLine(Right_knee, Right_ankle, paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+//左用
+class MyPainterLeft extends CustomPainter{
+  final List<Offset> offsets;
+
+  MyPainterLeft(this.offsets);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // var offsets2 = <Offset>[];
+
+    final paint = Paint()..color = Colors.red;
+    final radius = size.width / 50;
+
+    final Nose = offsets[0];
+    final Left_eye_inner = offsets[1];
+    final Left_eye = offsets[2];
+    final Left_eye_outer = offsets[3];
+    final _eye_inner = offsets[4];
+    final Right_eye = offsets[5];
+    final Right_eye_outer = offsets[6];
+    final Left_ear = offsets[7];
+    final Right_ear = offsets[8];
+    final Left_mouth = offsets[9];
+    final Right_mouth = offsets[10];
+    final Left_shoulder = offsets[11];
+    final Right_shoulder = offsets[12];
+    final Left_elbow = offsets[13];
+    final Right_elbow = offsets[14];
+    final Left_wrist = offsets[15];
+    final Right_wrist = offsets[16];
+    final Left_pinky = offsets[17];
+    final Right_pinky = offsets[18];
+    final Left_index = offsets[19];
+    final Right_index = offsets[20];
+    final Left_thumb = offsets[21];
+    final Right_thumb = offsets[22];
+    final Left_hip = offsets[23];
+    final Right_hip = offsets[24];
+    final Left_knee = offsets[25];
+    final Right_knee = offsets[26];
+    final Left_ankle = offsets[27];
+    final Right_ankle = offsets[28];
+    final Left_heel = offsets[29];
+    final Right_heel = offsets[30];
+    final Left_foot_index = offsets[31];
+    final Right_foot_index = offsets[32];
+
+    // offsets2.add(Nose);
+    // offsets2.add(Left_eye);
+    // offsets2.add(Right_eye);
+    // offsets2.add(Left_mouth);
+    // offsets2.add(Right_mouth);
+    // offsets2.add(Left_shoulder);
+    // offsets2.add(Right_shoulder);
+    // offsets2.add(Left_elbow);
+    // offsets2.add(Right_elbow);
+    // offsets2.add(Left_wrist);
+    // offsets2.add(Right_wrist);
+    // offsets2.add(Left_hip);
+    // offsets2.add(Right_hip);
+    // print(offsets2);
+
+    paint.color = Colors.orange;
+    canvas.drawCircle(Nose, radius, paint);
+    canvas.drawCircle(Left_shoulder, radius, paint);
+    canvas.drawCircle(Left_elbow, radius, paint);
+    canvas.drawCircle(Left_wrist, radius, paint);
+    canvas.drawCircle(Left_hip, radius, paint);
+    canvas.drawCircle(Left_knee, radius, paint);
+    canvas.drawCircle(Left_ankle, radius, paint);
+    
+    paint.strokeWidth = 5;
+    paint.color = Colors.green;
+    canvas.drawLine(Nose, Left_shoulder, paint);
+    canvas.drawLine(Left_shoulder, Left_elbow, paint);
+    canvas.drawLine(Left_elbow, Left_wrist, paint);
+    canvas.drawLine(Left_shoulder, Left_hip, paint);
+    canvas.drawLine(Left_knee, Left_hip, paint);
+    canvas.drawLine(Left_knee, Left_ankle, paint);
+
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
 
 //姿勢推定描画
 //正面画像
@@ -359,7 +533,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,title:  Text("正面姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -516,7 +690,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,title:  Text("右姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -528,7 +702,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
           GestureDetector(
           // カスタムペイント
           child: CustomPaint(
-            painter: MyPainter(offsets),
+            painter: MyPainterRight(offsets),
             // タッチを有効にするため、childが必要
             child: Center(),
         ),
@@ -672,7 +846,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,title:  Text("左姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -684,7 +858,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
           GestureDetector(
           // カスタムペイント
           child: CustomPaint(
-            painter: MyPainter(offsets),
+            painter: MyPainterLeft(offsets),
             // タッチを有効にするため、childが必要
             child: Center(),
         ),
