@@ -81,7 +81,7 @@ int _counter = 0;
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Evaluation(imagePath:widget.imagePath,offsets:_points),
+              MaterialPageRoute(builder: (context) => EvaluationTest(imagePath:widget.imagePath,offsets:_points),
         )
               );
             },

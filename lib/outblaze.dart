@@ -7,7 +7,7 @@ import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/outget.dart';
-import 'package:gazou/save.dart';
+import 'package:gazou/blazepaint.dart';
 
 //git追加テスト
 class OutBlazePage1 extends StatefulWidget {
@@ -57,8 +57,8 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 
@@ -72,8 +72,8 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
         listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     // print(listx);
     // print(listy);
-    print(EllorXlist);
-    print(EllorYlist);
+    // print(EllorXlist);
+    // print(EllorYlist);
     hantei = false;
     //おかしいところ判定
     if (EllorXlist.isEmpty && EllorYlist.isEmpty) {
@@ -439,8 +439,7 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
         listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     // print(listx);
     // print(listy);
-    print(EllorXlist);
-    print(EllorYlist);
+
     hantei = false;
     //おかしいところ判定
     if (EllorXlist.isEmpty && EllorYlist.isEmpty) {
@@ -490,33 +489,6 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
       );
     }
     seigyo();
-  }
-
-  void _resetState() {
-    if (!mounted) {
-      return;
-    }
-    setState(() {
-      _fileSelected = false;
-      _poseFound = false;
-      _filePath = null;
-    });
-  }
-
-  Widget _showImage() {
-    if (_fileSelected) {
-      return Image.file(_filePath!);
-    } else {
-      return const Text('');
-    }
-  }
-
-  Widget _drawPoints() {
-    if (_poseFound) {
-      return CustomPaint();
-    } else {
-      return const Text('');
-    }
   }
 
   Future<void> seigyo() async {

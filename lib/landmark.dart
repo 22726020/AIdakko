@@ -83,7 +83,7 @@ class LandmarkState extends State<Landmark> {
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/1.png"),
+            child: Image.asset("assets/orange.png"),
           ),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -249,7 +249,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Evaluation(imagePath:widget.imagePath,offsets:offsets),
+              MaterialPageRoute(builder: (context) => EvaluationTest(imagePath:widget.imagePath,offsets:offsets),
         )
               );
             },
