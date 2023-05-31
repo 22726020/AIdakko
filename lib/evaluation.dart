@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 //テスト
@@ -13,7 +14,7 @@ class EvaluationTest extends StatefulWidget {
 }
 
 class _EvaluationTestState extends State<EvaluationTest> {
-String human = "結果は？";
+String human = "あなたの姿勢パターンは？";
 
 //計算する
 String _calculation(String human){
@@ -99,7 +100,7 @@ class Evaluation extends StatefulWidget {
 }
 
 class _EvaluationState extends State<Evaluation> {
-String human = "結果は？";
+String human = "あなたの姿勢パターンは？";
 
 //計算する
 String _calculation(String human){
@@ -157,20 +158,82 @@ String _calculation(String human){
     // List<String> landmarkright = [0"Nose",1"Right_shoulder",2"Right_elbow",3"Right_wrist",4"Right_hip",5"Right_knee",6"Right_ankle"];
     // List<String> landmarkleft = [0"Nose",1"Left_shoulder",2"Left_elbow",3"Left_wrist",4"Left_hip",5"Left_knee",6"Left_ankle"];
   
-    String human = "あげています";
-    double righthand = landmarkleft[10].dy -landmarkfront[0].dy;
-    if(righthand>0){
-      human = "あげていません";
-    }
-    return "右手を $human";
-    }
+    // String human = "あげています";
+    // double righthand = landmarkfront[10].dy -landmarkfront[0].dy;
+    // if(righthand>0){
+    //   human = "あげていません";
+    // }
+    // return "右手を $human";
+    // }
     // List<Offset> human = landmark;
 
     // return "人間 $human";
     // }
 
     //ケンダル分類
-    
+    String kendall = "";
+    double ankle_knee = 0;
+    double ankle_hip = 0;
+    double ankle_shoulder = 0;
+    String human = "";
+
+    //ankle_knee 数字が大きい方で引いてるから最後に-1をかけていい感じにしてる
+    var tmp1 = landmarkright[5] - landmarkright[6];
+    ankle_knee = atan(tmp1.dy/tmp1.dx)*180/pi;
+    if(ankle_knee>0){
+      ankle_knee = (90 - ankle_knee)*-1;
+    }
+    else{
+      ankle_knee = (-90 + ankle_knee.abs())*-1;
+    }
+
+    //ankle_hip 
+    var tmp2 = landmarkright[4] - landmarkright[6];
+    //tmp1のyを使う
+    ankle_hip = atan(tmp1.dy/tmp2.dx)*180/pi;
+    if(ankle_hip>0){
+      ankle_hip = (90 - ankle_hip)*-1;
+    }
+    else{
+      ankle_hip = (-90 + ankle_hip.abs())*-1;
+    }
+
+    //ankle_shoulder
+    var tmp3 = landmarkright[1] - landmarkright[6];
+    //tmp1のyを使う
+    ankle_shoulder = atan(tmp1.dy/tmp3.dx)*180/pi;
+    if(ankle_shoulder>0){
+      ankle_shoulder = (90 - ankle_shoulder)*-1;
+    }
+    else{
+      ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
+    }
+
+    //ケンダル分類
+    if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+      human = "ノーマル";
+    }
+    else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+      human = "ロードシス";
+    }
+    else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+      human = "スウェイバック";
+    }
+    else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
+      human = "カイホロードシス";
+    }
+    else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+      human = "フラットバック";
+    }
+    else {
+      human = "不明";
+    }
+
+    print(ankle_knee);
+    print(ankle_hip);
+    print(ankle_shoulder);
+    return human;
+}
     //
 
   @override
@@ -179,7 +242,7 @@ String _calculation(String human){
       body:Stack(
           children: <Widget>[ 
             Image.file(
-            File(widget.path1)
+            File(widget.path2)
           ),
 
       Padding(padding: EdgeInsets.only(top: 650,left: 20),
