@@ -79,7 +79,7 @@ class LandmarkState extends State<Landmark> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -336,30 +336,34 @@ class MyPainter extends CustomPainter{
 
     paint.color = Colors.orange;
     canvas.drawCircle(Nose, radius, paint);
-    canvas.drawCircle(Left_shoulder, radius, paint);
+    // canvas.drawCircle(Left_shoulder, radius, paint);
     canvas.drawCircle(Right_shoulder, radius, paint);
-    canvas.drawCircle(Left_elbow, radius, paint);
+    // canvas.drawCircle(Left_elbow, radius, paint);
     canvas.drawCircle(Right_elbow, radius, paint);
-    canvas.drawCircle(Left_wrist, radius, paint);
+    // canvas.drawCircle(Left_wrist, radius, paint);
     canvas.drawCircle(Right_wrist, radius, paint);
-    canvas.drawCircle(Left_hip, radius, paint);
+    // canvas.drawCircle(Left_hip, radius, paint);
     canvas.drawCircle(Right_hip, radius, paint);
-    canvas.drawCircle(Left_eye, radius, paint);
-    canvas.drawCircle(Right_eye, radius, paint);
-    canvas.drawCircle(Left_mouth, radius, paint);
-    canvas.drawCircle(Right_mouth, radius, paint);
+    canvas.drawCircle(Right_knee, radius, paint);
+    canvas.drawCircle(Right_ankle, radius, paint);
+    // canvas.drawCircle(Left_eye, radius, paint);
+    // canvas.drawCircle(Right_eye, radius, paint);
+    // canvas.drawCircle(Left_mouth, radius, paint);
+    // canvas.drawCircle(Right_mouth, radius, paint);
     
     paint.strokeWidth = 5;
     paint.color = Colors.green;
-    canvas.drawLine(Left_mouth, Right_mouth, paint);
-    canvas.drawLine(Right_shoulder, Left_shoulder, paint);
+    // canvas.drawLine(Left_mouth, Right_mouth, paint);
+    // canvas.drawLine(Right_shoulder, Left_shoulder, paint);
     canvas.drawLine(Right_shoulder, Right_elbow, paint);
-    canvas.drawLine(Left_shoulder, Left_elbow, paint);
-    canvas.drawLine(Left_elbow, Left_wrist, paint);
+    // canvas.drawLine(Left_shoulder, Left_elbow, paint);
+    // canvas.drawLine(Left_elbow, Left_wrist, paint);
     canvas.drawLine(Right_elbow, Right_wrist, paint);
-    canvas.drawLine(Left_shoulder, Left_hip, paint);
+    // canvas.drawLine(Left_shoulder, Left_hip, paint);
     canvas.drawLine(Right_shoulder, Right_hip, paint);
-    canvas.drawLine(Right_hip, Left_hip, paint);
+    canvas.drawLine(Right_knee, Right_hip, paint);
+    canvas.drawLine(Right_knee, Right_ankle, paint);
+    // canvas.drawLine(Right_hip, Left_hip, paint);
 
   }
 

@@ -378,7 +378,7 @@ class MyPainterLeft extends CustomPainter{
     final Left_eye_inner = offsets[1];
     final Left_eye = offsets[2];
     final Left_eye_outer = offsets[3];
-    final _eye_inner = offsets[4];
+    final Right_eye_inner = offsets[4];
     final Right_eye = offsets[5];
     final Right_eye_outer = offsets[6];
     final Left_ear = offsets[7];
