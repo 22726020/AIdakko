@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gazou/hand20.dart';
 
 //テスト
 class EvaluationTest extends StatefulWidget {
@@ -14,8 +15,11 @@ class EvaluationTest extends StatefulWidget {
 }
 
 class _EvaluationTestState extends State<EvaluationTest> {
-String human = "あなたの姿勢パターンは？";
-
+String human = "評価結果を出す";
+String score = "姿勢スコア：計算中";
+String advice = "";
+String badpoint = "";
+String text = "";
 //計算する
 String _calculation(String human){
   List<Offset> landmarkright = widget.offsets;
@@ -106,43 +110,112 @@ String _calculation(String human){
     return human;
 }
 
+//姿勢スコア計算
+String _score(String score){
+  int sumscore = 0;
+
+  score = "姿勢スコア：" + sumscore.toString() + "点";
+
+  return score;
+}
+
+//悪いところを返す
+String _badpoint(String badpoint){
+  List<String> badpoint_list = ["抱っこの高さが低い","背筋が悪い","aaaa","bbbb"];
+  badpoint = badpoint_list[0] + "\n" + badpoint_list[1];
+  return badpoint;
+}
+
+//アドバイスを返す
+String _advice(String advice){
+  List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
+  advice = advice_list[0] + "\n" + advice_list[1];
+  return advice;
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,title:  Text("評価結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-      body:Stack(
-          children: <Widget>[ 
-            Image.file(
-            File(widget.imagePath)
-          ),
-          CustomPaint(
-            //引数の渡す方
-            painter: MyPainterRight(widget.offsets),
-            // タッチを有効にするため、childが必要
-            child: Center(),
-        ),
-
-      Padding(padding: EdgeInsets.only(top: 650,left: 20),
-        child: ElevatedButton(
-            onPressed: (){
-              setState(() {
-                human = _calculation(human);
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(400,60),
-              backgroundColor: Colors.orange,
-              elevation: 16,
+      body:SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Stack(
+              children: [
+                  Image.file(
+                  File(widget.imagePath)
+                ),
+                CustomPaint(
+                  //引数の渡す方
+                  painter: MyPainterRight(widget.offsets),
+                  // タッチを有効にするため、childが必要
+                  child: Center(),
+              ),
+              ],
             ),
-            child: Text(human,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.white)),
-          ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          score = _score(score);
+                          text = score;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          badpoint = _badpoint(badpoint);
+                          text = badpoint;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          advice = _advice(advice);
+                          text = advice;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+              ],
+            ),
+      
+                    
+            // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
+            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
+
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
       //     child: Text(_calculation(human),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
       // ),
           ],
+      ),
       ),
     );
     }
