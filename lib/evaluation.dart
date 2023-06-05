@@ -15,16 +15,17 @@ class EvaluationTest extends StatefulWidget {
 }
 
 class _EvaluationTestState extends State<EvaluationTest> {
-String human = "評価結果を出す";
+String kendall = "評価結果を出す";
 String score = "姿勢スコア：計算中";
 String advice = "";
 String badpoint = "";
 String text = "";
-//右姿勢からを評価する
-String _rightcalculation(String human){
+
+//右を調整してる
+List<Offset> _adjust_right(List<Offset> landmarkright){
   List<Offset> landmarkright = widget.offsets;
   List<Offset> landmarks = [];
-//調整
+
   landmarks = [];
     if(landmarkright.length!=7){
     landmarks.add(landmarkright[0]);
@@ -37,6 +38,14 @@ String _rightcalculation(String human){
     //戻す
     landmarkright = landmarks;
   }
+  return landmarkright;
+}
+
+//ケンダル分類
+String _kendall_classification(String kendall){
+  List<Offset>landmarkright = [];
+  //調整済み座標持ってきてる
+  landmarkright = _adjust_right(landmarkright);
 
    //メモ
     // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
@@ -49,7 +58,6 @@ String _rightcalculation(String human){
     double ankle_knee = 0;
     double ankle_hip = 0;
     double ankle_shoulder = 0;
-    String human = "";
 
     //ankle_knee 数字が大きい方で引いてるから最後に-1をかけていい感じにしてる
     var tmp1 = landmarkright[5] - landmarkright[6];
@@ -85,28 +93,28 @@ String _rightcalculation(String human){
 
     //ケンダル分類
     if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      human = "ノーマル";
+      kendall = "ノーマル";
     }
     else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      human = "ロードシス";
+      kendall = "ロードシス";
     }
     else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      human = "スウェイバック";
+      kendall = "スウェイバック";
     }
     else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
-      human = "カイホロードシス";
+      kendall = "カイホロードシス";
     }
     else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      human = "フラットバック";
+      kendall = "フラットバック";
     }
     else {
-      human = "不明";
+      kendall = "不明";
     }
 
     print(ankle_knee);
     print(ankle_hip);
     print(ankle_shoulder);
-    return human;
+    return kendall;
 }
 //肩の平行具合を計算する
 String _ShoulderScorecalculation(){
@@ -157,7 +165,7 @@ String _Hugheightcalculation(){
 //姿勢スコアを返す
 String _score(String score){
   //int sumscore = 0;
-  //human = _calculation(human);
+  //kendall = _calculation(kendall);
   var ShoulderScore = _ShoulderScorecalculation();
   //score = "姿勢スコア：" + sumscore.toString() + "点";
   score = "肩の平行具合は：" + ShoulderScore.toString() + "度";
@@ -257,7 +265,7 @@ String _advice(String advice){
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
 
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
-      //     child: Text(_calculation(human),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
+      //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
       // ),
           ],
       ),
@@ -281,17 +289,13 @@ class Evaluation extends StatefulWidget {
 }
 
 class _EvaluationState extends State<Evaluation> {
-String human = "あなたの姿勢パターンは？";
+String kendall = "あなたの姿勢パターンは？";
 
-//計算する
-String _calculation(String human){
+List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
-  List<Offset> landmarkright = widget.offsets2;
-  List<Offset> landmarkleft = widget.offsets3;
   List<Offset> landmarks = [];
-  
-//調整
-  if(landmarkfront.length!=13){
+//正面調整
+    if(landmarkfront.length!=13){
     landmarks.add(landmarkfront[0]);
     landmarks.add(landmarkfront[2]);
     landmarks.add(landmarkfront[5]);
@@ -308,6 +312,12 @@ String _calculation(String human){
     //戻す
     landmarkfront = landmarks;
   }
+  return landmarkfront;
+}
+//右調整
+List<Offset> _adjust_right(List<Offset> landmarkright){
+  List<Offset> landmarkright = widget.offsets2;
+  List<Offset> landmarks = [];
   landmarks = [];
     if(landmarkright.length!=7){
     landmarks.add(landmarkright[0]);
@@ -320,6 +330,12 @@ String _calculation(String human){
     //戻す
     landmarkright = landmarks;
   }
+  return landmarkright;
+}
+//左調整
+List<Offset> _adjust_left(List<Offset> landmarkleft){
+  List<Offset> landmarkleft = widget.offsets3;
+  List<Offset> landmarks = [];
   landmarks = [];
     if(landmarkleft.length!=7){
     landmarks.add(landmarkleft[0]);
@@ -332,31 +348,27 @@ String _calculation(String human){
     //戻す
     landmarkleft = landmarks;
   }
+  return landmarkleft;
+}
+
+//計算する
+String _kendall_classification(String kendall){
+  List<Offset>landmarkright = [];
+  //調整済み座標持ってきてる
+  landmarkright = _adjust_right(landmarkright);
+
 
    //メモ
     // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
     //                           7"Left_elbow",8"Right_elbow",9"Left_wrist",10"Right_wrist",11"Left_hip",12"Right_hip"];
     // List<String> landmarkright = [0"Nose",1"Right_shoulder",2"Right_elbow",3"Right_wrist",4"Right_hip",5"Right_knee",6"Right_ankle"];
     // List<String> landmarkleft = [0"Nose",1"Left_shoulder",2"Left_elbow",3"Left_wrist",4"Left_hip",5"Left_knee",6"Left_ankle"];
-  
-    // String human = "あげています";
-    // double righthand = landmarkfront[10].dy -landmarkfront[0].dy;
-    // if(righthand>0){
-    //   human = "あげていません";
-    // }
-    // return "右手を $human";
-    // }
-    // List<Offset> human = landmark;
-
-    // return "人間 $human";
-    // }
 
     //ケンダル分類
     String kendall = "";
     double ankle_knee = 0;
     double ankle_hip = 0;
     double ankle_shoulder = 0;
-    String human = "";
 
     //ankle_knee 数字が大きい方で引いてるから最後に-1をかけていい感じにしてる
     var tmp1 = landmarkright[5] - landmarkright[6];
@@ -392,28 +404,28 @@ String _calculation(String human){
 
     //ケンダル分類
     if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      human = "ノーマル";
+      kendall = "ノーマル";
     }
     else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      human = "ロードシス";
+      kendall = "ロードシス";
     }
     else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      human = "スウェイバック";
+      kendall = "スウェイバック";
     }
     else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
-      human = "カイホロードシス";
+      kendall = "カイホロードシス";
     }
     else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      human = "フラットバック";
+      kendall = "フラットバック";
     }
     else {
-      human = "不明";
+      kendall = "不明";
     }
 
     print(ankle_knee);
     print(ankle_hip);
     print(ankle_shoulder);
-    return human;
+    return kendall;
 }
     //
 
@@ -439,7 +451,7 @@ String _calculation(String human){
         child: ElevatedButton(
             onPressed: (){
               setState(() {
-                human = _calculation(human);
+                kendall = _kendall_classification(kendall);
               });
             },
             style: ElevatedButton.styleFrom(
@@ -448,11 +460,11 @@ String _calculation(String human){
               backgroundColor: Colors.orange,
               elevation: 16,
             ),
-            child: Text(human,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+            child: Text(kendall,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
           ),
                     ),
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
-      //     child: Text(_calculation(human),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
+      //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
       // ),
           ],
       ),
