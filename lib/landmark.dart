@@ -226,7 +226,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
         onLongPressEnd: (details) => _blazePose(),
       ),
       //→paint.dart
-      Padding(padding: EdgeInsets.only(top: 630,left: 20),
+      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
         child: ElevatedButton(
             onPressed: (){
               Navigator.push(
@@ -244,7 +244,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
             child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
           ),
                     ),
-      Padding(padding: EdgeInsets.only(top: 630,left: 220),
+      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
         child: ElevatedButton(
             onPressed: (){
               Navigator.push(

@@ -20,11 +20,10 @@ String score = "姿勢スコア：計算中";
 String advice = "";
 String badpoint = "";
 String text = "";
-//計算する
-String _calculation(String human){
+//右姿勢からを評価する
+String _rightcalculation(String human){
   List<Offset> landmarkright = widget.offsets;
   List<Offset> landmarks = [];
-  
 //調整
   landmarks = [];
     if(landmarkright.length!=7){
@@ -109,13 +108,59 @@ String _calculation(String human){
     print(ankle_shoulder);
     return human;
 }
+//肩の平行具合を計算する
+String _ShoulderScorecalculation(){
+  List<Offset> landmarkfront = widget.offsets;
+  List<Offset> landmarks = [];
+  double shoulder_angle = 0;
+  String ShoulderScore = "";
+  var tmp1 = widget.offsets[12] - widget.offsets[11];
+  print(tmp1);
+  print(atan(tmp1.dy / tmp1.dx));
+  print(atan(tmp1.dy / tmp1.dx).abs());
+  shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
+  print(shoulder_angle);
+  print(shoulder_angle);
+  ShoulderScore = shoulder_angle.toString() + "度です";
+  return ShoulderScore;
+}
+//抱く高さの位置を計算する
+String _Hugheightcalculation(){
+  List<Offset> landmarkfront = widget.offsets;
+  List<Offset> landmarks = [];
+  //それぞれの手首の高さ
+  int back_hand = 0;
+  int hip_hand = 0;
+  double back_hand_rate = 0;
+  double hip_hand_rate = 0;
+  if(widget.offsets[14].dy < widget.offsets[15].dy){
+    print("背中を支えている手首はRight_wristです");
+    back_hand = 10;
+    hip_hand = 9;
+  }
+  else{
+    print("背中を支えている手首はLeft_wristです");
+    back_hand = 9;
+    hip_hand = 10;
+  }
+  var hip_midpoint = (widget.offsets[16] + widget.offsets[23])/2;
+  var sholder_midpoint = (widget.offsets[10] + widget.offsets[11])/2;
+  back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+  hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+  print(back_hand_rate);
+  print(hip_hand_rate);
+  //return hip_hand_rate.toString();
+  return hip_hand_rate.toString();
+}
 
-//姿勢スコア計算
+
+//姿勢スコアを返す
 String _score(String score){
-  int sumscore = 0;
-
-  score = "姿勢スコア：" + sumscore.toString() + "点";
-
+  //int sumscore = 0;
+  //human = _calculation(human);
+  var ShoulderScore = _ShoulderScorecalculation();
+  //score = "姿勢スコア：" + sumscore.toString() + "点";
+  score = "肩の平行具合は：" + ShoulderScore.toString() + "度";
   return score;
 }
 
@@ -166,7 +211,7 @@ String _advice(String advice){
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange,//ボタン背景色
                         elevation: 16,
                       ),
                       child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
