@@ -516,7 +516,7 @@ String _advice(String advice){
                 ),
                 CustomPaint(
                   //引数の渡す方
-                  painter: MyPainterRight(widget.offsets1),
+                  painter: MyPainterFront(widget.offsets1),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
@@ -814,11 +814,11 @@ class MyPainterRight extends CustomPainter{
 }
 
 //左描画用
-class MyPainterRight extends CustomPainter{
+class MyPainterLeft extends CustomPainter{
   //引数の受け取る方
   List<Offset> offsets;
 
-  MyPainterRight(this.offsets);
+  MyPainterLeft(this.offsets);
   //appberの高さを取得
   // var height = AppBar().preferredSize.height;
   int count = 0;
@@ -861,52 +861,52 @@ class MyPainterRight extends CustomPainter{
     }
 
     final Nose = offsets[0];
-    final Right_shoulder = offsets[1];
-    final Right_elbow = offsets[2];
-    final Right_wrist = offsets[3];
-    final Right_hip = offsets[4];
-    final Right_knee = offsets[5];
-    final Right_ankle = offsets[6];
+    final Left_shoulder = offsets[1];
+    final Left_elbow = offsets[2];
+    final Left_wrist = offsets[3];
+    final Left_hip = offsets[4];
+    final Left_knee = offsets[5];
+    final Left_ankle = offsets[6];
 
-    final Right_shoulder_ideal = offsets[1].dy;
-    final Right_hip_ideal = offsets[4].dy;
-    final Right_knee_ideal = offsets[5].dy;
-    final Right_ankle_ideal_x = offsets[6].dx;
+    final Left_shoulder_ideal = offsets[1].dy;
+    final Left_hip_ideal = offsets[4].dy;
+    final Left_knee_ideal = offsets[5].dy;
+    final Left_ankle_ideal_x = offsets[6].dx;
 
 
     //姿勢推定
     paint.color = Colors.orange;
     canvas.drawCircle(Nose, radius, paint);
-    canvas.drawCircle(Right_shoulder, radius, paint);
-    canvas.drawCircle(Right_elbow, radius, paint);
-    canvas.drawCircle(Right_wrist, radius, paint);
-    canvas.drawCircle(Right_hip, radius, paint);
-    canvas.drawCircle(Right_knee, radius, paint);
-    canvas.drawCircle(Right_ankle, radius, paint);
+    canvas.drawCircle(Left_shoulder, radius, paint);
+    canvas.drawCircle(Left_elbow, radius, paint);
+    canvas.drawCircle(Left_wrist, radius, paint);
+    canvas.drawCircle(Left_hip, radius, paint);
+    canvas.drawCircle(Left_knee, radius, paint);
+    canvas.drawCircle(Left_ankle, radius, paint);
 
     //理想姿勢
     paint.color = Colors.red;
-    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_shoulder_ideal) , radius, paint);
-    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_hip_ideal) , radius, paint);
-    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_knee_ideal) , radius, paint);
-    canvas.drawCircle(Right_ankle, radius, paint);
+    canvas.drawCircle(Offset(Left_ankle_ideal_x,Left_shoulder_ideal) , radius, paint);
+    canvas.drawCircle(Offset(Left_ankle_ideal_x,Left_hip_ideal) , radius, paint);
+    canvas.drawCircle(Offset(Left_ankle_ideal_x,Left_knee_ideal) , radius, paint);
+    canvas.drawCircle(Left_ankle, radius, paint);
 
 
     //姿勢推定
     paint.strokeWidth = 5;
     paint.color = Colors.green;
-    // canvas.drawLine(Nose, Right_shoulder, paint);
-    canvas.drawLine(Right_shoulder, Right_elbow, paint);
-    canvas.drawLine(Right_elbow, Right_wrist, paint);
-    canvas.drawLine(Right_shoulder, Right_hip, paint);
-    canvas.drawLine(Right_knee, Right_hip, paint);
-    canvas.drawLine(Right_knee, Right_ankle, paint);
+    // canvas.drawLine(Nose, Left_shoulder, paint);
+    canvas.drawLine(Left_shoulder, Left_elbow, paint);
+    canvas.drawLine(Left_elbow, Left_wrist, paint);
+    canvas.drawLine(Left_shoulder, Left_hip, paint);
+    canvas.drawLine(Left_knee, Left_hip, paint);
+    canvas.drawLine(Left_knee, Left_ankle, paint);
 
     //理想姿勢
     paint.color = Colors.red;
-    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_shoulder_ideal), Offset(Right_ankle_ideal_x,Right_hip_ideal), paint);
-    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_hip_ideal), Offset(Right_ankle_ideal_x,Right_knee_ideal), paint);
-    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_knee_ideal), Right_ankle, paint);
+    canvas.drawLine(Offset(Left_ankle_ideal_x,Left_shoulder_ideal), Offset(Left_ankle_ideal_x,Left_hip_ideal), paint);
+    canvas.drawLine(Offset(Left_ankle_ideal_x,Left_hip_ideal), Offset(Left_ankle_ideal_x,Left_knee_ideal), paint);
+    canvas.drawLine(Offset(Left_ankle_ideal_x,Left_knee_ideal), Left_ankle, paint);
   }
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
