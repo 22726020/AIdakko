@@ -472,6 +472,30 @@ String _Hugheightcalculation(){
   //return hip_hand_rate.toString();
   return hip_hand_rate.toString();
 }
+
+//姿勢スコアを返す
+String _score(String score){
+  //int sumscore = 0;
+  //kendall = _calculation(kendall);
+  var ShoulderScore = _ShoulderScorecalculation();
+  //score = "姿勢スコア：" + sumscore.toString() + "点";
+  score = "肩の平行具合は：" + ShoulderScore.toString() + "度";
+  return score;
+}
+
+//悪いところを返す
+String _badpoint(String badpoint){
+  List<String> badpoint_list = ["抱っこの高さが低い","背筋が悪い","aaaa","bbbb"];
+  badpoint = badpoint_list[0] + "\n" + badpoint_list[1];
+  return badpoint;
+}
+
+//アドバイスを返す
+String _advice(String advice){
+  List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
+  advice = advice_list[0] + "\n" + advice_list[1];
+  return advice;
+}
   @override
   Widget build(BuildContext context) {
     
@@ -490,7 +514,7 @@ String _Hugheightcalculation(){
             // タッチを有効にするため、childが必要
             child: Center(),
         ),
-      Padding(padding: EdgeInsets.only(top: 630,left: 20),
+      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
         child: ElevatedButton(
             onPressed: (){
               setState(() {

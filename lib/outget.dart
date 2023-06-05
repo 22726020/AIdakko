@@ -89,7 +89,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 150),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
                 child:FloatingActionButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
@@ -97,7 +97,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
                   child: const Icon(Icons.home),
                 ),
                 ),
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
                 
                 child: FloatingActionButton(
                   onPressed: () async {
@@ -204,7 +204,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 150),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
                 child:FloatingActionButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
@@ -212,7 +212,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
                   child: const Icon(Icons.home),
                 ),
                 ),
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
                 
                 child: FloatingActionButton(
                   onPressed: () async {
@@ -320,7 +320,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 150),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
                 child:FloatingActionButton(
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
@@ -328,7 +328,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
                   child: const Icon(Icons.home),
                 ),
                 ),
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
                 
                 child: FloatingActionButton(
                   onPressed: () async {
