@@ -589,6 +589,129 @@ String _advice(String advice){
     }
 }
 
+//正面用
+class MyPainterFront extends CustomPainter{
+  //引数の受け取る方
+  List<Offset> offsets;
+
+  MyPainterFront(this.offsets);
+  //appberの高さを取得
+  // var height = AppBar().preferredSize.height;
+  int count = 0;
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    final paint = Paint()..color = Colors.red;
+    final radius = size.width / 50;
+    List<Offset> landmarks = [];
+
+    //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
+    if(count==0){
+      count++;
+      if(offsets.length==13){
+        landmarks.add(offsets[0]-Offset(0, 120));
+        landmarks.add(offsets[2]-Offset(0, 120));
+        landmarks.add(offsets[5]-Offset(0, 120));
+        landmarks.add(offsets[9]-Offset(0, 120));
+        landmarks.add(offsets[10]-Offset(0, 120));
+        landmarks.add(offsets[11]-Offset(0, 120));
+        landmarks.add(offsets[12]-Offset(0, 120));
+        landmarks.add(offsets[13]-Offset(0, 120));
+        landmarks.add(offsets[14]-Offset(0, 120));
+        landmarks.add(offsets[15]-Offset(0, 120));
+        landmarks.add(offsets[16]-Offset(0, 120));
+        landmarks.add(offsets[23]-Offset(0, 120));
+        landmarks.add(offsets[24]-Offset(0, 120));
+        //戻す
+        offsets = landmarks;
+      }
+    }
+
+    landmarks =  [];
+    if(offsets.length!=13){
+      landmarks.add(offsets[0]);
+      landmarks.add(offsets[2]);
+      landmarks.add(offsets[5]);
+      landmarks.add(offsets[9]);
+      landmarks.add(offsets[10]);
+      landmarks.add(offsets[11]);
+      landmarks.add(offsets[12]);
+      landmarks.add(offsets[13]);
+      landmarks.add(offsets[14]);
+      landmarks.add(offsets[15]);
+      landmarks.add(offsets[16]);
+      landmarks.add(offsets[23]);
+      landmarks.add(offsets[24]);
+
+      //戻す
+      offsets = landmarks;
+    }
+
+    final Nose = offsets[0];
+    final Left_eye = offsets[1];
+    final Right_eye = offsets[2];
+    final Left_mouth = offsets[3];
+    final Right_mouth = offsets[4];
+    final Left_shoulder = offsets[5];
+    final Right_shoulder = offsets[6];
+    final Left_elbow = offsets[7];
+    final Right_elbow = offsets[8];
+    final Left_wrist = offsets[9];
+    final Right_wrist = offsets[10];
+    final Left_hip = offsets[11];
+    final Right_hip = offsets[12];
+
+
+
+    //推定姿勢点プロット
+    paint.color = Colors.orange;
+    canvas.drawCircle(Nose, radius, paint);
+    canvas.drawCircle(Left_shoulder, radius, paint);
+    canvas.drawCircle(Right_shoulder, radius, paint);
+    canvas.drawCircle(Left_elbow, radius, paint);
+    canvas.drawCircle(Right_elbow, radius, paint);
+    canvas.drawCircle(Left_wrist, radius, paint);
+    canvas.drawCircle(Right_wrist, radius, paint);
+    canvas.drawCircle(Left_hip, radius, paint);
+    canvas.drawCircle(Right_hip, radius, paint);
+    //canvas.drawCircle(Right_knee, radius, paint);
+    //canvas.drawCircle(Right_ankle, radius, paint);
+    canvas.drawCircle(Left_eye, radius, paint);
+    canvas.drawCircle(Right_eye, radius, paint);
+    canvas.drawCircle(Left_mouth, radius, paint);
+    canvas.drawCircle(Right_mouth, radius, paint);
+    //推定姿勢線プロット
+    paint.strokeWidth = 5;
+    paint.color = Colors.green;
+    canvas.drawLine(Left_mouth, Right_mouth, paint);
+    canvas.drawLine(Right_shoulder, Left_shoulder, paint);
+    canvas.drawLine(Right_shoulder, Right_elbow, paint);
+    canvas.drawLine(Left_shoulder, Left_elbow, paint);
+    canvas.drawLine(Left_elbow, Left_wrist, paint);
+    canvas.drawLine(Right_elbow, Right_wrist, paint);
+    canvas.drawLine(Left_shoulder, Left_hip, paint);
+    canvas.drawLine(Right_shoulder, Right_hip, paint);
+    //canvas.drawLine(Right_knee, Right_hip, paint);
+    //canvas.drawLine(Right_knee, Right_ankle, paint);
+    canvas.drawLine(Right_hip, Left_hip, paint);
+
+    //理想姿勢計算
+    final Right_shoulder_ideal_x = offsets[6].dx-100;
+    final Right_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy)/2;
+    final Left_shoulder_ideal_x = offsets[5].dx+1000;
+    final Left_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy)/2;
+    //理想姿勢線プロット
+    paint.strokeWidth = 3;
+    paint.color = Colors.red;
+    canvas.drawLine(Offset(Right_shoulder_ideal_x,Right_shoulder_ideal_y), Offset(Left_shoulder_ideal_x,Left_shoulder_ideal_y), paint);
+
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
 //右用
 class MyPainterRight extends CustomPainter{
   //引数の受け取る方
@@ -667,6 +790,107 @@ class MyPainterRight extends CustomPainter{
     canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_knee_ideal) , radius, paint);
     canvas.drawCircle(Right_ankle, radius, paint);
     
+
+    //姿勢推定
+    paint.strokeWidth = 5;
+    paint.color = Colors.green;
+    // canvas.drawLine(Nose, Right_shoulder, paint);
+    canvas.drawLine(Right_shoulder, Right_elbow, paint);
+    canvas.drawLine(Right_elbow, Right_wrist, paint);
+    canvas.drawLine(Right_shoulder, Right_hip, paint);
+    canvas.drawLine(Right_knee, Right_hip, paint);
+    canvas.drawLine(Right_knee, Right_ankle, paint);
+
+    //理想姿勢
+    paint.color = Colors.red;
+    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_shoulder_ideal), Offset(Right_ankle_ideal_x,Right_hip_ideal), paint);
+    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_hip_ideal), Offset(Right_ankle_ideal_x,Right_knee_ideal), paint);
+    canvas.drawLine(Offset(Right_ankle_ideal_x,Right_knee_ideal), Right_ankle, paint);
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+//左描画用
+class MyPainterRight extends CustomPainter{
+  //引数の受け取る方
+  List<Offset> offsets;
+
+  MyPainterRight(this.offsets);
+  //appberの高さを取得
+  // var height = AppBar().preferredSize.height;
+  int count = 0;
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    final paint = Paint()..color = Colors.red;
+    final radius = size.width / 50;
+    List<Offset> landmarks = [];
+
+    //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
+    if(count==0){
+      count++;
+      if(offsets.length==7){
+        landmarks.add(offsets[0]-Offset(0, 120));
+        landmarks.add(offsets[1]-Offset(0, 120));
+        landmarks.add(offsets[2]-Offset(0, 120));
+        landmarks.add(offsets[3]-Offset(0, 120));
+        landmarks.add(offsets[4]-Offset(0, 120));
+        landmarks.add(offsets[5]-Offset(0, 120));
+        landmarks.add(offsets[6]-Offset(0, 120));
+        //戻す
+        offsets = landmarks;
+      }
+    }
+
+
+    landmarks =  [];
+    if(offsets.length!=7){
+      landmarks.add(offsets[0]);
+      landmarks.add(offsets[11]);
+      landmarks.add(offsets[13]);
+      landmarks.add(offsets[15]);
+      landmarks.add(offsets[23]);
+      landmarks.add(offsets[25]);
+      landmarks.add(offsets[27]);
+
+      //戻す
+      offsets = landmarks;
+    }
+
+    final Nose = offsets[0];
+    final Right_shoulder = offsets[1];
+    final Right_elbow = offsets[2];
+    final Right_wrist = offsets[3];
+    final Right_hip = offsets[4];
+    final Right_knee = offsets[5];
+    final Right_ankle = offsets[6];
+
+    final Right_shoulder_ideal = offsets[1].dy;
+    final Right_hip_ideal = offsets[4].dy;
+    final Right_knee_ideal = offsets[5].dy;
+    final Right_ankle_ideal_x = offsets[6].dx;
+
+
+    //姿勢推定
+    paint.color = Colors.orange;
+    canvas.drawCircle(Nose, radius, paint);
+    canvas.drawCircle(Right_shoulder, radius, paint);
+    canvas.drawCircle(Right_elbow, radius, paint);
+    canvas.drawCircle(Right_wrist, radius, paint);
+    canvas.drawCircle(Right_hip, radius, paint);
+    canvas.drawCircle(Right_knee, radius, paint);
+    canvas.drawCircle(Right_ankle, radius, paint);
+
+    //理想姿勢
+    paint.color = Colors.red;
+    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_shoulder_ideal) , radius, paint);
+    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_hip_ideal) , radius, paint);
+    canvas.drawCircle(Offset(Right_ankle_ideal_x,Right_knee_ideal) , radius, paint);
+    canvas.drawCircle(Right_ankle, radius, paint);
+
 
     //姿勢推定
     paint.strokeWidth = 5;
