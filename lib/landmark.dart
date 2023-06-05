@@ -203,6 +203,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
       count++;
     }
     
+    
     return Scaffold(
       appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
@@ -226,7 +227,7 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
         onLongPressEnd: (details) => _blazePose(),
       ),
       //→paint.dart
-      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
+      Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
         child: ElevatedButton(
             onPressed: (){
               Navigator.push(
