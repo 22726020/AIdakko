@@ -289,7 +289,11 @@ class Evaluation extends StatefulWidget {
 }
 
 class _EvaluationState extends State<Evaluation> {
-String kendall = "あなたの姿勢パターンは？";
+  String kendall = "評価結果を出す";
+String score = "姿勢スコア：計算中";
+String advice = "";
+String badpoint = "";
+String text = "";
 
 List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -496,44 +500,90 @@ String _advice(String advice){
   advice = advice_list[0] + "\n" + advice_list[1];
   return advice;
 }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar:  AppBar(centerTitle: true,title:  Text("評価結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-      body:Stack(
-          children: <Widget>[ 
-            Image.file(
-            File(widget.path2)
-          ),
-          // カスタムペイント
-          CustomPaint(
-            //引数の渡す方
-            painter: MyPainterRight(widget.offsets2),
-            // タッチを有効にするため、childが必要
-            child: Center(),
-        ),
-      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        child: ElevatedButton(
-            onPressed: (){
-              setState(() {
-                kendall = _kendall_classification(kendall);
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(400,60),
-              backgroundColor: Colors.orange,
-              elevation: 16,
+      body:SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Stack(
+              children: [
+                  Image.file(
+                  File(widget.path1)
+                ),
+                CustomPaint(
+                  //引数の渡す方
+                  painter: MyPainterRight(widget.offsets1),
+                  // タッチを有効にするため、childが必要
+                  child: Center(),
+              ),
+              ],
             ),
-            child: Text(kendall,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
-          ),
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          score = _score(score);
+                          text = score;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,//ボタン背景色
+                        elevation: 16,
+                      ),
+                      child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          badpoint = _badpoint(badpoint);
+                          text = badpoint;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          advice = _advice(advice);
+                          text = advice;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,80),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+              ],
+            ),
+      
+                    
+            // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
+            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
+
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
       //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
       // ),
           ],
+      ),
       ),
     );
     }
