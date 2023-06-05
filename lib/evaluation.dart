@@ -351,13 +351,11 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   return landmarkleft;
 }
 
-//計算する
+//ケンダルを計算する
 String _kendall_classification(String kendall){
   List<Offset>landmarkright = [];
   //調整済み座標持ってきてる
   landmarkright = _adjust_right(landmarkright);
-
-
    //メモ
     // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
     //                           7"Left_elbow",8"Right_elbow",9"Left_wrist",10"Right_wrist",11"Left_hip",12"Right_hip"];
@@ -427,8 +425,53 @@ String _kendall_classification(String kendall){
     print(ankle_shoulder);
     return kendall;
 }
-    //
+//肩の平行具合を計算する
+String _ShoulderScorecalculation(){
+  List<Offset>landmarkfront = [];
+  //調整済み座標持ってきてる
+  landmarkfront = _adjust_front(landmarkfront);
 
+  double shoulder_angle = 0;
+  String ShoulderScore = "";
+  var tmp1 = landmarkfront[6] - landmarkfront[5];
+  print(tmp1);
+  print(atan(tmp1.dy / tmp1.dx));
+  print(atan(tmp1.dy / tmp1.dx).abs());
+  shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
+  print(shoulder_angle);
+  print(shoulder_angle);
+  ShoulderScore = shoulder_angle.toString() + "度です";
+  return ShoulderScore;
+}
+//抱く高さの位置を計算する
+String _Hugheightcalculation(){
+  List<Offset>landmarkfront = [];
+  //調整済み座標持ってきてる
+  landmarkfront = _adjust_front(landmarkfront);
+  //それぞれの手首の高さ
+  int back_hand = 0;
+  int hip_hand = 0;
+  double back_hand_rate = 0;
+  double hip_hand_rate = 0;
+  if(landmarkfront[9].dy < landmarkfront[10].dy){
+    print("背中を支えている手首はRight_wristです");
+    back_hand = 10;
+    hip_hand = 9;
+  }
+  else{
+    print("背中を支えている手首はLeft_wristです");
+    back_hand = 9;
+    hip_hand = 10;
+  }
+  var hip_midpoint = (landmarkfront[11] + landmarkfront[12])/2;
+  var sholder_midpoint = (landmarkfront[5] + landmarkfront[6])/2;
+  back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+  hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+  print(back_hand_rate);
+  print(hip_hand_rate);
+  //return hip_hand_rate.toString();
+  return hip_hand_rate.toString();
+}
   @override
   Widget build(BuildContext context) {
     
