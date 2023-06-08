@@ -504,6 +504,12 @@ String _badpoint(String badpoint){
 String _advice(String advice){
   List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
   advice = advice_list[0] + "\n" + advice_list[1];
+  // advice = "";
+  // int count = 0;
+  // for(var i in advice_list){
+  //   advice += advice_list[count] + "\n";
+  //   count++;
+  // }
   return advice;
 }
 
@@ -683,18 +689,18 @@ class MyPainter extends CustomPainter{
       count++;
       if(offsets.length==13){
         landmarks.add(offsets[0]-Offset(0, 120));
+        landmarks.add(offsets[1]-Offset(0, 120));
         landmarks.add(offsets[2]-Offset(0, 120));
+        landmarks.add(offsets[3]-Offset(0, 120));
+        landmarks.add(offsets[4]-Offset(0, 120));
         landmarks.add(offsets[5]-Offset(0, 120));
+        landmarks.add(offsets[6]-Offset(0, 120));
+        landmarks.add(offsets[7]-Offset(0, 120));
+        landmarks.add(offsets[8]-Offset(0, 120));
         landmarks.add(offsets[9]-Offset(0, 120));
         landmarks.add(offsets[10]-Offset(0, 120));
         landmarks.add(offsets[11]-Offset(0, 120));
         landmarks.add(offsets[12]-Offset(0, 120));
-        landmarks.add(offsets[13]-Offset(0, 120));
-        landmarks.add(offsets[14]-Offset(0, 120));
-        landmarks.add(offsets[15]-Offset(0, 120));
-        landmarks.add(offsets[16]-Offset(0, 120));
-        landmarks.add(offsets[23]-Offset(0, 120));
-        landmarks.add(offsets[24]-Offset(0, 120));
         //戻す
         offsets = landmarks;
       }
