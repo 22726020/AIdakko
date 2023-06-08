@@ -20,6 +20,7 @@ String score = "姿勢スコア：計算中";
 String advice = "";
 String badpoint = "";
 String text = "";
+String dir = "front";
 
 //右を調整してる
 List<Offset> _adjust_right(List<Offset> landmarkright){
@@ -201,7 +202,7 @@ String _advice(String advice){
                 ),
                 CustomPaint(
                   //引数の渡す方
-                  painter: MyPainterRight(widget.offsets),
+                  painter: MyPainter(widget.offsets,dir),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
@@ -294,6 +295,11 @@ String score = "姿勢スコア：計算中";
 String advice = "";
 String badpoint = "";
 String text = "";
+String image = "";
+int count = 0;
+String aaa = "";
+String dir = "front";
+List<Offset> offset = [];
 
 List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -503,20 +509,84 @@ String _advice(String advice){
 
   @override
   Widget build(BuildContext context) {
+    //初期状態
+    if(count==0){
+      image = widget.path1;
+      offset = widget.offsets1;
+      dir = "front";
+      count++;
+    }
+    
     return Scaffold(
       appBar:  AppBar(centerTitle: true,title:  Text("評価結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
       body:SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            //上のボタン
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path1;
+                          offset = widget.offsets1;
+                          dir = "front";
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: Colors.orange,//ボタン背景色
+                        elevation: 16,
+                      ),
+                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path2;
+                          offset = widget.offsets2;
+                          dir = "right";
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path3;
+                          offset = widget.offsets3;
+                          dir = "left";
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: Colors.orange,
+                        elevation: 16,
+                      ),
+                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+              ],
+              ),
             Stack(
               children: [
                   Image.file(
-                  File(widget.path1)
+                  File(image)
                 ),
                 CustomPaint(
                   //引数の渡す方
-                  painter: MyPainterFront(widget.offsets1),
+                  painter: MyPainter(offset,dir),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
@@ -589,21 +659,24 @@ String _advice(String advice){
     }
 }
 
-//正面用
-class MyPainterFront extends CustomPainter{
+//描画用
+class MyPainter extends CustomPainter{
   //引数の受け取る方
   List<Offset> offsets;
+  String dir;
 
-  MyPainterFront(this.offsets);
+  MyPainter(this.offsets,this.dir);
   //appberの高さを取得
   // var height = AppBar().preferredSize.height;
   int count = 0;
   @override
   void paint(Canvas canvas, Size size) {
-
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
     List<Offset> landmarks = [];
+
+    //正面用
+    if(dir=="front"){
 
     //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
     if(count==0){
@@ -696,7 +769,7 @@ class MyPainterFront extends CustomPainter{
     canvas.drawLine(Right_hip, Left_hip, paint);
 
     //理想姿勢計算
-    final Right_shoulder_ideal_x = offsets[6].dx-100;
+    final Right_shoulder_ideal_x = offsets[6].dx-1000;
     final Right_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy)/2;
     final Left_shoulder_ideal_x = offsets[5].dx+1000;
     final Left_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy)/2;
@@ -706,29 +779,10 @@ class MyPainterFront extends CustomPainter{
     canvas.drawLine(Offset(Right_shoulder_ideal_x,Right_shoulder_ideal_y), Offset(Left_shoulder_ideal_x,Left_shoulder_ideal_y), paint);
 
   }
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
 
-//右用
-class MyPainterRight extends CustomPainter{
-  //引数の受け取る方
-  List<Offset> offsets;
-
-  MyPainterRight(this.offsets);
-  //appberの高さを取得
-  // var height = AppBar().preferredSize.height;
-  int count = 0;
-  @override
-  void paint(Canvas canvas, Size size) {
-
-    final paint = Paint()..color = Colors.red;
-    final radius = size.width / 50;
-    List<Offset> landmarks = [];
-
-    //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
+  //右用
+  if(dir=="right"){
+        //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
     if(count==0){
       count++;
       if(offsets.length==7){
@@ -807,29 +861,10 @@ class MyPainterRight extends CustomPainter{
     canvas.drawLine(Offset(Right_ankle_ideal_x,Right_hip_ideal), Offset(Right_ankle_ideal_x,Right_knee_ideal), paint);
     canvas.drawLine(Offset(Right_ankle_ideal_x,Right_knee_ideal), Right_ankle, paint);
   }
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
 
-//左描画用
-class MyPainterLeft extends CustomPainter{
-  //引数の受け取る方
-  List<Offset> offsets;
-
-  MyPainterLeft(this.offsets);
-  //appberの高さを取得
-  // var height = AppBar().preferredSize.height;
-  int count = 0;
-  @override
-  void paint(Canvas canvas, Size size) {
-
-    final paint = Paint()..color = Colors.red;
-    final radius = size.width / 50;
-    List<Offset> landmarks = [];
-
-    //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
+  //左用
+  if(dir=="left"){
+      //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
     if(count==0){
       count++;
       if(offsets.length==7){
@@ -907,6 +942,7 @@ class MyPainterLeft extends CustomPainter{
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_shoulder_ideal), Offset(Left_ankle_ideal_x,Left_hip_ideal), paint);
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_hip_ideal), Offset(Left_ankle_ideal_x,Left_knee_ideal), paint);
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_knee_ideal), Left_ankle, paint);
+  }
   }
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
