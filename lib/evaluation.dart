@@ -362,7 +362,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 }
 
 //ケンダルを計算する
-String _kendall_classification(String kendall){
+String _kendall_classification(){
   List<Offset>landmarkright = [];
   //調整済み座標持ってきてる
   landmarkright = _adjust_right(landmarkright);
@@ -436,70 +436,111 @@ String _kendall_classification(String kendall){
     return kendall;
 }
 //肩の平行具合を計算する
-String _ShoulderScorecalculation(){
-  List<Offset>landmarkfront = [];
-  //調整済み座標持ってきてる
-  landmarkfront = _adjust_front(landmarkfront);
+  double _ShoulderScore_calculation(){
+    List<Offset>landmarkfront = [];
+    //調整済み座標持ってきてる
+    landmarkfront = _adjust_front(landmarkfront);
 
-  double shoulder_angle = 0;
-  String ShoulderScore = "";
-  var tmp1 = landmarkfront[6] - landmarkfront[5];
-  print(tmp1);
-  print(atan(tmp1.dy / tmp1.dx));
-  print(atan(tmp1.dy / tmp1.dx).abs());
-  shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
-  print(shoulder_angle);
-  print(shoulder_angle);
-  ShoulderScore = shoulder_angle.toString() + "度です";
-  return ShoulderScore;
-}
+    double shoulder_angle = 0;
+    double ShoulderScore = 0;
+    var tmp1 = landmarkfront[6] - landmarkfront[5];
+    shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
+    print(shoulder_angle);
+    ShoulderScore = shoulder_angle;
+    return ShoulderScore;
+  }
 //抱く高さの位置を計算する
-String _Hugheightcalculation(){
-  List<Offset>landmarkfront = [];
-  //調整済み座標持ってきてる
-  landmarkfront = _adjust_front(landmarkfront);
-  //それぞれの手首の高さ
-  int back_hand = 0;
-  int hip_hand = 0;
-  double back_hand_rate = 0;
-  double hip_hand_rate = 0;
-  if(landmarkfront[9].dy < landmarkfront[10].dy){
-    print("背中を支えている手首はRight_wristです");
-    back_hand = 10;
-    hip_hand = 9;
+  double _Hugheight_calculation(){
+    List<Offset>landmarkfront = [];
+    //調整済み座標持ってきてる
+    landmarkfront = _adjust_front(landmarkfront);
+    //それぞれの手首の高さ
+    int back_hand = 0;
+    int hip_hand = 0;
+    double back_hand_rate = 0;
+    double hip_hand_rate = 0;
+    if(landmarkfront[9].dy > landmarkfront[10].dy){
+      print(landmarkfront[9]);
+      print(landmarkfront[10]);
+      print("背中を支えている手首はLeft_wristです");
+      back_hand = 10;
+      hip_hand = 9;
+    }
+    else{
+      print("背中を支えている手首はRight_wristです");
+      back_hand = 9;
+      hip_hand = 10;
+    }
+    var hip_midpoint = (landmarkfront[11] + landmarkfront[12])/2;
+    var sholder_midpoint = (landmarkfront[5] + landmarkfront[6])/2;
+    back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+    hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
+    //return hip_hand_rate.toString();
+    return hip_hand_rate;
   }
-  else{
-    print("背中を支えている手首はLeft_wristです");
-    back_hand = 9;
-    hip_hand = 10;
-  }
-  var hip_midpoint = (landmarkfront[11] + landmarkfront[12])/2;
-  var sholder_midpoint = (landmarkfront[5] + landmarkfront[6])/2;
-  back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
-  hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
-  print(back_hand_rate);
-  print(hip_hand_rate);
-  //return hip_hand_rate.toString();
-  return hip_hand_rate.toString();
-}
 
 //姿勢スコアを返す
-String _score(String score){
-  //int sumscore = 0;
-  //kendall = _calculation(kendall);
-  var ShoulderScore = _ShoulderScorecalculation();
-  //score = "姿勢スコア：" + sumscore.toString() + "点";
-  score = "肩の平行具合は：" + ShoulderScore.toString() + "度";
-  return score;
-}
+  String _score(String score){
+    int sumscore = 0;
+    var ShoulderScore = _ShoulderScore_calculation();
+    var kendall = _kendall_classification();
+    var Hugheight = _Hugheight_calculation();
 
-//悪いところを返す
-String _badpoint(String badpoint){
-  List<String> badpoint_list = ["抱っこの高さが低い","背筋が悪い","aaaa","bbbb"];
-  badpoint = badpoint_list[0] + "\n" + badpoint_list[1];
-  return badpoint;
-}
+    if(kendall == "ノーマル"){
+      sumscore += 33;
+    }
+    if(Hugheight > 0.48){
+      sumscore += 33;
+    }
+    if(ShoulderScore < 2.8){
+      sumscore = sumscore + 33;
+    }
+    else if(2.8 < ShoulderScore && ShoulderScore < 3.1){
+      sumscore += 22;
+    }
+    else{
+      sumscore += 11;
+    }
+    score = "あなたの抱っこの点数は：" + sumscore.toString() + "点";
+    return score;
+  }
 
+  //悪いところを返す
+  String _badpoint(String badpoint){
+    var ShoulderScore = _ShoulderScore_calculation();
+    var kendall = _kendall_classification();
+    var Hugheight = _Hugheight_calculation();
+    List<String> badpoint_list = ["問題ないで","姿勢悪いで","肩悪いで","bbbb"];
+    List<String> badpoint = [];
+    String badtext = "";
+    int badcount = 0;
+
+    if(kendall == "ノーマル"){
+      badpoint.add(badpoint_list[0]);
+    }
+    else{
+      badpoint.add(badpoint_list[1]);
+    }
+
+    if(ShoulderScore > 2.8){
+      badpoint.add(badpoint_list[2]);
+    }
+
+    for(var i in badpoint){
+      if(badcount==0) {
+        badtext += badpoint[badcount];
+        badcount++;
+      }
+      else {
+        badtext += "\n" + badpoint[badcount];
+        badcount++;
+      }
+    }
+
+    print(badtext);
+
+    return badtext;
+  }
 //アドバイスを返す
 String _advice(String advice){
   List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
