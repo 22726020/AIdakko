@@ -1010,9 +1010,12 @@ class MyPainter extends CustomPainter{
 class ImagePainter extends CustomPainter{
 
   ImagePainter();
-  //appberの高さを取得
-  // var height = AppBar().preferredSize.height;
-  int count = 0;
+  double hug_height_score = 55;
+  double kendall_score1 = -140;
+  double kendall_score2 = 260;
+  double shoulder_score1 = 90;
+  double shoulder_score2 = 260;
+
   @override
   void paint(Canvas canvas, Size size) {
     //チャート用
@@ -1025,15 +1028,21 @@ class ImagePainter extends CustomPainter{
       ..color = Colors.black
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
+      ..strokeWidth = 2;
     
     // Pathを作る
     var path = Path();
     
-    // Pathのメソッドを使って三角形をかく。
-    path.moveTo(-25, 60);
-    path.lineTo(-140, 260);
-    path.lineTo(90, 260);
+    //計算5段階評価の場合(5→1) hug_height_score +35していく kendall_score1　-28.75 kendallscore2 -16.25していく shoulder_score1 -28.75 shoulder_score2 -16.25していく
+
+
+    // Pathのメソッドを使って三角形をかく。満点三角形→path.moveTo(-25, 60);path.lineTo(-140, 260);path.lineTo(90, 260);
+    //抱っこの高さ
+    path.moveTo(-25, hug_height_score);
+    //背筋
+    path.lineTo(kendall_score1, kendall_score2);
+    //肩の並行
+    path.lineTo(shoulder_score1, shoulder_score2);
     
     // パスの座標と最初の座標を結ぶ。
     path.close();
