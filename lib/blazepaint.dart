@@ -65,7 +65,7 @@ class _SavePageInState extends State<SavePageIn> {
         onPressed: (){
           saveImage();
           Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => BlazeLandmarkPage1(path1: widget.path1,path2: widget.path2,path3:widget.path3),
+          MaterialPageRoute(builder: (context) => BlazeLandmarkPage1(inoutcamera: "in",path1: widget.path1,path2: widget.path2,path3:widget.path3),
           )
           );
           },
@@ -133,11 +133,11 @@ class _SavePageOutState extends State<SavePageOut> {
       ),
       const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
       Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path3)),
+      child: Image.file(File(widget.path2)),
       ),
       const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
       Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path2)),
+      child: Image.file(File(widget.path3)),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -146,7 +146,7 @@ class _SavePageOutState extends State<SavePageOut> {
         onPressed: (){
           saveImage();
           Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => BlazeLandmarkPage1(path1: widget.path1,path2: widget.path2,path3:widget.path3),
+          MaterialPageRoute(builder: (context) => BlazeLandmarkPage1(inoutcamera: "out",path1: widget.path1,path2: widget.path2,path3:widget.path3),
           )
           );
           },
@@ -277,13 +277,11 @@ class MyPainter extends CustomPainter{
 //右用
 class MyPainterRight extends CustomPainter{
   final List<Offset> offsets;
-
-  MyPainterRight(this.offsets);
+  String inoutcamera;
+  MyPainterRight(this.offsets,this.inoutcamera);
 
   @override
   void paint(Canvas canvas, Size size) {
-    // var offsets2 = <Offset>[];
-
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
 
@@ -320,40 +318,46 @@ class MyPainterRight extends CustomPainter{
     final Right_heel = offsets[30];
     final Left_foot_index = offsets[31];
     final Right_foot_index = offsets[32];
-
-    // offsets2.add(Nose);
-    // offsets2.add(Left_eye);
-    // offsets2.add(Right_eye);
-    // offsets2.add(Left_mouth);
-    // offsets2.add(Right_mouth);
-    // offsets2.add(Left_shoulder);
-    // offsets2.add(Right_shoulder);
-    // offsets2.add(Left_elbow);
-    // offsets2.add(Right_elbow);
-    // offsets2.add(Left_wrist);
-    // offsets2.add(Right_wrist);
-    // offsets2.add(Left_hip);
-    // offsets2.add(Right_hip);
-    // print(offsets2);
-
-    paint.color = Colors.orange;
-    canvas.drawCircle(Nose, radius, paint);
-    canvas.drawCircle(Right_shoulder, radius, paint);
-    canvas.drawCircle(Right_elbow, radius, paint);
-    canvas.drawCircle(Right_wrist, radius, paint);
-    canvas.drawCircle(Right_hip, radius, paint);
-    canvas.drawCircle(Right_knee, radius, paint);
-    canvas.drawCircle(Right_ankle, radius, paint);
-    
-    paint.strokeWidth = 5;
-    paint.color = Colors.green;
-    canvas.drawLine(Nose, Right_shoulder, paint);
-    canvas.drawLine(Right_shoulder, Right_elbow, paint);
-    canvas.drawLine(Right_elbow, Right_wrist, paint);
-    canvas.drawLine(Right_shoulder, Right_hip, paint);
-    canvas.drawLine(Right_knee, Right_hip, paint);
-    canvas.drawLine(Right_knee, Right_ankle, paint);
-
+    //アウトカメラの時
+    if(inoutcamera == "out"){
+      paint.color = Colors.orange;
+      canvas.drawCircle(Nose, radius, paint);
+      canvas.drawCircle(Right_shoulder, radius, paint);
+      canvas.drawCircle(Right_elbow, radius, paint);
+      canvas.drawCircle(Right_wrist, radius, paint);
+      canvas.drawCircle(Right_hip, radius, paint);
+      canvas.drawCircle(Right_knee, radius, paint);
+      canvas.drawCircle(Right_ankle, radius, paint);
+      
+      paint.strokeWidth = 5;
+      paint.color = Colors.green;
+      canvas.drawLine(Nose, Right_shoulder, paint);
+      canvas.drawLine(Right_shoulder, Right_elbow, paint);
+      canvas.drawLine(Right_elbow, Right_wrist, paint);
+      canvas.drawLine(Right_shoulder, Right_hip, paint);
+      canvas.drawLine(Right_knee, Right_hip, paint);
+      canvas.drawLine(Right_knee, Right_ankle, paint);
+    }
+    //インカメラの時
+    if(inoutcamera == "in"){
+      paint.color = Colors.orange;
+      canvas.drawCircle(Nose, radius, paint);
+      canvas.drawCircle(Left_shoulder, radius, paint);
+      canvas.drawCircle(Left_elbow, radius, paint);
+      canvas.drawCircle(Left_wrist, radius, paint);
+      canvas.drawCircle(Left_hip, radius, paint);
+      canvas.drawCircle(Left_knee, radius, paint);
+      canvas.drawCircle(Left_ankle, radius, paint);
+      
+      paint.strokeWidth = 5;
+      paint.color = Colors.green;
+      canvas.drawLine(Nose, Left_shoulder, paint);
+      canvas.drawLine(Left_shoulder, Left_elbow, paint);
+      canvas.drawLine(Left_elbow, Left_wrist, paint);
+      canvas.drawLine(Left_shoulder, Left_hip, paint);
+      canvas.drawLine(Left_knee, Left_hip, paint);
+      canvas.drawLine(Left_knee, Left_ankle, paint);
+    }
   }
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
@@ -364,12 +368,11 @@ class MyPainterRight extends CustomPainter{
 //左用
 class MyPainterLeft extends CustomPainter{
   final List<Offset> offsets;
-
-  MyPainterLeft(this.offsets);
+  String inoutcamera;
+  MyPainterLeft(this.offsets,this.inoutcamera);
 
   @override
   void paint(Canvas canvas, Size size) {
-    // var offsets2 = <Offset>[];
 
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
@@ -408,38 +411,48 @@ class MyPainterLeft extends CustomPainter{
     final Left_foot_index = offsets[31];
     final Right_foot_index = offsets[32];
 
-    // offsets2.add(Nose);
-    // offsets2.add(Left_eye);
-    // offsets2.add(Right_eye);
-    // offsets2.add(Left_mouth);
-    // offsets2.add(Right_mouth);
-    // offsets2.add(Left_shoulder);
-    // offsets2.add(Right_shoulder);
-    // offsets2.add(Left_elbow);
-    // offsets2.add(Right_elbow);
-    // offsets2.add(Left_wrist);
-    // offsets2.add(Right_wrist);
-    // offsets2.add(Left_hip);
-    // offsets2.add(Right_hip);
-    // print(offsets2);
+    //アウトカメラの時
+    if(inoutcamera == "out"){
+      paint.color = Colors.orange;
+      canvas.drawCircle(Nose, radius, paint);
+      canvas.drawCircle(Left_shoulder, radius, paint);
+      canvas.drawCircle(Left_elbow, radius, paint);
+      canvas.drawCircle(Left_wrist, radius, paint);
+      canvas.drawCircle(Left_hip, radius, paint);
+      canvas.drawCircle(Left_knee, radius, paint);
+      canvas.drawCircle(Left_ankle, radius, paint);
+      
+      paint.strokeWidth = 5;
+      paint.color = Colors.green;
+      canvas.drawLine(Nose, Left_shoulder, paint);
+      canvas.drawLine(Left_shoulder, Left_elbow, paint);
+      canvas.drawLine(Left_elbow, Left_wrist, paint);
+      canvas.drawLine(Left_shoulder, Left_hip, paint);
+      canvas.drawLine(Left_knee, Left_hip, paint);
+      canvas.drawLine(Left_knee, Left_ankle, paint);
+    }
+    //インカメラの時
+    if(inoutcamera == "in"){
+      paint.color = Colors.orange;
+      canvas.drawCircle(Nose, radius, paint);
+      canvas.drawCircle(Right_shoulder, radius, paint);
+      canvas.drawCircle(Right_elbow, radius, paint);
+      canvas.drawCircle(Right_wrist, radius, paint);
+      canvas.drawCircle(Right_hip, radius, paint);
+      canvas.drawCircle(Right_knee, radius, paint);
+      canvas.drawCircle(Right_ankle, radius, paint);
+      
+      paint.strokeWidth = 5;
+      paint.color = Colors.green;
+      canvas.drawLine(Nose, Right_shoulder, paint);
+      canvas.drawLine(Right_shoulder, Right_elbow, paint);
+      canvas.drawLine(Right_elbow, Right_wrist, paint);
+      canvas.drawLine(Right_shoulder, Right_hip, paint);
+      canvas.drawLine(Right_knee, Right_hip, paint);
+      canvas.drawLine(Right_knee, Right_ankle, paint);
+    }
 
-    paint.color = Colors.orange;
-    canvas.drawCircle(Nose, radius, paint);
-    canvas.drawCircle(Left_shoulder, radius, paint);
-    canvas.drawCircle(Left_elbow, radius, paint);
-    canvas.drawCircle(Left_wrist, radius, paint);
-    canvas.drawCircle(Left_hip, radius, paint);
-    canvas.drawCircle(Left_knee, radius, paint);
-    canvas.drawCircle(Left_ankle, radius, paint);
-    
-    paint.strokeWidth = 5;
-    paint.color = Colors.green;
-    canvas.drawLine(Nose, Left_shoulder, paint);
-    canvas.drawLine(Left_shoulder, Left_elbow, paint);
-    canvas.drawLine(Left_elbow, Left_wrist, paint);
-    canvas.drawLine(Left_shoulder, Left_hip, paint);
-    canvas.drawLine(Left_knee, Left_hip, paint);
-    canvas.drawLine(Left_knee, Left_ankle, paint);
+
 
 
   }
@@ -453,11 +466,12 @@ class MyPainterLeft extends CustomPainter{
 //姿勢推定描画
 //正面画像
 class BlazeLandmarkPage1 extends StatefulWidget {
-  const BlazeLandmarkPage1({Key? key,required this.path1, required this.path2, required this.path3})
+  const BlazeLandmarkPage1({Key? key,required this.inoutcamera,required this.path1, required this.path2, required this.path3})
       : super(key: key);
   final String path1;
   final String path2;
   final String path3;
+  final String inoutcamera;
   @override
   State<BlazeLandmarkPage1> createState() => BlazeLandmarkPage1State();
 }
@@ -560,7 +574,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Retouch1(path1: widget.path1, path2: widget.path2, path3: widget.path3)
+              MaterialPageRoute(builder: (context) => Retouch1(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3)
         )
               );
             },
@@ -578,7 +592,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BlazeLandmarkPage2(path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1: offsets),
+              MaterialPageRoute(builder: (context) => BlazeLandmarkPage2(inoutcamera: widget.inoutcamera,path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1: offsets),
         )
               );
             },
@@ -608,8 +622,9 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
 //姿勢推定描画
 //右画像
 class BlazeLandmarkPage2 extends StatefulWidget {
-  const BlazeLandmarkPage2({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1})
+  const BlazeLandmarkPage2({Key? key,required this.inoutcamera,required this.path1, required this.path2, required this.path3,required this.offsets1})
       : super(key: key);
+  final String inoutcamera;
   final String path1;
   final String path2;
   final String path3;
@@ -702,7 +717,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
           GestureDetector(
           // カスタムペイント
           child: CustomPaint(
-            painter: MyPainterRight(offsets),
+            painter: MyPainterRight(offsets,widget.inoutcamera),
             // タッチを有効にするため、childが必要
             child: Center(),
         ),
@@ -717,7 +732,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Retouch2(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
+              MaterialPageRoute(builder: (context) => Retouch2(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
         )
               );
             },
@@ -735,7 +750,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BlazeLandmarkPage3(path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1:widget.offsets1,offsets2:offsets),
+              MaterialPageRoute(builder: (context) => BlazeLandmarkPage3(inoutcamera: widget.inoutcamera,path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1:widget.offsets1,offsets2:offsets),
         )
               );
             },
@@ -763,8 +778,9 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
 //姿勢推定描画
 //左画像
 class BlazeLandmarkPage3 extends StatefulWidget {
-  const BlazeLandmarkPage3({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2})
+  const BlazeLandmarkPage3({Key? key,required this.inoutcamera,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2})
       : super(key: key);
+  final String inoutcamera;
   final String path1;
   final String path2;
   final String path3;
@@ -858,7 +874,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
           GestureDetector(
           // カスタムペイント
           child: CustomPaint(
-            painter: MyPainterLeft(offsets),
+            painter: MyPainterLeft(offsets,widget.inoutcamera),
             // タッチを有効にするため、childが必要
             child: Center(),
         ),

@@ -5,12 +5,12 @@ import 'package:gazou/blazepaint.dart';
 
 
 class Retouch1 extends StatefulWidget {
-  const Retouch1({Key? key,required this.path1, required this.path2, required this.path3})
+  const Retouch1({Key? key,required this.inoutcamera,required this.path1, required this.path2, required this.path3})
       : super(key: key);
+  final String inoutcamera;
   final String path1;
   final String path2;
   final String path3;
-
   @override
   Retouch1State createState() => Retouch1State();
 }
@@ -81,7 +81,7 @@ int _counter = 0;
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BlazeLandmarkPage2(path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1: _points),
+              MaterialPageRoute(builder: (context) => BlazeLandmarkPage2(inoutcamera: widget.inoutcamera,path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1: _points),
         )
               );
             },
@@ -138,8 +138,9 @@ int _counter = 0;
 }
 
 class Retouch2 extends StatefulWidget {
-  const Retouch2({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1})
+  const Retouch2({Key? key,required this.inoutcamera,required this.path1, required this.path2, required this.path3,required this.offsets1})
       : super(key: key);
+  final String inoutcamera;
   final String path1;
   final String path2;
   final String path3;
@@ -212,7 +213,7 @@ int _counter = 0;
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BlazeLandmarkPage3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: _points)
+              MaterialPageRoute(builder: (context) => BlazeLandmarkPage3(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: _points)
         )
               );
             },
