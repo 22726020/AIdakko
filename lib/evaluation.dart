@@ -300,6 +300,7 @@ int count = 0;
 String aaa = "";
 String dir = "front";
 List<Offset> offset = [];
+String imagescore = "assets/imagescore.png";
 
 List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -647,6 +648,7 @@ String _advice(String advice){
                         setState(() {
                           score = _score(score);
                           text = score;
+                          imagescore = "assets/imagescore.png";
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -663,6 +665,7 @@ String _advice(String advice){
                         setState(() {
                           badpoint = _badpoint(badpoint);
                           text = badpoint;
+                          imagescore = "assets/null.png";
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -679,6 +682,7 @@ String _advice(String advice){
                         setState(() {
                           advice = _advice(advice);
                           text = advice;
+                          imagescore = "assets/null.png";
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -687,6 +691,7 @@ String _advice(String advice){
                         elevation: 16,
                       ),
                       child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      
                     ),
                     ),
               ],
@@ -695,6 +700,10 @@ String _advice(String advice){
                     
             // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
+            CustomPaint(
+              painter: ImagePainter(),
+            ),
+            Image.asset(imagescore),
 
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
       //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
@@ -706,7 +715,7 @@ String _advice(String advice){
     }
 }
 
-//描画用
+//描画用1
 class MyPainter extends CustomPainter{
   //引数の受け取る方
   List<Offset> offsets;
@@ -991,6 +1000,51 @@ class MyPainter extends CustomPainter{
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_knee_ideal), Left_ankle, paint);
   }
   }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+//描画用2
+class ImagePainter extends CustomPainter{
+
+  ImagePainter();
+  //appberの高さを取得
+  // var height = AppBar().preferredSize.height;
+  int count = 0;
+  @override
+  void paint(Canvas canvas, Size size) {
+    //チャート用
+    // 三角（塗りつぶし）のためのPaintを作る
+    Paint fillWithBluePaint = Paint()
+      ..color = Colors.red;
+    
+    // 三角（外線）のためのPaintを作る
+    Paint outlinePaint = Paint()
+      ..color = Colors.black
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 10;
+    
+    // Pathを作る
+    var path = Path();
+    
+    // Pathのメソッドを使って三角形をかく。
+    path.moveTo(-25, 60);
+    path.lineTo(-140, 260);
+    path.lineTo(90, 260);
+    
+    // パスの座標と最初の座標を結ぶ。
+    path.close();
+    
+    // 三角形（塗りつぶし）の描画
+    canvas.drawPath(path, fillWithBluePaint);
+    // 三角形（外線）の描画
+    canvas.drawPath(path, outlinePaint);
+  }
+  
+
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
