@@ -513,7 +513,7 @@ String _kendall_classification(){
 
 //姿勢スコアを返す
   String _score(String score){
-    int sumscore = 0;
+    double sumscore = 0;
     var ShoulderScore = _ShoulderScore_calculation();
     var kendall = _kendall_classification();
     var Hugheight = _Hugheight_calculation();
@@ -521,18 +521,45 @@ String _kendall_classification(){
     if(kendall == "ノーマル"){
       sumscore += 33;
     }
-    if(Hugheight > 0.48){
+    else{
+      sumscore += 16.5;
+    }
+
+    if(Hugheight > 0.5){
       sumscore += 33;
     }
-    if(ShoulderScore < 2.8){
-      sumscore = sumscore + 33;
+    if(0.5 > Hugheight && Hugheight > 0.45){
+      sumscore += 24.75;
     }
-    else if(2.8 < ShoulderScore && ShoulderScore < 3.1){
-      sumscore += 22;
+    if(0.45 > Hugheight && Hugheight > 0.40){
+      sumscore += 16.5;
+    }
+    if(0.40 > Hugheight && Hugheight > 0.35){
+      sumscore += 8.25;
     }
     else{
-      sumscore += 11;
+      sumscore += 0;
     }
+
+    if(ShoulderScore < 2.8){
+      sumscore += 33;
+    }
+    if(2.8 < ShoulderScore && ShoulderScore < 3.0){
+      sumscore += 24.75;
+    }
+    if(3.0 < ShoulderScore && ShoulderScore < 3.2){
+      sumscore += 16.5;
+    }
+    if(3.2 < ShoulderScore && ShoulderScore < 3.4){
+      sumscore += 8.25;
+    }
+    else{
+      sumscore += 0;
+    }
+
+    int tmp = sumscore.toInt();
+    sumscore = tmp.toDouble();
+
     score = "あなたの抱っこの点数は：" + sumscore.toString() + "点";
     return score;
   }
@@ -642,6 +669,8 @@ List <double> _triangular_chart(){
       shoulder_point = 4;
     }
     print(hug_height_point);
+    print(kendall_point);
+    print(shoulder_point);
     //満点三角形→path.moveTo(-25, 55);path.lineTo(-140, 260);path.lineTo(90, 260);
     //計算5段階評価の場合(5→1) hug_height_score +35していく kendall_score1　-28.75 kendallscore2 -16.25していく shoulder_score1 -28.75 shoulder_score2 -16.25していく
     hug_height_score += hug_height_point * 35;
