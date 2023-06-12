@@ -202,7 +202,7 @@ String _advice(String advice){
                 ),
                 CustomPaint(
                   //引数の渡す方
-                  painter: MyPainter(widget.offsets,dir),
+                  //painter: MyPainter(widget.offsets,dir,button,summraize),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
@@ -299,6 +299,8 @@ String image = "";
 int count = 0;
 String aaa = "";
 String dir = "front";
+String button = "score";
+List<String> summraize= [];
 List<Offset> offset = [];
 String imagescore = "assets/imagescore.png";
 
@@ -562,6 +564,7 @@ String _advice(String advice){
       image = widget.path1;
       offset = widget.offsets1;
       dir = "front";
+      button = "score";
       count++;
     }
     
@@ -634,7 +637,7 @@ String _advice(String advice){
                 ),
                 CustomPaint(
                   //引数の渡す方
-                  painter: MyPainter(offset,dir),
+                  painter: MyPainter(offset,dir,button,summraize),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
@@ -648,6 +651,7 @@ String _advice(String advice){
                         setState(() {
                           score = _score(score);
                           text = score;
+                          button = "score";
                           imagescore = "assets/imagescore.png";
                         });
                       },
@@ -665,6 +669,7 @@ String _advice(String advice){
                         setState(() {
                           badpoint = _badpoint(badpoint);
                           text = badpoint;
+                          button = "badpoint";
                           imagescore = "assets/null.png";
                         });
                       },
@@ -682,6 +687,7 @@ String _advice(String advice){
                         setState(() {
                           advice = _advice(advice);
                           text = advice;
+                          button = "advice";
                           imagescore = "assets/null.png";
                         });
                       },
@@ -720,8 +726,10 @@ class MyPainter extends CustomPainter{
   //引数の受け取る方
   List<Offset> offsets;
   String dir;
+  String button;
+  List<String> summraize;
 
-  MyPainter(this.offsets,this.dir);
+  MyPainter(this.offsets,this.dir,this.button,this.summraize);
   //appberの高さを取得
   // var height = AppBar().preferredSize.height;
   int count = 0;
@@ -834,6 +842,16 @@ class MyPainter extends CustomPainter{
     paint.color = Colors.red;
     canvas.drawLine(Offset(Right_shoulder_ideal_x,Right_shoulder_ideal_y), Offset(Left_shoulder_ideal_x,Left_shoulder_ideal_y), paint);
 
+    //正面badpoint用
+    if(button=="badpoint"){
+      //肩の平行具合に異常があるときpolotする
+      if (double.parse(summraize[0]) > 2.8){
+        paint.color = Colors.red.withOpacity(0.5);
+        paint.strokeWidth = 5;
+        canvas.drawCircle(Right_shoulder,25, paint);
+        canvas.drawCircle(Left_shoulder,25, paint);
+      }
+    }
   }
 
   //右用
@@ -916,6 +934,17 @@ class MyPainter extends CustomPainter{
     canvas.drawLine(Offset(Right_ankle_ideal_x,Right_shoulder_ideal), Offset(Right_ankle_ideal_x,Right_hip_ideal), paint);
     canvas.drawLine(Offset(Right_ankle_ideal_x,Right_hip_ideal), Offset(Right_ankle_ideal_x,Right_knee_ideal), paint);
     canvas.drawLine(Offset(Right_ankle_ideal_x,Right_knee_ideal), Right_ankle, paint);
+
+    //右面badpoint用
+    if(button=="badpoint"){
+      //肩の平行具合に異常があるときpolotする
+      if (double.parse(summraize[0]) > 2.8){
+        paint.color = Colors.red.withOpacity(0.5);
+        paint.strokeWidth = 10;
+        canvas.drawCircle(Right_shoulder, 25, paint);
+      }
+
+    }
   }
 
   //左用
@@ -998,6 +1027,15 @@ class MyPainter extends CustomPainter{
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_shoulder_ideal), Offset(Left_ankle_ideal_x,Left_hip_ideal), paint);
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_hip_ideal), Offset(Left_ankle_ideal_x,Left_knee_ideal), paint);
     canvas.drawLine(Offset(Left_ankle_ideal_x,Left_knee_ideal), Left_ankle, paint);
+    //左用badpoint用
+    if(button=="badpoint"){
+      //肩の平行具合に異常があるときpolotする
+      if (double.parse(summraize[0]) > 2.8){
+        paint.color = Colors.red.withOpacity(0.5);
+        paint.strokeWidth = 10;
+        canvas.drawCircle(Left_shoulder, 25, paint);
+      }
+    }
   }
   }
   @override
