@@ -3,278 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gazou/hand20.dart';
 
-//テスト
-class EvaluationTest extends StatefulWidget {
-  const EvaluationTest({Key? key,required this.imagePath,required this.offsets}) : super(key: key);
-
-  final String imagePath;
-  final List<Offset> offsets;
-  
-  @override
-  State<EvaluationTest> createState() => _EvaluationTestState();
-}
-
-class _EvaluationTestState extends State<EvaluationTest> {
-String kendall = "評価結果を出す";
-String score = "姿勢スコア：計算中";
-String advice = "";
-String badpoint = "";
-String text = "";
-String dir = "front";
-
-//右を調整してる
-List<Offset> _adjust_right(List<Offset> landmarkright){
-  List<Offset> landmarkright = widget.offsets;
-  List<Offset> landmarks = [];
-
-  landmarks = [];
-    if(landmarkright.length!=7){
-    landmarks.add(landmarkright[0]);
-    landmarks.add(landmarkright[12]);
-    landmarks.add(landmarkright[14]);
-    landmarks.add(landmarkright[16]);
-    landmarks.add(landmarkright[24]);
-    landmarks.add(landmarkright[26]);
-    landmarks.add(landmarkright[28]);
-    //戻す
-    landmarkright = landmarks;
-  }
-  return landmarkright;
-}
-
-//ケンダル分類
-String _kendall_classification(String kendall){
-  List<Offset>landmarkright = [];
-  //調整済み座標持ってきてる
-  landmarkright = _adjust_right(landmarkright);
-
-   //メモ
-    // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
-    //                           7"Left_elbow",8"Right_elbow",9"Left_wrist",10"Right_wrist",11"Left_hip",12"Right_hip"];
-    // List<String> landmarkright = [0"Nose",1"Right_shoulder",2"Right_elbow",3"Right_wrist",4"Right_hip",5"Right_knee",6"Right_ankle"];
-    // List<String> landmarkleft = [0"Nose",1"Left_shoulder",2"Left_elbow",3"Left_wrist",4"Left_hip",5"Left_knee",6"Left_ankle"];
-
-    //ケンダル分類
-    String kendall = "";
-    double ankle_knee = 0;
-    double ankle_hip = 0;
-    double ankle_shoulder = 0;
-
-    //ankle_knee 数字が大きい方で引いてるから最後に-1をかけていい感じにしてる
-    var tmp1 = landmarkright[5] - landmarkright[6];
-    ankle_knee = atan(tmp1.dy/tmp1.dx)*180/pi;
-    if(ankle_knee>0){
-      ankle_knee = (90 - ankle_knee)*-1;
-    }
-    else{
-      ankle_knee = (-90 + ankle_knee.abs())*-1;
-    }
-
-    //ankle_hip 
-    var tmp2 = landmarkright[4] - landmarkright[6];
-    //tmp1のyを使う
-    ankle_hip = atan(tmp1.dy/tmp2.dx)*180/pi;
-    if(ankle_hip>0){
-      ankle_hip = (90 - ankle_hip)*-1;
-    }
-    else{
-      ankle_hip = (-90 + ankle_hip.abs())*-1;
-    }
-
-    //ankle_shoulder
-    var tmp3 = landmarkright[1] - landmarkright[6];
-    //tmp1のyを使う
-    ankle_shoulder = atan(tmp1.dy/tmp3.dx)*180/pi;
-    if(ankle_shoulder>0){
-      ankle_shoulder = (90 - ankle_shoulder)*-1;
-    }
-    else{
-      ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
-    }
-
-    //ケンダル分類
-    if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      kendall = "ノーマル";
-    }
-    else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      kendall = "ロードシス";
-    }
-    else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-      kendall = "スウェイバック";
-    }
-    else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
-      kendall = "カイホロードシス";
-    }
-    else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      kendall = "フラットバック";
-    }
-    else {
-      kendall = "不明";
-    }
-
-    print(ankle_knee);
-    print(ankle_hip);
-    print(ankle_shoulder);
-    return kendall;
-}
-//肩の平行具合を計算する
-String _ShoulderScorecalculation(){
-  List<Offset> landmarkfront = widget.offsets;
-  List<Offset> landmarks = [];
-  double shoulder_angle = 0;
-  String ShoulderScore = "";
-  var tmp1 = widget.offsets[12] - widget.offsets[11];
-  print(tmp1);
-  print(atan(tmp1.dy / tmp1.dx));
-  print(atan(tmp1.dy / tmp1.dx).abs());
-  shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
-  print(shoulder_angle);
-  print(shoulder_angle);
-  ShoulderScore = shoulder_angle.toString() + "度です";
-  return ShoulderScore;
-}
-//抱く高さの位置を計算する
-String _Hugheightcalculation(){
-  List<Offset> landmarkfront = widget.offsets;
-  List<Offset> landmarks = [];
-  //それぞれの手首の高さ
-  int back_hand = 0;
-  int hip_hand = 0;
-  double back_hand_rate = 0;
-  double hip_hand_rate = 0;
-  if(widget.offsets[14].dy < widget.offsets[15].dy){
-    print("背中を支えている手首はRight_wristです");
-    back_hand = 10;
-    hip_hand = 9;
-  }
-  else{
-    print("背中を支えている手首はLeft_wristです");
-    back_hand = 9;
-    hip_hand = 10;
-  }
-  var hip_midpoint = (widget.offsets[16] + widget.offsets[23])/2;
-  var sholder_midpoint = (widget.offsets[10] + widget.offsets[11])/2;
-  back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
-  hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
-  print(back_hand_rate);
-  print(hip_hand_rate);
-  //return hip_hand_rate.toString();
-  return hip_hand_rate.toString();
-}
-
-
-//姿勢スコアを返す
-String _score(String score){
-  //int sumscore = 0;
-  //kendall = _calculation(kendall);
-  var ShoulderScore = _ShoulderScorecalculation();
-  //score = "姿勢スコア：" + sumscore.toString() + "点";
-  score = "肩の平行具合は：" + ShoulderScore.toString() + "度";
-  return score;
-}
-
-//悪いところを返す
-String _badpoint(String badpoint){
-  List<String> badpoint_list = ["抱っこの高さが低い","背筋が悪い","aaaa","bbbb"];
-  badpoint = badpoint_list[0] + "\n" + badpoint_list[1];
-  return badpoint;
-}
-
-//アドバイスを返す
-String _advice(String advice){
-  List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
-  advice = advice_list[0] + "\n" + advice_list[1];
-  return advice;
-}
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("評価結果",style:TextStyle(color: Colors.black)),
-      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-      body:SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Stack(
-              children: [
-                  Image.file(
-                  File(widget.imagePath)
-                ),
-                CustomPaint(
-                  //引数の渡す方
-                  //painter: MyPainter(widget.offsets,dir,button,summraize),
-                  // タッチを有効にするため、childが必要
-                  child: Center(),
-              ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(padding: EdgeInsets.only(top: 10,left: 5),
-                  child: ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          score = _score(score);
-                          text = score;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,//ボタン背景色
-                        elevation: 16,
-                      ),
-                      child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
-                    ),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
-                  child: ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          badpoint = _badpoint(badpoint);
-                          text = badpoint;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,
-                        elevation: 16,
-                      ),
-                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
-                    ),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
-                  child: ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          advice = _advice(advice);
-                          text = advice;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,
-                        elevation: 16,
-                      ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
-                    ),
-                    ),
-              ],
-            ),
-      
-                    
-            // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
-            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
-
-      // Padding(padding: EdgeInsets.only(top: 730,left: 20),
-      //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
-      // ),
-          ],
-      ),
-      ),
-    );
-    }
-}
-
 //評価結果を返す
 class Evaluation extends StatefulWidget {
   const Evaluation({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2,required this.offsets3})
@@ -460,8 +188,9 @@ String _kendall_classification(){
     return ShoulderScore;
   }
 //抱く高さの位置を計算する
-  double _Hugheight_calculation(){
+  List<String> _Hugheight_calculation(){
     List<Offset>landmarkfront = [];
+    List<String> hugheight = [];
     //調整済み座標持ってきてる
     landmarkfront = _adjust_front(landmarkfront);
     //それぞれの手首の高さ
@@ -469,28 +198,36 @@ String _kendall_classification(){
     int hip_hand = 0;
     double back_hand_rate = 0;
     double hip_hand_rate = 0;
+    String ishiphand = "";
     if(landmarkfront[9].dy > landmarkfront[10].dy){
       print(landmarkfront[9]);
       print(landmarkfront[10]);
       print("背中を支えている手首はLeft_wristです");
       back_hand = 10;
       hip_hand = 9;
+      ishiphand = "Left_wrist";
     }
     else{
       print("背中を支えている手首はRight_wristです");
       back_hand = 9;
       hip_hand = 10;
+      ishiphand = "Right_wrist";
     }
     var hip_midpoint = (landmarkfront[11] + landmarkfront[12])/2;
     var sholder_midpoint = (landmarkfront[5] + landmarkfront[6])/2;
     back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
     hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
     //return hip_hand_rate.toString();
-    return hip_hand_rate;
+    hugheight.add(hip_hand_rate.toString());
+    hugheight.add(back_hand_rate.toString());
+    hugheight.add(ishiphand);
+
+    return hugheight;
   }
 
 //計算した値をリストでまとめて返す
-
+//   [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist]
+//   [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド]
   List<String> _Summraize(){
 
     List<String> summraize = [];
@@ -505,8 +242,11 @@ String _kendall_classification(){
 
     summraize.add(kendall);
 
-    summraize.add(Hugheight.toString());
+    summraize.add(Hugheight[0].toString());
+    summraize.add(Hugheight[1].toString());
+    summraize.add(Hugheight[2].toString());
 
+    print(summraize);
     return summraize;
 
   }
@@ -525,16 +265,16 @@ String _kendall_classification(){
       sumscore += 16.5;
     }
 
-    if(Hugheight > 0.5){
+    if(double.parse(Hugheight[0]) > 0.5){
       sumscore += 33;
     }
-    if(0.5 > Hugheight && Hugheight > 0.45){
+    if(0.5 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.45){
       sumscore += 24.75;
     }
-    if(0.45 > Hugheight && Hugheight > 0.40){
+    if(0.45 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.40){
       sumscore += 16.5;
     }
-    if(0.40 > Hugheight && Hugheight > 0.35){
+    if(0.40 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.35){
       sumscore += 8.25;
     }
     else{
@@ -701,6 +441,7 @@ List <double> _triangular_chart(){
       count++;
       downcolor_1 = Colors.orange;
       upcolor_1 = Colors.orange;
+      text = _score(score);
     }
     
     return Scaffold(
@@ -997,7 +738,9 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Right_hip, Left_hip, paint);
     }
     //正面badpoint用
-    if(button=="badpoint"||button=="score"){
+    // [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist]
+    // [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド]
+    if(button=="badpoint"){
       //肩の平行具合に異常があるときpolotする
       if (double.parse(summraize[0]) > 2.8){
         paint.color = Colors.red.withOpacity(0.5);
@@ -1005,6 +748,21 @@ class MyPainter extends CustomPainter{
         canvas.drawCircle(Right_shoulder,25, paint);
         canvas.drawCircle(Left_shoulder,25, paint);
       }
+      //抱っこの高さに異常があるときplotする
+      if (double.parse(summraize[2]) < 0.5){
+        if(summraize[4]=="Right_wrist"){
+          paint.color = Colors.red.withOpacity(0.5);
+          paint.strokeWidth = 5;
+          canvas.drawCircle(Right_wrist, 25, paint);
+        }
+        else if(summraize[4]=="Left_wrist"){
+          paint.color = Colors.red.withOpacity(0.5);
+          paint.strokeWidth = 5;
+          canvas.drawCircle(Left_wrist, 25, paint);
+        }
+
+      }
+
     }
   }
 
@@ -1088,7 +846,7 @@ class MyPainter extends CustomPainter{
     }
 
     //右面badpoint用
-    if(button=="score"||button=="badpoint"){
+    if(button=="badpoint"){
       //肩の平行具合に異常があるときplotする
       if (double.parse(summraize[0]) > 2.8){
         paint.color = Colors.red.withOpacity(0.5);
@@ -1096,7 +854,7 @@ class MyPainter extends CustomPainter{
         canvas.drawCircle(Right_shoulder, 25, paint);
       }
       //抱っこの高さに異常があるときplotする
-      if (double.parse(summraize[2]) > 0.5){
+      if (double.parse(summraize[2]) < 0.5){
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_wrist, 25, paint);
@@ -1206,12 +964,21 @@ class MyPainter extends CustomPainter{
           Offset(Left_ankle_ideal_x, Left_knee_ideal), Left_ankle, paint);
     }
     //左用badpoint用
-    if(button=="score"||button=="badpoint"){
+    if(button=="badpoint"){
       //肩の平行具合に異常があるときpolotする
       if (double.parse(summraize[0]) > 2.8){
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Left_shoulder, 25, paint);
+      }
+      //抱っこの高さに異常があるときplotする
+      if (double.parse(summraize[2]) < 0.5){
+        if(summraize[4]=="Left_wrist"){
+          paint.color = Colors.red.withOpacity(0.5);
+          paint.strokeWidth = 5;
+          canvas.drawCircle(Left_wrist, 25, paint);
+        }
+
       }
     }
   }

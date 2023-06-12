@@ -245,24 +245,24 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
             child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
           ),
                     ),
-      Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
-        child: ElevatedButton(
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => EvaluationTest(imagePath:widget.imagePath,offsets:offsets),
-        )
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
-              elevation: 16,
-            ),
-            child: Text('このまま',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-          ),
-                    ),
+      // Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
+      //   child: ElevatedButton(
+      //       onPressed: (){
+      //         Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => EvaluationTest(imagePath:widget.imagePath,offsets:offsets),
+      //   )
+      //         );
+      //       },
+      //       style: ElevatedButton.styleFrom(
+      //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      //         fixedSize:const Size(180,60),
+      //         backgroundColor: Colors.orange,
+      //         elevation: 16,
+      //       ),
+      //       child: Text('このまま',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+      //     ),
+      //               ),
       ],
           ),
       // body: Center(child: Transform(transform: Matrix4.rotationY(pi),
