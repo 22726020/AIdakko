@@ -653,21 +653,22 @@ List <double> _triangular_chart(){
     }
 
     //肩の並行三角チャート計算
-    if(double.parse(summraize[0]) >= 2.8){
+    if(double.parse(summraize[0]) <= 2.8){
       shoulder_point = 0;
     }
-    else if(double.parse(summraize[0]) >= 3.0){
+    else if(double.parse(summraize[0]) <= 3.0){
       shoulder_point = 1;
     }
-    else if(double.parse(summraize[0]) >= 3.2){
+    else if(double.parse(summraize[0]) <= 3.2){
       shoulder_point = 2;
     }
-    else if(double.parse(summraize[0]) >= 3.4){
+    else if(double.parse(summraize[0]) <= 3.4){
       shoulder_point = 3;
     }
     else{
       shoulder_point = 4;
     }
+    
     print(hug_height_point);
     print(kendall_point);
     print(shoulder_point);
