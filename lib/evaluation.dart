@@ -482,6 +482,28 @@ String _kendall_classification(){
     return hip_hand_rate;
   }
 
+//計算した値をリストでまとめて返す
+
+  List<String> _Summraize(){
+
+    List<String> summraize = [];
+
+    var ShoulderScore = _ShoulderScore_calculation();
+
+    var kendall = _kendall_classification();
+
+    var Hugheight = _Hugheight_calculation();
+
+    summraize.add(ShoulderScore.toString());
+
+    summraize.add(kendall);
+
+    summraize.add(Hugheight.toString());
+
+    return summraize;
+
+  }
+
 //姿勢スコアを返す
   String _score(String score){
     int sumscore = 0;
@@ -667,6 +689,7 @@ String _advice(String advice){
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
+                          summraize = _Summraize();
                           badpoint = _badpoint(badpoint);
                           text = badpoint;
                           button = "badpoint";
