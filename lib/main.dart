@@ -121,21 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ]
               ),
-              // Row(
-              //   children: <Widget>[
-              //     Padding(padding: EdgeInsets.only(top: 320,left: 34),
-              //     child: ElevatedButton(
-              //     onPressed: (){
-              //       outcamera();
-              //     }, child: Text('外カメラ',style: TextStyle(fontSize: 32,color: Colors.white)))),
-              //     Padding(padding: EdgeInsets.only(top: 320,left: 15),
-              //     child: ElevatedButton(
-              //     onPressed: (){
-              //       main();
-              //     }, 
-              //     child: Text('内カメラ',style: TextStyle(fontSize: 32,color: Colors.white)))),
-              // ],
-              // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

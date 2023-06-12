@@ -29,6 +29,9 @@ class _JunbiINPageState extends State<JunbiINPage> {
         children: [
       ElevatedButton(
         onPressed: ()async{
+            final cameras = await availableCameras();
+  // 利用可能なカメラのリストから特定のカメラを取得
+            final firstCamera = cameras[1];
 showDialog(
           context: context,
           builder: (context) => AlertDialog(
