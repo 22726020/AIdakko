@@ -303,6 +303,13 @@ String button = "score";
 List<String> summraize= [];
 List<Offset> offset = [];
 String imagescore = "assets/imagescore.png";
+//色
+var downcolor_1 = Colors.grey;
+var downcolor_2 = Colors.grey;
+var downcolor_3 = Colors.grey;
+var upcolor_1 = Colors.grey;
+var upcolor_2 = Colors.grey;
+var upcolor_3 = Colors.grey;
 
 List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -588,6 +595,8 @@ String _advice(String advice){
       dir = "front";
       button = "score";
       count++;
+      downcolor_1 = Colors.orange;
+      upcolor_1 = Colors.orange;
     }
     
     return Scaffold(
@@ -606,11 +615,14 @@ String _advice(String advice){
                           image = widget.path1;
                           offset = widget.offsets1;
                           dir = "front";
+                          upcolor_1 = Colors.orange;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.grey;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,60),
-                        backgroundColor: Colors.orange,//ボタン背景色
+                        backgroundColor: upcolor_1,//ボタン背景色
                         elevation: 16,
                       ),
                       child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -623,11 +635,14 @@ String _advice(String advice){
                           image = widget.path2;
                           offset = widget.offsets2;
                           dir = "right";
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.orange;
+                          upcolor_3 = Colors.grey;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,60),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
                       child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -640,11 +655,14 @@ String _advice(String advice){
                           image = widget.path3;
                           offset = widget.offsets3;
                           dir = "left";
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.orange;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,60),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
                       child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -675,11 +693,14 @@ String _advice(String advice){
                           text = score;
                           button = "score";
                           imagescore = "assets/imagescore.png";
+                          downcolor_1 = Colors.orange;
+                          downcolor_2 = Colors.grey;
+                          downcolor_3 = Colors.grey;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,//ボタン背景色
+                        backgroundColor: downcolor_1,//ボタン背景色
                         elevation: 16,
                       ),
                       child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -694,11 +715,14 @@ String _advice(String advice){
                           text = badpoint;
                           button = "badpoint";
                           imagescore = "assets/null.png";
+                          downcolor_1 = Colors.grey;
+                          downcolor_2 = Colors.orange;
+                          downcolor_3 = Colors.grey;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: downcolor_2,
                         elevation: 16,
                       ),
                       child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -712,11 +736,14 @@ String _advice(String advice){
                           text = advice;
                           button = "advice";
                           imagescore = "assets/null.png";
+                          downcolor_1 = Colors.grey;
+                          downcolor_2 = Colors.grey;
+                          downcolor_3 = Colors.orange;
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: downcolor_3,
                         elevation: 16,
                       ),
                       child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
