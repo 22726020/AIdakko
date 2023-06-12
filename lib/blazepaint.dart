@@ -331,7 +331,7 @@ class MyPainterRight extends CustomPainter{
       
       paint.strokeWidth = 5;
       paint.color = Colors.green;
-      canvas.drawLine(Nose, Right_shoulder, paint);
+      // canvas.drawLine(Nose, Right_shoulder, paint);
       canvas.drawLine(Right_shoulder, Right_elbow, paint);
       canvas.drawLine(Right_elbow, Right_wrist, paint);
       canvas.drawLine(Right_shoulder, Right_hip, paint);
@@ -351,7 +351,7 @@ class MyPainterRight extends CustomPainter{
       
       paint.strokeWidth = 5;
       paint.color = Colors.green;
-      canvas.drawLine(Nose, Left_shoulder, paint);
+      // canvas.drawLine(Nose, Left_shoulder, paint);
       canvas.drawLine(Left_shoulder, Left_elbow, paint);
       canvas.drawLine(Left_elbow, Left_wrist, paint);
       canvas.drawLine(Left_shoulder, Left_hip, paint);
@@ -424,7 +424,7 @@ class MyPainterLeft extends CustomPainter{
       
       paint.strokeWidth = 5;
       paint.color = Colors.green;
-      canvas.drawLine(Nose, Left_shoulder, paint);
+      // canvas.drawLine(Nose, Left_shoulder, paint);
       canvas.drawLine(Left_shoulder, Left_elbow, paint);
       canvas.drawLine(Left_elbow, Left_wrist, paint);
       canvas.drawLine(Left_shoulder, Left_hip, paint);
@@ -444,7 +444,7 @@ class MyPainterLeft extends CustomPainter{
       
       paint.strokeWidth = 5;
       paint.color = Colors.green;
-      canvas.drawLine(Nose, Right_shoulder, paint);
+      // canvas.drawLine(Nose, Right_shoulder, paint);
       canvas.drawLine(Right_shoulder, Right_elbow, paint);
       canvas.drawLine(Right_elbow, Right_wrist, paint);
       canvas.drawLine(Right_shoulder, Right_hip, paint);
