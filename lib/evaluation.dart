@@ -586,6 +586,80 @@ String _advice(String advice){
   return advice;
 }
 
+//三角チャート
+List <double> _triangular_chart(){
+  List<double> point=[];
+  List<String> summraize = _Summraize();
+  double hug_height_score = 55;
+  double kendall_score1 = -140;
+  double kendall_score2 = 260;
+  double shoulder_score1 = 90;
+  double shoulder_score2 = 260;
+  //5段階評価用
+  int hug_height_point = 0;
+  int kendall_point = 0;
+  int shoulder_point = 0;
+
+      //抱っこの高さ三角チャート計算
+    if(double.parse(summraize[2]) > 0.5){
+      hug_height_point = 0;
+    }
+    else if(double.parse(summraize[2]) > 0.45){
+      hug_height_point = 1;
+    }
+    else if(double.parse(summraize[2]) > 0.40){
+      hug_height_point = 2;
+    }
+    else if(double.parse(summraize[2]) > 0.35){
+      hug_height_point = 3;
+    }
+    else{
+      hug_height_point = 4;
+    }
+    
+    //ケンダル三角チャート計算
+    if(summraize[1]=="ノーマル"){
+      kendall_point = 0;
+    }
+    else{
+      kendall_point = 2;
+    }
+
+    //肩の並行三角チャート計算
+    if(double.parse(summraize[0]) >= 2.8){
+      shoulder_point = 0;
+    }
+    else if(double.parse(summraize[0]) >= 3.0){
+      shoulder_point = 1;
+    }
+    else if(double.parse(summraize[0]) >= 3.2){
+      shoulder_point = 2;
+    }
+    else if(double.parse(summraize[0]) >= 3.4){
+      shoulder_point = 3;
+    }
+    else{
+      shoulder_point = 4;
+    }
+    print(hug_height_point);
+    //満点三角形→path.moveTo(-25, 55);path.lineTo(-140, 260);path.lineTo(90, 260);
+    //計算5段階評価の場合(5→1) hug_height_score +35していく kendall_score1　-28.75 kendallscore2 -16.25していく shoulder_score1 -28.75 shoulder_score2 -16.25していく
+    hug_height_score += hug_height_point * 35;
+    kendall_score1 += kendall_point * 28.75;
+    kendall_score2 += kendall_point * -16.25;
+    shoulder_score1 += shoulder_point * -28.75;
+    shoulder_score2 += shoulder_point * -16.25;
+
+    //追加していく
+    point.add(hug_height_score);
+    point.add(kendall_score1);
+    point.add(kendall_score2);
+    point.add(shoulder_score1);
+    point.add(shoulder_score2);
+
+  return point;
+}
+
   @override
   Widget build(BuildContext context) {
     //初期状態
@@ -757,7 +831,7 @@ String _advice(String advice){
             // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
             CustomPaint(
-              painter: ImagePainter(),
+              painter: ImagePainter(_triangular_chart()),
             ),
             Image.asset(imagescore),
 
@@ -1121,12 +1195,9 @@ class MyPainter extends CustomPainter{
 //描画用2
 class ImagePainter extends CustomPainter{
 
-  ImagePainter();
-  double hug_height_score = 55;
-  double kendall_score1 = -140;
-  double kendall_score2 = 260;
-  double shoulder_score1 = 90;
-  double shoulder_score2 = 260;
+  List<double> point;
+
+  ImagePainter(this.point);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1145,8 +1216,11 @@ class ImagePainter extends CustomPainter{
     // Pathを作る
     var path = Path();
     
-    //計算5段階評価の場合(5→1) hug_height_score +35していく kendall_score1　-28.75 kendallscore2 -16.25していく shoulder_score1 -28.75 shoulder_score2 -16.25していく
-
+    double hug_height_score = point[0];
+    double kendall_score1 = point[1];
+    double kendall_score2 = point[2];
+    double shoulder_score1 = point[3];
+    double shoulder_score2 = point[4];
 
     // Pathのメソッドを使って三角形をかく。満点三角形→path.moveTo(-25, 60);path.lineTo(-140, 260);path.lineTo(90, 260);
     //抱っこの高さ
