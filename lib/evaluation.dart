@@ -96,8 +96,9 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 }
 
 //ケンダルを計算する
-String _kendall_classification(){
-  List<Offset>landmarkright = [];
+  List<String> _kendall_classification(){
+    List<Offset>landmarkright = [];
+    List<String>kendalllist = [];
   //調整済み座標持ってきてる
   landmarkright = _adjust_right(landmarkright);
    //メモ
@@ -167,7 +168,12 @@ String _kendall_classification(){
     print(ankle_knee);
     print(ankle_hip);
     print(ankle_shoulder);
-    return kendall;
+    kendalllist.add(kendall);
+    kendalllist.add(ankle_knee.toString());
+    kendalllist.add(ankle_hip.toString());
+    kendalllist.add(ankle_shoulder.toString());
+
+    return kendalllist;
 }
 //肩の平行具合を計算する
   double _ShoulderScore_calculation(){
@@ -220,27 +226,30 @@ String _kendall_classification(){
 
     return hugheight;
   }
-
-//計算した値をリストでまとめて返す
-//   [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist]
-//   [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド]
+  //計算した値をリストでまとめて返す”さまらいず”
+  //   [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist,ankle_knee,ankle_hip,ankle_shoulder]
+  //   [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド、膝までの角度、腰までの角度、肩までの角度]
   List<String> _Summraize(){
 
     List<String> summraize = [];
 
     var ShoulderScore = _ShoulderScore_calculation();
 
-    var kendall = _kendall_classification();
-
     var Hugheight = _Hugheight_calculation();
+
+    var kendalllist= _kendall_classification();
+
 
     summraize.add(ShoulderScore.toString());
 
-    summraize.add(kendall);
+    summraize.add(kendalllist[0]);
 
     summraize.add(Hugheight[0].toString());
     summraize.add(Hugheight[1].toString());
     summraize.add(Hugheight[2].toString());
+    summraize.add(kendalllist[1]);
+    summraize.add(kendalllist[2]);
+    summraize.add(kendalllist[3]);
 
     print(summraize);
     return summraize;
@@ -251,7 +260,7 @@ String _kendall_classification(){
   String _score(String score){
     double sumscore = 0;
     var ShoulderScore = _ShoulderScore_calculation();
-    var kendall = _kendall_classification();
+    var kendall = _kendall_classification()[0];
     var Hugheight = _Hugheight_calculation();
 
     if(kendall == "ノーマル"){
@@ -303,7 +312,7 @@ String _kendall_classification(){
   //悪いところを返す
   String _badpoint(String badpoint){
     var ShoulderScore = _ShoulderScore_calculation();
-    var kendall = _kendall_classification();
+    var kendall = _kendall_classification()[0];
     var Hugheight = _Hugheight_calculation();
     List<String> badpoint_list = ["問題ないで","姿勢悪いで","肩悪いで","bbbb"];
     List<String> badpoint = [];
@@ -438,6 +447,7 @@ List <double> _triangular_chart(){
       downcolor_1 = Colors.orange;
       upcolor_1 = Colors.orange;
       text = _score(score);
+      summraize = _Summraize();
     }
     
     return Scaffold(
@@ -596,7 +606,7 @@ List <double> _triangular_chart(){
               ],
             ),
                     
-            Text("姿勢パターン:" + _kendall_classification(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
+            Text("姿勢パターン:" + _kendall_classification()[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
             CustomPaint(
               painter: ImagePainter(_triangular_chart()),
@@ -630,6 +640,16 @@ class MyPainter extends CustomPainter{
     final paint = Paint()..color = Colors.red;
     final radius = size.width / 50;
     List<Offset> landmarks = [];
+
+    //テキストペインター用定義
+    String text = "";
+    TextSpan span = new TextSpan(
+        text: text,
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            backgroundColor: Colors.blue));
 
     //正面用
     if(dir=="front"){
@@ -692,6 +712,39 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
           Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
     }
+//正面でスコアボタンを押しているとき
+      if(button=="score") {
+        //shoulderbalance描画(肩のバランス：〇〇度)
+        String shouldertext = "肩の角度は" + double.parse(summraize[0]).ceil().toString() + "度";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: shouldertext,  // 新しいテキストを指定
+        );
+        TextPainter shoulder = new TextPainter(text: shoulderSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+        shoulder.layout();
+        shoulder.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
+
+        //backhandの高さ(手首の高さ：〇〇％)
+        String backwristtext = "手首の高さは" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
+        TextSpan backwristSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: backwristtext,  // 新しいテキストを指定
+        );
+        TextPainter backwrist = new TextPainter(text: backwristSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+        backwrist.layout();
+        backwrist.paint(canvas, new Offset(Left_wrist.dx, Left_wrist.dy));
+
+        //backhandの高さ(手首の高さ：〇〇％)
+        String hipwristtext = "手首の高さは" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
+        TextSpan hipwristSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: hipwristtext,  // 新しいテキストを指定
+        );
+        TextPainter hipwrist = new TextPainter(text: hipwristSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        hipwrist.layout();
+        hipwrist.paint(canvas, new Offset(Right_wrist.dx, Right_wrist.dy));
+
+      }
 
     if(button=="score"||button=="advice") {
       //推定姿勢点プロット
@@ -824,6 +877,7 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Right_knee, Right_ankle, paint);
     }
 
+
     //右面badpoint用
     if(button=="badpoint"){
       //肩の平行具合に異常があるときplotする
@@ -907,7 +961,7 @@ class MyPainter extends CustomPainter{
     final Left_hip_ideal = offsets[4].dy;
     final Left_knee_ideal = offsets[5].dy;
     final Left_ankle_ideal_x = offsets[6].dx;
-    //右面badpoint用
+    //左面badpoint用
     if(button=="score"||button=="advice") {
       //姿勢推定
       paint.color = Colors.orange;
@@ -929,7 +983,7 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Left_knee, Left_hip, paint);
       canvas.drawLine(Left_knee, Left_ankle, paint);
     }
-    //右面badpoint用
+    //左面badpoint用
     if(button=="advice") {
       //理想姿勢
       paint.color = Colors.red;
