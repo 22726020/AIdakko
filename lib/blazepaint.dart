@@ -31,6 +31,13 @@ class SavePageIn extends StatefulWidget {
 }
 
 class _SavePageInState extends State<SavePageIn> {
+  String image = "";
+  int count = 0;
+  //色
+  var upcolor_1 = Colors.grey;
+  var upcolor_2 = Colors.grey;
+  var upcolor_3 = Colors.grey;
+
   // 画像の保存したい
   Future saveImage() async {
     dynamic imgpath1 = io.File(widget.path1).readAsBytes;
@@ -39,25 +46,78 @@ class _SavePageInState extends State<SavePageIn> {
   }
  @override
   Widget build(BuildContext context) {
+    if(count==0){
+      image = widget.path1;
+      count++;
+      upcolor_1 = Colors.orange;
+    }
   return Scaffold(
     appBar: AppBar(title: const Text('確認画面'),backgroundColor: Colors.orange),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
-      const Padding(padding: EdgeInsets.only(top: 10),
-      child: Text('正面画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      ),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path1)),
-      ),
-      const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path2)),
-      ),
-      const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path3)),
-      ),
+        //上のボタン
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path1;
+                          upcolor_1 = Colors.orange;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.grey;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_1,//ボタン背景色
+                        elevation: 16,
+                      ),
+                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path2;
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.orange;
+                          upcolor_3 = Colors.grey;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_2,
+                        elevation: 16,
+                      ),
+                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path3;
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.orange;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_3,
+                        elevation: 16,
+                      ),
+                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+              ],
+              ),
+              Image.file(
+                  File(image)
+                ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -112,6 +172,13 @@ class SavePageOut extends StatefulWidget {
 }
 
 class _SavePageOutState extends State<SavePageOut> {
+  String image = "";
+  int count = 0;
+  //色
+  var upcolor_1 = Colors.grey;
+  var upcolor_2 = Colors.grey;
+  var upcolor_3 = Colors.grey;
+
   // 画像の保存したい
   Future saveImage() async {
     dynamic imgpath1 = io.File(widget.path1).readAsBytes;
@@ -120,25 +187,78 @@ class _SavePageOutState extends State<SavePageOut> {
   }
  @override
   Widget build(BuildContext context) {
+    if(count==0){
+      image = widget.path1;
+      count++;
+      upcolor_1 = Colors.orange;
+    }
   return Scaffold(
     appBar: AppBar(title: const Text('確認画面'),backgroundColor: Colors.orange),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
-      const Padding(padding: EdgeInsets.only(top: 10),
-      child: Text('正面画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      ),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path1)),
-      ),
-      const Text('右画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path2)),
-      ),
-      const Text('左画像', style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
-      Padding(padding: const EdgeInsets.only(top: 5,left: 5,right: 5),
-      child: Image.file(File(widget.path3)),
-      ),
+        //上のボタン
+            Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path1;
+                          upcolor_1 = Colors.orange;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.grey;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_1,//ボタン背景色
+                        elevation: 16,
+                      ),
+                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path2;
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.orange;
+                          upcolor_3 = Colors.grey;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_2,
+                        elevation: 16,
+                      ),
+                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        setState(() {
+                          image = widget.path3;
+                          upcolor_1 = Colors.grey;
+                          upcolor_2 = Colors.grey;
+                          upcolor_3 = Colors.orange;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize:const Size(120,60),
+                        backgroundColor: upcolor_3,
+                        elevation: 16,
+                      ),
+                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    ),
+                    ),
+              ],
+              ),
+              Image.file(
+                  File(image)
+                ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
