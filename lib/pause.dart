@@ -16,7 +16,9 @@ class _Pause1PageState extends State<Pause1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: new Text(widget.title,style:TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
@@ -66,7 +68,9 @@ class _Pause2PageState extends State<Pause2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: new Text(widget.title,style:TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[
@@ -116,7 +120,9 @@ class _Pause3PageState extends State<Pause3Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text(widget.title,style:TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text(widget.title,style:TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[

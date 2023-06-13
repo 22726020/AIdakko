@@ -19,7 +19,9 @@ class _JunbiINPageState extends State<JunbiINPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('内カメラ',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text('内カメラ',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
@@ -87,7 +89,9 @@ class _JunbiOUTPageState extends State<JunbiOUTPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('外カメラ',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text('外カメラ',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[

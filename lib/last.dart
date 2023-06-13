@@ -21,7 +21,9 @@ class _OwariPageState extends State<OwariPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: new Text(widget.title,style:TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: new Text(widget.title,style:TextStyle(color: Colors.white)),
         backgroundColor: Colors.orange),
         body:  Stack(
           children: <Widget>[

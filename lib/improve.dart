@@ -30,6 +30,7 @@ class _PointerDrawingWidgetState extends State<PointerDrawingWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
         title: Text(widget.title),
       ),
       body:Stack(

@@ -52,7 +52,9 @@ class _SavePageInState extends State<SavePageIn> {
       upcolor_1 = Colors.orange;
     }
   return Scaffold(
-    appBar: AppBar(title: const Text('確認画面'),backgroundColor: Colors.orange),
+    appBar: AppBar(title: const Text('確認画面'),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+      backgroundColor: Colors.orange),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
@@ -193,7 +195,9 @@ class _SavePageOutState extends State<SavePageOut> {
       upcolor_1 = Colors.orange;
     }
   return Scaffold(
-    appBar: AppBar(title: const Text('確認画面'),backgroundColor: Colors.orange),
+    appBar: AppBar(title: const Text('確認画面'),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+      backgroundColor: Colors.orange),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
@@ -667,7 +671,9 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("正面姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        title:  Text("正面姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -825,7 +831,9 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("右姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        title:  Text("右姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -982,7 +990,9 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("左姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        title:  Text("左姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(

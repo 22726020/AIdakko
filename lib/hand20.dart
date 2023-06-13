@@ -12,7 +12,9 @@ class _HandexpPageState extends State<HandexpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('上肢機能評価の記入について',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text('上肢機能評価の記入について',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
@@ -54,7 +56,9 @@ class _HandresultPageState extends State<HandresultPage> {
     double result = widget.result;
     String result1 = result.toString();
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('結果',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text('結果',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(
@@ -108,7 +112,9 @@ class _HandtehonPageState extends State<HandtehonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true,title: Text('アドバイス',style:const TextStyle(color: Colors.white)),
+        appBar: AppBar(centerTitle: true,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+          title: Text('アドバイス',style:const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
@@ -1015,6 +1021,7 @@ class _HandPageState extends State<HandPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
         title: Text('腱鞘炎チェック'),
       ),
       body: SingleChildScrollView(

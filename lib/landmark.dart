@@ -205,7 +205,9 @@ class BlazeLandmarkPageState extends State<BlazeLandmarkPage> {
     
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
+      appBar:  AppBar(centerTitle: true,
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        title:  Text("姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
