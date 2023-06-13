@@ -374,14 +374,14 @@ class MyPainter extends CustomPainter{
     canvas.drawCircle(Right_wrist, radius, paint);
     canvas.drawCircle(Left_hip, radius, paint);
     canvas.drawCircle(Right_hip, radius, paint);
-    canvas.drawCircle(Left_eye, radius, paint);
-    canvas.drawCircle(Right_eye, radius, paint);
-    canvas.drawCircle(Left_mouth, radius, paint);
-    canvas.drawCircle(Right_mouth, radius, paint);
+    // canvas.drawCircle(Left_eye, radius, paint);
+    // canvas.drawCircle(Right_eye, radius, paint);
+    // canvas.drawCircle(Left_mouth, radius, paint);
+    // canvas.drawCircle(Right_mouth, radius, paint);
     
     paint.strokeWidth = 5;
     paint.color = Colors.green;
-    canvas.drawLine(Left_mouth, Right_mouth, paint);
+    // canvas.drawLine(Left_mouth, Right_mouth, paint);
     canvas.drawLine(Right_shoulder, Left_shoulder, paint);
     canvas.drawLine(Right_shoulder, Right_elbow, paint);
     canvas.drawLine(Left_shoulder, Left_elbow, paint);

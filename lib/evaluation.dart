@@ -43,12 +43,8 @@ List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
   List<Offset> landmarks = [];
 //正面調整
-    if(landmarkfront.length!=13){
+    if(landmarkfront.length!=9){
     landmarks.add(landmarkfront[0]);
-    landmarks.add(landmarkfront[2]);
-    landmarks.add(landmarkfront[5]);
-    landmarks.add(landmarkfront[9]);
-    landmarks.add(landmarkfront[10]);
     landmarks.add(landmarkfront[11]);
     landmarks.add(landmarkfront[12]);
     landmarks.add(landmarkfront[13]);
@@ -181,7 +177,7 @@ String _kendall_classification(){
 
     double shoulder_angle = 0;
     double ShoulderScore = 0;
-    var tmp1 = landmarkfront[6] - landmarkfront[5];
+    var tmp1 = landmarkfront[2] - landmarkfront[1];
     shoulder_angle = (((atan(tmp1.dy / tmp1.dx)).abs())*180 / pi);
     print(shoulder_angle);
     ShoulderScore = shoulder_angle;
@@ -199,22 +195,22 @@ String _kendall_classification(){
     double back_hand_rate = 0;
     double hip_hand_rate = 0;
     String ishiphand = "";
-    if(landmarkfront[9].dy > landmarkfront[10].dy){
-      print(landmarkfront[9]);
-      print(landmarkfront[10]);
+    if(landmarkfront[5].dy > landmarkfront[6].dy){
+      print(landmarkfront[5]);
+      print(landmarkfront[6]);
       print("背中を支えている手首はLeft_wristです");
-      back_hand = 10;
-      hip_hand = 9;
+      back_hand = 6;
+      hip_hand = 5;
       ishiphand = "Left_wrist";
     }
     else{
       print("背中を支えている手首はRight_wristです");
-      back_hand = 9;
-      hip_hand = 10;
+      back_hand = 5;
+      hip_hand = 6;
       ishiphand = "Right_wrist";
     }
-    var hip_midpoint = (landmarkfront[11] + landmarkfront[12])/2;
-    var sholder_midpoint = (landmarkfront[5] + landmarkfront[6])/2;
+    var hip_midpoint = (landmarkfront[7] + landmarkfront[8])/2;
+    var sholder_midpoint = (landmarkfront[1] + landmarkfront[2])/2;
     back_hand_rate = (landmarkfront[back_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
     hip_hand_rate = (landmarkfront[hip_hand].dy - hip_midpoint.dy)/(sholder_midpoint.dy - hip_midpoint.dy);
     //return hip_hand_rate.toString();
@@ -640,7 +636,7 @@ class MyPainter extends CustomPainter{
     //修正ページのx,y座標と合わせる必要があるため -Offset(0,120) , countで制御
     if(count==0){
       count++;
-      if(offsets.length==13){
+      if(offsets.length==9){
         landmarks.add(offsets[0]-Offset(0, 120));
         landmarks.add(offsets[1]-Offset(0, 120));
         landmarks.add(offsets[2]-Offset(0, 120));
@@ -650,21 +646,13 @@ class MyPainter extends CustomPainter{
         landmarks.add(offsets[6]-Offset(0, 120));
         landmarks.add(offsets[7]-Offset(0, 120));
         landmarks.add(offsets[8]-Offset(0, 120));
-        landmarks.add(offsets[9]-Offset(0, 120));
-        landmarks.add(offsets[10]-Offset(0, 120));
-        landmarks.add(offsets[11]-Offset(0, 120));
-        landmarks.add(offsets[12]-Offset(0, 120));
         //戻す
         offsets = landmarks;
       }
     }
     landmarks =  [];
-    if(offsets.length!=13){
+    if(offsets.length!=9){
       landmarks.add(offsets[0]);
-      landmarks.add(offsets[2]);
-      landmarks.add(offsets[5]);
-      landmarks.add(offsets[9]);
-      landmarks.add(offsets[10]);
       landmarks.add(offsets[11]);
       landmarks.add(offsets[12]);
       landmarks.add(offsets[13]);
@@ -679,25 +667,25 @@ class MyPainter extends CustomPainter{
     }
 
     final Nose = offsets[0];
-    final Left_eye = offsets[1];
-    final Right_eye = offsets[2];
-    final Left_mouth = offsets[3];
-    final Right_mouth = offsets[4];
-    final Left_shoulder = offsets[5];
-    final Right_shoulder = offsets[6];
-    final Left_elbow = offsets[7];
-    final Right_elbow = offsets[8];
-    final Left_wrist = offsets[9];
-    final Right_wrist = offsets[10];
-    final Left_hip = offsets[11];
-    final Right_hip = offsets[12];
+    // final Left_eye = offsets[1];
+    // final Right_eye = offsets[2];
+    // final Left_mouth = offsets[3];
+    // final Right_mouth = offsets[4];
+    final Left_shoulder = offsets[1];
+    final Right_shoulder = offsets[2];
+    final Left_elbow = offsets[3];
+    final Right_elbow = offsets[4];
+    final Left_wrist = offsets[5];
+    final Right_wrist = offsets[6];
+    final Left_hip = offsets[7];
+    final Right_hip = offsets[8];
 
     if(button=="advice") {
       //理想姿勢計算
-      final Right_shoulder_ideal_x = offsets[6].dx - 1000;
-      final Right_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy) / 2;
-      final Left_shoulder_ideal_x = offsets[5].dx + 1000;
-      final Left_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy) / 2;
+      final Right_shoulder_ideal_x = Right_shoulder.dx - 1000;
+      final Right_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
+      final Left_shoulder_ideal_x = Left_shoulder.dx + 1000;
+      final Left_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
       //理想姿勢線プロット
       paint.strokeWidth = 5;
       paint.color = Colors.red;

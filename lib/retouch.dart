@@ -31,7 +31,9 @@ int _counter = 0;
     //                           "Right_thumb","Left_hip","Right_hip","Left_knee",
     //                           "Right_knee","Left_ankle","Right_ankle","Left_heel",
     //                           "Right_heel","Left_foot_index","Right_foot_index"];
-    List<String> landmarks = ["Nose","Left_eye","Right_eye","Left_mouth","Right_mouth","Left_shoulder","Right_shoulder",
+
+    //消去"Left_eye","Right_eye","Left_mouth","Right_mouth"
+    List<String> landmarks = ["Nose","Left_shoulder","Right_shoulder",
                               "Left_elbow","Right_elbow","Left_wrist","Right_wrist",
                               "Left_hip","Right_hip","修正完了"];
     landmark = landmarks[_counter];
@@ -434,15 +436,15 @@ class PaintLine extends CustomPainter{
     paint.strokeWidth = 5;
     paint.color = Colors.green;
     // 点と点を結ぶ
-    canvas.drawLine(_points[3], _points[4], paint);
-    canvas.drawLine(_points[5], _points[6], paint);
-    canvas.drawLine(_points[5], _points[7], paint);
-    canvas.drawLine(_points[6], _points[8], paint);
-    canvas.drawLine(_points[7], _points[9], paint);
-    canvas.drawLine(_points[8], _points[10], paint);
-    canvas.drawLine(_points[5], _points[11], paint);
-    canvas.drawLine(_points[6], _points[12], paint);
-    canvas.drawLine(_points[11], _points[12], paint); 
+    // canvas.drawLine(_points[3], _points[4], paint);
+    canvas.drawLine(_points[1], _points[2], paint);
+    canvas.drawLine(_points[1], _points[3], paint);
+    canvas.drawLine(_points[2], _points[4], paint);
+    canvas.drawLine(_points[3], _points[5], paint);
+    canvas.drawLine(_points[4], _points[6], paint);
+    canvas.drawLine(_points[1], _points[7], paint);
+    canvas.drawLine(_points[2], _points[8], paint);
+    canvas.drawLine(_points[7], _points[8], paint); 
   }
 
   @override
@@ -464,7 +466,7 @@ class PaintLineRight extends CustomPainter{
     paint.strokeWidth = 5;
     paint.color = Colors.green;
     // 点と点を結ぶ
-    canvas.drawLine(_points[0], _points[1], paint);
+    // canvas.drawLine(_points[0], _points[1], paint);
     canvas.drawLine(_points[1], _points[2], paint);
     canvas.drawLine(_points[2], _points[3], paint);
     canvas.drawLine(_points[1], _points[4], paint);
@@ -491,7 +493,7 @@ class PaintLineLeft extends CustomPainter{
     paint.strokeWidth = 5;
     paint.color = Colors.green;
     // 点と点を結ぶ
-    canvas.drawLine(_points[0], _points[1], paint);
+    // canvas.drawLine(_points[0], _points[1], paint);
     canvas.drawLine(_points[1], _points[2], paint);
     canvas.drawLine(_points[2], _points[3], paint);
     canvas.drawLine(_points[1], _points[4], paint);
