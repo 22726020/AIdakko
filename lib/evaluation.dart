@@ -885,6 +885,39 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Right_knee, Right_ankle, paint);
     }
 
+    //右側姿勢スコアのボタンを押したときに描画する
+    if(button=="score") {
+      //膝角度
+      String kneetext = "膝：" + double.parse(summraize[5]).ceil().toString() + "度";
+      TextSpan kneeSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: kneetext,  // 新しいテキストを指定
+      );
+      TextPainter kneepaint = new TextPainter(text: kneeSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      kneepaint.layout();
+      kneepaint.paint(canvas, new Offset(Right_knee.dx, Right_knee.dy));
+
+      //腰角度
+      String elbowtext = "腰：" + double.parse(summraize[6]).ceil().toString() + "度";
+      TextSpan hipSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: elbowtext,  // 新しいテキストを指定
+      );
+      TextPainter elbowpaint = new TextPainter(text: hipSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      elbowpaint.layout();
+      elbowpaint.paint(canvas, new Offset(Right_elbow.dx, Right_elbow.dy));
+
+      //肩角度
+      String shouldertext = "肩：" + double.parse(summraize[7]).ceil().toString() + "度";
+      TextSpan shoulderSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: shouldertext,  // 新しいテキストを指定
+      );
+      TextPainter shoulderpaint = new TextPainter(text: shoulderSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      shoulderpaint.layout();
+      shoulderpaint.paint(canvas, new Offset(Right_shoulder.dx, Right_shoulder.dy));
+    }
+
 
     //右面badpoint用
     if(button=="badpoint"){
