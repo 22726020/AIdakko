@@ -300,7 +300,7 @@ String _kendall_classification(){
     int tmp = sumscore.toInt();
     sumscore = tmp.toDouble();
 
-    score = "あなたの抱っこの点数は：" + sumscore.toString() + "点";
+    score = "抱っこの点数：" + sumscore.ceil().toString() + "点";
     return score;
   }
 
@@ -691,14 +691,14 @@ class MyPainter extends CustomPainter{
     final Left_hip = offsets[11];
     final Right_hip = offsets[12];
 
-    if(button=="score"||button=="advice") {
+    if(button=="advice") {
       //理想姿勢計算
       final Right_shoulder_ideal_x = offsets[6].dx - 1000;
       final Right_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy) / 2;
       final Left_shoulder_ideal_x = offsets[5].dx + 1000;
       final Left_shoulder_ideal_y = (offsets[5].dy + offsets[6].dy) / 2;
       //理想姿勢線プロット
-      paint.strokeWidth = 3;
+      paint.strokeWidth = 5;
       paint.color = Colors.red;
       canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
           Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
@@ -823,16 +823,6 @@ class MyPainter extends CustomPainter{
       canvas.drawCircle(Right_knee, radius, paint);
       canvas.drawCircle(Right_ankle, radius, paint);
 
-      //理想姿勢
-      paint.color = Colors.red;
-      canvas.drawCircle(
-          Offset(Right_ankle_ideal_x, Right_shoulder_ideal), radius, paint);
-      canvas.drawCircle(
-          Offset(Right_ankle_ideal_x, Right_hip_ideal), radius, paint);
-      canvas.drawCircle(
-          Offset(Right_ankle_ideal_x, Right_knee_ideal), radius, paint);
-      canvas.drawCircle(Right_ankle, radius, paint);
-
 
       //姿勢推定
       paint.strokeWidth = 5;
@@ -861,7 +851,17 @@ class MyPainter extends CustomPainter{
       }
     }
     //理想姿勢
-    if(button=="score"||button=="advice") {
+    if(button=="advice") {
+      //理想姿勢
+      paint.color = Colors.red;
+      canvas.drawCircle(
+          Offset(Right_ankle_ideal_x, Right_shoulder_ideal), radius, paint);
+      canvas.drawCircle(
+          Offset(Right_ankle_ideal_x, Right_hip_ideal), radius, paint);
+      canvas.drawCircle(
+          Offset(Right_ankle_ideal_x, Right_knee_ideal), radius, paint);
+      canvas.drawCircle(Right_ankle, radius, paint);
+
       paint.color = Colors.red;
       paint.strokeWidth = 5;
       canvas.drawLine(Offset(Right_ankle_ideal_x, Right_shoulder_ideal),
@@ -930,17 +930,6 @@ class MyPainter extends CustomPainter{
       canvas.drawCircle(Left_knee, radius, paint);
       canvas.drawCircle(Left_ankle, radius, paint);
 
-      //理想姿勢
-      paint.color = Colors.red;
-      canvas.drawCircle(
-          Offset(Left_ankle_ideal_x, Left_shoulder_ideal), radius, paint);
-      canvas.drawCircle(
-          Offset(Left_ankle_ideal_x, Left_hip_ideal), radius, paint);
-      canvas.drawCircle(
-          Offset(Left_ankle_ideal_x, Left_knee_ideal), radius, paint);
-      canvas.drawCircle(Left_ankle, radius, paint);
-
-
       //姿勢推定
       paint.strokeWidth = 5;
       paint.color = Colors.green;
@@ -952,7 +941,17 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Left_knee, Left_ankle, paint);
     }
     //右面badpoint用
-    if(button=="score"||button=="advice") {
+    if(button=="advice") {
+      //理想姿勢
+      paint.color = Colors.red;
+      canvas.drawCircle(
+          Offset(Left_ankle_ideal_x, Left_shoulder_ideal), radius, paint);
+      canvas.drawCircle(
+          Offset(Left_ankle_ideal_x, Left_hip_ideal), radius, paint);
+      canvas.drawCircle(
+          Offset(Left_ankle_ideal_x, Left_knee_ideal), radius, paint);
+      canvas.drawCircle(Left_ankle, radius, paint);
+
       //理想姿勢
       paint.strokeWidth = 5;
       paint.color = Colors.red;
