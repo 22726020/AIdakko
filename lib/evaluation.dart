@@ -31,6 +31,9 @@ String button = "score";
 List<String> summraize= [];
 List<Offset> offset = [];
 String imagescore = "assets/imagescore.png";
+String kendall_text = "";
+bool tf = true;
+
 //色
 var downcolor_1 = Colors.grey;
 var downcolor_2 = Colors.grey;
@@ -448,6 +451,7 @@ List <double> _triangular_chart(){
       upcolor_1 = Colors.orange;
       text = _score(score);
       summraize = _Summraize();
+      kendall_text = "姿勢パターン:" + _kendall_classification()[0];
     }
     
     return Scaffold(
@@ -549,6 +553,7 @@ List <double> _triangular_chart(){
                           downcolor_1 = Colors.orange;
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.grey;
+                          tf = true;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -571,6 +576,7 @@ List <double> _triangular_chart(){
                           downcolor_1 = Colors.grey;
                           downcolor_2 = Colors.orange;
                           downcolor_3 = Colors.grey;
+                          tf = false;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -592,6 +598,7 @@ List <double> _triangular_chart(){
                           downcolor_1 = Colors.grey;
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.orange;
+                          tf = false;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -606,12 +613,12 @@ List <double> _triangular_chart(){
               ],
             ),
                     
-            Text("姿勢パターン:" + _kendall_classification()[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
+            Visibility(child: Text(kendall_text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),visible: tf,),
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
             CustomPaint(
               painter: ImagePainter(_triangular_chart()),
             ),
-            Image.asset(imagescore),
+            Visibility(child: Image.asset(imagescore),visible: tf,)
 
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
       //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
@@ -712,39 +719,7 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
           Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
     }
-//正面でスコアボタンを押しているとき
-      if(button=="score") {
-        //shoulderbalance描画(肩のバランス：〇〇度)
-        String shouldertext = "肩の角度は" + double.parse(summraize[0]).ceil().toString() + "度";
-        TextSpan shoulderSpan = TextSpan(
-          style: span.style,  // オリジナルのスタイルを維持
-          text: shouldertext,  // 新しいテキストを指定
-        );
-        TextPainter shoulder = new TextPainter(text: shoulderSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
-        shoulder.layout();
-        shoulder.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
 
-        //backhandの高さ(手首の高さ：〇〇％)
-        String backwristtext = "手首の高さは" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
-        TextSpan backwristSpan = TextSpan(
-          style: span.style,  // オリジナルのスタイルを維持
-          text: backwristtext,  // 新しいテキストを指定
-        );
-        TextPainter backwrist = new TextPainter(text: backwristSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
-        backwrist.layout();
-        backwrist.paint(canvas, new Offset(Left_wrist.dx, Left_wrist.dy));
-
-        //backhandの高さ(手首の高さ：〇〇％)
-        String hipwristtext = "手首の高さは" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
-        TextSpan hipwristSpan = TextSpan(
-          style: span.style,  // オリジナルのスタイルを維持
-          text: hipwristtext,  // 新しいテキストを指定
-        );
-        TextPainter hipwrist = new TextPainter(text: hipwristSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
-        hipwrist.layout();
-        hipwrist.paint(canvas, new Offset(Right_wrist.dx, Right_wrist.dy));
-
-      }
 
     if(button=="score"||button=="advice") {
       //推定姿勢点プロット
@@ -779,6 +754,39 @@ class MyPainter extends CustomPainter{
       //canvas.drawLine(Right_knee, Right_ankle, paint);
       canvas.drawLine(Right_hip, Left_hip, paint);
     }
+    //正面でスコアボタンを押しているとき
+      if(button=="score") {
+        //shoulderbalance描画(肩のバランス：〇〇度)
+        String shouldertext = "肩の角度は" + double.parse(summraize[0]).ceil().toString() + "度";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: shouldertext,  // 新しいテキストを指定
+        );
+        TextPainter shoulder = new TextPainter(text: shoulderSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+        shoulder.layout();
+        shoulder.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
+
+        //backhandの高さ(手首の高さ：〇〇％)
+        String backwristtext = "手首の高さは" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
+        TextSpan backwristSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: backwristtext,  // 新しいテキストを指定
+        );
+        TextPainter backwrist = new TextPainter(text: backwristSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+        backwrist.layout();
+        backwrist.paint(canvas, new Offset(Left_wrist.dx, Left_wrist.dy));
+
+        //backhandの高さ(手首の高さ：〇〇％)
+        String hipwristtext = "手首の高さは" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
+        TextSpan hipwristSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: hipwristtext,  // 新しいテキストを指定
+        );
+        TextPainter hipwrist = new TextPainter(text: hipwristSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        hipwrist.layout();
+        hipwrist.paint(canvas, new Offset(Right_wrist.dx, Right_wrist.dy));
+
+      }
     //正面badpoint用
     // [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist]
     // [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド]
