@@ -300,7 +300,7 @@ String _kendall_classification(){
     int tmp = sumscore.toInt();
     sumscore = tmp.toDouble();
 
-    score = "抱っこの点数：" + sumscore.ceil().toString() + "点";
+    score = "抱っこの点数:" + sumscore.ceil().toString() + "点";
     return score;
   }
 
@@ -597,9 +597,8 @@ List <double> _triangular_chart(){
                     ),
               ],
             ),
-      
                     
-            // Text("アドバイス欄",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
+            Text("姿勢パターン:" + _kendall_classification(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),
             Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
             CustomPaint(
               painter: ImagePainter(_triangular_chart()),
