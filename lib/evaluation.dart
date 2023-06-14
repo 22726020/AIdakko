@@ -340,6 +340,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
       "まあバランスがとれています",//1
       "バランスがとれています",];//0
 
+    //ケンダル分類指摘出力
     if(summraize[1] == "ノーマル"){
       badpoint.add(bad_kendall_list[0]+bad_kendall_list[1]);
     }
@@ -355,7 +356,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     if(summraize[1] == "フラットバック"){
       badpoint.add(bad_kendall_list[0]+bad_kendall_list[5]);
     }
-
+    //抱っこの高さ指摘出力
     if(point[5]==3||point[5]==4){
       badpoint.add(bad_hugheight_list[0]+bad_hugheight_list[1]);
     }
@@ -365,7 +366,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     if(point[5]==0){
       badpoint.add(bad_hugheight_list[0]+bad_hugheight_list[3]);
     }
-
+    //肩のバランスの指摘出力
     if(point[7]==3||point[7]==4){
       badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[1]);
     }
@@ -378,18 +379,6 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     if(point[7]==0){
       badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[4]);
     }
-
-
-    // if(kendall == "ノーマル"){
-    //   badpoint.add(badpoint_list[0]);
-    // }
-    // else{
-    //   badpoint.add(badpoint_list[1]);
-    // }
-    //
-    // if(ShoulderScore > 2.8){
-    //   badpoint.add(badpoint_list[2]);
-    // }
 
     for(var i in badpoint){
       if(badcount==0) {
@@ -408,14 +397,86 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   }
 //アドバイスを返す
   String _advice(String advice){
-    List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
-    advice = advice_list[0] + "\n" + advice_list[1];
-    // advice = "";
-    // int count = 0;
-    // for(var i in advice_list){
-    //   advice += advice_list[count] + "\n";
-    //   count++;
-    // }
+    var summraize = _Summraize();
+    var point = _triangular_chart();
+    List<String> advicelist = [];
+    String advice = "";
+    int advicecount = 0;
+
+    List<String> advice_kendall_list
+    = ["横から見た姿勢：",
+      "真横から見たとき耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
+      "ロードシスを改善するために 、背中をまっすぐ伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "スウェイバックを改善するために 、背中をまっすぐ伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "カイホロードシスを改善するために 、背中をまっすぐ伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "フラットバックを改善するために 、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
+    ];
+    List<String> advice_hugheight_list
+    = ["抱っこの位置:",
+      "かなり低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
+      "やや低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
+      "適切です",
+    ];
+    List<String> advice_shoulderbalance_list
+    = ["左右の肩の高さ:",
+      "とても差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "やや差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "まあ差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "バランスが取れています",
+    ];
+
+    //ケンダル分類指摘出力
+    if(summraize[1] == "ノーマル"){
+      advicelist.add(advice_kendall_list[0]+advice_kendall_list[1]);
+    }
+    if(summraize[1] == "ロードシス"){
+      advicelist.add(advice_kendall_list[0]+advice_kendall_list[2]);
+    }
+    if(summraize[1] == "スウェイバック"){
+      advicelist.add(advice_kendall_list[0]+advice_kendall_list[3]);
+    }
+    if(summraize[1] == "カイホロードシス"){
+      advicelist.add(advice_kendall_list[0]+advice_kendall_list[4]);
+    }
+    if(summraize[1] == "フラットバック"){
+      advicelist.add(advice_kendall_list[0]+advice_kendall_list[5]);
+    }
+    //抱っこの高さ指摘出力
+    if(point[5]==3||point[5]==4){
+      advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[1]);
+    }
+    if(point[5]==1||point[5]==2){
+      advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[2]);
+    }
+    if(point[5]==0){
+      advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[3]);
+    }
+    //肩のバランスの指摘出力
+    if(point[7]==3||point[7]==4){
+      advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[1]);
+    }
+    if(point[7]==2){
+      advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[2]);
+    }
+    if(point[7]==1){
+      advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[3]);
+    }
+    if(point[7]==0){
+      advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[4]);
+    }
+
+    //リストを一つ吐き出したら改行を行う
+    for(var i in advicelist){
+      if(advicecount==0) {
+        advice += advicelist[advicecount];
+        advicecount++;
+      }
+      else {
+        advice += "\n" + advicelist[advicecount];
+        advicecount++;
+      }
+    }
+    print(advice);
     return advice;
   }
 
