@@ -165,7 +165,8 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
       kendall = "フラットバック";
     }
     else {
-      kendall = "不明";
+      // kendall = "不明";
+      kendall = "ノーマル";//とりあえず
     }
 
     print(ankle_knee);
@@ -314,24 +315,81 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
   //悪いところを返す
   String _badpoint(String badpoint){
-    var ShoulderScore = _ShoulderScore_calculation();
-    var kendall = _kendall_classification()[0];
-    var Hugheight = _Hugheight_calculation();
-    List<String> badpoint_list = ["問題ないで","姿勢悪いで","肩悪いで","bbbb"];
+    var summraize = _Summraize();
+    var point = _triangular_chart();
     List<String> badpoint = [];
     String badtext = "";
     int badcount = 0;
 
-    if(kendall == "ノーマル"){
-      badpoint.add(badpoint_list[0]);
+    List<String> bad_kendall_list
+    = ["横から見た姿勢：",
+      "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
+      "ロードシス型は 、骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
+      "スウェイバック型は 、頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
+      "カイホロードシス型は 、背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
+      "フラットバック型は 、 背骨のS字カーブが全体的に弱くなっている姿勢です。"];
+    List<String> bad_hugheight_list
+    = ["抱っこの位置：",
+      "かなり低いです",//34
+      "やや低いです",//12
+      "適切です",];//0
+    List<String> bad_shoulderbalance_list
+    = ["左右の肩の高さ：",
+      "とても差があります",//34
+      "やや差があります",//2
+      "まあバランスがとれています",//1
+      "バランスがとれています",];//0
+
+    if(summraize[1] == "ノーマル"){
+      badpoint.add(bad_kendall_list[0]+bad_kendall_list[1]);
     }
-    else{
-      badpoint.add(badpoint_list[1]);
+    if(summraize[1] == "ロードシス"){
+      badpoint.add(bad_kendall_list[0]+bad_kendall_list[2]);
+    }
+    if(summraize[1] == "スウェイバック"){
+      badpoint.add(bad_kendall_list[0]+bad_kendall_list[3]);
+    }
+    if(summraize[1] == "カイホロードシス"){
+      badpoint.add(bad_kendall_list[0]+bad_kendall_list[4]);
+    }
+    if(summraize[1] == "フラットバック"){
+      badpoint.add(bad_kendall_list[0]+bad_kendall_list[5]);
     }
 
-    if(ShoulderScore > 2.8){
-      badpoint.add(badpoint_list[2]);
+    if(point[5]==3||point[5]==4){
+      badpoint.add(bad_hugheight_list[0]+bad_hugheight_list[1]);
     }
+    if(point[5]==1||point[5]==2){
+      badpoint.add(bad_hugheight_list[0]+bad_hugheight_list[2]);
+    }
+    if(point[5]==0){
+      badpoint.add(bad_hugheight_list[0]+bad_hugheight_list[3]);
+    }
+
+    if(point[7]==3||point[7]==4){
+      badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[1]);
+    }
+    if(point[7]==2){
+      badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[2]);
+    }
+    if(point[7]==1){
+      badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[3]);
+    }
+    if(point[7]==0){
+      badpoint.add(bad_shoulderbalance_list[0]+bad_shoulderbalance_list[4]);
+    }
+
+
+    // if(kendall == "ノーマル"){
+    //   badpoint.add(badpoint_list[0]);
+    // }
+    // else{
+    //   badpoint.add(badpoint_list[1]);
+    // }
+    //
+    // if(ShoulderScore > 2.8){
+    //   badpoint.add(badpoint_list[2]);
+    // }
 
     for(var i in badpoint){
       if(badcount==0) {
@@ -349,17 +407,17 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     return badtext;
   }
 //アドバイスを返す
-String _advice(String advice){
-  List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
-  advice = advice_list[0] + "\n" + advice_list[1];
-  // advice = "";
-  // int count = 0;
-  // for(var i in advice_list){
-  //   advice += advice_list[count] + "\n";
-  //   count++;
-  // }
-  return advice;
-}
+  String _advice(String advice){
+    List<String> advice_list = ["赤ちゃんのほっぺにキス","背筋を伸ばす","aaaa","bbbb"];
+    advice = advice_list[0] + "\n" + advice_list[1];
+    // advice = "";
+    // int count = 0;
+    // for(var i in advice_list){
+    //   advice += advice_list[count] + "\n";
+    //   count++;
+    // }
+    return advice;
+  }
 
 //三角チャート
 List <double> _triangular_chart(){
@@ -371,9 +429,9 @@ List <double> _triangular_chart(){
   double shoulder_score1 = 90;
   double shoulder_score2 = 260;
   //5段階評価用
-  int hug_height_point = 0;
-  int kendall_point = 0;
-  int shoulder_point = 0;
+  double hug_height_point = 0;
+  double kendall_point = 0;
+  double shoulder_point = 0;
 
       //抱っこの高さ三角チャート計算
     if(double.parse(summraize[2]) > 0.5){
@@ -434,6 +492,10 @@ List <double> _triangular_chart(){
     point.add(kendall_score2);
     point.add(shoulder_score1);
     point.add(shoulder_score2);
+    point.add(hug_height_point);
+    point.add(kendall_point);
+    point.add(shoulder_point);
+
 
   return point;
 }
@@ -614,7 +676,7 @@ List <double> _triangular_chart(){
             ),
                     
             Visibility(child: Text(kendall_text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),visible: tf,),
-            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.red)),
+            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.red)),
             CustomPaint(
               painter: ImagePainter(_triangular_chart()),
             ),
@@ -905,7 +967,7 @@ class MyPainter extends CustomPainter{
       );
       TextPainter elbowpaint = new TextPainter(text: hipSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
       elbowpaint.layout();
-      elbowpaint.paint(canvas, new Offset(Right_elbow.dx, Right_elbow.dy));
+      elbowpaint.paint(canvas, new Offset(Right_hip.dx, Right_hip.dy));
 
       //肩角度
       String shouldertext = "肩：" + double.parse(summraize[7]).ceil().toString() + "度";
@@ -927,8 +989,8 @@ class MyPainter extends CustomPainter{
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_shoulder, 25, paint);
       }
-      //抱っこの高さに異常があるときplotする
-      if (double.parse(summraize[2]) < 0.5){
+      //抱っこの高さに異常があるときかつ右手がhiphadの時plotする
+      if (double.parse(summraize[2]) < 0.5&&summraize[4]=="Right_wrist"){
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_wrist, 25, paint);
