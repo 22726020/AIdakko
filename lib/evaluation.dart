@@ -19,40 +19,40 @@ class Evaluation extends StatefulWidget {
 
 class _EvaluationState extends State<Evaluation> {
   String kendall = "評価結果を出す";
-String score = "姿勢スコア：計算中";
-String advice = "";
-String badpoint = "";
-String text = "";
-String image = "";
-int count = 0;
-String aaa = "";
-String dir = "front";
-String button = "score";
-List<String> summraize= [];
-List<Offset> offset = [];
-String imagescore = "assets/imagescore.png";
-String kendall_text = "";
-bool tf = true;
-bool badtf = false;
-bool texttf = true;
-bool advicetf = true;
+  String score = "姿勢スコア：計算中";
+  String advice = "";
+  String badpoint = "";
+  String text = "";
+  String image = "";
+  int count = 0;
+  String aaa = "";
+  String dir = "front";
+  String button = "score";
+  List<String> summraize= [];
+  List<Offset> offset = [];
+  String imagescore = "assets/imagescore.png";
+  String kendall_text = "";
+  bool tf = true;
+  bool badtf = false;
+  bool texttf = true;
+  bool advicetf = true;
 
-List<String> badtxt= [];
-List<String> advicetxt= [];
+  List<String> badtxt= [];
+  List<String> advicetxt= [];
 
-//色
-var downcolor_1 = Colors.grey;
-var downcolor_2 = Colors.grey;
-var downcolor_3 = Colors.grey;
-var upcolor_1 = Colors.grey;
-var upcolor_2 = Colors.grey;
-var upcolor_3 = Colors.grey;
+  //色
+  var downcolor_1 = Colors.grey;
+  var downcolor_2 = Colors.grey;
+  var downcolor_3 = Colors.grey;
+  var upcolor_1 = Colors.grey;
+  var upcolor_2 = Colors.grey;
+  var upcolor_3 = Colors.grey;
 
-List<Offset> _adjust_front(List<Offset> landmarkfront){
+  List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
   List<Offset> landmarks = [];
-//正面調整
-    if(landmarkfront.length!=9){
+  //正面調整
+  if(landmarkfront.length!=9){
     landmarks.add(landmarkfront[0]);
     landmarks.add(landmarkfront[11]);
     landmarks.add(landmarkfront[12]);
@@ -67,30 +67,30 @@ List<Offset> _adjust_front(List<Offset> landmarkfront){
   }
   return landmarkfront;
 }
-//右調整
-List<Offset> _adjust_right(List<Offset> landmarkright){
-  List<Offset> landmarkright = widget.offsets2;
-  List<Offset> landmarks = [];
-  landmarks = [];
+  //右調整
+  List<Offset> _adjust_right(List<Offset> landmarkright){
+    List<Offset> landmarkright = widget.offsets2;
+    List<Offset> landmarks = [];
+    landmarks = [];
     if(landmarkright.length!=7){
-    landmarks.add(landmarkright[0]);
-    landmarks.add(landmarkright[12]);
-    landmarks.add(landmarkright[14]);
-    landmarks.add(landmarkright[16]);
-    landmarks.add(landmarkright[24]);
-    landmarks.add(landmarkright[26]);
-    landmarks.add(landmarkright[28]);
-    //戻す
-    landmarkright = landmarks;
-  }
-  return landmarkright;
+      landmarks.add(landmarkright[0]);
+      landmarks.add(landmarkright[12]);
+      landmarks.add(landmarkright[14]);
+      landmarks.add(landmarkright[16]);
+      landmarks.add(landmarkright[24]);
+      landmarks.add(landmarkright[26]);
+      landmarks.add(landmarkright[28]);
+      //戻す
+      landmarkright = landmarks;
+    }
+    return landmarkright;
 }
-//左調整
-List<Offset> _adjust_left(List<Offset> landmarkleft){
+  //左調整
+  List<Offset> _adjust_left(List<Offset> landmarkleft){
   List<Offset> landmarkleft = widget.offsets3;
   List<Offset> landmarks = [];
   landmarks = [];
-    if(landmarkleft.length!=7){
+  if(landmarkleft.length!=7){
     landmarks.add(landmarkleft[0]);
     landmarks.add(landmarkleft[11]);
     landmarks.add(landmarkleft[13]);
@@ -104,13 +104,13 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   return landmarkleft;
 }
 
-//Rightの特徴点を用いてケンダルを計算する
+  //Rightの特徴点を用いてケンダルを計算する
   List<String> _kendall_classification(){
     List<Offset>landmarkright = [];
     List<String>kendalllist = [];
-  //調整済み座標持ってきてる
-  landmarkright = _adjust_right(landmarkright);
-   //メモ
+    //調整済み座標持ってきてる
+    landmarkright = _adjust_right(landmarkright);
+    //メモ
     // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
     //                           7"Left_elbow",8"Right_elbow",9"Left_wrist",10"Right_wrist",11"Left_hip",12"Right_hip"];
     // List<String> landmarkright = [0"Nose",1"Right_shoulder",2"Right_elbow",3"Right_wrist",4"Right_hip",5"Right_knee",6"Right_ankle"];
@@ -185,7 +185,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
     return kendalllist;
 }
-//Leftの特徴点を用いて膝・腰・肩の角度を計算する
+  //Leftの特徴点を用いて膝・腰・肩の角度を計算する
   List<String> _leftpoint_classification(){
     List<Offset>landmarkleft = [];
     List<String>left_kendalllist = [];
@@ -265,7 +265,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
     return left_kendalllist;
   }
-//肩の平行具合を計算する
+  //肩の平行具合を計算する
   double _ShoulderScore_calculation(){
     List<Offset>landmarkfront = [];
     //調整済み座標持ってきてる
@@ -279,7 +279,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     ShoulderScore = shoulder_angle;
     return ShoulderScore;
   }
-//抱く高さの位置を計算する
+  //抱く高さの位置を計算する
   List<String> _Hugheight_calculation(){
     List<Offset>landmarkfront = [];
     List<String> hugheight = [];
@@ -348,7 +348,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
   }
 
-//姿勢スコアを返す
+  //姿勢スコアを返す
   String _score(String score){
     double sumscore = 0;
     var ShoulderScore = _ShoulderScore_calculation();
@@ -483,7 +483,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
     return badpoint;
   }
-//アドバイスを返す
+  //アドバイスを返す
   List<String> _advice(){
     var summraize = _Summraize();
     var point = _triangular_chart();
@@ -568,26 +568,26 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     return advicelist;
   }
 
-//三角チャート
-List <double> _triangular_chart(){
-  List<double> point=[];
-  List<String> summraize = _Summraize();
-  // double hug_height_score = 55;
-  // double kendall_score1 = -140;
-  // double kendall_score2 = 260;
-  // double shoulder_score1 = 90;
-  // double shoulder_score2 = 260;
+  //三角チャート
+  List <double> _triangular_chart(){
+    List<double> point=[];
+    List<String> summraize = _Summraize();
+    // double hug_height_score = 55;
+    // double kendall_score1 = -140;
+    // double kendall_score2 = 260;
+    // double shoulder_score1 = 90;
+    // double shoulder_score2 = 260;
 
-  //満点三角形→path.moveTo(-80, -280);path.lineTo(-160, -140);path.lineTo(0, -140);
-  double hug_height_score = -280;
-  double kendall_score1 = -160;
-  double kendall_score2 = -140;
-  double shoulder_score1 = 0;
-  double shoulder_score2 = -140;
-  //5段階評価用
-  double hug_height_point = 0;
-  double kendall_point = 0;
-  double shoulder_point = 0;
+    //満点三角形→path.moveTo(-80, -280);path.lineTo(-160, -140);path.lineTo(0, -140);
+    double hug_height_score = -280;
+    double kendall_score1 = -160;
+    double kendall_score2 = -140;
+    double shoulder_score1 = 0;
+    double shoulder_score2 = -140;
+    //5段階評価用
+    double hug_height_point = 0;
+    double kendall_point = 0;
+    double shoulder_point = 0;
 
       //抱っこの高さ三角チャート計算
     if(double.parse(summraize[2]) > 0.5){
@@ -657,8 +657,8 @@ List <double> _triangular_chart(){
   return point;
 }
 
-//ダイアログ表示
-_openDialog() {
+  //ダイアログ表示
+  _openDialog() {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1030,7 +1030,7 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Right_hip, Left_hip, paint);
     }
     //正面でスコアボタンを押しているとき
-      if(button=="score") {
+    if(button=="score") {
         //shoulderbalance描画(肩のバランス：〇〇度)
         String shouldertext = "肩の角度:" + double.parse(summraize[0]).ceil().toString() + "度";
         TextSpan shoulderSpan = TextSpan(
@@ -1173,8 +1173,7 @@ class MyPainter extends CustomPainter{
             TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
             hugheight.layout();
             hugheight.paint(canvas,Right_elbow);
-      }
-
+        }
           else if(summraize[4]=="Left_wrist"){
             //特徴点と直線を描画する
             paint.color = Colors.red.withOpacity(0.5);
@@ -1231,7 +1230,7 @@ class MyPainter extends CustomPainter{
 
     //戻す
     offsets = landmarks;
-  }
+   }
 
     final Nose = offsets[0];
     final Right_shoulder = offsets[1];
