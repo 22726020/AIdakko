@@ -633,7 +633,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
         offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
@@ -793,7 +793,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
         offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
@@ -952,7 +952,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
         offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 

@@ -55,8 +55,9 @@ class _BlazePage1State extends State<BlazePage1> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 
@@ -239,8 +240,9 @@ class _BlazePage2State extends State<BlazePage2> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 
@@ -421,8 +423,9 @@ class _BlazePage3State extends State<BlazePage3> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 

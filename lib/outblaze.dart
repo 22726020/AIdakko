@@ -56,7 +56,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
       pose.landmarks.forEach((_, landmark) {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
-
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
         listx.add(landmark.x/480*deviceWidth);
         listy.add(landmark.y/960*deviceHeight);
       });
@@ -65,16 +65,20 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
     setState(() {
       _poseFound = true;
     });
-    //閾値をピクセル値以上に設定する
+    //閾値をピクセル値以上に設定する *2をして閾値を緩めに
     var EllorXlist =
-        listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
+        listx.where((valuex) => valuex > deviceWidth*2 || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight*2 || 0 > valuey).toList();
     // print(listx);
     // print(listy);
     // print(EllorXlist);
     // print(EllorYlist);
     hantei = false;
+    print(deviceWidth);
+    print(deviceHeight);
+    print(EllorYlist);
+    print(EllorXlist);
     //おかしいところ判定
     if (EllorXlist.isEmpty && EllorYlist.isEmpty) {
       hantei = true;
@@ -240,8 +244,9 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 
@@ -250,9 +255,9 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
     });
     //閾値をピクセル値以上に設定する
     var EllorXlist =
-        listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
+        listx.where((valuex) => valuex > deviceWidth*2 || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight*2 || 0 > valuey).toList();
     // print(listx);
     // print(listy);
     print(EllorXlist);
@@ -424,8 +429,9 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
         offsets.add(Offset(landmark.x, landmark.y));
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        //比率を合わせる Android旧 480,960 ,新 1080,2360
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/960*deviceHeight);
       });
     }
 
@@ -434,9 +440,9 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
     });
     //閾値をピクセル値以上に設定する
     var EllorXlist =
-        listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
+        listx.where((valuex) => valuex > deviceWidth*2 || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight*2 || 0 > valuey).toList();
     // print(listx);
     // print(listy);
 
