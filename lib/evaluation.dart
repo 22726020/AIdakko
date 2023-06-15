@@ -484,11 +484,18 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 List <double> _triangular_chart(){
   List<double> point=[];
   List<String> summraize = _Summraize();
-  double hug_height_score = 55;
-  double kendall_score1 = -140;
-  double kendall_score2 = 260;
-  double shoulder_score1 = 90;
-  double shoulder_score2 = 260;
+  // double hug_height_score = 55;
+  // double kendall_score1 = -140;
+  // double kendall_score2 = 260;
+  // double shoulder_score1 = 90;
+  // double shoulder_score2 = 260;
+
+  //満点三角形→path.moveTo(-80, -280);path.lineTo(-160, -140);path.lineTo(0, -140);
+  double hug_height_score = -280;
+  double kendall_score1 = -160;
+  double kendall_score2 = -140;
+  double shoulder_score1 = 0;
+  double shoulder_score2 = -140;
   //5段階評価用
   double hug_height_point = 0;
   double kendall_point = 0;
@@ -541,11 +548,12 @@ List <double> _triangular_chart(){
     print(shoulder_point);
     //満点三角形→path.moveTo(-25, 55);path.lineTo(-140, 260);path.lineTo(90, 260);
     //計算5段階評価の場合(5→1) hug_height_score +35していく kendall_score1　-28.75 kendallscore2 -16.25していく shoulder_score1 -28.75 shoulder_score2 -16.25していく
-    hug_height_score += hug_height_point * 35;
-    kendall_score1 += kendall_point * 28.75;
-    kendall_score2 += kendall_point * -16.25;
-    shoulder_score1 += shoulder_point * -28.75;
-    shoulder_score2 += shoulder_point * -16.25;
+    //計算5段階評価の場合(5→1) hug_height_score +22.5していく kendall_score1　20.0 kendallscore2 -12.5していく shoulder_score1 -20 shoulder_score2 -12.5していく
+    hug_height_score += hug_height_point * 22.5;
+    kendall_score1 += kendall_point * 20;
+    kendall_score2 += kendall_point * -12.5;
+    shoulder_score1 += shoulder_point * -20;
+    shoulder_score2 += shoulder_point * -12.5;
 
     //追加していく
     point.add(hug_height_score);
@@ -561,6 +569,41 @@ List <double> _triangular_chart(){
   return point;
 }
 
+//ダイアログ表示
+_openDialog() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          titlePadding: EdgeInsets.zero, //titleの周りについているpaddingを無しにする
+          title : Visibility(
+            child: Image.asset("assets/imagescore.png",height: 200,fit: BoxFit.cover,),visible: tf,
+          ),
+          content: Column(mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(text),
+            Visibility(
+              child: Text(kendall_text),visible: tf,)
+            
+            ],) ,
+          actions: <Widget>[
+            Visibility(child:
+            CustomPaint(
+              painter: ImagePainter(_triangular_chart()),
+            ),visible: tf
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     //初期状態
@@ -575,6 +618,7 @@ List <double> _triangular_chart(){
       text = _score(score);
       summraize = _Summraize();
       kendall_text = "姿勢パターン:" + _kendall_classification()[0];
+      
     }
     
     return Scaffold(
@@ -582,11 +626,11 @@ List <double> _triangular_chart(){
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
         title:  Text("評価結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
-      body:SingleChildScrollView(
-        child: Column(
+      body:Stack(
           children: <Widget>[
+            Column(
             //上のボタン
-            Row(
+          children:[  Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: EdgeInsets.only(left: 5),
                   child: ElevatedButton(
@@ -649,23 +693,26 @@ List <double> _triangular_chart(){
                     ),
                     ),
               ],
-              ),
-            Stack(
-              children: [
-                  Image.file(
+              ),],),
+              Padding(padding: EdgeInsets.only(top:70),
+                child: Image.file(
                   File(image)
                 ),
-                CustomPaint(
+              ),
+              Padding(padding: EdgeInsets.only(top:70),
+                child: CustomPaint(
                   //引数の渡す方
                   painter: MyPainter(offset,dir,button,summraize),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
-              ],
-            ),
-            Row(
+              ),
+              
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                Align(alignment: Alignment.bottomCenter,
+               child: Padding(padding: EdgeInsets.only(top: 10,left: 5),
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -677,6 +724,7 @@ List <double> _triangular_chart(){
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.grey;
                           tf = true;
+                          _openDialog();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -687,6 +735,7 @@ List <double> _triangular_chart(){
                       child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
+                ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),
                   child: ElevatedButton(
                       onPressed: (){
@@ -700,6 +749,7 @@ List <double> _triangular_chart(){
                           downcolor_2 = Colors.orange;
                           downcolor_3 = Colors.grey;
                           tf = false;
+                          _openDialog();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -722,6 +772,7 @@ List <double> _triangular_chart(){
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.orange;
                           tf = false;
+                          _openDialog();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -736,18 +787,18 @@ List <double> _triangular_chart(){
               ],
             ),
                     
-            Visibility(child: Text(kendall_text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),visible: tf,),
-            Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.red)),
-            CustomPaint(
-              painter: ImagePainter(_triangular_chart()),
-            ),
-            Visibility(child: Image.asset(imagescore),visible: tf,)
+            // Visibility(child: Text(kendall_text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),visible: tf,),
+            // Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.red)),
+            // Visibility(child: CustomPaint(
+            //   painter: ImagePainter(_triangular_chart()),
+            // ),visible: tf)
+            
+            // Visibility(child: Image.asset(imagescore),visible: tf,)
 
       // Padding(padding: EdgeInsets.only(top: 730,left: 20),
       //     child: Text(_calculation(kendall),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.black)),
       // ),
           ],
-      ),
       ),
     );
     }
@@ -1207,7 +1258,7 @@ class ImagePainter extends CustomPainter{
     //チャート用
     // 三角（塗りつぶし）のためのPaintを作る
     Paint fillWithBluePaint = Paint()
-      ..color = Colors.red;
+      ..color = Colors.red.withOpacity(0.7);
     
     // 三角（外線）のためのPaintを作る
     Paint outlinePaint = Paint()
@@ -1226,11 +1277,12 @@ class ImagePainter extends CustomPainter{
     double shoulder_score2 = point[4];
 
     // Pathのメソッドを使って三角形をかく。満点三角形→path.moveTo(-25, 60);path.lineTo(-140, 260);path.lineTo(90, 260);
+    // Pathのメソッドを使って三角形をかく。満点三角形→path.moveTo(-80, -280);path.lineTo(-160, -140);path.lineTo(0, -140);
     //抱っこの高さ
-    path.moveTo(-25, hug_height_score);
-    //背筋
+    path.moveTo(-80, hug_height_score);
+    // //背筋
     path.lineTo(kendall_score1, kendall_score2);
-    //肩の並行
+    // //肩の並行
     path.lineTo(shoulder_score1, shoulder_score2);
     
     // パスの座標と最初の座標を結ぶ。
