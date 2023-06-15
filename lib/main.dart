@@ -71,11 +71,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var main_colors = Colors.white;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.black;
+  var sub_text_colors = Colors.white;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: Colors.black)),
-        backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: main_text_colors)),
+        backgroundColor: appbar_colors),
         body:  Stack(
           children: <Widget>[
             SizedBox(
