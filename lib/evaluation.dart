@@ -33,6 +33,12 @@ List<Offset> offset = [];
 String imagescore = "assets/imagescore.png";
 String kendall_text = "";
 bool tf = true;
+bool badtf = false;
+bool texttf = true;
+bool advicetf = true;
+
+List<String> badtxt= [];
+List<String> advicetxt= [];
 
 //色
 var downcolor_1 = Colors.grey;
@@ -396,7 +402,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   }
 
   //悪いところを返す
-  String _badpoint(String badpoint){
+  List<String> _badpoint(){
     var summraize = _Summraize();
     var point = _triangular_chart();
     List<String> badpoint = [];
@@ -404,19 +410,19 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     int badcount = 0;
 
     List<String> bad_kendall_list
-    = ["横から見た姿勢：",
+    = ["",
       "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
       "ロードシス型は 、骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
       "スウェイバック型は 、頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
       "カイホロードシス型は 、背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
       "フラットバック型は 、 背骨のS字カーブが全体的に弱くなっている姿勢です。"];
     List<String> bad_hugheight_list
-    = ["抱っこの位置：",
+    = ["",
       "かなり低いです",//34
       "やや低いです",//12
       "適切です",];//0
     List<String> bad_shoulderbalance_list
-    = ["左右の肩の高さ：",
+    = ["",
       "とても差があります",//34
       "やや差があります",//2
       "まあバランスがとれています",//1
@@ -473,12 +479,12 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
       }
     }
 
-    print(badtext);
+    print(badpoint);
 
-    return badtext;
+    return badpoint;
   }
 //アドバイスを返す
-  String _advice(String advice){
+  List<String> _advice(){
     var summraize = _Summraize();
     var point = _triangular_chart();
     List<String> advicelist = [];
@@ -486,7 +492,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
     int advicecount = 0;
 
     List<String> advice_kendall_list
-    = ["横から見た姿勢：",
+    = ["",
       "真横から見たとき耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
       "ロードシスを改善するために 、背中をまっすぐ伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
       "スウェイバックを改善するために 、背中をまっすぐ伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
@@ -494,13 +500,13 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
       "フラットバックを改善するために 、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
     ];
     List<String> advice_hugheight_list
-    = ["抱っこの位置:",
+    = ["",
       "かなり低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
       "やや低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
       "適切です",
     ];
     List<String> advice_shoulderbalance_list
-    = ["左右の肩の高さ:",
+    = ["",
       "とても差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
       "やや差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
       "まあ差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
@@ -559,7 +565,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
       }
     }
     print(advice);
-    return advice;
+    return advicelist;
   }
 
 //三角チャート
@@ -663,11 +669,28 @@ _openDialog() {
           ),
           content: Column(mainAxisSize: MainAxisSize.min,
           children: [
-            Text(text),
-            Visibility(
-              child: Text(kendall_text),visible: tf,)
-            
-            ],) ,
+            Visibility(child: Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: texttf,),
+            Visibility(child: Text(kendall_text),visible: tf ),
+
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children:[
+            //BadPont
+            Visibility(child: Text("横から見た姿勢："),visible: badtf),
+            Visibility(child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: badtf),
+            Visibility(child: Text("抱っこの位置："),visible: badtf),
+            Visibility(child: Text(badtxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: badtf),
+            Visibility(child: Text("左右の肩の高さ："),visible: badtf),
+            Visibility(child: Text(badtxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: badtf),
+            //アドバイス
+            Visibility(child: Text("横から見た姿勢："),visible: advicetf),
+            Visibility(child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: advicetf),
+            Visibility(child: Text("抱っこの位置："),visible: advicetf),
+            Visibility(child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: advicetf),
+            Visibility(child: Text("左右の肩の高さ："),visible: advicetf),
+            Visibility(child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.red)),visible: advicetf)
+          ]
+          )
+            ],
+            ) ,
           actions: <Widget>[
             Visibility(child:
             CustomPaint(
@@ -700,6 +723,8 @@ _openDialog() {
       text = _score(score);
       summraize = _Summraize();
       kendall_text = "姿勢パターン:" + _kendall_classification()[0];
+      advicetxt = _advice();
+      badtxt = _badpoint();
       
     }
     
@@ -806,6 +831,9 @@ _openDialog() {
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.grey;
                           tf = true;
+                          badtf = false;
+                          texttf = true;
+                          advicetf = false;
                           _openDialog();
                         });
                       },
@@ -823,14 +851,16 @@ _openDialog() {
                       onPressed: (){
                         setState(() {
                           summraize = _Summraize();
-                          badpoint = _badpoint(badpoint);
-                          text = badpoint;
+                          badtxt = _badpoint();
                           button = "badpoint";
                           imagescore = "assets/null.png";
                           downcolor_1 = Colors.grey;
                           downcolor_2 = Colors.orange;
                           downcolor_3 = Colors.grey;
                           tf = false;
+                          badtf = true;
+                          texttf = false;
+                          advicetf = false;
                           _openDialog();
                         });
                       },
@@ -846,14 +876,17 @@ _openDialog() {
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
-                          advice = _advice(advice);
-                          text = advice;
+                          advicetxt = _advice();
+                         
                           button = "advice";
                           imagescore = "assets/null.png";
                           downcolor_1 = Colors.grey;
                           downcolor_2 = Colors.grey;
                           downcolor_3 = Colors.orange;
                           tf = false;
+                          badtf = false;
+                          texttf = false;
+                          advicetf = true;
                           _openDialog();
                         });
                       },
@@ -999,7 +1032,7 @@ class MyPainter extends CustomPainter{
     //正面でスコアボタンを押しているとき
       if(button=="score") {
         //shoulderbalance描画(肩のバランス：〇〇度)
-        String shouldertext = "肩の角度は" + double.parse(summraize[0]).ceil().toString() + "度";
+        String shouldertext = "肩の角度:" + double.parse(summraize[0]).ceil().toString() + "度";
         TextSpan shoulderSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
           text: shouldertext,  // 新しいテキストを指定
@@ -1009,7 +1042,7 @@ class MyPainter extends CustomPainter{
         shoulder.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
 
         //backhandの高さテキスト表示(手首の高さ：〇〇％)
-        String backwristtext = "手首の高さは" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
+        String backwristtext = "手首の高さ:" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
         TextSpan backwristSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
           text: backwristtext,  // 新しいテキストを指定
@@ -1023,7 +1056,7 @@ class MyPainter extends CustomPainter{
           backwrist.paint(canvas, Right_wrist);
         }
         //backhandの高さテキスト表示(手首の高さ：〇〇％)
-        String hipwristtext = "手首の高さは" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
+        String hipwristtext = "手首の高さ:" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
         TextSpan hipwristSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
           text: hipwristtext,  // 新しいテキストを指定
