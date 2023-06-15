@@ -633,12 +633,11 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる Android旧 480,960 ,新 1080,2360
-        offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
+        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
+        listx.add(landmark.x/_adjust()[0]*deviceWidth);
+        listy.add(landmark.y/_adjust()[1]*deviceHeight);
       });
     }
     setState(() {
@@ -663,9 +662,31 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     });
   }
 
+//特徴点plotを調整する関数
+  List<int> _adjust(){
+    List <int> adjust = [];
+    //デバイスのサイズ取得
+    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
+    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
+    //比率を合わせる Android旧 480,960 ,新 1080,2360
+        if(deviceHeight==899){
+          adjust.add(1080);
+          adjust.add(2360);
+        }
+        else{
+          adjust.add(480);
+          adjust.add(960);
+        }
+        print(deviceHeight);
+        print(adjust);
+    //adjust[0]=x,adjust[1]0=y
+    return adjust;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
+      _adjust();
       _blazePose();
       count++;
     }
@@ -793,12 +814,11 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる Android旧 480,960 ,新 1080,2360
-        offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
+        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
+        listx.add(landmark.x/_adjust()[0]*deviceWidth);
+        listy.add(landmark.y/_adjust()[1]*deviceHeight);
       });
     }
     setState(() {
@@ -816,6 +836,25 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     });
   }
 
+//特徴点plotを調整する関数
+  List<int> _adjust(){
+    List <int> adjust = [];
+    //デバイスのサイズ取得
+    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
+    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
+    //比率を合わせる Android旧 480,960 ,新 1080,2360
+        if(deviceHeight==899){
+          adjust.add(1080);
+          adjust.add(2360);
+        }
+        else{
+          adjust.add(480);
+          adjust.add(960);
+        }
+    //adjust[0]=x,adjust[1]0=y
+    return adjust;
+  }
+
   // タッチしたら描画をクリアする
   void _clearPoints(){
     setState((){
@@ -826,6 +865,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
+      _adjust();
       _blazePose();
       count++;
     }
@@ -952,12 +992,11 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        //比率を合わせる Android旧 480,960 ,新 1080,2360
-        offsets.add(Offset(landmark.x/480*deviceWidth, landmark.y/960*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
-        listx.add(landmark.x);
-        listy.add(landmark.y);
+        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
+        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
+        listx.add(landmark.x/_adjust()[0]*deviceWidth);
+        listy.add(landmark.y/_adjust()[1]*deviceHeight);
       });
     }
     setState(() {
@@ -975,6 +1014,25 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     });
   }
 
+//特徴点plotを調整する関数
+  List<int> _adjust(){
+    List <int> adjust = [];
+    //デバイスのサイズ取得
+    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
+    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
+    //比率を合わせる Android旧 480,960 ,新 1080,2360
+        if(deviceHeight==899){
+          adjust.add(1080);
+          adjust.add(2360);
+        }
+        else{
+          adjust.add(480);
+          adjust.add(960);
+        }
+    //adjust[0]=x,adjust[1]0=y
+    return adjust;
+  }
+
   // タッチしたら描画をクリアする
   void _clearPoints(){
     setState((){
@@ -985,6 +1043,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
+      _adjust();
       _blazePose();
       count++;
     }

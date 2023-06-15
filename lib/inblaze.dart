@@ -29,6 +29,10 @@ class _BlazePage1State extends State<BlazePage1> {
   bool hantei2 = true;
   int count = 0;
 
+  //調整用xy
+  int adjustx = 480;
+  int adjusty = 960;
+
   String? _extension;
   String? _fileName;
   File? _filePath;
@@ -56,8 +60,12 @@ class _BlazePage1State extends State<BlazePage1> {
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
         //比率を合わせる Android旧 480,960 ,新 1080,2360
-        listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/960*deviceHeight);
+        if(deviceHeight==898){
+          adjustx = 1080;
+          adjusty = 2360;
+        }
+        listx.add(landmark.x/adjustx*deviceWidth);
+        listy.add(landmark.y/adjusty*deviceHeight);
       });
     }
 
@@ -214,6 +222,10 @@ class _BlazePage2State extends State<BlazePage2> {
   bool hantei2 = true;
   int count = 0;
 
+  //調整用xy
+  int adjustx = 480;
+  int adjusty = 960;
+
   String? _extension;
   String? _fileName;
   File? _filePath;
@@ -241,8 +253,12 @@ class _BlazePage2State extends State<BlazePage2> {
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
         //比率を合わせる Android旧 480,960 ,新 1080,2360
-        listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/960*deviceHeight);
+        if(deviceHeight==898){
+          adjustx = 1080;
+          adjusty = 2360;
+        }
+        listx.add(landmark.x/adjustx*deviceWidth);
+        listy.add(landmark.y/adjusty*deviceHeight);
       });
     }
 
@@ -397,6 +413,10 @@ class _BlazePage3State extends State<BlazePage3> {
   bool hantei2 = true;
   int count = 0;
 
+  //調整用xy
+  int adjustx = 480;
+  int adjusty = 960;
+
   String? _extension;
   String? _fileName;
   File? _filePath;
@@ -424,8 +444,12 @@ class _BlazePage3State extends State<BlazePage3> {
         // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
 
         //比率を合わせる Android旧 480,960 ,新 1080,2360
-        listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/960*deviceHeight);
+        if(deviceHeight==898){
+          adjustx = 1080;
+          adjusty = 2360;
+        }
+        listx.add(landmark.x/adjustx*deviceWidth);
+        listy.add(landmark.y/adjusty*deviceHeight);
       });
     }
 
