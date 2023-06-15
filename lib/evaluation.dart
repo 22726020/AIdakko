@@ -839,7 +839,7 @@ _openDialog() {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: downcolor_1,//ボタン背景色
+                        backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
                       child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -866,7 +866,7 @@ _openDialog() {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: downcolor_2,
+                        backgroundColor: downcolor_2.withOpacity(0.6),
                         elevation: 16,
                       ),
                       child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -892,7 +892,7 @@ _openDialog() {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,80),
-                        backgroundColor: downcolor_3,
+                        backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
                       child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
