@@ -98,7 +98,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   return landmarkleft;
 }
 
-//ケンダルを計算する
+//Rightの特徴点を用いてケンダルを計算する
   List<String> _kendall_classification(){
     List<Offset>landmarkright = [];
     List<String>kendalllist = [];
@@ -179,6 +179,86 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
     return kendalllist;
 }
+//Leftの特徴点を用いて膝・腰・肩の角度を計算する
+  List<String> _leftpoint_classification(){
+    List<Offset>landmarkleft = [];
+    List<String>left_kendalllist = [];
+    //調整済み座標持ってきてる
+    landmarkleft = _adjust_left(landmarkleft);
+    //メモ
+    // List<String> landmarkfront = [0"Nose",1"Left_eye",2"Right_eye",3"Left_mouth",4"Right_mouth",5"Left_shoulder",6"Right_shoulder",
+    //                           7"Left_elbow",8"Right_elbow",9"Left_wrist",10"Right_wrist",11"Left_hip",12"Right_hip"];
+    // List<String> landmarkright = [0"Nose",1"Right_shoulder",2"Right_elbow",3"Right_wrist",4"Right_hip",5"Right_knee",6"Right_ankle"];
+    // List<String> landmarkleft = [0"Nose",1"Left_shoulder",2"Left_elbow",3"Left_wrist",4"Left_hip",5"Left_knee",6"Left_ankle"];
+
+    //ケンダル分類
+    String kendall = "";
+    double ankle_knee = 0;
+    double ankle_hip = 0;
+    double ankle_shoulder = 0;
+
+    //ankle_knee 数字が大きい方で引いてるから最後に-1をかけていい感じにしてる
+    var tmp1 = landmarkleft[5] - landmarkleft[6];
+    ankle_knee = atan(tmp1.dy/tmp1.dx)*180/pi;
+    if(ankle_knee>0){
+      ankle_knee = (90 - ankle_knee)*-1;
+    }
+    else{
+      ankle_knee = (-90 + ankle_knee.abs())*-1;
+    }
+
+    //ankle_hip
+    var tmp2 = landmarkleft[4] - landmarkleft[6];
+    //tmp1のyを使う
+    ankle_hip = atan(tmp1.dy/tmp2.dx)*180/pi;
+    if(ankle_hip>0){
+      ankle_hip = (90 - ankle_hip)*-1;
+    }
+    else{
+      ankle_hip = (-90 + ankle_hip.abs())*-1;
+    }
+
+    //ankle_shoulder
+    var tmp3 = landmarkleft[1] - landmarkleft[6];
+    //tmp1のyを使う
+    ankle_shoulder = atan(tmp1.dy/tmp3.dx)*180/pi;
+    if(ankle_shoulder>0){
+      ankle_shoulder = (90 - ankle_shoulder)*-1;
+    }
+    else{
+      ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
+    }
+    //ケンダル分類
+    if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+      kendall = "ノーマル";
+    }
+    else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+      kendall = "ロードシス";
+    }
+    else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+      kendall = "スウェイバック";
+    }
+    else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
+      kendall = "カイホロードシス";
+    }
+    else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+      kendall = "フラットバック";
+    }
+    else {
+      // kendall = "不明";
+      kendall = "ノーマル";//とりあえず
+    }
+
+    print(ankle_knee);
+    print(ankle_hip);
+    print(ankle_shoulder);
+    left_kendalllist.add(kendall);
+    left_kendalllist.add(ankle_knee.toString());
+    left_kendalllist.add(ankle_hip.toString());
+    left_kendalllist.add(ankle_shoulder.toString());
+
+    return left_kendalllist;
+  }
 //肩の平行具合を計算する
   double _ShoulderScore_calculation(){
     List<Offset>landmarkfront = [];
@@ -232,7 +312,7 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
   }
   //計算した値をリストでまとめて返す”さまらいず”
   //   [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist,ankle_knee,ankle_hip,ankle_shoulder]
-  //   [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド、膝までの角度、腰までの角度、肩までの角度]
+  //   [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド、膝までの角度(右)、腰までの角度(右)、肩までの角度(右)、膝までの角度(左)、腰までの角度(左)、肩までの角度(左)]
   List<String> _Summraize(){
 
     List<String> summraize = [];
@@ -241,19 +321,21 @@ List<Offset> _adjust_left(List<Offset> landmarkleft){
 
     var Hugheight = _Hugheight_calculation();
 
-    var kendalllist= _kendall_classification();
+    var right_kendalllist= _kendall_classification();
 
+    var left_kendalllist = _leftpoint_classification();
 
-    summraize.add(ShoulderScore.toString());
-
-    summraize.add(kendalllist[0]);
-
-    summraize.add(Hugheight[0].toString());
-    summraize.add(Hugheight[1].toString());
-    summraize.add(Hugheight[2].toString());
-    summraize.add(kendalllist[1]);
-    summraize.add(kendalllist[2]);
-    summraize.add(kendalllist[3]);
+    summraize.add(ShoulderScore.toString());//肩の平行具合
+    summraize.add(right_kendalllist[0]);//ケンダル
+    summraize.add(Hugheight[0].toString());//ヒップハンド
+    summraize.add(Hugheight[1].toString());//バックハンド
+    summraize.add(Hugheight[2].toString());//イズヒップハンド
+    summraize.add(right_kendalllist[1]);//膝までの角度(右)
+    summraize.add(right_kendalllist[2]);//腰までの角度(右)
+    summraize.add(right_kendalllist[3]);//肩までの角度(右)
+    summraize.add(left_kendalllist[1]);//膝までの角度(左)
+    summraize.add(left_kendalllist[2]);//腰までの角度(左)
+    summraize.add(left_kendalllist[3]);//肩までの角度(左)
 
     print(summraize);
     return summraize;
@@ -830,7 +912,7 @@ class MyPainter extends CustomPainter{
             color: Colors.white,
             fontSize: 15,
             fontWeight: FontWeight.bold,
-            backgroundColor: Colors.blue));
+            backgroundColor: Colors.blueGrey.withOpacity(0.5)));//透過50%
 
     //正面用
     if(dir=="front"){
@@ -881,20 +963,6 @@ class MyPainter extends CustomPainter{
     final Left_hip = offsets[7];
     final Right_hip = offsets[8];
 
-    if(button=="advice") {
-      //理想姿勢計算
-      final Right_shoulder_ideal_x = Right_shoulder.dx - 1000;
-      final Right_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
-      final Left_shoulder_ideal_x = Left_shoulder.dx + 1000;
-      final Left_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
-      //理想姿勢線プロット
-      paint.strokeWidth = 5;
-      paint.color = Colors.red;
-      canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
-          Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
-    }
-
-
     if(button=="score"||button=="advice") {
       //推定姿勢点プロット
       paint.color = Colors.orange;
@@ -940,7 +1008,7 @@ class MyPainter extends CustomPainter{
         shoulder.layout();
         shoulder.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
 
-        //backhandの高さ(手首の高さ：〇〇％)
+        //backhandの高さテキスト表示(手首の高さ：〇〇％)
         String backwristtext = "手首の高さは" + ((double.parse(summraize[3])*100).ceil()).toString() + "%";
         TextSpan backwristSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
@@ -948,9 +1016,13 @@ class MyPainter extends CustomPainter{
         );
         TextPainter backwrist = new TextPainter(text: backwristSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
         backwrist.layout();
-        backwrist.paint(canvas, new Offset(Left_wrist.dx, Left_wrist.dy));
-
-        //backhandの高さ(手首の高さ：〇〇％)
+        if(summraize[4]=="Right_wrist"){
+          backwrist.paint(canvas, Left_wrist);
+        }
+        else if(summraize[4]=="Left_wrist"){
+          backwrist.paint(canvas, Right_wrist);
+        }
+        //backhandの高さテキスト表示(手首の高さ：〇〇％)
         String hipwristtext = "手首の高さは" + ((double.parse(summraize[2])*100).ceil()).toString() + "%";
         TextSpan hipwristSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
@@ -958,35 +1030,140 @@ class MyPainter extends CustomPainter{
         );
         TextPainter hipwrist = new TextPainter(text: hipwristSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
         hipwrist.layout();
-        hipwrist.paint(canvas, new Offset(Right_wrist.dx, Right_wrist.dy));
+        if(summraize[4]=="Right_wrist"){
+          hipwrist.paint(canvas, Right_wrist);
+        }
+        else if(summraize[4]=="Left_wrist"){
+          hipwrist.paint(canvas, Left_wrist);
+        }
 
       }
     //正面badpoint用
     // [1.9385906915861866, 不明, 0.3848952710315345, 0.8713518732334877, Right_wrist]
     // [肩の平行具合、ケンダル、ヒップハンド、バックハンド、イズヒップハンド]
     if(button=="badpoint"){
-      //肩の平行具合に異常があるときpolotする
+      //肩の平行具合に異常があるとき
       if (double.parse(summraize[0]) > 2.8){
+        //範囲を描画する
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_shoulder,25, paint);
         canvas.drawCircle(Left_shoulder,25, paint);
+        //shoulderbalanceテキスト表示(肩のバランス)
+        String shouldertext = "肩のバランス";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: shouldertext,  // 新しいテキストを指定
+        );
+        TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        shoulderbalance.layout();
+        shoulderbalance.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
       }
-      //抱っこの高さに異常があるときplotする
+      //抱っこの高さに異常があるとき
       if (double.parse(summraize[2]) < 0.5){
         if(summraize[4]=="Right_wrist"){
+          //plotする
           paint.color = Colors.red.withOpacity(0.5);
           paint.strokeWidth = 5;
           canvas.drawCircle(Right_wrist, 25, paint);
+          //shoulderbalanceテキスト表示(肩のバランス)
+          String hugheighttext = "抱っこの高さ";
+          TextSpan hugheightSpan = TextSpan(
+            style: span.style,
+            text: hugheighttext,
+          );
+          TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+          hugheight.layout();
+          hugheight.paint(canvas, Right_wrist);
         }
         else if(summraize[4]=="Left_wrist"){
+          //plotする
           paint.color = Colors.red.withOpacity(0.5);
           paint.strokeWidth = 5;
           canvas.drawCircle(Left_wrist, 25, paint);
+          //shoulderbalanceテキスト表示(肩のバランス)
+          String hugheighttext = "抱っこの高さ";
+          TextSpan hugheightSpan = TextSpan(
+            style: span.style,
+            text: hugheighttext,
+          );
+          TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+          hugheight.layout();
+          hugheight.paint(canvas, Left_wrist);
+          //
         }
+      }
+        }
+      //正面でアドバイスを押したときに描写
+    if(button=="advice") {
+        //理想の肩のバランスを描画する
+        final Right_shoulder_ideal_x = Right_shoulder.dx;
+        final Right_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
+        final Left_shoulder_ideal_x = Left_shoulder.dx;
+        final Left_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
+        paint.strokeWidth = 5;
+        paint.color = Colors.red;
+        canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
+            Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
+        paint.color = Colors.red.withOpacity(0.7);
+        canvas.drawCircle(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),radius, paint);
+        canvas.drawCircle(Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y),radius, paint);
+        //shoulderbalanceテキスト表示(肩のバランス)
+        String shouldertext = "肩のバランス";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: shouldertext,  // 新しいテキストを指定
+        );
+        TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        shoulderbalance.layout();
+        shoulderbalance.paint(canvas, new Offset(Left_shoulder.dx, (Right_shoulder.dy+Left_shoulder.dy)/2));
 
+        //抱っこの高さに異常があるとき理想の抱っこの高さを描画する
+        if (double.parse(summraize[2]) < 0.5){
+          if(summraize[4]=="Right_wrist"){
+            //特徴点と直線を描画する
+            paint.color = Colors.red.withOpacity(0.5);
+            paint.strokeWidth = 5;
+            canvas.drawCircle(Right_elbow, radius, paint);//お尻を支えている腕の肘の特徴点を描画
+            final Right_wrist_ideal_x = Right_wrist.dx;
+            final Right_wrist_ideal_y = (Right_shoulder.dy + Right_hip.dy) / 2;
+            canvas.drawCircle(Offset(Right_wrist_ideal_x,Right_wrist_ideal_y), radius, paint);//理想の手首の特徴点を描画
+            paint.color = Colors.red;
+            canvas.drawLine(Right_elbow,
+                Offset(Right_wrist_ideal_x,Right_wrist_ideal_y), paint);//上記2点をつなげる直線を描画
+            //説明用テキストを描画する
+            String hugheighttext = "抱っこの高さ";
+            TextSpan hugheightSpan = TextSpan(
+              style: span.style,  // オリジナルのスタイルを維持
+              text: hugheighttext,  // 新しいテキストを指定
+            );
+            TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+            hugheight.layout();
+            hugheight.paint(canvas,Right_elbow);
       }
 
+          else if(summraize[4]=="Left_wrist"){
+            //特徴点と直線を描画する
+            paint.color = Colors.red.withOpacity(0.5);
+            paint.strokeWidth = 5;
+            canvas.drawCircle(Left_elbow, radius, paint);
+            final Left_wrist_ideal_x = Left_wrist.dx;
+            final Left_wrist_ideal_y = (Left_shoulder.dy + Left_hip.dy) / 2;//理想の手首の特徴点を描画
+            canvas.drawCircle(Offset(Left_wrist_ideal_x,Left_wrist_ideal_y), radius, paint);//理想の手首の特徴点を描画
+            paint.color = Colors.red;
+            canvas.drawLine(Left_elbow,
+                Offset(Left_wrist_ideal_x,Left_wrist_ideal_y), paint);//上記2点をつなげる直線を描画
+            //説明用テキストを描画する
+            String hugheighttext = "抱っこの高さ";
+            TextSpan hugheightSpan = TextSpan(
+              style: span.style,  // オリジナルのスタイルを維持
+              text: hugheighttext,  // 新しいテキストを指定
+            );
+            TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+            hugheight.layout();
+            hugheight.paint(canvas,Left_elbow);
+          }
+        }
     }
   }
 
@@ -1095,22 +1272,42 @@ class MyPainter extends CustomPainter{
 
     //右面badpoint用
     if(button=="badpoint"){
-      //肩の平行具合に異常があるときplotする
+      //肩の平行具合に異常があるとき
       if (double.parse(summraize[0]) > 2.8){
+        //plot
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_shoulder, 25, paint);
+        //shoulderbalanceテキスト表示(肩のバランス)
+        String shouldertext = "肩のバランス";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,  // オリジナルのスタイルを維持
+          text: shouldertext,  // 新しいテキストを指定
+        );
+        TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        shoulderbalance.layout();
+        shoulderbalance.paint(canvas, Right_shoulder);
       }
-      //抱っこの高さに異常があるときかつ右手がhiphadの時plotする
+      //抱っこの高さに異常があるときかつ右手がhiphadの時
       if (double.parse(summraize[2]) < 0.5&&summraize[4]=="Right_wrist"){
+        //plotする
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Right_wrist, 25, paint);
+        //shoulderbalanceテキスト表示(肩のバランス)
+        String hugheighttext = "抱っこの高さ";
+        TextSpan hugheightSpan = TextSpan(
+          style: span.style,
+          text: hugheighttext,
+        );
+        TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        hugheight.layout();
+        hugheight.paint(canvas, Right_wrist);
       }
     }
     //理想姿勢
     if(button=="advice") {
-      //理想姿勢
+      //理想姿勢特徴点描画
       paint.color = Colors.red;
       canvas.drawCircle(
           Offset(Right_ankle_ideal_x, Right_shoulder_ideal), radius, paint);
@@ -1128,6 +1325,15 @@ class MyPainter extends CustomPainter{
           Offset(Right_ankle_ideal_x, Right_knee_ideal), paint);
       canvas.drawLine(
           Offset(Right_ankle_ideal_x, Right_knee_ideal), Right_ankle, paint);
+      //理想姿勢テキスト描画表示(姿勢)
+      String kendaltext = "理想姿勢";
+      TextSpan kendalSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: kendaltext,  // 新しいテキストを指定
+      );
+      TextPainter kendal = new TextPainter(text: kendalSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+      kendal.layout();
+      kendal.paint(canvas, Right_hip);
     }
   }
 
@@ -1198,9 +1404,41 @@ class MyPainter extends CustomPainter{
       canvas.drawLine(Left_knee, Left_hip, paint);
       canvas.drawLine(Left_knee, Left_ankle, paint);
     }
+    //右側姿勢スコアのボタンを押したときに描画する
+    if(button=="score") {
+      //膝角度
+      String kneetext = "膝：" + double.parse(summraize[8]).ceil().toString() + "度";
+      TextSpan kneeSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: kneetext,  // 新しいテキストを指定
+      );
+      TextPainter kneepaint = new TextPainter(text: kneeSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      kneepaint.layout();
+      kneepaint.paint(canvas, new Offset(Left_knee.dx, Left_knee.dy));
+
+      //腰角度
+      String elbowtext = "腰：" + double.parse(summraize[9]).ceil().toString() + "度";
+      TextSpan hipSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: elbowtext,  // 新しいテキストを指定
+      );
+      TextPainter elbowpaint = new TextPainter(text: hipSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      elbowpaint.layout();
+      elbowpaint.paint(canvas, new Offset(Left_hip.dx, Left_hip.dy));
+
+      //肩角度
+      String shouldertext = "肩：" + double.parse(summraize[10]).ceil().toString() + "度";
+      TextSpan shoulderSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: shouldertext,  // 新しいテキストを指定
+      );
+      TextPainter shoulderpaint = new TextPainter(text: shoulderSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+      shoulderpaint.layout();
+      shoulderpaint.paint(canvas, new Offset(Left_shoulder.dx, Left_shoulder.dy));
+    }
     //左面badpoint用
     if(button=="advice") {
-      //理想姿勢
+      //理想姿勢描画
       paint.color = Colors.red;
       canvas.drawCircle(
           Offset(Left_ankle_ideal_x, Left_shoulder_ideal), radius, paint);
@@ -1219,21 +1457,50 @@ class MyPainter extends CustomPainter{
           Offset(Left_ankle_ideal_x, Left_knee_ideal), paint);
       canvas.drawLine(
           Offset(Left_ankle_ideal_x, Left_knee_ideal), Left_ankle, paint);
+      //理想姿勢テキスト描画表示(姿勢)
+      String kendaltext = "理想姿勢";
+      TextSpan kendalSpan = TextSpan(
+        style: span.style,  // オリジナルのスタイルを維持
+        text: kendaltext,  // 新しいテキストを指定
+      );
+      TextPainter kendal = new TextPainter(text: kendalSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+      kendal.layout();
+      kendal.paint(canvas, Left_hip);
     }
     //左用badpoint用
     if(button=="badpoint"){
-      //肩の平行具合に異常があるときpolotする
+      //肩の平行具合に異常があるとき
       if (double.parse(summraize[0]) > 2.8){
+        //polotする
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
         canvas.drawCircle(Left_shoulder, 25, paint);
+        //shoulderbalanceテキスト表示(肩のバランス)
+        String shouldertext = "肩のバランス";
+        TextSpan shoulderSpan = TextSpan(
+          style: span.style,
+          text: shouldertext,
+        );
+        TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+        shoulderbalance.layout();
+        shoulderbalance.paint(canvas, Left_shoulder);
       }
-      //抱っこの高さに異常があるときplotする
+      //抱っこの高さに異常があるとき
       if (double.parse(summraize[2]) < 0.5){
         if(summraize[4]=="Left_wrist"){
+          //plotする
           paint.color = Colors.red.withOpacity(0.5);
           paint.strokeWidth = 5;
           canvas.drawCircle(Left_wrist, 25, paint);
+          //shoulderbalanceテキスト表示(肩のバランス)
+          String hugheighttext = "抱っこの高さ";
+          TextSpan hugheightSpan = TextSpan(
+            style: span.style,
+            text: hugheighttext,
+          );
+          TextPainter hugheight = new TextPainter(text: hugheightSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+          hugheight.layout();
+          hugheight.paint(canvas, Left_wrist);
         }
 
       }
@@ -1284,7 +1551,7 @@ class ImagePainter extends CustomPainter{
     path.lineTo(kendall_score1, kendall_score2);
     // //肩の並行
     path.lineTo(shoulder_score1, shoulder_score2);
-    
+
     // パスの座標と最初の座標を結ぶ。
     path.close();
     
