@@ -898,7 +898,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: downcolor_2.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
+                      child: Text("Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),

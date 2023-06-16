@@ -63,15 +63,14 @@ class _SavePageInState extends State<SavePageIn> {
       upcolor_1 = Colors.orange;
       count++;
     }
-  return Scaffold(
-    appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
-      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
-      backgroundColor: appbar_colors),
-      body:Stack(
-      children: <Widget>[
-            Column(
-        //上のボタン
-          children:[ Row(mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+          backgroundColor: appbar_colors),
+      body: Stack(
+        children: <Widget>[
+          //上のボタン
+          Row(
               children: [
                 Padding(padding: EdgeInsets.only(left: 5),
                   child: ElevatedButton(
@@ -125,10 +124,10 @@ class _SavePageInState extends State<SavePageIn> {
                         elevation: 16,
                       ),
                       child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
-                    ),
+                  ),
                     ),
               ],
-              ),],),
+          ),
             Padding(padding: EdgeInsets.only(top:70),
                 child: Image.file(
                   File(image)
@@ -206,8 +205,8 @@ class _SavePageOutState extends State<SavePageOut> {
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
   var icon_colors = Colors.black;
-
   final _audio = AudioCache();
+
 
   // 画像の保存したい
   Future saveImage() async {
@@ -248,7 +247,7 @@ class _SavePageOutState extends State<SavePageOut> {
                         backgroundColor: upcolor_1,//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -266,7 +265,7 @@ class _SavePageOutState extends State<SavePageOut> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                    child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -289,13 +288,17 @@ class _SavePageOutState extends State<SavePageOut> {
                     ),
               ],
               ),
-        Image.file(
-            File(image)
+        Padding(padding: EdgeInsets.only(top:70),
+          child: Image.file(
+              File(image)
+          ),
         ),
-        Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-      ElevatedButton(
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+   crossAxisAlignment: CrossAxisAlignment.end,
+   children: [
+   Align(alignment: Alignment.bottomCenter,
+   child: Padding(padding: EdgeInsets.only(top: 10,left: 5),
+   child: ElevatedButton(
         onPressed: (){
           saveImage();
           Navigator.push(context,
@@ -307,9 +310,12 @@ class _SavePageOutState extends State<SavePageOut> {
           backgroundColor: main_colors,
           elevation: 26,
           ),
-          child: const Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: Colors.white)),
-          ),
-      ElevatedButton(
+   child: Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: main_text_colors)),
+   ),
+   ),
+   ),
+   Padding(padding: EdgeInsets.only(top: 10,left: 5),
+   child: ElevatedButton(
         onPressed: () {
           Navigator.push(context,
           MaterialPageRoute(builder: (context) => OutTakePicture1(camera:widget.camera),
@@ -317,17 +323,18 @@ class _SavePageOutState extends State<SavePageOut> {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: main_text_colors,
+          backgroundColor: Colors.grey,
           elevation: 26,
           ),
-          child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
-          ),
-      ],
-      ),
+          child: Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: main_text_colors)),
+   ),
+   ),
+   ],
+        ),
       ],
     ),
   );
-  }
+ }
 }
 
 //正面用
@@ -754,22 +761,22 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        child: ElevatedButton(
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Retouch1(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3)
-        )
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(180,60),
-              backgroundColor: main_colors,
-              elevation: 16,
-            ),
-            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-          ),
+        // child: ElevatedButton(
+        //     onPressed: (){
+        //       Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => Retouch1(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3)
+        // )
+        //       );
+        //     },
+        //     style: ElevatedButton.styleFrom(
+        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        //       fixedSize:const Size(180,60),
+        //       backgroundColor: main_colors,
+        //       elevation: 16,
+        //     ),
+        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+        //   ),
                     ),
           Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
         child: ElevatedButton(
@@ -940,22 +947,22 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        child: ElevatedButton(
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Retouch2(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
-        )
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(180,60),
-              backgroundColor: main_colors,
-              elevation: 16,
-            ),
-            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-          ),
+        // child: ElevatedButton(
+        //     onPressed: (){
+        //       Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => Retouch2(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
+        // )
+        //       );
+        //     },
+        //     style: ElevatedButton.styleFrom(
+        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        //       fixedSize:const Size(180,60),
+        //       backgroundColor: main_colors,
+        //       elevation: 16,
+        //     ),
+        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+        //   ),
                     ),
           Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
         child: ElevatedButton(
@@ -1123,22 +1130,22 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        child: ElevatedButton(
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,inoutcamera: widget.inoutcamera,),
-              )
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              fixedSize:const Size(180,60),
-              backgroundColor: main_colors,
-              elevation: 16,
-            ),
-            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-          ),
+        // child: ElevatedButton(
+        //     onPressed: (){
+        //       Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,inoutcamera: widget.inoutcamera,),
+        //       )
+        //       );
+        //     },
+        //     style: ElevatedButton.styleFrom(
+        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        //       fixedSize:const Size(180,60),
+        //       backgroundColor: main_colors,
+        //       elevation: 16,
+        //     ),
+        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+        //   ),
                     ),
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.25),
         child: ElevatedButton(
