@@ -163,25 +163,45 @@ class _EvaluationState extends State<Evaluation> {
       ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
     }
 
+    // //ケンダル分類
+    // if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+    //   kendall = "ノーマル";
+    // }
+    // else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+    //   kendall = "ロードシス";
+    // }
+    // else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+    //   kendall = "スウェイバック";
+    // }
+    // else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
+    //   kendall = "カイホロードシス";
+    // }
+    // else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+    //   kendall = "フラットバック";
+    // }
+    // else {
+    //   // kendall = "不明";
+    //   kendall = "ノーマル";//とりあえず
+    // }
     //ケンダル分類
     if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
       kendall = "ノーマル";
     }
-    else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
+    else if(ankle_knee.abs()>10 && ankle_hip>10){
+      kendall = "フラットバック";
+    }
+    else if(ankle_hip>10){
       kendall = "ロードシス";
     }
-    else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
+    else if(ankle_knee>10){
       kendall = "スウェイバック";
     }
-    else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
+    else if(ankle_knee<-10 && ankle_shoulder<-10){
       kendall = "カイホロードシス";
-    }
-    else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-      kendall = "フラットバック";
     }
     else {
       // kendall = "不明";
-      kendall = "ノーマル";//とりあえず
+      kendall = "カイホロードシス";//とりあえず
     }
 
     print(ankle_knee);
