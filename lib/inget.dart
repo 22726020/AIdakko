@@ -137,7 +137,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -290,7 +290,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -445,7 +445,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -559,7 +559,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
 
   Widget build(BuildContext context) {
     if (count == 0) {
-      _audio.play('migi.mp3');
+      _audio.play('hidari.mp3');
       startTimer();
       count++;
     }
@@ -603,7 +603,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -713,7 +713,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
 
   Widget build(BuildContext context) {
     if (count == 0) {
-      _audio.play('migi.mp3');
+      _audio.play('hidari.mp3');
       startTimer();
       count++;
     }
@@ -757,7 +757,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -873,7 +873,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
 
   Widget build(BuildContext context) {
     if (count == 0) {
-      _audio.play('hidari.mp3');
+      _audio.play('migi.mp3');
       startTimer();
       count++;
     }
@@ -917,7 +917,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();
@@ -1032,7 +1032,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
 
   Widget build(BuildContext context) {
     if (count == 0) {
-      _audio.play('hidari.mp3');
+      _audio.play('migi.mp3');
       startTimer();
       count++;
     }
@@ -1076,7 +1076,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 
-                Padding(padding: const EdgeInsets.only(top:720,left: 30),
+                Padding(padding: const EdgeInsets.only(top:650,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
                     dispose();

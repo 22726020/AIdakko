@@ -221,7 +221,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage1(imagePath:image.path,camera:widget.camera),
+                    MaterialPageRoute(builder: (context) => OutBlazePage2(imagePath:image.path,camera:widget.camera,path1:widget.path1),
               )
                     );
                     // path を出力
@@ -337,7 +337,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage1(imagePath:image.path,camera:widget.camera),
+                    MaterialPageRoute(builder: (context) => OutBlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2),
               )
                     );
                     // path を出力
