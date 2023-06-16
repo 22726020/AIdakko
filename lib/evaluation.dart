@@ -767,7 +767,7 @@ class _EvaluationState extends State<Evaluation> {
           children: <Widget>[
             Column(
             //上のボタン
-          children:[  Row(mainAxisAlignment: MainAxisAlignment.center,
+          children:[ Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: EdgeInsets.only(left: 5),
                   child: ElevatedButton(
@@ -831,12 +831,12 @@ class _EvaluationState extends State<Evaluation> {
                     ),
               ],
               ),],),
-              Padding(padding: EdgeInsets.only(top:70),
+            Padding(padding: EdgeInsets.only(top:70),
                 child: Image.file(
                   File(image)
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top:70),
+            Padding(padding: EdgeInsets.only(top:70),
                 child: CustomPaint(
                   //引数の渡す方
                   painter: MyPainter(offset,dir,button,summraize),
@@ -844,7 +844,6 @@ class _EvaluationState extends State<Evaluation> {
                   child: Center(),
               ),
               ),
-              
             Row(mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -931,7 +930,6 @@ class _EvaluationState extends State<Evaluation> {
                     ),
               ],
             ),
-                    
             // Visibility(child: Text(kendall_text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: Colors.black)),visible: tf,),
             // Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.red)),
             // Visibility(child: CustomPaint(

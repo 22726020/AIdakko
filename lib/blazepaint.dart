@@ -62,12 +62,12 @@ class _SavePageInState extends State<SavePageIn> {
   return Scaffold(
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
       actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
-      backgroundColor: main_colors),
-    body: SingleChildScrollView(
-      child:Column(
+      backgroundColor: appbar_colors),
+      body:Stack(
       children: <Widget>[
+            Column(
         //上のボタン
-            Row(
+          children:[ Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: EdgeInsets.only(left: 5),
                   child: ElevatedButton(
@@ -81,10 +81,10 @@ class _SavePageInState extends State<SavePageIn> {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,60),
-                        backgroundColor: main_colors,//ボタン背景色
+                        backgroundColor: upcolor_1,//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -102,7 +102,7 @@ class _SavePageInState extends State<SavePageIn> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -120,18 +120,22 @@ class _SavePageInState extends State<SavePageIn> {
                         backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
-                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
               ],
-              ),
-              Image.file(
+              ),],),
+            Padding(padding: EdgeInsets.only(top:70),
+                child: Image.file(
                   File(image)
                 ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-      ElevatedButton(
+         Align(alignment: Alignment.bottomCenter,
+         child: Padding(padding: EdgeInsets.only(top: 10,left: 5),
+   child: ElevatedButton(
         onPressed: (){
           saveImage();
           Navigator.push(context, 
@@ -143,9 +147,12 @@ class _SavePageInState extends State<SavePageIn> {
           backgroundColor: main_colors,
           elevation: 26,
           ),
-          child: const Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: Colors.white)),
+          child: Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: main_text_colors)),
           ),
-      ElevatedButton(
+         ),
+   ),
+   Padding(padding: EdgeInsets.only(top: 10,left: 5),
+   child: ElevatedButton(
         onPressed: () {
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
@@ -153,15 +160,15 @@ class _SavePageInState extends State<SavePageIn> {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: main_colors,
+          backgroundColor: Colors.grey,
           elevation: 26,
           ),
-          child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
+          child: Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: main_text_colors)),
           ),
-      ],
+   ),
+   ],
       ),
       ],
-      ),
     ),
   );
   }
@@ -213,11 +220,10 @@ class _SavePageOutState extends State<SavePageOut> {
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
       actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
       backgroundColor: appbar_colors),
-    body: SingleChildScrollView(
-      child:Column(
+    body: Stack(
       children: <Widget>[
         //上のボタン
-            Row(
+        Row(
               children: [
                 Padding(padding: EdgeInsets.only(left: 5),
                   child: ElevatedButton(
@@ -275,16 +281,16 @@ class _SavePageOutState extends State<SavePageOut> {
                     ),
               ],
               ),
-              Image.file(
-                  File(image)
-                ),
-      Row(
+        Image.file(
+            File(image)
+        ),
+        Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
       ElevatedButton(
         onPressed: (){
           saveImage();
-          Navigator.push(context, 
+          Navigator.push(context,
           MaterialPageRoute(builder: (context) => BlazeLandmarkPage1(inoutcamera: "out",path1: widget.path1,path2: widget.path2,path3:widget.path3),
           )
           );
@@ -297,13 +303,13 @@ class _SavePageOutState extends State<SavePageOut> {
           ),
       ElevatedButton(
         onPressed: () {
-          Navigator.push(context, 
+          Navigator.push(context,
           MaterialPageRoute(builder: (context) => OutTakePicture1(camera:widget.camera),
           )
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: main_colors,
+          backgroundColor: main_text_colors,
           elevation: 26,
           ),
           child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -311,7 +317,6 @@ class _SavePageOutState extends State<SavePageOut> {
       ],
       ),
       ],
-      ),
     ),
   );
   }
