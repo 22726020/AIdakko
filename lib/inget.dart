@@ -143,7 +143,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -305,7 +305,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -469,7 +469,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -636,7 +636,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -799,7 +799,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -968,7 +968,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
@@ -1136,7 +1136,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
                   onPressed: (){
                     Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
                   },
-                  child: Icon(Icons.home,color: icon_colors,),
+                  child: const Icon(Icons.home),
                 ),
                 ),
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
