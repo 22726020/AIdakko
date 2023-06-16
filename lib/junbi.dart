@@ -16,7 +16,7 @@ class JunbiINPage extends StatefulWidget {
 
 class _JunbiINPageState extends State<JunbiINPage> {
   final _audio = AudioCache();
-  //色
+  //色の変更
   var appbar_colors = Colors.white;
   var appbar_text_colors = Colors.black;
   var main_colors = Colors.black;
@@ -28,8 +28,8 @@ class _JunbiINPageState extends State<JunbiINPage> {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: Text('内カメラ',style:TextStyle(color: main_text_colors)),
-        backgroundColor: main_colors),
+          title: Text('内カメラ',style:TextStyle(color: appbar_text_colors)),
+        backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual2.png"),
@@ -93,7 +93,7 @@ class JunbiOUTPage extends StatefulWidget {
 
 class _JunbiOUTPageState extends State<JunbiOUTPage> {
   final _audio = AudioCache();
-  //色
+  //色の変更
   var appbar_colors = Colors.white;
   var appbar_text_colors = Colors.black;
   var main_colors = Colors.black;
