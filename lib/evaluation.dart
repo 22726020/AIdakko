@@ -5,7 +5,7 @@ import 'package:gazou/hand20.dart';
 
 //評価結果を返す
 class Evaluation extends StatefulWidget {
-  const Evaluation({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2,required this.offsets3})
+ Evaluation({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2,required this.offsets3,required this.inoutcamera})
       : super(key: key);
   final String path1;
   final String path2;
@@ -13,6 +13,8 @@ class Evaluation extends StatefulWidget {
   final List<Offset> offsets1;
   final List<Offset> offsets2;
   final List<Offset> offsets3;
+  String inoutcamera;
+
   @override
   State<Evaluation> createState() => _EvaluationState();
 }
@@ -776,7 +778,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -796,7 +798,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
-                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
               ],

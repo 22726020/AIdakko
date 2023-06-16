@@ -112,7 +112,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/1.png"),
+            child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -268,7 +268,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/1.png"),
+            child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -424,7 +424,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/1.png"),
+            child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -579,11 +579,11 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/2.png"),
+            child: Image.asset("assets/⇦.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -736,11 +736,11 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('←を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/2.png"),
+            child: Image.asset("assets/⇦.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -897,11 +897,11 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/3.png"),
+            child: Image.asset("assets/⇨.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,
@@ -1056,11 +1056,11 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange,color: Colors.white)),
+            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange,color: Colors.white)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/3.png"),
+            child: Image.asset("assets/⇨.png"),
           ),
           Opacity(
             opacity: check ? opacity = 0.5 : opacity = 0.5,

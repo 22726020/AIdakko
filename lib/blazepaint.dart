@@ -94,7 +94,7 @@ class _SavePageInState extends State<SavePageIn> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -112,7 +112,7 @@ class _SavePageInState extends State<SavePageIn> {
                         backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
-                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
               ],
@@ -237,7 +237,7 @@ class _SavePageOutState extends State<SavePageOut> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("右側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -255,7 +255,7 @@ class _SavePageOutState extends State<SavePageOut> {
                         backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
-                      child: Text("左側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
                     ),
                     ),
               ],
@@ -614,6 +614,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
   var offsets = <Offset>[];
 
   final _points = <Offset>[];
+  String dir = "正面姿勢推定結果";
 
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
   Future<void> _blazePose() async {
@@ -694,7 +695,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("正面姿勢推定結果",style:TextStyle(color: Colors.black)),
+        title:  Text(dir,style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -792,7 +793,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
   String? _fileName;
   File? _filePath;
   var offsets = <Offset>[];
-
+  String dir = "姿勢推定結果";
 
   final _points = <Offset>[];
 
@@ -873,7 +874,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("右姿勢推定結果",style:TextStyle(color: Colors.black)),
+        title:  Text("⇨姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -1051,7 +1052,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("左姿勢推定結果",style:TextStyle(color: Colors.black)),
+        title:  Text("⇦姿勢推定結果",style:TextStyle(color: Colors.black)),
       backgroundColor: Color.fromARGB(255, 174, 168, 167)),
 
       body: Stack(
@@ -1078,7 +1079,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2),
+              MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,inoutcamera: widget.inoutcamera,),
               )
               );
             },
@@ -1096,7 +1097,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Evaluation(path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1:widget.offsets1,offsets2:widget.offsets2,offsets3:offsets),
+              MaterialPageRoute(builder: (context) => Evaluation(path1: widget.path1,path2: widget.path2,path3:widget.path3,offsets1:widget.offsets1,offsets2:widget.offsets2,offsets3:offsets,inoutcamera:widget.inoutcamera),
         )
               );
             },

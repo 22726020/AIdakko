@@ -272,13 +272,14 @@ int _counter = 0;
 }
 
 class Retouch3 extends StatefulWidget {
-  const Retouch3({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2})
+   Retouch3({Key? key,required this.path1, required this.path2, required this.path3,required this.offsets1,required this.offsets2,required this.inoutcamera})
       : super(key: key);
   final String path1;
   final String path2;
   final String path3;
   final List<Offset> offsets1;
   final List<Offset> offsets2;
+  String inoutcamera;
   @override
   Retouch3State createState() => Retouch3State();
 }
@@ -347,7 +348,7 @@ int _counter = 0;
             onPressed: (){
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Evaluation(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,offsets3: _points),
+              MaterialPageRoute(builder: (context) => Evaluation(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,offsets3: _points,inoutcamera: "",),
         )
               );
             },

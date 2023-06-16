@@ -84,7 +84,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/1.png"),
+            child: Image.asset("assets/syoumen.png"),
           ),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -195,11 +195,11 @@ class OutTakePicture2State extends State<OutTakePicture2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('右を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/2.png"),
+            child: Image.asset("assets/⇨.png"),
           ),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -311,11 +311,11 @@ class OutTakePicture3State extends State<OutTakePicture3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('左を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: const Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
-            child: Image.asset("assets/3.png"),
+            child: Image.asset("assets/⇦.png"),
           ),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
