@@ -118,7 +118,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
@@ -280,7 +280,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
             child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
@@ -444,7 +444,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
             child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
           ),
           Opacity(
@@ -611,7 +611,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
             child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
           ),
           Opacity(
@@ -774,7 +774,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
             child: Text('←を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
           ),
           Opacity(
@@ -943,7 +943,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
             child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
           ),
           Opacity(
@@ -1111,7 +1111,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
             child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
           ),          
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
           ),
           Opacity(

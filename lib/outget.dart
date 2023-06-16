@@ -91,7 +91,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
             child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
           ),
           Row(
@@ -213,7 +213,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
             child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
           ),
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
           ),
           Row(
@@ -335,7 +335,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
             child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
-            opacity: check ? opacity = 0.6 : opacity = 0.6,
+            opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
           ),
           Row(
