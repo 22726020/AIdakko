@@ -47,10 +47,10 @@ class _Pause1PageState extends State<Pause1Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
               ],
             ),
@@ -108,10 +108,10 @@ class _Pause2PageState extends State<Pause2Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
               ],
             ),
@@ -169,10 +169,10 @@ class _Pause3PageState extends State<Pause3Page> {
                           ));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('再開する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('再開する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
               ],
             ),
