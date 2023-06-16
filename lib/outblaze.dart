@@ -70,7 +70,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
     var EllorXlist =
         listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight*0.8 || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     print(listx);
     print(listy);
     // print(EllorXlist);
@@ -278,7 +278,7 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
     var EllorXlist =
         listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight*0.8 || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     // print(listx);
     // print(listy);
     print(EllorXlist);
@@ -483,7 +483,7 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
     var EllorXlist =
         listx.where((valuex) => valuex > deviceWidth || 0 > valuex).toList();
     var EllorYlist =
-        listy.where((valuey) => valuey > deviceHeight*0.8 || 0 > valuey).toList();
+        listy.where((valuey) => valuey > deviceHeight || 0 > valuey).toList();
     // print(listx);
     // print(listy);
 

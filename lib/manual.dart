@@ -17,13 +17,20 @@ class ManualPage extends StatefulWidget {
 
 class _ManualPageState extends State<ManualPage> {
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_color = Colors.white;
+  var sub_text_colors = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: Text('環境説明',style:const TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          title: Text('環境説明',style:TextStyle(color: appbar_colors )),
+        backgroundColor: appbar_text_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual.png"),
@@ -39,10 +46,10 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 30,
           ),
-          child: const Text('内カメ',style: TextStyle(fontSize: 40, color: Colors.white)),
+                child: Text('内カメ',style: TextStyle(fontSize: 40, color: main_text_color)),
           ),
       ElevatedButton(
         onPressed: (){
@@ -52,10 +59,10 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 30,
           ),
-          child: const Text('外カメ',style: TextStyle(fontSize: 40, color: Colors.white)),
+                child: Text('外カメ',style: TextStyle(fontSize: 40, color: main_text_color)),
           ),
           ],
     ),
