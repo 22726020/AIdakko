@@ -50,18 +50,18 @@ showDialog(
             content: const Text("スマホはなるべく垂直に置き\n全身が写るようにして下さい\n十分離れた後に\nお子さんを抱っこして下さい\n撮影が開始されます"),
             actions: [
               GestureDetector(
-                child: Text("いいえ",style: TextStyle(fontSize: 30),),
+                child: Text("はい",style: TextStyle(fontSize: 30),),
                 onTap: (){
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
+                      )
+                  );
                 },
               ),
               GestureDetector(
-                child: Text("はい",style: TextStyle(fontSize: 30),),
+                child: Text("いいえ",style: TextStyle(fontSize: 30),),
                 onTap: (){
-                  Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),
-                  )
-          );
+                  Navigator.pop(context);
                 },
               ),
             ],
@@ -129,18 +129,18 @@ showDialog(
             content: const Text("全身が写る距離まで離れて下さい\n撮影が開始されます"),
             actions: [
               GestureDetector(
-                child: Text("いいえ",style: TextStyle(fontSize: 30),),
+                child: Text("はい",style: TextStyle(fontSize: 30),),
                 onTap: (){
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => OutTakePicture1(camera:firstCamera),
+                      )
+                  );
                 },
               ),
               GestureDetector(
-                child: Text("はい",style: TextStyle(fontSize: 30),),
+                child: Text("いいえ",style: TextStyle(fontSize: 30),),
                 onTap: (){
-                  Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => OutTakePicture1(camera:firstCamera),
-                  )
-          );
+                  Navigator.pop(context);
                 },
               ),
             ],
