@@ -71,6 +71,9 @@ class OutTakePicture1State extends State<OutTakePicture1> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('正面を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -85,11 +88,6 @@ class OutTakePicture1State extends State<OutTakePicture1> {
               }
             },
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
@@ -97,17 +95,11 @@ class OutTakePicture1State extends State<OutTakePicture1> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
                 
-                child: FloatingActionButton(
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.3),
+                child:Transform.scale(
+                  scale: 2,
+                  child: FloatingActionButton(
                   onPressed: () async {
                     // 写真を撮る
                     final image = await _controller.takePicture();
@@ -120,7 +112,8 @@ class OutTakePicture1State extends State<OutTakePicture1> {
                     // path を出力
                   },
                   child: const Icon(Icons.camera_alt),
-                ),
+                ),)
+                
                 ),
               ],
         ),
@@ -160,6 +153,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   @override
@@ -193,6 +187,9 @@ class OutTakePicture2State extends State<OutTakePicture2> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇨を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -207,11 +204,6 @@ class OutTakePicture2State extends State<OutTakePicture2> {
               }
             },
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
-          ),
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
@@ -219,29 +211,24 @@ class OutTakePicture2State extends State<OutTakePicture2> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
-                
-                child: FloatingActionButton(
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.3),
+                child:Transform.scale(
+                  scale: 2,
+                  child: FloatingActionButton(
                   onPressed: () async {
                     // 写真を撮る
                     final image = await _controller.takePicture();
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage2(imagePath:image.path,camera:widget.camera, path1:widget.path1),
+                    MaterialPageRoute(builder: (context) => OutBlazePage1(imagePath:image.path,camera:widget.camera),
               )
                     );
+                    // path を出力
                   },
                   child: const Icon(Icons.camera_alt),
-                ),
+                ),)
+                
                 ),
               ],
         ),
@@ -283,6 +270,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
   @override
   void initState() {
@@ -315,6 +303,9 @@ class OutTakePicture3State extends State<OutTakePicture3> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇦を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -329,11 +320,6 @@ class OutTakePicture3State extends State<OutTakePicture3> {
               }
             },
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
@@ -341,29 +327,24 @@ class OutTakePicture3State extends State<OutTakePicture3> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
-                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.2),
-                
-                child: FloatingActionButton(
+                Padding(padding: EdgeInsets.only(top:  MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.3),
+                child:Transform.scale(
+                  scale: 2,
+                  child: FloatingActionButton(
                   onPressed: () async {
                     // 写真を撮る
                     final image = await _controller.takePicture();
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage3(imagePath:image.path,camera:widget.camera, path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => OutBlazePage1(imagePath:image.path,camera:widget.camera),
               )
                     );
+                    // path を出力
                   },
                   child: const Icon(Icons.camera_alt),
-                ),
+                ),)
+                
                 ),
               ],
         ),
