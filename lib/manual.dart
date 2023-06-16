@@ -40,6 +40,8 @@ class _ManualPageState extends State<ManualPage> {
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+      Padding(padding: EdgeInsets.only(top: 20),
+      child:
       ElevatedButton(
         onPressed: (){
           Navigator.push(context, 
@@ -53,6 +55,9 @@ class _ManualPageState extends State<ManualPage> {
           ),
                 child: Text('自撮り\nモード',style: TextStyle(fontSize: 30, color: main_text_colors)),
           ),
+      ),
+      Padding(padding: EdgeInsets.only(top: 20),
+      child:
       ElevatedButton(
         onPressed: (){
           Navigator.push(context, 
@@ -66,6 +71,7 @@ class _ManualPageState extends State<ManualPage> {
           ),
                 child: Text('他撮り\nモード',style: TextStyle(fontSize: 30, color: main_text_colors)),
           ),
+      ),
           ],
     ),
           ],
