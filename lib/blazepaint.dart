@@ -9,6 +9,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import 'dart:io';//　File
 import 'dart:typed_data'; // Uint8List
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:gazou/retouch.dart';
 import 'package:gazou/evaluation.dart';
@@ -46,6 +47,8 @@ class _SavePageInState extends State<SavePageIn> {
   var sub_text_colors = Colors.white;
   var icon_colors = Colors.black;
 
+  final _audio = AudioCache();
+
   // 画像の保存したい
   Future saveImage() async {
     dynamic imgpath1 = io.File(widget.path1).readAsBytes;
@@ -56,8 +59,9 @@ class _SavePageInState extends State<SavePageIn> {
   Widget build(BuildContext context) {
     if(count==0){
       image = widget.path1;
-      count++;
+      _audio.play('takepicturefinish.mp3');
       upcolor_1 = Colors.orange;
+      count++;
     }
   return Scaffold(
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
@@ -203,6 +207,8 @@ class _SavePageOutState extends State<SavePageOut> {
   var sub_text_colors = Colors.white;
   var icon_colors = Colors.black;
 
+  final _audio = AudioCache();
+
   // 画像の保存したい
   Future saveImage() async {
     dynamic imgpath1 = io.File(widget.path1).readAsBytes;
@@ -213,8 +219,10 @@ class _SavePageOutState extends State<SavePageOut> {
   Widget build(BuildContext context) {
     if(count==0){
       image = widget.path1;
-      count++;
+      _audio.play('takepicturefinish.mp3');
       upcolor_1 = Colors.orange;
+      count++;
+      
     }
   return Scaffold(
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
