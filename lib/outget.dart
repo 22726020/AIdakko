@@ -30,6 +30,13 @@ class OutTakePicture1State extends State<OutTakePicture1> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
 
   @override
@@ -80,7 +87,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -145,6 +152,13 @@ class OutTakePicture2State extends State<OutTakePicture2> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
 
   @override
@@ -195,7 +209,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -261,7 +275,13 @@ class OutTakePicture3State extends State<OutTakePicture3> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
-
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   @override
   void initState() {
@@ -311,7 +331,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,

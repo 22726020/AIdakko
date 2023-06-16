@@ -49,6 +49,13 @@ class _EvaluationState extends State<Evaluation> {
   var upcolor_1 = Colors.grey;
   var upcolor_2 = Colors.grey;
   var upcolor_3 = Colors.grey;
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -733,8 +740,8 @@ class _EvaluationState extends State<Evaluation> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("評価結果",style:TextStyle(color: Colors.black)),
-      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        title:  Text("評価結果",style:TextStyle(color: appbar_text_colors)),
+      backgroundColor: appbar_colors),
       body:Stack(
           children: <Widget>[
             Column(
@@ -758,7 +765,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: upcolor_1,//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -778,7 +785,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: upcolor_2,
                         elevation: 16,
                       ),
-                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(left: 5),
@@ -798,7 +805,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: upcolor_3,
                         elevation: 16,
                       ),
-                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
               ],
@@ -844,7 +851,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text(" 姿勢スコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                 ),
@@ -871,7 +878,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: downcolor_2.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("Bad Point",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),
@@ -897,7 +904,7 @@ class _EvaluationState extends State<Evaluation> {
                         backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                       
                     ),
                     ),

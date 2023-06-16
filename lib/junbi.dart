@@ -16,13 +16,20 @@ class JunbiINPage extends StatefulWidget {
 
 class _JunbiINPageState extends State<JunbiINPage> {
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: Text('内カメラ',style:const TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          title: Text('内カメラ',style:TextStyle(color: main_text_colors)),
+        backgroundColor: main_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/manual2.png"),
@@ -60,10 +67,10 @@ showDialog(
         );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 30,
           ),
-          child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),
+          child: Text('次へ',style: TextStyle(fontSize: 40, color: main_text_colors)),
           ),
           ],
     ),
@@ -86,13 +93,20 @@ class JunbiOUTPage extends StatefulWidget {
 
 class _JunbiOUTPageState extends State<JunbiOUTPage> {
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: Text('外カメラ',style:const TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          title: Text('外カメラ',style:TextStyle(color:appbar_text_colors)),
+        backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Image.asset("assets/junbiout.png"),
@@ -130,10 +144,10 @@ showDialog(
         );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 30,
           ),
-          child: const Text('次へ',style: TextStyle(fontSize: 40, color: Colors.white)),
+          child:Text('次へ',style: TextStyle(fontSize: 40, color: main_text_colors)),
           ),
           ],
     ),

@@ -71,17 +71,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _audio = AudioCache();
-  //色
+  //色の変更
   var appbar_colors = Colors.white;
-  var main_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
   var sub_colors = Colors.black;
-  var main_text_colors = Colors.black;
+  var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: main_text_colors)),
+        appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: appbar_text_colors)),
         backgroundColor: appbar_colors),
         body:  Stack(
           children: <Widget>[
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                primary: Colors.transparent,
                 elevation: 0,
                   ),
-                  child: Text('     ',style: TextStyle(fontSize: 50,color: Colors.black)),
+                  child: Text('     ',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 ),
               ]
@@ -152,10 +153,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     fixedSize:const Size(150,150),
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('姿勢\n評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: Colors.white)),
+                  child: Text('姿勢\n評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
                 ),
                 ),
               //  ElevatedButton(
@@ -184,31 +185,31 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     fixedSize:const Size(180,150),
-                    backgroundColor: Colors.green,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white),textAlign: TextAlign.center,),
-                ), 
-              ),
+                  child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors),textAlign: TextAlign.center,),
+                ),
+                ),              
               ],
             ),
-            Align(alignment: Alignment.topRight,
-                child: ElevatedButton(
-                  onPressed: (){
-                    outcamera();
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Developer(title: '開発者',camera: widget.camera)
-              )
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 214, 160, 255),
-                    elevation: 16,
-                  ),
-                  child: Text('開発者',style: TextStyle(fontSize: 20,color: Colors.black)),
-                ),              
-            )
+            // Align(alignment: Alignment.topRight,
+            //     child: ElevatedButton(
+            //       onPressed: (){
+            //         outcamera();
+            //         Navigator.push(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => Developer(title: '開発者',camera: widget.camera)
+            //   )
+            //         );
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         primary: Color.fromARGB(255, 214, 160, 255),
+            //         elevation: 16,
+            //       ),
+            //       child: Text('開発者',style: TextStyle(fontSize: 20,color: main_text_colors)),
+            //     ),
+            // )
               ],
             ),
           ],

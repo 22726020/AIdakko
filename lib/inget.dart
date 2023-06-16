@@ -57,7 +57,13 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     );
     });
   }
-
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   @override
   void initState() {
@@ -108,7 +114,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -150,10 +156,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -214,6 +220,14 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
     });
   }
 
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+
 
   @override
   void initState() {
@@ -236,9 +250,6 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
     _controller.dispose();
     super.dispose();
   }
-
-
-
 
   Widget build(BuildContext context) {
     if (count == 0) {
@@ -264,7 +275,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -306,10 +317,10 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -344,6 +355,13 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -420,7 +438,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -462,10 +480,10 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child:Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -503,6 +521,13 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -579,7 +604,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -621,10 +646,10 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child:Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -660,6 +685,13 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -710,8 +742,6 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
   }
 
 
-
-
   Widget build(BuildContext context) {
     if (count == 0) {
       _audio.play('migi.mp3');
@@ -736,7 +766,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('←を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('←を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -778,10 +808,10 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child:Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -821,6 +851,13 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -897,7 +934,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange ,color: Colors.white)),
+            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -939,10 +976,10 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child:Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],
@@ -980,6 +1017,14 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+
 
   // ③ カウントダウン処理を行う関数を定義
   Future <void> startTimer() async{
@@ -1056,7 +1101,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
           Container(
             padding: const EdgeInsets.only(top: 55),
             alignment: Alignment.topCenter,
-            child: const Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: Colors.orange,color: Colors.white)),
+            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
           ),          
           Opacity(
             opacity: check ? opacity = 0.6 : opacity = 0.6,
@@ -1098,10 +1143,10 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: const Text('中断する',style: TextStyle(fontSize: 50,color: Colors.white)),
+                  child: Text('中断する',style: TextStyle(fontSize: 50,color: main_text_colors)),
                 ),
                 )
               ],

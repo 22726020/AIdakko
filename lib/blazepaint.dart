@@ -37,6 +37,13 @@ class _SavePageInState extends State<SavePageIn> {
   var upcolor_1 = Colors.grey;
   var upcolor_2 = Colors.grey;
   var upcolor_3 = Colors.grey;
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // 画像の保存したい
   Future saveImage() async {
@@ -52,9 +59,9 @@ class _SavePageInState extends State<SavePageIn> {
       upcolor_1 = Colors.orange;
     }
   return Scaffold(
-    appBar: AppBar(title: const Text('確認画面'),
+    appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
       actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-      backgroundColor: Colors.orange),
+      backgroundColor: main_colors),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
@@ -73,7 +80,7 @@ class _SavePageInState extends State<SavePageIn> {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize:const Size(120,60),
-                        backgroundColor: upcolor_1,//ボタン背景色
+                        backgroundColor: main_colors,//ボタン背景色
                         elevation: 16,
                       ),
                       child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.white)),
@@ -132,7 +139,7 @@ class _SavePageInState extends State<SavePageIn> {
           );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 26,
           ),
           child: const Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -145,7 +152,7 @@ class _SavePageInState extends State<SavePageIn> {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 26,
           ),
           child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -180,6 +187,12 @@ class _SavePageOutState extends State<SavePageOut> {
   var upcolor_1 = Colors.grey;
   var upcolor_2 = Colors.grey;
   var upcolor_3 = Colors.grey;
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   // 画像の保存したい
   Future saveImage() async {
@@ -195,9 +208,9 @@ class _SavePageOutState extends State<SavePageOut> {
       upcolor_1 = Colors.orange;
     }
   return Scaffold(
-    appBar: AppBar(title: const Text('確認画面'),
+    appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
       actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-      backgroundColor: Colors.orange),
+      backgroundColor: appbar_colors),
     body: SingleChildScrollView(
       child:Column(
       children: <Widget>[
@@ -275,7 +288,7 @@ class _SavePageOutState extends State<SavePageOut> {
           );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 26,
           ),
           child: const Text('姿勢推定部へ',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -288,7 +301,7 @@ class _SavePageOutState extends State<SavePageOut> {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: main_colors,
           elevation: 26,
           ),
           child: const Text('撮影をやり直す',style: TextStyle(fontSize: 25,color: Colors.white)),
@@ -615,6 +628,13 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
 
   final _points = <Offset>[];
   String dir = "正面姿勢推定結果";
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
 
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
   Future<void> _blazePose() async {
@@ -695,8 +715,8 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text(dir,style:TextStyle(color: Colors.black)),
-      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        title:  Text(dir,style:TextStyle(color: appbar_text_colors)),
+      backgroundColor: appbar_colors),
 
       body: Stack(
         children: <Widget>[
@@ -729,7 +749,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
@@ -747,7 +767,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('次へ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
@@ -794,10 +814,15 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
   File? _filePath;
   var offsets = <Offset>[];
   String dir = "姿勢推定結果";
-
   final _points = <Offset>[];
-
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
   Future<void> _blazePose() async {
     String path = widget.path2; //
     final inputImage = InputImage.fromFilePath(path);
@@ -874,8 +899,8 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("⇨姿勢推定結果",style:TextStyle(color: Colors.black)),
-      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        title:  Text("⇨姿勢推定結果",style:TextStyle(color: appbar_text_colors)),
+      backgroundColor: appbar_colors),
 
       body: Stack(
         children: <Widget>[
@@ -908,7 +933,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
@@ -926,7 +951,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('次へ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
@@ -971,9 +996,15 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
   String? _fileName;
   File? _filePath;
   var offsets = <Offset>[];
-
-
   final _points = <Offset>[];
+  //色
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+
 
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
   Future<void> _blazePose() async {
@@ -984,11 +1015,10 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     //デバイスのサイズ取得
     final double deviceHeight = MediaQuery.of(context).size.height;
     final double deviceWidth = MediaQuery.of(context).size.width;
-
-    
     //初期化
     listx = [];
     listy = [];
+
 
     for (Pose pose in poses) {
       // to access all landmarks
@@ -1052,8 +1082,8 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
         actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-        title:  Text("⇦姿勢推定結果",style:TextStyle(color: Colors.black)),
-      backgroundColor: Color.fromARGB(255, 174, 168, 167)),
+        title:  Text("⇦姿勢推定結果",style:TextStyle(color: appbar_text_colors)),
+      backgroundColor: appbar_colors),
 
       body: Stack(
         children: <Widget>[
@@ -1086,7 +1116,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
@@ -1104,7 +1134,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
             child: Text('次へ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
