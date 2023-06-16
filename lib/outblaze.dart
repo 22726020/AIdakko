@@ -37,6 +37,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   String? _extension;

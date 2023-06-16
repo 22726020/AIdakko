@@ -13,13 +13,22 @@ class Pause1Page extends StatefulWidget {
 }
 
 class _Pause1PageState extends State<Pause1Page> {
+  //色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
-          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: new Text(widget.title,style:TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+          title: new Text(widget.title,style:TextStyle(color: appbar_text_colors)),
+        backgroundColor: appbar_colors),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -65,13 +74,22 @@ class Pause2Page extends StatefulWidget {
 }
 
 class _Pause2PageState extends State<Pause2Page> {
+  //色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
-          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: new Text(widget.title,style:TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+          title: new Text(widget.title,style:TextStyle(color: appbar_text_colors)),
+        backgroundColor: appbar_colors),
         body:  Stack(
           children: <Widget>[
             SizedBox(
@@ -117,13 +135,22 @@ class Pause3Page extends StatefulWidget {
 }
 
 class _Pause3PageState extends State<Pause3Page> {
+  //色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
-          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
-          title: Text(widget.title,style:TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange),
+          actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+          title: Text(widget.title,style:TextStyle(color: appbar_text_colors)),
+        backgroundColor: appbar_colors),
         body:  Stack(
           children: <Widget>[
             SizedBox(

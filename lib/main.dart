@@ -78,6 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

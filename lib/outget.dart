@@ -37,6 +37,7 @@ class OutTakePicture1State extends State<OutTakePicture1> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   @override

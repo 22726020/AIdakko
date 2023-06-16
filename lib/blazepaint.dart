@@ -44,6 +44,7 @@ class _SavePageInState extends State<SavePageIn> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
   // 画像の保存したい
   Future saveImage() async {
@@ -60,7 +61,7 @@ class _SavePageInState extends State<SavePageIn> {
     }
   return Scaffold(
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
-      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
       backgroundColor: main_colors),
     body: SingleChildScrollView(
       child:Column(
@@ -193,6 +194,7 @@ class _SavePageOutState extends State<SavePageOut> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
   // 画像の保存したい
   Future saveImage() async {
@@ -209,7 +211,7 @@ class _SavePageOutState extends State<SavePageOut> {
     }
   return Scaffold(
     appBar: AppBar(title: Text('確認画面',style:TextStyle(color: appbar_text_colors)),
-      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
       backgroundColor: appbar_colors),
     body: SingleChildScrollView(
       child:Column(
@@ -635,6 +637,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
   Future<void> _blazePose() async {
@@ -714,7 +717,7 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
     
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
-        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
         title:  Text(dir,style:TextStyle(color: appbar_text_colors)),
       backgroundColor: appbar_colors),
 
@@ -823,6 +826,8 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
+
   Future<void> _blazePose() async {
     String path = widget.path2; //
     final inputImage = InputImage.fromFilePath(path);
@@ -898,7 +903,7 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
     
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
-        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
         title:  Text("⇨姿勢推定結果",style:TextStyle(color: appbar_text_colors)),
       backgroundColor: appbar_colors),
 
@@ -1004,7 +1009,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
-
+  var icon_colors = Colors.black;
 
   final poseDetector = PoseDetector(options: PoseDetectorOptions());
   Future<void> _blazePose() async {
@@ -1081,7 +1086,7 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
     
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
-        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
         title:  Text("⇦姿勢推定結果",style:TextStyle(color: appbar_text_colors)),
       backgroundColor: appbar_colors),
 

@@ -56,6 +56,7 @@ class _EvaluationState extends State<Evaluation> {
   var sub_colors = Colors.black;
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
   List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
@@ -759,7 +760,7 @@ class _EvaluationState extends State<Evaluation> {
     
     return Scaffold(
       appBar:  AppBar(centerTitle: true,
-        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home))],
+        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
         title:  Text("評価結果",style:TextStyle(color: appbar_text_colors)),
       backgroundColor: appbar_colors),
       body:Stack(

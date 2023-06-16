@@ -18,6 +18,14 @@ class Retouch1 extends StatefulWidget {
 class Retouch1State extends State<Retouch1> {
 final _points = <Offset>[];
 int _counter = 0;
+//色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
@@ -90,10 +98,10 @@ int _counter = 0;
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
-            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors)),
           ),
                     ),
       ],
@@ -154,6 +162,14 @@ class Retouch2 extends StatefulWidget {
 class Retouch2State extends State<Retouch2> {
 final _points = <Offset>[];
 int _counter = 0;
+//色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   Widget build(BuildContext context) {
@@ -177,7 +193,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
@@ -222,10 +238,10 @@ int _counter = 0;
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
-            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors)),
           ),
                     ),
       ],
@@ -287,6 +303,14 @@ class Retouch3 extends StatefulWidget {
 class Retouch3State extends State<Retouch3> {
 final _points = <Offset>[];
 int _counter = 0;
+//色の変更
+  var appbar_colors = Colors.white;
+  var appbar_text_colors = Colors.black;
+  var main_colors = Colors.black;
+  var sub_colors = Colors.black;
+  var main_text_colors = Colors.white;
+  var sub_text_colors = Colors.white;
+  var icon_colors = Colors.black;
 
 
   Widget build(BuildContext context) {
@@ -310,7 +334,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
@@ -355,10 +379,10 @@ int _counter = 0;
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               fixedSize:const Size(180,60),
-              backgroundColor: Colors.orange,
+              backgroundColor: main_colors,
               elevation: 16,
             ),
-            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+            child: Text('修正完了',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors)),
           ),
                     ),
       ],
