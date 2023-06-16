@@ -98,6 +98,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('正面を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -111,11 +114,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
           ),
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
@@ -138,14 +136,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -260,6 +251,9 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('正面を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -273,12 +267,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),          
+          ),         
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
@@ -300,14 +289,7 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -424,6 +406,9 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('正面を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -437,12 +422,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('正面を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),          
+          ),         
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/syoumen.png"),
@@ -464,14 +444,7 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -591,6 +564,9 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇦を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -604,12 +580,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('⇦を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),          
+          ),       
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
@@ -631,14 +602,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -754,6 +718,9 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇦を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -767,12 +734,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('←を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),          
+          ),         
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇦.png"),
@@ -794,14 +756,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -923,6 +878,9 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇨を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -936,12 +894,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors ,color: main_text_colors)),
-          ),          
+          ),         
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
@@ -963,14 +916,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
@@ -1091,6 +1037,9 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
       count++;
     }
     return Scaffold(
+      appBar:  AppBar(centerTitle: true,title:  Text('⇨を向いてください',style:TextStyle(color: appbar_text_colors)),
+      actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+        backgroundColor: appbar_colors),
       body: Stack(
         alignment: Alignment.center,
         fit:StackFit.loose,
@@ -1104,12 +1053,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
                 return const CircularProgressIndicator();
               }
             },
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 55),
-            alignment: Alignment.topCenter,
-            child: Text('⇨を向いてください', style: TextStyle(fontSize: 36,backgroundColor: main_colors,color: main_text_colors)),
-          ),          
+          ),       
           Opacity(
             opacity: check ? opacity = 0.8 : opacity = 0.8,
             child: Image.asset("assets/⇨.png"),
@@ -1131,14 +1075,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: const EdgeInsets.only(top:720,right: 20),
-                child:FloatingActionButton(
-                  onPressed: (){
-                    Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
-                  },
-                  child: const Icon(Icons.home),
-                ),
-                ),
+                
                 Padding(padding: const EdgeInsets.only(top:720,left: 30),
                 child:ElevatedButton(
                   onPressed: (){
