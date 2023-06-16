@@ -33,9 +33,9 @@ int _counter = 0;
     //                           "Right_heel","Left_foot_index","Right_foot_index"];
 
     //消去"Left_eye","Right_eye","Left_mouth","Right_mouth"
-    List<String> landmarks = ["Nose","Left_shoulder","Right_shoulder",
-                              "Left_elbow","Right_elbow","Left_wrist","Right_wrist",
-                              "Left_hip","Right_hip","修正完了"];
+    List<String> landmarks = ["鼻","左肩","右肩",
+                              "左肘","右肘","左手首","右手首",
+                              "左腰","右腰","修正完了"];
     landmark = landmarks[_counter];
     
 
@@ -45,7 +45,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を押して", style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
@@ -167,7 +167,7 @@ int _counter = 0;
     //                           "Right_thumb","Left_hip","Right_hip","Left_knee",
     //                           "Right_knee","Left_ankle","Right_ankle","Left_heel",
     //                           "Right_heel","Left_foot_index","Right_foot_index"];
-    List<String> landmarks = ["Nose","Right_shoulder","Right_elbow","Right_wrist","Right_hip","Right_knee","Right_ankle","修正完了"];
+    List<String> landmarks = ["鼻","右肩","右肘","右手首","右腰","右膝","右足首","修正完了"];
     landmark = landmarks[_counter];
     
 
@@ -177,7 +177,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を押して", style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
@@ -300,7 +300,7 @@ int _counter = 0;
     //                           "Right_thumb","Left_hip","Right_hip","Left_knee",
     //                           "Right_knee","Left_ankle","Right_ankle","Left_heel",
     //                           "Right_heel","Left_foot_index","Right_foot_index"];
-    List<String> landmarks = ["Nose","Left_shoulder","Left_elbow","Left_wrist","Left_hip","Left_knee","Left_ankle","修正完了"];
+    List<String> landmarks = ["鼻","左肩","左肘","左手首","左腰","左膝","左足首","修正完了"];
     landmark = landmarks[_counter];
     
 
@@ -310,7 +310,7 @@ int _counter = 0;
       body:Stack(
         children: <Widget>[
           Padding (padding: EdgeInsets.only(top: 60),
-          child: Text(landmark + "を押して", style: TextStyle(fontSize: 40,backgroundColor: Colors.orange ,color: Colors.white)),
+          child: Text(landmark + "を長押ししてください", style: TextStyle(fontSize: 28,backgroundColor: Colors.orange ,color: Colors.white)),
           ),
           Padding (padding: EdgeInsets.only(top: 120),
           child: Image.file(
