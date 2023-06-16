@@ -31,7 +31,7 @@ class _ManualPageState extends State<ManualPage> {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
-          title: Text('環境説明',style:TextStyle(color: appbar_text_colors )),
+          title: Text('撮影を行う前に',style:TextStyle(color: appbar_text_colors )),
         backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
@@ -51,7 +51,7 @@ class _ManualPageState extends State<ManualPage> {
           backgroundColor: main_colors,
           elevation: 30,
           ),
-                child: Text('内カメ',style: TextStyle(fontSize: 40, color: main_text_colors)),
+                child: Text('自撮り\nモード',style: TextStyle(fontSize: 30, color: main_text_colors)),
           ),
       ElevatedButton(
         onPressed: (){
@@ -61,10 +61,10 @@ class _ManualPageState extends State<ManualPage> {
           );
           },
         style: ElevatedButton.styleFrom(
-          backgroundColor: main_colors,
+          backgroundColor: Colors.grey,
           elevation: 30,
           ),
-                child: Text('外カメ',style: TextStyle(fontSize: 40, color: main_text_colors)),
+                child: Text('他撮り\nモード',style: TextStyle(fontSize: 30, color: main_text_colors)),
           ),
           ],
     ),

@@ -43,14 +43,14 @@ class _JunbiINPageState extends State<JunbiINPage> {
             final cameras = await availableCameras();
   // 利用可能なカメラのリストから特定のカメラを取得
             final firstCamera = cameras[1];
-showDialog(
+            showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("準備はできましたか？"),
             content: const Text("スマホはなるべく垂直に置き\n全身が写るようにして下さい\n十分離れた後に\nお子さんを抱っこして下さい\n撮影が開始されます"),
             actions: [
               GestureDetector(
-                child: Text("はい",style: TextStyle(fontSize: 30),),
+                child: Text("はい",style: TextStyle(fontSize: 30)),
                 onTap: (){
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => TakePictureScreen(camera:widget.camera),

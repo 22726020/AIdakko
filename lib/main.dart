@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     fixedSize:const Size(180,150),
-                    backgroundColor: Colors.grey.withOpacity(0.5),
+                    backgroundColor: Colors.grey,
                     elevation: 16,
                   ),
                   child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors),textAlign: TextAlign.center,),
