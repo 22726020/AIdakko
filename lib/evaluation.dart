@@ -373,7 +373,11 @@ class _EvaluationState extends State<Evaluation> {
     summraize.add(left_kendalllist[2]);//腰までの角度(左)
     summraize.add(left_kendalllist[3]);//肩までの角度(左)
 
-    print(summraize);
+    print("B1:"+summraize[7]);
+    print("B2:"+summraize[6]);
+    print("B3:"+summraize[5]);
+    print("A:"+summraize[0]);
+    print("R:"+summraize[2]);
     return summraize;
 
   }
@@ -689,6 +693,7 @@ class _EvaluationState extends State<Evaluation> {
 
   //ダイアログ表示
   _openDialog() {
+    
     return showDialog(
       context: context,
       builder: (BuildContext context) {

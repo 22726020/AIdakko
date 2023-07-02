@@ -761,22 +761,22 @@ class BlazeLandmarkPage1State extends State<BlazeLandmarkPage1> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        // child: ElevatedButton(
-        //     onPressed: (){
-        //       Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => Retouch1(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3)
-        // )
-        //       );
-        //     },
-        //     style: ElevatedButton.styleFrom(
-        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        //       fixedSize:const Size(180,60),
-        //       backgroundColor: main_colors,
-        //       elevation: 16,
-        //     ),
-        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-        //   ),
+        child: ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Retouch1(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3)
+        )
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              fixedSize:const Size(180,60),
+              backgroundColor: main_colors,
+              elevation: 16,
+            ),
+            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+          ),
                     ),
           Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
         child: ElevatedButton(
@@ -947,22 +947,22 @@ class BlazeLandmarkPage2State extends State<BlazeLandmarkPage2> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        // child: ElevatedButton(
-        //     onPressed: (){
-        //       Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => Retouch2(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
-        // )
-        //       );
-        //     },
-        //     style: ElevatedButton.styleFrom(
-        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        //       fixedSize:const Size(180,60),
-        //       backgroundColor: main_colors,
-        //       elevation: 16,
-        //     ),
-        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-        //   ),
+        child: ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Retouch2(inoutcamera: widget.inoutcamera,path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1)
+        )
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              fixedSize:const Size(180,60),
+              backgroundColor: main_colors,
+              elevation: 16,
+            ),
+            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+          ),
                     ),
           Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.26),
         child: ElevatedButton(
@@ -1130,22 +1130,22 @@ class BlazeLandmarkPage3State extends State<BlazeLandmarkPage3> {
       ),
       //→paint.dart
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.007),
-        // child: ElevatedButton(
-        //     onPressed: (){
-        //       Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,inoutcamera: widget.inoutcamera,),
-        //       )
-        //       );
-        //     },
-        //     style: ElevatedButton.styleFrom(
-        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        //       fixedSize:const Size(180,60),
-        //       backgroundColor: main_colors,
-        //       elevation: 16,
-        //     ),
-        //     child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
-        //   ),
+        child: ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Retouch3(path1: widget.path1, path2: widget.path2, path3: widget.path3, offsets1: widget.offsets1, offsets2: widget.offsets2,inoutcamera: widget.inoutcamera,),
+              )
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              fixedSize:const Size(180,60),
+              backgroundColor: main_colors,
+              elevation: 16,
+            ),
+            child: Text('修正する',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.white)),
+          ),
                     ),
       Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*1.5,left: MediaQuery.of(context).size.height*0.25),
         child: ElevatedButton(
