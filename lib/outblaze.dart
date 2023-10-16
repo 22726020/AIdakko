@@ -8,6 +8,7 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/outget.dart';
 import 'package:gazou/blazepaint.dart';
+import 'package:gazou/evaluation.dart';
 
 //git追加テスト
 class OutBlazePage1 extends StatefulWidget {
@@ -171,7 +172,7 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.imagePath),
+            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.imagePath,offsets1: offsets),
           ));
     } else {
 
@@ -227,11 +228,12 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
 }
 
 class OutBlazePage2 extends StatefulWidget {
-  const OutBlazePage2({Key? key, required this.camera, required this.imagePath,required this.path1})
+  const OutBlazePage2({Key? key, required this.camera, required this.imagePath,required this.path1,required this.offsets1})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
   final String path1;
+  final List<Offset> offsets1;
 
   //パスも一緒に受け取る
   @override
@@ -375,7 +377,7 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.imagePath),
+            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.imagePath, offsets1:widget.offsets1, offsets2:offsets),
           ));
     } else {
 
@@ -385,7 +387,7 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.path1),
+            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.path1,offsets1: offsets),
           ));
     }
   }
@@ -431,12 +433,14 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
 }
 
 class OutBlazePage3 extends StatefulWidget {
-  const OutBlazePage3({Key? key, required this.camera, required this.imagePath,required this.path1,required this.path2})
+  const OutBlazePage3({Key? key, required this.camera, required this.imagePath,required this.path1,required this.path2,required this.offsets1, required this.offsets2})
       : super(key: key);
   final CameraDescription camera;
   final String imagePath;
   final String path1;
   final String path2;
+  final List<Offset> offsets1;
+  final List<Offset> offsets2;
 
   //パスも一緒に受け取る
   @override
@@ -552,7 +556,10 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
       await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SavePageOut(camera: widget.camera, title: "抱っこアプリ",path1:widget.path1, path2: widget.path2,path3: widget.imagePath),
+            //修正できるページに飛ばす
+            // builder: (context) => SavePageOut(camera: widget.camera, title: "抱っこアプリ",path1:widget.path1, path2: widget.path2,path3: widget.imagePath),
+            //修正を省略したページに飛ばす
+            builder: (context) => Evaluation(path1: widget.path1,path2: widget.path2,path3:widget.imagePath,offsets1:widget.offsets1,offsets2:widget.offsets2,offsets3:offsets,inoutcamera:"out"),
           ));
     } else {
 
@@ -562,7 +569,7 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,),
+            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,offsets1:widget.offsets1, offsets2:offsets),
           ));
     }
   }

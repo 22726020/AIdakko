@@ -478,10 +478,12 @@ class TakePictureScreen2 extends StatefulWidget {
     Key? key,
     required this.camera,
     required this.path1,
+    required this.offsets1,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
+  final List<Offset> offsets1;
 
   @override
   TakePictureScreen2State createState() => TakePictureScreen2State();
@@ -525,7 +527,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
 
       await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1),
+                    MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1,offsets1: widget.offsets1,),
               )
                     );
     });
@@ -609,7 +611,7 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
                     dispose();
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Pause2Page(title:"中断中",camera:widget.camera,path1:widget.path1),
+                    MaterialPageRoute(builder: (context) => Pause2Page(title:"中断中",camera:widget.camera,path1:widget.path1, offsets1: widget.offsets1,),
               )
                     );
                   },
@@ -634,10 +636,13 @@ class TakePictureScreen2p2 extends StatefulWidget {
     Key? key,
     required this.camera,
     required this.path1,
+    required this.offsets1,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
+  final List<Offset> offsets1;
+
 
   @override
   TakePictureScreen2p2State createState() => TakePictureScreen2p2State();
@@ -681,7 +686,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
 
       await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1),
+                    MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1,offsets1: widget.offsets1,),
               )
                     );
     });
@@ -763,7 +768,7 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
                     dispose();
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Pause2Page(title:"中断中",camera:widget.camera,path1:widget.path1),
+                    MaterialPageRoute(builder: (context) => Pause2Page(title:"中断中",camera:widget.camera,path1:widget.path1,offsets1: widget.offsets1,),
               )
                     );
                   },
@@ -791,11 +796,15 @@ class TakePictureScreen3 extends StatefulWidget {
     required this.camera,
     required this.path1,
     required this.path2,
+    required this.offsets1, 
+    required this.offsets2,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
   final String path2;
+  final List<Offset> offsets1;
+  final List<Offset> offsets2;
 
   @override
   TakePictureScreen3State createState() => TakePictureScreen3State();
@@ -839,7 +848,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
 
       await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
               )
                     );
     });
@@ -923,7 +932,7 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
                     dispose();
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Pause3Page(title:"中断中",camera:widget.camera,path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => Pause3Page(title:"中断中",camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
               )
                     );
                   },
@@ -949,11 +958,15 @@ class TakePictureScreen3p3 extends StatefulWidget {
     required this.camera,
     required this.path1,
     required this.path2,
+    required this.offsets1, 
+    required this.offsets2,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
   final String path2;
+  final List<Offset> offsets1;
+  final List<Offset> offsets2;
 
   @override
   TakePictureScreen3p3State createState() => TakePictureScreen3p3State();
@@ -998,7 +1011,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
 
       await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
               )
                     );
     });
@@ -1082,7 +1095,7 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
                     dispose();
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Pause3Page(title:"中断中",camera:widget.camera,path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => Pause3Page(title:"中断中",camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
               )
                     );
                   },

@@ -62,11 +62,12 @@ class _Pause1PageState extends State<Pause1Page> {
 
 
 class Pause2Page extends StatefulWidget {
-  const Pause2Page({Key? key, required this.title,required this.camera,required this.path1}) : super(key: key);
+  const Pause2Page({Key? key, required this.title,required this.camera,required this.path1,required this.offsets1}) : super(key: key);
 
   final String title;
   final CameraDescription camera;
   final String path1;
+  final List<Offset> offsets1;
 
 
   @override
@@ -104,7 +105,7 @@ class _Pause2PageState extends State<Pause2Page> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TakePictureScreen2p2(camera: widget.camera,path1: widget.path1,),
+                            builder: (context) => TakePictureScreen2p2(camera: widget.camera,path1: widget.path1,offsets1: widget.offsets1,),
                           ));
                   },
                   style: ElevatedButton.styleFrom(
@@ -122,12 +123,14 @@ class _Pause2PageState extends State<Pause2Page> {
 }
 
 class Pause3Page extends StatefulWidget {
-  const Pause3Page({Key? key, required this.title,required this.camera,required this.path1,required this.path2}) : super(key: key);
+  const Pause3Page({Key? key, required this.title,required this.camera,required this.path1,required this.path2,required this.offsets1,required this.offsets2,}) : super(key: key);
 
   final String title;
   final CameraDescription camera;
   final String path1;
   final String path2;
+  final List<Offset> offsets1;
+  final List<Offset> offsets2;
 
 
   @override
@@ -165,7 +168,7 @@ class _Pause3PageState extends State<Pause3Page> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TakePictureScreen3p3(camera: widget.camera,path1: widget.path1,path2: widget.path2),
+                            builder: (context) => TakePictureScreen3p3(camera: widget.camera,path1: widget.path1,path2: widget.path2,offsets1: widget.offsets1, offsets2: widget.offsets2,),
                           ));
                   },
                   style: ElevatedButton.styleFrom(

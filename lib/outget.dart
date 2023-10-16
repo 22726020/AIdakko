@@ -129,10 +129,12 @@ class OutTakePicture2 extends StatefulWidget {
     Key? key,
     required this.camera,
     required this.path1,
+    required this.offsets1,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
+  final List<Offset> offsets1;
 
   @override
   OutTakePicture2State createState() => OutTakePicture2State();
@@ -221,7 +223,7 @@ class OutTakePicture2State extends State<OutTakePicture2> {
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage2(imagePath:image.path,camera:widget.camera,path1:widget.path1),
+                    MaterialPageRoute(builder: (context) => OutBlazePage2(imagePath:image.path,camera:widget.camera,path1:widget.path1, offsets1: widget.offsets1,),
               )
                     );
                     // path を出力
@@ -244,12 +246,16 @@ class OutTakePicture3 extends StatefulWidget {
     Key? key,
     required this.camera,
     required this.path1,
-    required this.path2,
+    required this.path2, 
+    required this.offsets1, 
+    required this.offsets2,
   }) : super(key: key);
 
   final CameraDescription camera;
   final String path1;
   final String path2;
+  final List<Offset> offsets1;
+  final List<Offset> offsets2;
 
   @override
   OutTakePicture3State createState() => OutTakePicture3State();
@@ -337,7 +343,7 @@ class OutTakePicture3State extends State<OutTakePicture3> {
 
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => OutBlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2),
+                    MaterialPageRoute(builder: (context) => OutBlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1, offsets2: widget.offsets2,),
               )
                     );
                     // path を出力
