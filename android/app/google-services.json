@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1083816701295",
+    "firebase_url": "https://hakko-c7bf7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hakko-c7bf7",
+    "storage_bucket": "hakko-c7bf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083816701295:android:88f1f8514fec0c452c4c9a",
+        "android_client_info": {
+          "package_name": "com.example.gazou"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNzYO3vC5V3-iu-xaeuOi8Kutovsdw0jU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

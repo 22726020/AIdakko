@@ -387,7 +387,7 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.path1,offsets1: offsets),
+            builder: (context) => OutTakePicture2(camera: widget.camera,path1: widget.path1,offsets1: widget.offsets1),
           ));
     }
   }
@@ -562,14 +562,13 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
             builder: (context) => Evaluation(path1: widget.path1,path2: widget.path2,path3:widget.imagePath,offsets1:widget.offsets1,offsets2:widget.offsets2,offsets3:offsets,inoutcamera:"out"),
           ));
     } else {
-
       //問題があるとき再撮影へ
       _audio.play('keihou.mp3');
       await Future.delayed(const Duration(seconds: 4));
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,offsets1:widget.offsets1, offsets2:offsets),
+            builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,offsets1:widget.offsets1, offsets2:widget.offsets2),
           ));
     }
   }

@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gazou/inget.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/junbi.dart';
-
+import 'package:fl_chart/fl_chart.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'dart:typed_data';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
 
 class ManualPage extends StatefulWidget {
   const ManualPage({Key? key, required this.camera,required this.title}) : super(key: key);
@@ -35,6 +40,7 @@ class _ManualPageState extends State<ManualPage> {
         backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
+
             Image.asset("assets/manual.png"),
             Text('どちらで行うか選択してください',style: TextStyle(fontSize: 22),),
     Row(
@@ -44,6 +50,7 @@ class _ManualPageState extends State<ManualPage> {
       child:
       ElevatedButton(
         onPressed: (){
+          _InImagesave();
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => JunbiINPage(title: widget.title,camera:widget.camera),
           )
@@ -60,6 +67,7 @@ class _ManualPageState extends State<ManualPage> {
       child:
       ElevatedButton(
         onPressed: (){
+          _OutImagesave();
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => JunbiOUTPage(title: widget.title,camera:widget.camera),
           )
@@ -80,3 +88,42 @@ class _ManualPageState extends State<ManualPage> {
     );
   }
 }
+
+  Future<void> _InImagesave() async {
+  // 1. アプリ内の画像ファイルをアセットからコピーして保存
+  final appDocDir = await getApplicationDocumentsDirectory();
+  final imageFile = File('${appDocDir.path}/jidori.png');
+  
+  // 2. アセットから画像ファイルをコピー
+  final ByteData data = await rootBundle.load('assets/jidori.png');
+  final List<int> bytes = data.buffer.asUint8List();
+  await imageFile.writeAsBytes(bytes);
+
+  // 3. 保存したファイルをギャラリーアルバムに保存
+  final result = await ImageGallerySaver.saveFile(imageFile.path);
+  
+    if (result != null) {
+      print('画像がギャラリーアルバムに保存されました: $result');
+    } else {
+      print('画像の保存に失敗しました');
+    }
+  }
+  Future<void> _OutImagesave() async {
+  // 1. アプリ内の画像ファイルをアセットからコピーして保存
+  final appDocDir = await getApplicationDocumentsDirectory();
+  final imageFile = File('${appDocDir.path}/tadori.png');
+  
+  // 2. アセットから画像ファイルをコピー
+  final ByteData data = await rootBundle.load('assets/tadori.png');
+  final List<int> bytes = data.buffer.asUint8List();
+  await imageFile.writeAsBytes(bytes);
+
+  // 3. 保存したファイルをギャラリーアルバムに保存
+  final result = await ImageGallerySaver.saveFile(imageFile.path);
+  
+    if (result != null) {
+      print('画像がギャラリーアルバムに保存されました: $result');
+    } else {
+      print('画像の保存に失敗しました');
+    }
+  }

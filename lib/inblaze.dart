@@ -279,6 +279,7 @@ class _BlazePage2State extends State<BlazePage2> {
     print(EllorXlist);
     print(EllorYlist);
     hantei = false;
+
     //おかしいところ判定
     if (EllorXlist.isEmpty && EllorYlist.isEmpty) {
       hantei = true;
@@ -372,7 +373,7 @@ class _BlazePage2State extends State<BlazePage2> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen2(camera: widget.camera,path1:widget.path1,offsets1: offsets,),
+            builder: (context) => TakePictureScreen2(camera: widget.camera,path1:widget.path1,offsets1: widget.offsets1),
           ));
     }
   }
@@ -580,7 +581,7 @@ class _BlazePage3State extends State<BlazePage3> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1,path2:widget.path2,offsets1: widget.offsets1, offsets2: offsets),
+            builder: (context) => TakePictureScreen3(camera: widget.camera,path1: widget.path1,path2:widget.path2,offsets1: widget.offsets1, offsets2: widget.offsets2),
           ));
     }
   }

@@ -7,6 +7,7 @@ import 'package:gazou/main.dart';
 import 'package:quiver/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gazou/pause.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 //get0
 /// 写真撮影画面
@@ -50,6 +51,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     sub.onDone(()async {
       final image = await _controller.takePicture();
 
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage1(imagePath:image.path,camera:widget.camera),
@@ -160,6 +164,17 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       ),
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 //get1
@@ -203,7 +218,9 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage1(imagePath:image.path,camera:widget.camera),
@@ -314,6 +331,17 @@ class TakePictureScreen1State extends State<TakePictureScreen1> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 /// 写真撮影画面
@@ -364,7 +392,9 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage1(imagePath:image.path,camera:widget.camera),
@@ -469,6 +499,17 @@ class TakePictureScreen1p1State extends State<TakePictureScreen1p1> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 //get2
@@ -524,7 +565,9 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1,offsets1: widget.offsets1,),
@@ -629,6 +672,17 @@ class TakePictureScreen2State extends State<TakePictureScreen2> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 class TakePictureScreen2p2 extends StatefulWidget {
@@ -683,7 +737,9 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage2(imagePath:image.path,camera:widget.camera,path1: widget.path1,offsets1: widget.offsets1,),
@@ -786,6 +842,17 @@ class TakePictureScreen2p2State extends State<TakePictureScreen2p2> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 //get3
@@ -845,7 +912,9 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
@@ -950,6 +1019,17 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
 
 class TakePictureScreen3p3 extends StatefulWidget {
@@ -1008,7 +1088,9 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
     // ④終了時の処理
     sub.onDone(()async {
       final image = await _controller.takePicture();
-
+      //画像をローカルに保存
+      String imagePath = image.path; // XFile からファイルのパスを取得
+      await _saveImageToGallery(imagePath);
       await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => BlazePage3(imagePath:image.path,camera:widget.camera,path1:widget.path1,path2:widget.path2,offsets1: widget.offsets1,offsets2: widget.offsets2,),
@@ -1113,4 +1195,15 @@ class TakePictureScreen3p3State extends State<TakePictureScreen3p3> {
       
     );
   }
+//画像をローカルに保存
+Future<void> _saveImageToGallery(String imagePath) async {
+  // 保存したい画像ファイルのパスを指定
+  final result = await ImageGallerySaver.saveFile(imagePath);
+
+  if (result != null) {
+    print('画像がギャラリーアルバムに保存されました: $result');
+  } else {
+    print('画像の保存に失敗しました');
+  }
+}
 }
