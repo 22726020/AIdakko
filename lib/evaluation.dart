@@ -11,7 +11,8 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
-
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as ui;
 
 //評価結果を返す
 class Evaluation extends StatefulWidget {
@@ -169,6 +170,10 @@ class _EvaluationState extends State<Evaluation> {
 
   List<String> badtxt= [];
   List<String> advicetxt= [];
+
+  Uint8List? bytes;
+  final globalKeyfront = GlobalKey();
+  final globalKeyside = GlobalKey();
   
   
   //色
@@ -186,19 +191,6 @@ class _EvaluationState extends State<Evaluation> {
   var main_text_colors = Colors.white;
   var sub_text_colors = Colors.white;
   var icon_colors = Colors.black;
-
-//スクリーンショット
-  Uint8List? bytes;
-  final ScreenshotController screenshotController = ScreenshotController();
-
-  Future<void> widgetToImage() async {
-    try {
-      bytes = await screenshotController.capture();
-    } catch (e) {
-      print("スクリーンショットの取得に失敗しました: $e");
-      bytes = null;
-    }
-  }
 
 
   List<Offset> _adjust_front(List<Offset> landmarkfront){
@@ -1011,6 +1003,33 @@ List<double> _devicesizeget(){
       return devicesize;
   }
 
+// スクショするための関数
+Future<void> widgetToImage(wti) async {
+  final boundary = wti.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+  if (boundary == null) {
+    return;
+  }
+
+  // 画像をキャプチャ
+  final image = await boundary.toImage(pixelRatio: 3.0); // 例として pixelRatio を指定
+  ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+  if (byteData != null) {
+    // バイトデータをUint8Listに変換
+    Uint8List bytes = byteData.buffer.asUint8List();
+    
+    // スクリーンショットを表示する
+    showDialog(
+      context: wti.currentContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Image.memory(bytes),
+        );
+      },
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     //初期状態
@@ -1125,10 +1144,15 @@ List<double> _devicesizeget(){
             Column(children:[ 
             Row(
               children: <Widget>[
-                Container(
-                  width: _devicesizeget()[0]/2,
-                  height: _devicesizeget()[1]/2.6,
-                  // color: Colors.yellow,
+              RepaintBoundary(
+              key: globalKeyfront,
+               child: Container(
+                width: _devicesizeget()[0]/2,
+                height: _devicesizeget()[1]/2.6,
+                child: GestureDetector(
+                  onTap: () {
+                    widgetToImage(globalKeyfront);
+                  },
 
                   child:Stack(
                     children: [
@@ -1156,19 +1180,26 @@ List<double> _devicesizeget(){
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
-                CustomPaint(
-                  size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
-                  painter: SquarePainter("front"),  // 描画ロジックを指定したカスタムペインター
-                )
+                // CustomPaint(
+                //   size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
+                //   painter: SquarePainter("front"),  // 描画ロジックを指定したカスタムペインター
+                // )
                     ],
                   ), 
                   
                 ),
-                
-                
-                Container(
+              ),
+              ),
+
+              RepaintBoundary(
+              key: globalKeyside,
+                child: Container(
                   width: _devicesizeget()[0]/2,
                   height: _devicesizeget()[1]/2.6,
+                  child: GestureDetector(
+                  onTap: () {
+                    widgetToImage(globalKeyside);
+                  },
                   // color: Colors.red,
                   child:Stack(
                     children: [
@@ -1188,14 +1219,16 @@ List<double> _devicesizeget(){
                   child: Center(),
               ),
               ),
-              CustomPaint(
-                  size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
-                  painter: SquarePainter("right"),  // 描画ロジックを指定したカスタムペインター
-                )
+              // CustomPaint(
+              //     size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
+              //     painter: SquarePainter("right"),  // 描画ロジックを指定したカスタムペインター
+              //   )
                     ],
                   ), 
                   
                 ),
+              ),
+              ),
               ]
               ),
             // Container(
@@ -1326,18 +1359,18 @@ List<double> _devicesizeget(){
                     
                     //BadPont
                     Visibility(child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: badtf),
-                    Visibility(child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: badtf),
+                    Visibility(child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: badtf),
                     Visibility(child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: badtf),
-                    Visibility(child: Text(badtxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: badtf),
+                    Visibility(child: Text(badtxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: badtf),
                     Visibility(child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: badtf),
-                    Visibility(child: Text(badtxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: badtf),
+                    Visibility(child: Text(badtxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: badtf),
                     //アドバイス
                     Visibility(child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: advicetf),
-                    Visibility(child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: advicetf),
+                    Visibility(child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: advicetf),
                     Visibility(child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: advicetf),
-                    Visibility(child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: advicetf),
+                    Visibility(child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: advicetf),
                     Visibility(child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black)),visible: advicetf),
-                    Visibility(child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.orange)),visible: advicetf),
+                    Visibility(child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54)),visible: advicetf),
           ]
           )
             ),
@@ -1359,7 +1392,7 @@ List<double> _devicesizeget(){
                         backgroundColor: Colors.black.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("画像をアップロード",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
+                      child: Text("データをアップロード",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ):Container(), // ボタンが非表示の場合は空のコンテナを表示
                     ),
               ],
@@ -1479,6 +1512,19 @@ class MyPainter extends CustomPainter{
   MyPainter(this.offsets,this.dir,this.button,this.summraize);
   //appberの高さを取得
   // var height = AppBar().preferredSize.height;
+
+  String _symbol(int value){
+    if (value > 18){
+      return "⚪︎";
+    }
+    else if (value == 0){
+      return "×";
+    }
+    else {
+      return "△";
+    }
+  }
+
   int count = 0;
   @override
   void paint(Canvas canvas, Size size) {
@@ -1549,7 +1595,7 @@ class MyPainter extends CustomPainter{
 
     if(button=="score"||button=="advice") {
       //推定姿勢点プロット
-      paint.color = Colors.orange;
+      paint.color = Colors.orange.withOpacity(0.5);
       canvas.drawCircle(Nose, radius, paint);
       canvas.drawCircle(Left_shoulder, radius, paint);
       canvas.drawCircle(Right_shoulder, radius, paint);
@@ -1567,7 +1613,7 @@ class MyPainter extends CustomPainter{
       // canvas.drawCircle(Right_mouth, radius, paint);
       //推定姿勢線プロット
       paint.strokeWidth = 5;
-      paint.color = Colors.green;
+      paint.color = Colors.green.withOpacity(0.5);
       // canvas.drawLine(Left_mouth, Right_mouth, paint);
       canvas.drawLine(Right_shoulder, Left_shoulder, paint);
       canvas.drawLine(Right_shoulder, Right_elbow, paint);
@@ -1580,10 +1626,12 @@ class MyPainter extends CustomPainter{
       //canvas.drawLine(Right_knee, Right_ankle, paint);
       canvas.drawLine(Right_hip, Left_hip, paint);
     }
+
     //正面でスコアボタンを押しているとき
     if(button=="score") {
         //shoulderbalance描画(肩のバランス：〇〇度)
         String shouldertext = "肩の角度:" + double.parse(summraize[0]).ceil().toString() + "度";
+
         TextSpan shoulderSpan = TextSpan(
           style: span.style,  // オリジナルのスタイルを維持
           text: shouldertext,  // 新しいテキストを指定
@@ -1686,7 +1734,7 @@ class MyPainter extends CustomPainter{
         final Left_shoulder_ideal_x = Left_shoulder.dx;
         final Left_shoulder_ideal_y = (Left_shoulder.dy + Right_shoulder.dy) / 2;
         paint.strokeWidth = 5;
-        paint.color = Colors.red;
+        paint.color = Colors.red.withOpacity(0.5);
         canvas.drawLine(Offset(Right_shoulder_ideal_x, Right_shoulder_ideal_y),
             Offset(Left_shoulder_ideal_x, Left_shoulder_ideal_y), paint);
         paint.color = Colors.red.withOpacity(0.7);
@@ -1800,7 +1848,7 @@ class MyPainter extends CustomPainter{
 
     if(button=="score"||button=="advice") {
       //姿勢推定
-      paint.color = Colors.orange;
+      paint.color = Colors.orange.withOpacity(0.5);
       canvas.drawCircle(Nose, radius, paint);
       canvas.drawCircle(Right_shoulder, radius, paint);
       canvas.drawCircle(Right_elbow, radius, paint);
@@ -1812,7 +1860,7 @@ class MyPainter extends CustomPainter{
 
       //姿勢推定
       paint.strokeWidth = 5;
-      paint.color = Colors.green;
+      paint.color = Colors.green.withOpacity(0.5);
       // canvas.drawLine(Nose, Right_shoulder, paint);
       canvas.drawLine(Right_shoulder, Right_elbow, paint);
       canvas.drawLine(Right_elbow, Right_wrist, paint);
@@ -1893,7 +1941,7 @@ class MyPainter extends CustomPainter{
     //理想姿勢
     if(button=="advice") {
       //理想姿勢特徴点描画
-      paint.color = Colors.red;
+      paint.color = Colors.red.withOpacity(0.5);
       canvas.drawCircle(
           Offset(Right_ankle_ideal_x, Right_shoulder_ideal), radius, paint);
       canvas.drawCircle(
@@ -1902,7 +1950,7 @@ class MyPainter extends CustomPainter{
           Offset(Right_ankle_ideal_x, Right_knee_ideal), radius, paint);
       canvas.drawCircle(Right_ankle, radius, paint);
 
-      paint.color = Colors.red;
+      paint.color = Colors.red.withOpacity(0.5);
       paint.strokeWidth = 5;
       canvas.drawLine(Offset(Right_ankle_ideal_x, Right_shoulder_ideal),
           Offset(Right_ankle_ideal_x, Right_hip_ideal), paint);
@@ -1972,7 +2020,7 @@ class MyPainter extends CustomPainter{
     //左面badpoint用
     if(button=="score"||button=="advice") {
       //姿勢推定
-      paint.color = Colors.orange;
+      paint.color = Colors.orange.withOpacity(0.5);
       canvas.drawCircle(Nose, radius, paint);
       canvas.drawCircle(Left_shoulder, radius, paint);
       canvas.drawCircle(Left_elbow, radius, paint);
@@ -1983,7 +2031,7 @@ class MyPainter extends CustomPainter{
 
       //姿勢推定
       paint.strokeWidth = 5;
-      paint.color = Colors.green;
+      paint.color = Colors.green.withOpacity(0.5);
       // canvas.drawLine(Nose, Left_shoulder, paint);
       canvas.drawLine(Left_shoulder, Left_elbow, paint);
       canvas.drawLine(Left_elbow, Left_wrist, paint);
