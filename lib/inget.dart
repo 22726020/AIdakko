@@ -882,8 +882,8 @@ class TakePictureScreen3State extends State<TakePictureScreen3> {
   late Future<void> _initializeControllerFuture;
   bool check = true;
   double opacity = 0.5;
-  int _start = 5;
-  int _current = 5;
+  int _start = 8;
+  int _current = 8;
   int tmp = 0;
   int count = 0;
   final _audio = AudioCache();

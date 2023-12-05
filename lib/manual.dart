@@ -9,6 +9,7 @@ import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
+import 'package:gazou/main.dart';
 
 class ManualPage extends StatefulWidget {
   const ManualPage({Key? key, required this.camera,required this.title}) : super(key: key);
@@ -33,6 +34,14 @@ class _ManualPageState extends State<ManualPage> {
 
   @override
   Widget build(BuildContext context) {
+    //デバイスのサイズを取得する
+    // DeviceSizeHelperクラスのインスタンスを作成
+    DeviceSizeHelper deviceSizeHelper = DeviceSizeHelper(context);
+    // 外部クラスのメソッドを呼び出してデバイスサイズを取得
+    List<double> size = deviceSizeHelper.getDeviceSize();
+    double deviceWidth = size[0];
+    double deviceHeight = size[1];
+
     return Scaffold(
         appBar: AppBar(centerTitle: true,
           actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
@@ -50,7 +59,6 @@ class _ManualPageState extends State<ManualPage> {
       child:
       ElevatedButton(
         onPressed: (){
-          _InImagesave();
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => JunbiINPage(title: widget.title,camera:widget.camera),
           )
@@ -67,7 +75,6 @@ class _ManualPageState extends State<ManualPage> {
       child:
       ElevatedButton(
         onPressed: (){
-          _OutImagesave();
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) => JunbiOUTPage(title: widget.title,camera:widget.camera),
           )

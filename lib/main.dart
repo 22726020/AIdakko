@@ -125,6 +125,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //デバイスのサイズを取得する
+    // DeviceSizeHelperクラスのインスタンスを作成
+    DeviceSizeHelper deviceSizeHelper = DeviceSizeHelper(context);
+    // 外部クラスのメソッドを呼び出してデバイスサイズを取得
+    List<double> size = deviceSizeHelper.getDeviceSize();
+    double deviceWidth = size[0];
+    double deviceHeight = size[1];
+
     return Scaffold(
         // appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: appbar_text_colors)),
         // backgroundColor: appbar_colors),
@@ -173,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(padding: EdgeInsets.only(left: 80),
               child: ElevatedButton(
                   onPressed: (){
-                    _audio.play('akatyankoe.mp3');
+                    // _audio.play('akatyankoe.mp3');
                   },
                   style: ElevatedButton.styleFrom(
                primary: Colors.transparent,
@@ -365,25 +373,24 @@ void saveImage(Uint8List imageBytes) async {
 }
 }
 
-    // SizedBox(
-    //   width: 100, // 幅を調整
-    //   height: 100, // 高さを調整
-    //   child: RadarChart(
-    //     RadarChartData(
-    //       dataSets: [
-    //         RadarDataSet(
-    //           fillColor: Colors.amber,
-    //           dataEntries: [
-    //             RadarEntry(value: 5),
-    //             RadarEntry(value: 5),
-    //             RadarEntry(value: 5),
-    //             RadarEntry(value: 5),
-    //             RadarEntry(value: 5),
-    //           ],
-    //         ),
-    //       ],
-    //       // 他のチャートプロパティを設定
-    //     ),
-    //   ),
-    // ),
+//デバイスのサイズを取得するクラス
+class DeviceSizeHelper {
+  BuildContext context;
+
+  // コンストラクタ
+  DeviceSizeHelper(this.context);
+
+  // デバイスのサイズを取得するメソッド
+  List<double> getDeviceSize() {
+    List<double> devicesize = [];
+
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
+    devicesize.add(deviceWidth);
+    devicesize.add(deviceHeight);
+
+    return devicesize;
+  }
+}
     
