@@ -133,6 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
     double deviceWidth = size[0];
     double deviceHeight = size[1];
 
+    print(deviceHeight);
+    print(deviceWidth);
     return Scaffold(
         // appBar:  AppBar(centerTitle: true,title:  Text(widget.title,style:TextStyle(color: appbar_text_colors)),
         // backgroundColor: appbar_colors),

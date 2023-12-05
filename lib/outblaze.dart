@@ -64,11 +64,10 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-
-        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
-        listx.add(landmark.x/_adjust()[0]*deviceWidth);
-        listy.add(landmark.y/_adjust()[1]*deviceHeight);
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/(deviceHeight/720));
       });
     }
 
@@ -187,27 +186,6 @@ class _OutBlazePage1State extends State<OutBlazePage1> {
     }
   }
 
-  //特徴点plotを調整する関数
-  List<int> _adjust(){
-    List <int> adjust = [];
-    //デバイスのサイズ取得
-    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
-    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
-    //比率を合わせる Android旧 480,960 ,新 1080,2360
-        if(deviceHeight==899){
-          adjust.add(1080);
-          adjust.add(2360);
-        }
-        else{
-          adjust.add(480);
-          adjust.add(960);
-        }
-        print(deviceHeight);
-        print(adjust);
-    //adjust[0]=x,adjust[1]0=y
-    return adjust;
-  }
-
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
@@ -273,11 +251,10 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-
-        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
-        listx.add(landmark.x/_adjust()[0]*deviceWidth);
-        listy.add(landmark.y/_adjust()[1]*deviceHeight);
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/(deviceHeight/720));
       });
     }
 
@@ -392,27 +369,6 @@ class _OutBlazePage2State extends State<OutBlazePage2> {
     }
   }
 
-  //特徴点plotを調整する関数
-  List<int> _adjust(){
-    List <int> adjust = [];
-    //デバイスのサイズ取得
-    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
-    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
-    //比率を合わせる Android旧 480,960 ,新 1080,2360
-        if(deviceHeight==899){
-          adjust.add(1080);
-          adjust.add(2360);
-        }
-        else{
-          adjust.add(480);
-          adjust.add(960);
-        }
-        print(deviceHeight);
-        print(adjust);
-    //adjust[0]=x,adjust[1]0=y
-    return adjust;
-  }
-
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
@@ -480,11 +436,10 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-
-        offsets.add(Offset(landmark.x/_adjust()[0]*deviceWidth, landmark.y/_adjust()[1]*deviceHeight));
-        // print("${landmark.type}, x=${landmark.x}, y=${landmark.y}");
-        listx.add(landmark.x/_adjust()[0]*deviceWidth);
-        listy.add(landmark.y/_adjust()[1]*deviceHeight);
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
+        listx.add(landmark.x/480*deviceWidth);
+        listy.add(landmark.y/(deviceHeight/720));
       });
     }
 
@@ -571,26 +526,6 @@ class _OutBlazePage3State extends State<OutBlazePage3> {
             builder: (context) => OutTakePicture3(camera: widget.camera,path1: widget.path1,path2: widget.path2,offsets1:widget.offsets1, offsets2:widget.offsets2),
           ));
     }
-  }
-  //特徴点plotを調整する関数
-  List<int> _adjust(){
-    List <int> adjust = [];
-    //デバイスのサイズ取得
-    final int deviceHeight = MediaQuery.of(context).size.height.ceil();
-    final int deviceWidth = MediaQuery.of(context).size.width.ceil();
-    //比率を合わせる Android旧 480,960 ,新 1080,2360
-        if(deviceHeight==899){
-          adjust.add(1080);
-          adjust.add(2360);
-        }
-        else{
-          adjust.add(480);
-          adjust.add(960);
-        }
-        print(deviceHeight);
-        print(adjust);
-    //adjust[0]=x,adjust[1]0=y
-    return adjust;
   }
 
   @override
