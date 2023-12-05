@@ -52,10 +52,10 @@ class _BlazePage1State extends State<BlazePage1> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
         listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/(deviceHeight/720));
+        listy.add(landmark.y/(480/deviceWidth));
       });
     }
 
@@ -236,10 +236,10 @@ class _BlazePage2State extends State<BlazePage2> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
         listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/(deviceHeight/720));
+        listy.add(landmark.y/(480/deviceWidth));
       });
     }
 
@@ -420,10 +420,10 @@ class _BlazePage3State extends State<BlazePage3> {
     for (Pose pose in poses) {
       // to access all landmarks
       pose.landmarks.forEach((_, landmark) {
-        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(deviceHeight/720)));
+        offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
         listx.add(landmark.x/480*deviceWidth);
-        listy.add(landmark.y/(deviceHeight/720));
+        listy.add(landmark.y/(480/deviceWidth));
       });
     }
 
