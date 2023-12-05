@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gazou/hand20.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:screenshot/screenshot.dart';
 import 'dart:typed_data';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -1388,23 +1387,75 @@ Future<void> widgetToImage(wti) async {
             ),
             Column(
               children:[
-              Padding(padding: EdgeInsets.only(top: 590,left: 5),
-                  child: isVisible? ElevatedButton(
-                      onPressed: ()async{
-                        setState(() {
-                          isVisible = false;
-                        });
-                        //firebase
-                        await uploadImage(widget.path1,widget.path2,widget.path3,widget.offsets1,widget.offsets2,widget.offsets3);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize:const Size(600,30),
-                        backgroundColor: Colors.black.withOpacity(0.6),//ボタン背景色
-                        elevation: 16,
-                      ),
-                      child: Text("データをアップロード",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
-                    ):Container(), // ボタンが非表示の場合は空のコンテナを表示
-                    ),
+              Padding(
+                padding: EdgeInsets.only(top: 590, left: 5),
+                child: isVisible
+                    ? ElevatedButton(
+                        onPressed: () async {
+                          String confirmationText =
+                              "撮影した写真と推定した姿勢の数値情報が送信されます。\n研究用途以外には使用しません。\n個人情報は保護されます.";
+                          String sendtext = "送信します";
+                          String nosendtext = "送信しません";
+                          showDialog(
+                            context: context,
+                            builder: (context) => StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: const Text("アップロードについて"),
+                                  content: Text(confirmationText),
+                                  actions: [
+                                    GestureDetector(
+                                      child: Text(
+                                        nosendtext,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      child: Text(
+                                        sendtext,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onTap: () async {
+                                        // Firebaseへのアップロード処理
+                                        setState(() {
+                                          confirmationText = "送信中です。";
+                                          sendtext = "";
+                                          nosendtext = "";
+                                        });
+                                        await uploadImage(widget.path1,widget.path2,widget.path3,widget.offsets1,widget.offsets2,widget.offsets3);
+                                        // ボタン非表示
+                                        setState(() {
+                                          isVisible = false;
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(600, 30),
+                          backgroundColor: Colors.black.withOpacity(0.6),
+                          elevation: 16,
+                        ),
+                        child: Text(
+                          "データをアップロード",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28,
+                            color: main_text_colors,
+                          ),
+                        ),
+                      )
+                    : Container(), // ボタンが非表示の場合は空のコンテナを表示
+              ),
+
               ],
                 ),
 

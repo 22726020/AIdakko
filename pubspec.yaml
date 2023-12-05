@@ -59,9 +59,8 @@ dev_dependencies:
   image_picker: ^0.8.5+3
   flutter_launcher_icons: ^0.10.0
   image: ^3.0.1 
-  screenshot: ^1.0.0
   firebase_core: ^2.22.0
-  convert: ^2.1.1
+  convert: ^3.0.0
 
 flutter_icons:
   android: true
