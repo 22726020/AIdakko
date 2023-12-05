@@ -238,11 +238,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                    fixedSize:const Size(150,150),
+                    fixedSize:const Size(300,80),
                     backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('姿勢\n評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
+                  child: Text('姿勢評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
                 ),
                 ),
               //  ElevatedButton(
@@ -278,25 +278,25 @@ class _MyHomePageState extends State<MyHomePage> {
               //     child: Text('腱鞘炎\nチェック',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors),textAlign: TextAlign.center,),
               //   ),
               //   ),              
-              Padding(padding: EdgeInsets.only(top: 300,left: 10),
-               child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DataCollection(camera: widget.camera, title: widget.title)
-              )
-                    );
-              // _saveImageToGallery();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                    fixedSize:const Size(180,150),
-                    backgroundColor: Colors.grey,
-                    elevation: 16,
-                  ),
-                  child: Text('データ\n収集',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors),textAlign: TextAlign.center,),
-                ),
-                ),  
+              // Padding(padding: EdgeInsets.only(top: 300,left: 10),
+              //  child: ElevatedButton(
+              //     onPressed: (){
+              //       Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => DataCollection(camera: widget.camera, title: widget.title)
+              // )
+              //       );
+              // // _saveImageToGallery();
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              //       fixedSize:const Size(180,150),
+              //       backgroundColor: Colors.grey,
+              //       elevation: 16,
+              //     ),
+              //     child: Text('データ\n収集',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: main_text_colors),textAlign: TextAlign.center,),
+              //   ),
+              //   ),  
               
               ],
             ),
