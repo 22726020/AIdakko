@@ -250,9 +250,9 @@ class _EvaluationState extends State<Evaluation> {
 }
 
   //Rightの特徴点を用いてケンダルを計算する
-  List<String> _kendall_classification(){
+  List<double> _kendall_classification(){
     List<Offset>landmarkright = [];
-    List<String>kendalllist = [];
+    List<double>kendalllist = [];
     //調整済み座標持ってきてる
     landmarkright = _adjust_right(landmarkright);
     //メモ
@@ -299,26 +299,6 @@ class _EvaluationState extends State<Evaluation> {
       ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
     }
 
-    // //ケンダル分類
-    // if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-    //   kendall = "ノーマル";
-    // }
-    // else if(ankle_knee.abs()<10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-    //   kendall = "ロードシス";
-    // }
-    // else if(ankle_knee>10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
-    //   kendall = "スウェイバック";
-    // }
-    // else if(ankle_knee<-10 && ankle_hip.abs()<10 && ankle_shoulder<-10){
-    //   kendall = "カイホロードシス";
-    // }
-    // else if(ankle_knee.abs()>10 && ankle_hip>10 && ankle_shoulder.abs()<10){
-    //   kendall = "フラットバック";
-    // }
-    // else {
-    //   // kendall = "不明";
-    //   kendall = "ノーマル";//とりあえず
-    // }
     //ケンダル分類
     if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
       kendall = "ノーマル";
@@ -340,10 +320,10 @@ class _EvaluationState extends State<Evaluation> {
       kendall = "カイホロードシス";//とりあえず
     }
 
-    kendalllist.add(kendall);
-    kendalllist.add(ankle_knee.toString());
-    kendalllist.add(ankle_hip.toString());
-    kendalllist.add(ankle_shoulder.toString());
+    kendalllist.add(0);
+    kendalllist.add(ankle_knee);
+    kendalllist.add(ankle_hip);
+    kendalllist.add(ankle_shoulder);
 
     return kendalllist;
 }
@@ -563,13 +543,13 @@ class _EvaluationState extends State<Evaluation> {
     var Closeness = _Closeness_calculation();
 
     summraize.add(ShoulderScore.toString());//肩の平行具合
-    summraize.add(right_kendalllist[0]);//ケンダル
+    summraize.add(right_kendalllist[0].toString());//ケンダル
     summraize.add(Hugheight[0].toString());//ヒップハンド
     summraize.add(Hugheight[1].toString());//バックハンド
     summraize.add(Hugheight[2].toString());//イズヒップハンド
-    summraize.add(right_kendalllist[1]);//膝までの角度(右)
-    summraize.add(right_kendalllist[2]);//腰までの角度(右)
-    summraize.add(right_kendalllist[3]);//肩までの角度(右)
+    summraize.add(right_kendalllist[1].toString());//膝までの角度(右)
+    summraize.add(right_kendalllist[2].toString());//腰までの角度(右)
+    summraize.add(right_kendalllist[3].toString());//肩までの角度(右)
     summraize.add(left_kendalllist[1]);//膝までの角度(左)
     summraize.add(left_kendalllist[2]);//腰までの角度(左)
     summraize.add(left_kendalllist[3]);//肩までの角度(左)
@@ -591,7 +571,7 @@ class _EvaluationState extends State<Evaluation> {
     int sumscore = 0;
     List<int> scorelist = [];
     var ShoulderScore = _ShoulderScore_calculation();
-    var kendall = _kendall_classification()[0];
+    var kendall = _kendall_classification()[1] + _kendall_classification()[2] + _kendall_classification()[3];
     var Hugheight = _Hugheight_calculation();
     var ArmPitFit = _ArmpitFit_calculation();
     var Closeness = _Closeness_calculation();
@@ -603,18 +583,27 @@ class _EvaluationState extends State<Evaluation> {
     int closeness_score = 0;
 
 
-    if(kendall == "ノーマル"){
+    if(kendall < 20){
       backbone_score += 19;
     }
-    else{
+    if(35 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 20){
+      backbone_score += 15;
+    }
+    if(40 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 35){
       backbone_score += 10;
     }
+    if(45 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 40){
+      backbone_score += 5;
+    }
+    else{
+      backbone_score += 0;
+    }
 
-    if(double.parse(Hugheight[0]) > 0.5){
+    if(double.parse(Hugheight[0]) > 0.6){
       hugheight_score += 20;
     }
 
-    if(0.5 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.45){
+    if(0.6 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.45){
       hugheight_score += 15;
     }
     if(0.45 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.40){
@@ -627,10 +616,10 @@ class _EvaluationState extends State<Evaluation> {
       hugheight_score += 0;
     }
 
-    if(ShoulderScore < 2.0){
+    if(ShoulderScore < 1.5){
       shoulder_score += 20;
     }
-    if(2.0 < ShoulderScore && ShoulderScore < 3.0){
+    if(1.5 < ShoulderScore && ShoulderScore < 3.0){
       shoulder_score += 15;
     }
     if(3.0 < ShoulderScore && ShoulderScore < 3.2){
@@ -644,26 +633,26 @@ class _EvaluationState extends State<Evaluation> {
     }
 
 
-    if(ArmPitFit < 5.0){
+    if(6 < ArmPitFit && ArmPitFit < 5){
       armpitfit_score += 20;
     }
-    if(5.0 < ArmPitFit && ArmPitFit < 4.25){
+    if(5 < ArmPitFit && ArmPitFit < 4){
       armpitfit_score += 15;
     }
-    if(4.25 < ArmPitFit && ArmPitFit < 4){
+    if(3 < ArmPitFit && ArmPitFit < 4){
       armpitfit_score += 10;
     }
-    if(3.5 < ArmPitFit && ArmPitFit < 3){
+    if(2 < ArmPitFit && ArmPitFit < 3){
       armpitfit_score += 5;
     }
     else{
       armpitfit_score += 0;
     }
 
-    if(Closeness > 30){
+    if(0 > Closeness && Closeness > 25){
       closeness_score += 20;
     }
-    if(30 > Closeness && Closeness > 50){
+    if(25 > Closeness && Closeness > 50){
       closeness_score += 15;
     }
     if(50 > Closeness && Closeness > 60){
@@ -730,6 +719,9 @@ class _EvaluationState extends State<Evaluation> {
     }
     if(summraize[1] == "フラットバック"){
       badpoint.add(bad_kendall_list[0]+bad_kendall_list[5]);
+    }
+    else{
+    badpoint.add(bad_kendall_list[1]);
     }
     //抱っこの高さ指摘出力
     if(point[5]==3||point[5]==4){
@@ -814,6 +806,9 @@ class _EvaluationState extends State<Evaluation> {
     }
     if(summraize[1] == "フラットバック"){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[5]);
+    }
+    else{
+      advicelist.add(advice_kendall_list[1]);
     }
     //抱っこの高さ指摘出力
     if(point[5]==3||point[5]==4){
@@ -1046,7 +1041,7 @@ Future<void> widgetToImage(wti) async {
       upcolor_1 = Colors.orange;
       text = _score()[0].toString();
       summraize = _Summraize();
-      kendall_text = "姿勢パターン:" + _kendall_classification()[0];
+      kendall_text = "姿勢パターン:";
       advicetxt = _advice();
       badtxt = _badpoint();
       
@@ -1057,7 +1052,68 @@ Future<void> widgetToImage(wti) async {
         preferredSize: Size.fromHeight(_devicesizeget()[1]/12), // AppBarの高さを変更
         child: AppBar(
             centerTitle: true,
-            actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+            actions:[ElevatedButton(
+                        onPressed: () async {
+                          String confirmationText =
+                              "撮影した写真と推定した姿勢の数値情報が送信されます。\n研究用途以外には使用しません。\n個人情報は保護されます.";
+                          String sendtext = "送信します";
+                          String nosendtext = "送信しません";
+                          showDialog(
+                            context: context,
+                            builder: (context) => StatefulBuilder(
+                              builder: (context, setState) {
+                                return AlertDialog(
+                                  title: const Text("アップロードについて"),
+                                  content: Text(confirmationText),
+                                  actions: [
+                                    GestureDetector(
+                                      child: Text(
+                                        nosendtext,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onTap: () {
+                                        Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      child: Text(
+                                        sendtext,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onTap: () async {
+                                        // Firebaseへのアップロード処理
+                                        setState(() {
+                                          confirmationText = "送信中です。";
+                                          sendtext = "";
+                                          nosendtext = "";
+                                        });
+                                        await uploadImage(widget.path1,widget.path2,widget.path3,widget.offsets1,widget.offsets2,widget.offsets3);
+                                        Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(120, _devicesizeget()[1]/12),
+                          backgroundColor: Colors.black.withOpacity(0.6),
+                          elevation: 16,
+                        ),
+                        child: Text(
+                          "FINISH",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: main_text_colors,
+                          ),
+                        ),
+                      )
+            ],
+
+            // actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
             title:  Text("評価結果",style:TextStyle(color: appbar_text_colors)),
             backgroundColor: appbar_colors),
       ),

@@ -34,7 +34,7 @@ class _JunbiINPageState extends State<JunbiINPage> {
         backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Image.asset("assets/manual2.png"),
+            Image.asset("assets/intejun.png"),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -113,7 +113,7 @@ class _JunbiOUTPageState extends State<JunbiOUTPage> {
         backgroundColor: appbar_colors),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Image.asset("assets/junbiout.png"),
+            Image.asset("assets/outtejun.png"),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

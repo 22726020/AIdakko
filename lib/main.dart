@@ -241,10 +241,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                     fixedSize:const Size(300,80),
-                    backgroundColor: main_colors,
+                    backgroundColor: Colors.black54,
                     elevation: 16,
                   ),
-                  child: Text('Start',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
+                  child: Text('S T A R T',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
                 ),
                 ),
               //  ElevatedButton(

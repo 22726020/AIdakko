@@ -50,7 +50,7 @@ class _ManualPageState extends State<ManualPage> {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
 
-            Image.asset("assets/manual.png"),
+            Image.asset("assets/manualfree.png"),
             Text('どちらで行うか選択してください',style: TextStyle(fontSize: 22),),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
