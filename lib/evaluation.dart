@@ -321,9 +321,9 @@ class _EvaluationState extends State<Evaluation> {
     }
 
     kendalllist.add(0);
-    kendalllist.add(ankle_knee);
-    kendalllist.add(ankle_hip);
-    kendalllist.add(ankle_shoulder);
+    kendalllist.add((ankle_knee).abs());
+    kendalllist.add((ankle_hip).abs());
+    kendalllist.add((ankle_shoulder).abs());
 
     return kendalllist;
 }
@@ -459,7 +459,6 @@ class _EvaluationState extends State<Evaluation> {
     return hugheight;
   }
   //脇の閉まり具合について
-  //お尻を支える手の方を見てます
   double _ArmpitFit_calculation(){
     List<Offset>landmarkfront = [];
     //調整済み座標持ってきてる
@@ -483,6 +482,7 @@ class _EvaluationState extends State<Evaluation> {
     }
     ArmpitFit = (landmarkfront[hip_hand_shoulder].dy - landmarkfront[hip_hand_elbow].dy) / (landmarkfront[hip_hand_shoulder].dx - landmarkfront[hip_hand_elbow].dx);
     // print("脇の閉まり具合:"+ArmpitFit.toString());
+
     return ArmpitFit.abs();
   }
   //乳児の密着具合について
@@ -500,10 +500,13 @@ class _EvaluationState extends State<Evaluation> {
     var point1;
     var point2;
     var point3;
+    // print("aaaaa");
+    // print(isdir_backhand);
     if(isdir_backhand=="Left_wrist"){//もし右側の特徴点座標を使うなら2を原点として，1と3がなす角度
       point1 = landmarkright[1];
       point2 = landmarkright[2];
       point3 = landmarkright[3];
+
     }
     else{//お尻を支える腕が右の時，右側の特徴点座標を参照
       point1 = landmarkleft[1];
@@ -511,8 +514,8 @@ class _EvaluationState extends State<Evaluation> {
       point3 = landmarkleft[3];
     }
     //2つのベクトルのなす角度を計算
-    double abX = point1.dx - point2.dx;
-    double abY = point1.dy - point2.dy;
+    double abX = point2.dx - point1.dx;
+    double abY = point2.dy - point1.dy;
     double bcX = point3.dx - point2.dx;
     double bcY = point3.dy - point2.dy;
     double dotProduct = abX * bcX + abY * bcY;
@@ -522,6 +525,7 @@ class _EvaluationState extends State<Evaluation> {
     double angleInRadians = acos(cosTheta);
     // ラジアンを度に変換
     Closeness = angleInRadians * (180 / pi);
+    Closeness = 180-Closeness;
     return Closeness.abs();//脇の閉まり具合に関する評価スコアを返す
   }
   //計算した値をリストでまとめて返す”さまらいず”
@@ -634,7 +638,7 @@ class _EvaluationState extends State<Evaluation> {
     }
 
 
-    if(5 < ArmPitFit){
+    if(6 < ArmPitFit && ArmPitFit < 5){
       armpitfit_score += 20;
     }
     if(5 < ArmPitFit && ArmPitFit < 4){
@@ -649,25 +653,25 @@ class _EvaluationState extends State<Evaluation> {
     else{
       armpitfit_score += 0;
     }
+    print(Closeness);
 
-    if(0 > Closeness && Closeness > 25){
+    if(0 < Closeness && Closeness < 25){
       closeness_score += 20;
     }
-    if(25 > Closeness && Closeness > 50){
+    if(25 < Closeness && Closeness < 50){
+
       closeness_score += 15;
     }
-    if(50 > Closeness && Closeness > 60){
+    if(50 < Closeness && Closeness < 60){
       closeness_score += 10;
     }
-    if(70 > Closeness && Closeness > 80){
+    if(70 < Closeness && Closeness < 80){
       closeness_score += 5;
     }
     else{
       closeness_score += 0;
+
     }
-    print("テスト");
-    print(Closeness);
-    print(closeness_score);
 
     sumscore = shoulder_score + backbone_score + hugheight_score + armpitfit_score + closeness_score;
     
@@ -691,7 +695,7 @@ class _EvaluationState extends State<Evaluation> {
 
     List<String> bad_kendall_list
     = ["",
-      "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでいるのが正しい姿勢です。",
+      "耳たぶ,肩峰,股関節,膝,くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
       "骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
       "頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
       "背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
@@ -775,24 +779,24 @@ class _EvaluationState extends State<Evaluation> {
 
     List<String> advice_kendall_list
     = ["",
-      "真横から見たとき耳たぶ・肩峰（肩口/肩先）・股関節・膝・外くるぶしの５cm前の5点が一直線に並ぶのが理想的な姿勢です。",
-      "腰椎の強い前弯と、骨盤の前傾）を改善するために、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶのが理想的な姿勢です。",
+      "腰椎の強い前弯と、骨盤の前傾を改善するために、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
       "骨盤の前方移動とのけ反りを改善するために 、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
       "猫背で、反り腰を改善するために、顎を引き、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
       "平背：へいはいを改善するために、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
     ];
     List<String> advice_hugheight_list
     = ["",
-      "かなり低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう。",
-      "やや低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう。",
-      "適切です。",
-    ];
-    List<String> advice_shoulderbalance_list
-    = ["",
       "かなりの左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
       "左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
       "やや左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "バランスが取れています。",
+    ];
+    List<String> advice_shoulderbalance_list
+    = ["",
+      "とても差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "やや差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "まあ差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "バランスが取れています",
     ];
 
     //ケンダル分類指摘出力
@@ -1446,7 +1450,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
+                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
                     ),
                  ),
                     ),
@@ -1477,7 +1481,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_2.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
+                      child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
                     ),
                       ),
                     ),
@@ -1507,7 +1511,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
                       
                     ),
                       ),

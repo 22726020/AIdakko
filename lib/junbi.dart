@@ -47,7 +47,7 @@ class _JunbiINPageState extends State<JunbiINPage> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("準備はできましたか？"),
-            content: const Text("スマホはなるべく垂直に置き\n全身が写るようにして下さい\n十分離れた後に\nお子さんを抱っこして下さい\n撮影が開始されます"),
+            content: const Text("撮影が開始されます"),
             actions: [
               GestureDetector(
                 child: Text("はい",style: TextStyle(fontSize: 30)),
@@ -58,12 +58,12 @@ class _JunbiINPageState extends State<JunbiINPage> {
                   );
                 },
               ),
-              GestureDetector(
-                child: Text("いいえ",style: TextStyle(fontSize: 30),),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
+              // GestureDetector(
+              //   child: Text("いいえ",style: TextStyle(fontSize: 30),),
+              //   onTap: (){
+              //     Navigator.pop(context);
+              //   },
+              // ),
             ],
           ),
         );
@@ -126,7 +126,7 @@ showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("準備はできましたか？"),
-            content: const Text("全身が写る距離まで離れて下さい\n撮影が開始されます"),
+            content: const Text("撮影が開始されます"),
             actions: [
               GestureDetector(
                 child: Text("はい",style: TextStyle(fontSize: 30),),
@@ -137,12 +137,12 @@ showDialog(
                   );
                 },
               ),
-              GestureDetector(
-                child: Text("いいえ",style: TextStyle(fontSize: 30),),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
+              // GestureDetector(
+              //   child: Text("いいえ",style: TextStyle(fontSize: 30),),
+              //   onTap: (){
+              //     Navigator.pop(context);
+              //   },
+              // ),
             ],
           ),
         );
