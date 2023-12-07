@@ -1147,7 +1147,7 @@ Future<void> widgetToImage(wti) async {
                           child:Center(
                             child: Column(children: [
                               Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black)),
-                              Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 85,color: Colors.red))
+                              Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 100,color: Colors.red))
                             ]),
                           )
 
@@ -1247,7 +1247,7 @@ Future<void> widgetToImage(wti) async {
         Container(
             width: _devicesizeget()[0],
             height: _devicesizeget()[1]/12*4,
-            child: Column(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Visibility(child: Padding(padding: EdgeInsets.only(left: 8.0,right: 8.0),child: AutoSizeText("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black),maxFontSize: 40.0,)),visible: badtf),
                 Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
@@ -1264,7 +1264,7 @@ Future<void> widgetToImage(wti) async {
         Container(
             width: _devicesizeget()[0],
             height: _devicesizeget()[1]/12*4,
-            child: Column(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //アドバイス
                 Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
