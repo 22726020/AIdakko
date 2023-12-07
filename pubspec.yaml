@@ -61,6 +61,7 @@ dev_dependencies:
   image: ^3.0.1 
   firebase_core: ^2.22.0
   convert: ^3.0.0
+  auto_size_text: ^3.0.0
 
 flutter_icons:
   android: true

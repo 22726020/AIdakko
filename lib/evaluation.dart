@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
+import 'package:auto_size_text/auto_size_text.dart';
 
 //評価結果を返す
 class Evaluation extends StatefulWidget {
@@ -642,33 +643,34 @@ class _EvaluationState extends State<Evaluation> {
       shoulder_score += 0;
     }
 
-    if(ArmPitFit < 30){
+
+    if(ArmPitFit < 5.0){
       armpitfit_score += 20;
     }
-    if(30 < ArmPitFit && ArmPitFit < 50){
+    if(5.0 < ArmPitFit && ArmPitFit < 4.25){
       armpitfit_score += 15;
     }
-    if(50 < ArmPitFit && ArmPitFit < 60){
+    if(4.25 < ArmPitFit && ArmPitFit < 4){
       armpitfit_score += 10;
     }
-    if(70 < ArmPitFit && ArmPitFit < 80){
+    if(3.5 < ArmPitFit && ArmPitFit < 3){
       armpitfit_score += 5;
     }
     else{
       armpitfit_score += 0;
     }
 
-    if(Closeness > 5.0){
+    if(Closeness > 30){
       closeness_score += 20;
     }
-    if(5.0 > Closeness && Closeness > 4.25){
+    if(30 > Closeness && Closeness > 50){
       closeness_score += 15;
     }
-    if(4.25 > Closeness && Closeness > 4){
+    if(50 > Closeness && Closeness > 60){
       closeness_score += 10;
     }
-    if(3.5 > Closeness && Closeness > 3){
-      closeness_score += 10;
+    if(70 > Closeness && Closeness > 80){
+      closeness_score += 5;
     }
     else{
       closeness_score += 0;
@@ -697,10 +699,10 @@ class _EvaluationState extends State<Evaluation> {
     List<String> bad_kendall_list
     = ["",
       "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
-      "ロードシス型は 、骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
-      "スウェイバック型は 、頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
-      "カイホロードシス型は 、背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
-      "フラットバック型は 、 背骨のS字カーブが全体的に弱くなっている姿勢です。"];
+      "骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
+      "頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
+      "背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
+      "背骨のS字カーブが全体的に弱くなっている姿勢です。"];
     List<String> bad_hugheight_list
     = ["",
       "かなり低いです",//34
@@ -778,10 +780,10 @@ class _EvaluationState extends State<Evaluation> {
     List<String> advice_kendall_list
     = ["",
       "真横から見たとき耳たぶ・肩峰（肩口/肩先）・股関節・膝・外くるぶしの５cm前の5点が一直線に並ぶのが理想的な姿勢です。",
-      "ロードシス（腰椎の強い前弯と、骨盤の前傾）を改善するために 、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "スウェイバック（骨盤の前方移動とのけ反り）を改善するために 、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "カイホロードシス（猫背で、反り腰）を改善するために 、顎を引き、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "フラットバック（平背：へいはい）を改善するために 、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
+      "腰椎の強い前弯と、骨盤の前傾）を改善するために、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "骨盤の前方移動とのけ反りを改善するために 、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "猫背で、反り腰を改善するために、顎を引き、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
+      "平背：へいはいを改善するために、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
     ];
     List<String> advice_hugheight_list
     = ["",
@@ -1051,95 +1053,18 @@ Future<void> widgetToImage(wti) async {
     }
     
     return Scaffold(
-      appBar:  AppBar(centerTitle: true,
-        actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
-        title:  Text("評価結果",style:TextStyle(color: appbar_text_colors)),
-      backgroundColor: appbar_colors),
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(_devicesizeget()[1]/12), // AppBarの高さを変更
+        child: AppBar(
+            centerTitle: true,
+            actions:[IconButton(onPressed: (){Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);}, icon:Icon(Icons.home,color: icon_colors,))],
+            title:  Text("評価結果",style:TextStyle(color: appbar_text_colors)),
+            backgroundColor: appbar_colors),
+      ),
       body:Stack(
           children: <Widget>[
             Column(
-            //上のボタン
-          children:[ 
-            // Row(mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Padding(padding: EdgeInsets.only(left: 5),
-            //       child: ElevatedButton(
-            //           onPressed: (){
-            //             setState(() {
-            //               image = widget.path1;
-            //               offset = widget.offsets1;
-            //               dir = "front";
-            //               upcolor_1 = Colors.orange;
-            //               upcolor_2 = Colors.grey;
-            //               upcolor_3 = Colors.grey;
-            //             });
-            //           },
-            //           style: ElevatedButton.styleFrom(
-            //             fixedSize:const Size(120,60),
-            //             backgroundColor: upcolor_1,//ボタン背景色
-            //             elevation: 16,
-            //           ),
-            //           child: Text("正面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
-            //         ),
-            //         ),
-            //         Padding(padding: EdgeInsets.only(left: 5),
-            //       child: ElevatedButton(
-            //           onPressed: (){
-            //             setState(() {
-            //               image = widget.path2;
-            //               offset = widget.offsets2;
-            //               dir = "right";
-            //               upcolor_1 = Colors.grey;
-            //               upcolor_2 = Colors.orange;
-            //               upcolor_3 = Colors.grey;
-            //             });
-            //           },
-            //           style: ElevatedButton.styleFrom(
-            //             fixedSize:const Size(120,60),
-            //             backgroundColor: upcolor_2,
-            //             elevation: 16,
-            //           ),
-            //           child: Text("⇨側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
-            //         ),
-            //         ),
-            //         Padding(padding: EdgeInsets.only(left: 5),
-            //       child: ElevatedButton(
-            //           onPressed: (){
-            //             setState(() {
-            //               image = widget.path3;
-            //               offset = widget.offsets3;
-            //               dir = "left";
-            //               upcolor_1 = Colors.grey;
-            //               upcolor_2 = Colors.grey;
-            //               upcolor_3 = Colors.orange;
-            //             });
-            //           },
-            //           style: ElevatedButton.styleFrom(
-            //             fixedSize:const Size(120,60),
-            //             backgroundColor: upcolor_3,
-            //             elevation: 16,
-            //           ),
-            //           child: Text("⇦側面",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
-            //         ),
-            //         ),
-            //   ],
-              // ),
-              ],
               ),
-            // Padding(padding: EdgeInsets.only(top:70),
-            //     child: Image.file(
-            //       File(image)
-            //     ),
-            //   ),
-            // Padding(padding: EdgeInsets.only(top:70),
-            //     child: CustomPaint(
-            //       //引数の渡す方
-            //       painter: MyPainter(offset,dir,button,summraize),
-            //       // タッチを有効にするため、childが必要
-            //       child: Center(),
-            //   ),
-            //   ),
-            //高菜
             Column(children:[ 
             Row(
               children: <Widget>[
@@ -1147,7 +1072,8 @@ Future<void> widgetToImage(wti) async {
               key: globalKeyfront,
                child: Container(
                 width: _devicesizeget()[0]/2,
-                height: _devicesizeget()[1]/2.6,
+                height: _devicesizeget()[1]/12*4.5,
+                child: InteractiveViewer(
                 child: GestureDetector(
                   onTap: () {
                     widgetToImage(globalKeyfront);
@@ -1155,37 +1081,21 @@ Future<void> widgetToImage(wti) async {
 
                   child:Stack(
                     children: [
-                      // Positioned(left: 90,top: 90,child: 
                       Transform.scale(
                         scale: 1, // スケールファクター（2.0で2倍に拡大）
-                      // child: Align(
-                      //   alignment: Alignment.bottomLeft,
-                      // child:Positioned(
-                      //   left: 30, // 左からの位置
-                      //   top: 30,  // 上からの位置
-                      //   child:
-                      // ClipRect(
-                      //   clipper: MyClipper(offset=widget.offsets1),
                           child: Image.file(
                             File(imagefront),
                           ),
-                    // ),
                       ),
-                      // ),
-                  // ),
                 CustomPaint(
                   //引数の渡す方
                   painter: MyPainter(offset=widget.offsets1,dir="front",button,summraize,_score()),
                   // タッチを有効にするため、childが必要
                   child: Center(),
               ),
-                // CustomPaint(
-                //   size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
-                //   painter: SquarePainter("front"),  // 描画ロジックを指定したカスタムペインター
-                // )
                     ],
                   ), 
-                  
+                ),
                 ),
               ),
               ),
@@ -1194,7 +1104,8 @@ Future<void> widgetToImage(wti) async {
               key: globalKeyside,
                 child: Container(
                   width: _devicesizeget()[0]/2,
-                  height: _devicesizeget()[1]/2.6,
+                  height: _devicesizeget()[1]/12*4.5,
+                  child: InteractiveViewer(
                   child: GestureDetector(
                   onTap: () {
                     widgetToImage(globalKeyside);
@@ -1202,14 +1113,9 @@ Future<void> widgetToImage(wti) async {
                   // color: Colors.red,
                   child:Stack(
                     children: [
-                      // ClipRect(
-                      //   clipper: MyClipper(offset=widget.offsets2),
-                      //   child: 
                         Image.file(
                             File(imageside),
-                            fit: BoxFit.fitWidth,
                     ),
-              // ),
               Padding(padding: EdgeInsets.only(top:0),
                 child: CustomPaint(
                   //引数の渡す方
@@ -1218,58 +1124,30 @@ Future<void> widgetToImage(wti) async {
                   child: Center(),
               ),
               ),
-              // CustomPaint(
-              //     size: Size(_devicesizeget()[0]/2, _devicesizeget()[1]/2.6),  // 描画領域のサイズを設定
-              //     painter: SquarePainter("right"),  // 描画ロジックを指定したカスタムペインター
-              //   )
                     ],
                   ), 
-                  
+                  ),
                 ),
               ),
               ),
               ]
               ),
-            // Container(
-            //   width: _devicesizeget()[0]/2,
-            //   height: _devicesizeget()[1]/2,
-            //   child: Row(
-            //   children:[
-            //     ClipRect(
-            //     clipper: MyClipper(offset),
-            //     child: 
-            //     Image.file(
-            //         File(image),
-            //         fit: BoxFit.fitWidth,
-            //         ),
-            //   ),
-            //     // ClipRect(
-            //     //   clipper: MyClipper(offset),
-            //     //   child: 
-            //       Image.file(
-            //           File(image),
-            //           fit: BoxFit.contain,
-            //           ),
-            //     // ),
-            //   ]
-            // ),
-            // ),
             Container(
                   width: _devicesizeget()[0],
-                  height: _devicesizeget()[1]/2/1.8,
+                  height: _devicesizeget()[1]/12*4,
                   // color: Colors.blue,
                   child:Column(crossAxisAlignment: CrossAxisAlignment.start, children:[
                     Row(
                       children: [
                         Visibility(visible: texttf,
                         child:Container(
-                          padding: EdgeInsets.only(top: 5),
-                          width: _devicesizeget()[0]/2.2,
-                          height: _devicesizeget()[1]/4,
+                          // padding: EdgeInsets.only(top: 5),
+                          width: _devicesizeget()[0]/2,
+                          height: _devicesizeget()[1]/12*3.8,
                           child:Center(
                             child: Column(children: [
                               Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black)),
-                              Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 130,color: Colors.red))
+                              Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 85,color: Colors.red))
                             ]),
                           )
 
@@ -1278,10 +1156,10 @@ Future<void> widgetToImage(wti) async {
                         // Visibility(child: Text(kendall_text),visible: tf ),
                         Visibility(visible: tf,
                           child:Container(
-                          width: _devicesizeget()[0]/2,
-                          height: _devicesizeget()[1]/4,
+                          width: _devicesizeget()[0]/2.5,
+                          height: _devicesizeget()[1]/12*3.8,
                             //レーダーチャート
-                          padding: EdgeInsets.only(top: 20,right: 20),
+                          padding: EdgeInsets.only(top: 0,right: 0),
                             child: RadarChart(
                               
                               RadarChartData( 
@@ -1365,105 +1243,127 @@ Future<void> widgetToImage(wti) async {
                           )
                       ],
                     ),
-                    
-                    //BadPont
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: badtf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: badtf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: badtf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
-                    //アドバイス
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
-                    Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
-          ]
+        Visibility(visible:badtf, child:
+        Container(
+            width: _devicesizeget()[0],
+            height: _devicesizeget()[1]/12*4,
+            child: Column(
+              children: [
+                Visibility(child: Padding(padding: EdgeInsets.only(left: 8.0,right: 8.0),child: AutoSizeText("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black),maxFontSize: 40.0,)),visible: badtf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: badtf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: badtf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(badtxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: badtf),
+              ],
+            )
+                    //BadPoint
+    ),
+        ),
+                Visibility(visible:advicetf, child:
+        Container(
+            width: _devicesizeget()[0],
+            height: _devicesizeget()[1]/12*4,
+            child: Column(
+              children: [
+                //アドバイス
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
+              ],
+            )
+    ),
+        ),
+                  ]
           )
             ),
-            ]
-            ),
-            Column(
-              children:[
-              Padding(
-                padding: EdgeInsets.only(top: 590, left: 5),
-                child: isVisible
-                    ? ElevatedButton(
-                        onPressed: () async {
-                          String confirmationText =
-                              "撮影した写真と推定した姿勢の数値情報が送信されます。\n研究用途以外には使用しません。\n個人情報は保護されます.";
-                          String sendtext = "送信します";
-                          String nosendtext = "送信しません";
-                          showDialog(
-                            context: context,
-                            builder: (context) => StatefulBuilder(
-                              builder: (context, setState) {
-                                return AlertDialog(
-                                  title: const Text("アップロードについて"),
-                                  content: Text(confirmationText),
-                                  actions: [
-                                    GestureDetector(
-                                      child: Text(
-                                        nosendtext,
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    GestureDetector(
-                                      child: Text(
-                                        sendtext,
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      onTap: () async {
-                                        // Firebaseへのアップロード処理
-                                        setState(() {
-                                          confirmationText = "送信中です。";
-                                          sendtext = "";
-                                          nosendtext = "";
-                                        });
-                                        await uploadImage(widget.path1,widget.path2,widget.path3,widget.offsets1,widget.offsets2,widget.offsets3);
-                                        // ボタン非表示
-                                        setState(() {
-                                          isVisible = false;
-                                        });
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(600, 30),
-                          backgroundColor: Colors.black.withOpacity(0.6),
-                          elevation: 16,
-                        ),
-                        child: Text(
-                          "データをアップロード",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28,
-                            color: main_text_colors,
-                          ),
-                        ),
-                      )
-                    : Container(), // ボタンが非表示の場合は空のコンテナを表示
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(top: 0, left: 0),
+              //   child: Container(
+              //     width: _devicesizeget()[0],
+              //     height: _devicesizeget()[1]/12*1,
+              //   child: isVisible
+              //       ? ElevatedButton(
+              //           onPressed: () async {
+              //             String confirmationText =
+              //                 "撮影した写真と推定した姿勢の数値情報が送信されます。\n研究用途以外には使用しません。\n個人情報は保護されます.";
+              //             String sendtext = "送信します";
+              //             String nosendtext = "送信しません";
+              //             showDialog(
+              //               context: context,
+              //               builder: (context) => StatefulBuilder(
+              //                 builder: (context, setState) {
+              //                   return AlertDialog(
+              //                     title: const Text("アップロードについて"),
+              //                     content: Text(confirmationText),
+              //                     actions: [
+              //                       GestureDetector(
+              //                         child: Text(
+              //                           nosendtext,
+              //                           style: TextStyle(fontSize: 20),
+              //                         ),
+              //                         onTap: () {
+              //                           Navigator.pop(context);
+              //                         },
+              //                       ),
+              //                       GestureDetector(
+              //                         child: Text(
+              //                           sendtext,
+              //                           style: TextStyle(fontSize: 20),
+              //                         ),
+              //                         onTap: () async {
+              //                           // Firebaseへのアップロード処理
+              //                           setState(() {
+              //                             confirmationText = "送信中です。";
+              //                             sendtext = "";
+              //                             nosendtext = "";
+              //                           });
+              //                           await uploadImage(widget.path1,widget.path2,widget.path3,widget.offsets1,widget.offsets2,widget.offsets3);
+              //                           // ボタン非表示
+              //                           setState(() {
+              //                             isVisible = false;
+              //                           });
+              //                           Navigator.pop(context);
+              //                         },
+              //                       ),
+              //                     ],
+              //                   );
+              //                 },
+              //               ),
+              //             );
+              //           },
+              //           style: ElevatedButton.styleFrom(
+              //             fixedSize: const Size(60, 30),
+              //             backgroundColor: Colors.black.withOpacity(0.6),
+              //             elevation: 16,
+              //           ),
+              //           child: Text(
+              //             "データをアップロード",
+              //             style: TextStyle(
+              //               fontWeight: FontWeight.bold,
+              //               fontSize: 28,
+              //               color: main_text_colors,
+              //             ),
+              //           ),
+              //         )
 
-              ],
-                ),
+              //       : Container(), // ボタンが非表示の場合は空のコンテナを表示
+              // ),
+              // ),
+              ]
+              ),
 
             Row(mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Align(alignment: Alignment.bottomCenter,
                child: Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                 child: Container(
+                   width: _devicesizeget()[0]/3.2,
+                   height: _devicesizeget()[1]/12*1.2,
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -1488,9 +1388,13 @@ Future<void> widgetToImage(wti) async {
                       ),
                       child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
+                 ),
                     ),
                 ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                      child: Container(
+                        width: _devicesizeget()[0]/3.2,
+                        height: _devicesizeget()[1]/12*1.2,
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -1515,8 +1419,12 @@ Future<void> widgetToImage(wti) async {
                       ),
                       child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                     ),
+                      ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                      child: Container(
+                        width: _devicesizeget()[0]/3.2,
+                        height: _devicesizeget()[1]/12*1.2,
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -1542,6 +1450,7 @@ Future<void> widgetToImage(wti) async {
                       child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: main_text_colors)),
                       
                     ),
+                      ),
                     ),
               ],
             ),

@@ -244,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     backgroundColor: main_colors,
                     elevation: 16,
                   ),
-                  child: Text('姿勢評価',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
+                  child: Text('Start',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,color: main_text_colors)),
                 ),
                 ),
               //  ElevatedButton(
