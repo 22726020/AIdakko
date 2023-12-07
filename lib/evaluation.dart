@@ -1922,24 +1922,56 @@ class MyPainter extends CustomPainter{
     }
 
 
-    //右面badpoint用
+   //右面badpoint用
     if(button=="badpoint"){
-      //肩の平行具合に異常があるとき
-      if (double.parse(summraize[0]) > 2.8){
-        //plot
+      // //ケンダル分類に異常があるとき赤線で
+      if (scorelist[2] < 16) {
+        //理想姿勢特徴点描画
+        paint.color = Colors.red.withOpacity(0.5);
+        canvas.drawCircle(
+            Offset(Right_ankle_ideal_x, Right_shoulder_ideal), radius, paint);
+        canvas.drawCircle(
+            Offset(Right_ankle_ideal_x, Right_hip_ideal), radius, paint);
+        canvas.drawCircle(
+            Offset(Right_ankle_ideal_x, Right_knee_ideal), radius, paint);
+        canvas.drawCircle(Right_ankle, radius, paint);
+
         paint.color = Colors.red.withOpacity(0.5);
         paint.strokeWidth = 5;
-        canvas.drawCircle(Right_shoulder, 15, paint);
-        //shoulderbalanceテキスト表示(肩のバランス)
-        String shouldertext = "肩のバランス";
-        TextSpan shoulderSpan = TextSpan(
-          style: span.style,  // オリジナルのスタイルを維持
-          text: shouldertext,  // 新しいテキストを指定
+        canvas.drawLine(Offset(Right_ankle_ideal_x, Right_shoulder_ideal),
+            Offset(Right_ankle_ideal_x, Right_hip_ideal), paint);
+        canvas.drawLine(Offset(Right_ankle_ideal_x, Right_hip_ideal),
+            Offset(Right_ankle_ideal_x, Right_knee_ideal), paint);
+        canvas.drawLine(
+            Offset(Right_ankle_ideal_x, Right_knee_ideal), Right_ankle, paint);
+        //理想姿勢テキスト描画表示(姿勢)
+        String kendaltext = "理想姿勢";
+        TextSpan kendalSpan = TextSpan(
+          style: span.style, // オリジナルのスタイルを維持
+          text: kendaltext, // 新しいテキストを指定
         );
-        TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
-        shoulderbalance.layout();
-        shoulderbalance.paint(canvas, Right_shoulder);
+        TextPainter kendal = new TextPainter(text: kendalSpan,
+            textAlign: TextAlign.right,
+            textDirection: TextDirection.ltr);
+        kendal.layout();
+        kendal.paint(canvas, Right_hip);
       }
+      // if (double.parse(summraize[0]) > 2.8){
+      //   //plot
+      //   paint.color = Colors.red.withOpacity(0.5);
+      //   paint.strokeWidth = 5;
+      //   canvas.drawCircle(Right_shoulder, 15, paint);
+      //   //shoulderbalanceテキスト表示(肩のバランス)
+      //   String shouldertext = "肩のバランス";
+      //   TextSpan shoulderSpan = TextSpan(
+      //     style: span.style,  // オリジナルのスタイルを維持
+      //     text: shouldertext,  // 新しいテキストを指定
+      //   );
+      //   TextPainter shoulderbalance = new TextPainter(text: shoulderSpan, textAlign: TextAlign.right, textDirection: TextDirection.ltr);
+      //   shoulderbalance.layout();
+      //   shoulderbalance.paint(canvas, Right_shoulder);
+      // }
+
       //抱っこの高さに異常があるときかつ右手がhiphadの時
       if (double.parse(summraize[2]) < 0.5&&summraize[4]=="Right_wrist"){
         //plotする
@@ -2274,7 +2306,7 @@ class SquarePainter extends CustomPainter {
 
   String _symbol(int value){
     if (value > 18){
-      return "○";
+      return "◎";
     }
     else if (value == 0){
       return "×";
