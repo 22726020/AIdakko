@@ -459,6 +459,7 @@ class _EvaluationState extends State<Evaluation> {
     return hugheight;
   }
   //脇の閉まり具合について
+  //お尻を支える手の方を見てます
   double _ArmpitFit_calculation(){
     List<Offset>landmarkfront = [];
     //調整済み座標持ってきてる
@@ -499,7 +500,7 @@ class _EvaluationState extends State<Evaluation> {
     var point1;
     var point2;
     var point3;
-    if(isdir_backhand=="Left_Wrist"){//もし右側の特徴点座標を使うなら2を原点として，1と3がなす角度
+    if(isdir_backhand=="Left_wrist"){//もし右側の特徴点座標を使うなら2を原点として，1と3がなす角度
       point1 = landmarkright[1];
       point2 = landmarkright[2];
       point3 = landmarkright[3];
@@ -510,8 +511,8 @@ class _EvaluationState extends State<Evaluation> {
       point3 = landmarkleft[3];
     }
     //2つのベクトルのなす角度を計算
-    double abX = point2.dx - point1.dx;
-    double abY = point2.dy - point1.dy;
+    double abX = point1.dx - point2.dx;
+    double abY = point1.dy - point2.dy;
     double bcX = point3.dx - point2.dx;
     double bcY = point3.dy - point2.dy;
     double dotProduct = abX * bcX + abY * bcY;
@@ -633,7 +634,7 @@ class _EvaluationState extends State<Evaluation> {
     }
 
 
-    if(6 < ArmPitFit && ArmPitFit < 5){
+    if(5 < ArmPitFit){
       armpitfit_score += 20;
     }
     if(5 < ArmPitFit && ArmPitFit < 4){
@@ -664,6 +665,9 @@ class _EvaluationState extends State<Evaluation> {
     else{
       closeness_score += 0;
     }
+    print("テスト");
+    print(Closeness);
+    print(closeness_score);
 
     sumscore = shoulder_score + backbone_score + hugheight_score + armpitfit_score + closeness_score;
     
@@ -687,7 +691,7 @@ class _EvaluationState extends State<Evaluation> {
 
     List<String> bad_kendall_list
     = ["",
-      "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
+      "耳たぶ・肩峰・股関節・膝・くるぶしの5点が床から一直線に並んでいるのが正しい姿勢です。",
       "骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
       "頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
       "背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
@@ -779,16 +783,16 @@ class _EvaluationState extends State<Evaluation> {
     ];
     List<String> advice_hugheight_list
     = ["",
-      "かなりの左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "やや左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "かなり低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう。",
+      "やや低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう。",
+      "適切です。",
     ];
     List<String> advice_shoulderbalance_list
     = ["",
-      "とても差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "やや差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "まあ差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "バランスが取れています",
+      "かなりの左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "やや左右差があるため背すじを伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
+      "バランスが取れています。",
     ];
 
     //ケンダル分類指摘出力
