@@ -638,22 +638,23 @@ class _EvaluationState extends State<Evaluation> {
     }
 
 
-    if(6 < ArmPitFit && ArmPitFit < 5){
+    if(ArmPitFit > 5){
       armpitfit_score += 20;
     }
-    if(5 < ArmPitFit && ArmPitFit < 4){
+    if(5 > ArmPitFit && ArmPitFit > 3){
       armpitfit_score += 15;
     }
-    if(3 < ArmPitFit && ArmPitFit < 4){
+    if(3 > ArmPitFit && ArmPitFit > 2){
       armpitfit_score += 10;
     }
-    if(2 < ArmPitFit && ArmPitFit < 3){
+    if(2 > ArmPitFit && ArmPitFit > 1){
       armpitfit_score += 5;
     }
     else{
       armpitfit_score += 0;
     }
-    print(Closeness);
+    print("テスト");
+    print(ArmPitFit);
 
     if(0 < Closeness && Closeness < 25){
       closeness_score += 20;
@@ -695,7 +696,7 @@ class _EvaluationState extends State<Evaluation> {
 
     List<String> bad_kendall_list
     = ["",
-      "耳たぶ,肩峰,股関節,膝,くるぶしの5点が床から一直線に並んでおり、正しい姿勢です。",
+      "耳たぶ,肩峰,股関節,膝,くるぶしの5点が床から一直線に並んでいるのが正しい姿勢です。",
       "骨盤が前傾し過ぎてしまい、反り腰になってしまっている状態です。",
       "頭が前に出て背中が丸まっている、いわゆる猫背の状態です。",
       "背中は猫背丸くで、腰は反っている、いわゆる反り腰の状態です。",
