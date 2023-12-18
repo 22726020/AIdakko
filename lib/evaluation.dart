@@ -1209,6 +1209,7 @@ Future<void> widgetToImage(wti) async {
                           // padding: EdgeInsets.only(top: 5),
                           width: _devicesizeget()[0]/2,
                           height: _devicesizeget()[1]/12*3.8,
+                          padding: EdgeInsets.only(top: 30),
                           child:Center(
                             child: Column(children: [
                               Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black)),
@@ -1451,7 +1452,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
+                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
                     ),
                  ),
                     ),
@@ -1482,7 +1483,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_2.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
+                      child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
                     ),
                       ),
                     ),
@@ -1512,7 +1513,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: main_text_colors)),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
                       
                     ),
                       ),

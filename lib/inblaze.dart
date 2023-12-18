@@ -54,7 +54,7 @@ class _BlazePage1State extends State<BlazePage1> {
       pose.landmarks.forEach((_, landmark) {
         offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
-        listx.add(landmark.x/480*deviceWidth);
+        listx.add(landmark.x/(480/deviceWidth));
         listy.add(landmark.y/(480/deviceWidth));
       });
     }
@@ -238,7 +238,7 @@ class _BlazePage2State extends State<BlazePage2> {
       pose.landmarks.forEach((_, landmark) {
         offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
-        listx.add(landmark.x/480*deviceWidth);
+        listx.add(landmark.x/(480/deviceWidth));
         listy.add(landmark.y/(480/deviceWidth));
       });
     }
@@ -422,7 +422,7 @@ class _BlazePage3State extends State<BlazePage3> {
       pose.landmarks.forEach((_, landmark) {
         offsets.add(Offset(landmark.x/(480/deviceWidth), landmark.y/(480/deviceWidth)));
         // print("${landmark.type}, x=${landmark.x}, y=${lßndmark.y}");
-        listx.add(landmark.x/480*deviceWidth);
+        listx.add(landmark.x/(480/deviceWidth));
         listy.add(landmark.y/(480/deviceWidth));
       });
     }
