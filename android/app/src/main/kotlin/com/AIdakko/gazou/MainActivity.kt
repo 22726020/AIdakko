@@ -1,4 +1,4 @@
-package com.example.gazou
+package com.AIdakko.gazou
 
 import io.flutter.embedding.android.FlutterActivity
 

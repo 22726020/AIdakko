@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gazou">
-    package="com.example.url_launcher_example">
+    package="com.AIdakko.gazou">
+    package="com.AIdakko.url_launcher_AIdakko">
     <queries>
         <!-- If your app opens https URLs -->
         <intent>
@@ -24,7 +24,7 @@
         </intent>
     </queries>
    <application
-        android:label="gazou"
+        android:label="{AIdakko}"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         android:requestLegacyExternalStorage="true">
