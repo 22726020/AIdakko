@@ -144,7 +144,7 @@ Future<void> uploadImage(String front,String left,String right,List<Offset> fron
   print('エラー: $e');
 }
 }
-
+//5項目の計算用関数
 class _EvaluationState extends State<Evaluation> {
   String kendall = "評価結果を出す";
   String score = "姿勢スコア：計算中";
@@ -196,7 +196,7 @@ class _EvaluationState extends State<Evaluation> {
   List<Offset> _adjust_front(List<Offset> landmarkfront){
   List<Offset> landmarkfront = widget.offsets1;
   List<Offset> landmarks = [];
-  //正面調整
+  //正面
   if(landmarkfront.length!=9){
     landmarks.add(landmarkfront[0]);
     landmarks.add(landmarkfront[11]);
@@ -299,6 +299,7 @@ class _EvaluationState extends State<Evaluation> {
       ankle_shoulder = (-90 + ankle_shoulder.abs())*-1;
     }
 
+    //下記はケンダル分類が抱っこ姿勢の分類に対応していなとのことで使用していない
     //ケンダル分類
     if(ankle_knee.abs()<10 && ankle_hip.abs()<10 && ankle_shoulder.abs()<10){
       kendall = "ノーマル";
@@ -325,9 +326,9 @@ class _EvaluationState extends State<Evaluation> {
     kendalllist.add((ankle_hip).abs());
     kendalllist.add((ankle_shoulder).abs());
 
-    return kendalllist;
+    return kendalllist;//0:何も入ってない,1:足首からankle_kneeの角度，2:足首からankle_hipの角度,3:足首からankle_shoulderの角度
 }
-  //Leftの特徴点を用いて膝・腰・肩の角度を計算する
+  //Leftの特徴点を用いて膝・腰・肩の角度を計算する(今は左の姿勢は判断に使っていない)
   List<String> _leftpoint_classification(){
     List<Offset>landmarkleft = [];
     List<String>left_kendalllist = [];
@@ -482,6 +483,7 @@ class _EvaluationState extends State<Evaluation> {
     }
     ArmpitFit = (landmarkfront[hip_hand_shoulder].dy - landmarkfront[hip_hand_elbow].dy) / (landmarkfront[hip_hand_shoulder].dx - landmarkfront[hip_hand_elbow].dx);
     // print("脇の閉まり具合:"+ArmpitFit.toString());
+    //print(ArmpitFit.abs);
 
     return ArmpitFit.abs();
   }
@@ -570,7 +572,6 @@ class _EvaluationState extends State<Evaluation> {
     // print("密着具合:"+summraize[12]);
     return summraize;
   }
-
   //姿勢スコアを返す
   List<int> _score(){
     int sumscore = 0;
@@ -587,23 +588,27 @@ class _EvaluationState extends State<Evaluation> {
     int armpitfit_score = 0;
     int closeness_score = 0;
 
-
+//ここから閾値設定してます
+    //姿勢の数値を出力しています．
+    print("姿勢の数値"+kendall.toString());
     if(kendall < 20){
       backbone_score += 19;
     }
-    if(35 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 20){
+    if(35 > kendall && kendall > 20){
       backbone_score += 15;
     }
-    if(40 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 35){
+    if(40 > kendall && kendall > 35){
       backbone_score += 10;
     }
-    if(45 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 40){
+    if(45 > kendall && kendall > 40){
       backbone_score += 5;
     }
     else{
       backbone_score += 0;
     }
 
+    //抱っこの高さの数値化を出力しています
+    print("抱っこの高さ"+double.parse(Hugheight[0]).toString());
     if(double.parse(Hugheight[0]) > 0.6){
       hugheight_score += 20;
     }
@@ -621,6 +626,8 @@ class _EvaluationState extends State<Evaluation> {
       hugheight_score += 0;
     }
 
+    //肩のバランスの数値化を出力しています
+    print("肩のバランス"+ShoulderScore.toString());
     if(ShoulderScore < 1.5){
       shoulder_score += 20;
     }
@@ -638,6 +645,7 @@ class _EvaluationState extends State<Evaluation> {
     }
 
 
+
     if(ArmPitFit > 5){
       armpitfit_score += 20;
     }
@@ -653,9 +661,12 @@ class _EvaluationState extends State<Evaluation> {
     else{
       armpitfit_score += 0;
     }
-    print("テスト");
-    print(ArmPitFit);
 
+    print("脇の開き具合"+ArmPitFit.toString());
+
+    //Closenessは密着具合の定量化した変数です．
+    //以下で閾値を定めて5段階評価しています．
+    print("密着具合"+Closeness.toString());
     if(0 < Closeness && Closeness < 25){
       closeness_score += 20;
     }
@@ -685,8 +696,7 @@ class _EvaluationState extends State<Evaluation> {
 
     return scorelist;
   }
-
-  //悪いところを返す
+  //badpointを返す
   List<String> _badpoint(){
     var summraize = _Summraize();
     var point = _triangular_chart();
@@ -857,7 +867,6 @@ class _EvaluationState extends State<Evaluation> {
 
     return advicelist;
   }
-
   //三角チャート
   List <double> _triangular_chart(){
     List<double> point=[];
@@ -944,7 +953,6 @@ class _EvaluationState extends State<Evaluation> {
 
   return point;
 }
-
   //ダイアログ表示
   _openDialog() {
     
@@ -997,7 +1005,7 @@ class _EvaluationState extends State<Evaluation> {
       },
     );
   }
-
+  //複数のスマホで実行できるようにデバイスのサイズを取得するための関数
 List<double> _devicesizeget(){
     List<double> devicesize = [];
       //デバイスのサイズ取得
@@ -1035,6 +1043,8 @@ Future<void> widgetToImage(wti) async {
   }
 }
 
+
+//Widget build
   @override
   Widget build(BuildContext context) {
     //初期状態
@@ -1537,7 +1547,7 @@ Future<void> widgetToImage(wti) async {
     }
 }
 
-//描画用1
+//描画用：画像に線や印を描画するための関数
 class MyPainter extends CustomPainter{
   //引数の受け取る方
   List<Offset> offsets;
@@ -2209,7 +2219,7 @@ class MyPainter extends CustomPainter{
   }
 }
 
-//描画用2
+//描画用：三角チャートを作成するための描画(未使用)
 class ImagePainter extends CustomPainter{
 
   List<double> point;
@@ -2263,7 +2273,7 @@ class ImagePainter extends CustomPainter{
     return true;
   }
 }
-//高菜
+//トリミングのための関数(未使用)
 class MyClipper extends CustomClipper<Rect> {
   List<Offset> offsets;
   MyClipper(this.offsets);
@@ -2284,7 +2294,7 @@ class MyClipper extends CustomClipper<Rect> {
         return false; // トリミングは常に同じであるため、再クリップを行わない
     }
 }
-
+//5角形チャートを描画するための関数
 class SquarePainter extends CustomPainter {
   String dir;
   SquarePainter(this.dir);
@@ -2313,7 +2323,7 @@ class SquarePainter extends CustomPainter {
     return false;
   }
 }
-
+//描画用:〇，△，□の描画を行う関数
   String _symbol(int value){
     if (value > 18){
       return "◎";
@@ -2325,5 +2335,3 @@ class SquarePainter extends CustomPainter {
       return "△";
     }
   }
-
-
