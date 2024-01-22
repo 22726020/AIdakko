@@ -1428,8 +1428,8 @@ Future<void> widgetToImage(wti) async {
                 Align(alignment: Alignment.bottomCenter,
                child: Padding(padding: EdgeInsets.only(top: 10,left: 5),
                  child: Container(
-                   width: _devicesizeget()[0]/3.2,
-                   height: _devicesizeget()[1]/12*1.2,
+                   width: _devicesizeget()[0]/2.1,
+                   height: _devicesizeget()[1]/12*1,
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -1452,45 +1452,45 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
+                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: main_text_colors)),
                     ),
                  ),
                     ),
                 ),
+                  //   Padding(padding: EdgeInsets.only(top: 10,left: 5),
+                  //     child: Container(
+                  //       width: _devicesizeget()[0]/3.2,
+                  //       height: _devicesizeget()[1]/12*1.2,
+                  // child: ElevatedButton(
+                  //     onPressed: (){
+                  //       setState(() {
+                  //         summraize = _Summraize();
+                  //         badtxt = _badpoint();
+                  //         button = "badpoint";
+                  //         imagescore = "assets/null.png";
+                  //         downcolor_1 = Colors.grey;
+                  //         downcolor_2 = Colors.orange;
+                  //         downcolor_3 = Colors.grey;
+                  //         tf = false;
+                  //         badtf = true;
+                  //         texttf = false;
+                  //         advicetf = false;
+                  //         // _openDialog();
+                  //       });
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       fixedSize:const Size(120,80),
+                  //       backgroundColor: downcolor_2.withOpacity(0.6),
+                  //       elevation: 16,
+                  //     ),
+                  //     child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
+                  //   ),
+                  //     ),
+                  //   ),
                     Padding(padding: EdgeInsets.only(top: 10,left: 5),
                       child: Container(
-                        width: _devicesizeget()[0]/3.2,
-                        height: _devicesizeget()[1]/12*1.2,
-                  child: ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          summraize = _Summraize();
-                          badtxt = _badpoint();
-                          button = "badpoint";
-                          imagescore = "assets/null.png";
-                          downcolor_1 = Colors.grey;
-                          downcolor_2 = Colors.orange;
-                          downcolor_3 = Colors.grey;
-                          tf = false;
-                          badtf = true;
-                          texttf = false;
-                          advicetf = false;
-                          // _openDialog();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize:const Size(120,80),
-                        backgroundColor: downcolor_2.withOpacity(0.6),
-                        elevation: 16,
-                      ),
-                      child: Text("要点",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
-                    ),
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 10,left: 5),
-                      child: Container(
-                        width: _devicesizeget()[0]/3.2,
-                        height: _devicesizeget()[1]/12*1.2,
+                        width: _devicesizeget()[0]/2.1,
+                        height: _devicesizeget()[1]/12*1,
                   child: ElevatedButton(
                       onPressed: (){
                         setState(() {
@@ -1513,7 +1513,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: main_text_colors)),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: main_text_colors)),
                       
                     ),
                       ),
