@@ -591,99 +591,109 @@ class _EvaluationState extends State<Evaluation> {
 //ここから閾値設定してます
     //姿勢の数値を出力しています．
     print("姿勢の数値"+kendall.toString());
-    if(kendall < 20){
-      backbone_score += 19;
+
+    if(kendall <= 14.065){
+      backbone_score = 19;
     }
-    if(35 > kendall && kendall > 20){
-      backbone_score += 15;
+    else if(14.065 < kendall && kendall <= 21.335){
+      backbone_score = 15;
     }
-    if(40 > kendall && kendall > 35){
-      backbone_score += 10;
+    else if(21.335 < kendall && kendall <= 24.83){
+      backbone_score = 10;
     }
-    if(45 > kendall && kendall > 40){
-      backbone_score += 5;
+    else if(24.83 < kendall && kendall <= 33.5){
+      backbone_score = 5;
     }
-    else{
-      backbone_score += 0;
+    else if(33.5 < kendall){
+      backbone_score = 0;
     }
+    //確認用
+    // print("姿勢の点数は"+backbone_score.toString());
 
     //抱っこの高さの数値化を出力しています
     print("抱っこの高さ"+double.parse(Hugheight[0]).toString());
-    if(double.parse(Hugheight[0]) > 0.6){
-      hugheight_score += 20;
+    if(0.55 < double.parse(Hugheight[0])){
+      hugheight_score = 20;
     }
-
-    if(0.6 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.45){
-      hugheight_score += 15;
+    else if(0.485 < double.parse(Hugheight[0]) && double.parse(Hugheight[0]) <= 0.55){
+      hugheight_score = 15;
     }
-    if(0.45 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.40){
-      hugheight_score += 10;
+    else if(0.475 < double.parse(Hugheight[0]) && double.parse(Hugheight[0]) <= 0.485){
+      hugheight_score = 10;
     }
-    if(0.40 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) > 0.35){
-      hugheight_score += 5;
+    else if(0.425 > double.parse(Hugheight[0]) && double.parse(Hugheight[0]) <= 0.475){
+      hugheight_score = 5;
     }
-    else{
-      hugheight_score += 0;
+    else if(double.parse(Hugheight[0]) <= 0.425){
+      hugheight_score = 0;
     }
+    //確認用
+    // print("抱っこの高さのスコアは"+hugheight_score.toString());
 
     //肩のバランスの数値化を出力しています
     print("肩のバランス"+ShoulderScore.toString());
-    if(ShoulderScore < 1.5){
-      shoulder_score += 20;
+    if(ShoulderScore <= 2.25){
+      shoulder_score = 20;
     }
-    if(1.5 < ShoulderScore && ShoulderScore < 3.0){
-      shoulder_score += 15;
+    else if(2.25 < ShoulderScore && ShoulderScore <= 3.0){
+      shoulder_score = 15;
     }
-    if(3.0 < ShoulderScore && ShoulderScore < 3.2){
-      shoulder_score += 10;
+    else if(3.0 < ShoulderScore && ShoulderScore <= 6.62){
+      shoulder_score = 10;
     }
-    if(3.2 < ShoulderScore && ShoulderScore < 3.4){
-      shoulder_score += 5;
+    else if(6.62 < ShoulderScore && ShoulderScore <= 9.24){
+      shoulder_score = 5;
     }
-    else{
-      shoulder_score += 0;
+    else if(9.24 < ShoulderScore){
+      shoulder_score = 0;
     }
+    //確認用
+    // print("肩のバランスのスコアは"+shoulder_score.toString());
 
-
-
-    if(ArmPitFit > 5){
-      armpitfit_score += 20;
+    //ArmPitFitは脇の開き具合の定量化した変数です．
+    //以下で閾値を定めて5段階評価しています．
+    if(4.19 < ArmPitFit){
+      armpitfit_score = 20;
     }
-    if(5 > ArmPitFit && ArmPitFit > 3){
-      armpitfit_score += 15;
+    else if(1.625 < ArmPitFit && ArmPitFit <= 4.19){
+      armpitfit_score = 15;
     }
-    if(3 > ArmPitFit && ArmPitFit > 2){
-      armpitfit_score += 10;
+    else if(1.315 < ArmPitFit && ArmPitFit <= 1.625){
+      armpitfit_score = 10;
     }
-    if(2 > ArmPitFit && ArmPitFit > 1){
-      armpitfit_score += 5;
+    else if(1.11 < ArmPitFit && ArmPitFit <= 1.315){
+      armpitfit_score = 5;
     }
-    else{
-      armpitfit_score += 0;
+    else if (ArmPitFit < 1.11){
+      armpitfit_score = 0;
     }
-
     print("脇の開き具合"+ArmPitFit.toString());
+    //確認用
+    // print("脇の開き具合のスコアは"+armpitfit_score.toString());
 
     //Closenessは密着具合の定量化した変数です．
     //以下で閾値を定めて5段階評価しています．
     print("密着具合"+Closeness.toString());
-    if(0 < Closeness && Closeness < 25){
-      closeness_score += 20;
+    if(Closeness <= 58.38){
+      closeness_score = 20;
     }
-    if(25 < Closeness && Closeness < 50){
+    else if(58.38 < Closeness && Closeness <= 86.5){
 
-      closeness_score += 15;
+      closeness_score = 15;
     }
-    if(50 < Closeness && Closeness < 60){
-      closeness_score += 10;
+    else if(86.5 < Closeness && Closeness <= 144.5){
+      closeness_score = 10;
     }
-    if(70 < Closeness && Closeness < 80){
-      closeness_score += 5;
+    else if(144.5 < Closeness && Closeness <= 148){
+      closeness_score = 5;
     }
-    else{
+    else if(148 < Closeness){
       closeness_score += 0;
-
     }
+    //確認用
+    // print("密着具合のスコアは"+closeness_score.toString());
+
+//ここまで変更
 
     sumscore = shoulder_score + backbone_score + hugheight_score + armpitfit_score + closeness_score;
     
@@ -696,6 +706,7 @@ class _EvaluationState extends State<Evaluation> {
 
     return scorelist;
   }
+
   //badpointを返す
   List<String> _badpoint(){
     var summraize = _Summraize();
@@ -713,15 +724,15 @@ class _EvaluationState extends State<Evaluation> {
       "背骨のS字カーブが全体的に弱くなっている姿勢です。"];
     List<String> bad_hugheight_list
     = ["",
-      "かなり低いです",//34
-      "やや低いです",//12
-      "適切です",];//0
+      "かなり低いです",
+      "やや低いです",
+      "適切です",];
     List<String> bad_shoulderbalance_list
     = ["",
-      "とても差があります",//34
-      "やや差があります",//2
-      "まあバランスがとれています",//1
-      "バランスがとれています",];//0
+      "とても差があります",
+      "やや差があります",
+      "まあバランスがとれています",
+      "バランスがとれています",];
 
     //ケンダル分類指摘出力
     if(summraize[1] == "ノーマル"){
@@ -784,73 +795,132 @@ class _EvaluationState extends State<Evaluation> {
   List<String> _advice(){
     var summraize = _Summraize();
     var point = _triangular_chart();
+    var score = _score();//[0]sumscore [1]shoulder_score [2]backbone_score [3]hugheight_score [4]armpitfit_score [5]closeness_score;
     List<String> advicelist = [];
     String advice = "";
     int advicecount = 0;
 
     List<String> advice_kendall_list
     = ["",
-      "耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶのが理想的な姿勢です。",
-      "腰椎の強い前弯と、骨盤の前傾を改善するために、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "骨盤の前方移動とのけ反りを改善するために 、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "猫背で、反り腰を改善するために、顎を引き、背すじを伸ばし、腰椎の自然な湾曲を保つように心がけましょう。",
-      "平背：へいはいを改善するために、腰の湾曲を意識し、腰を少し前に倒すイメージを持ちましょう。",
+      "全ポイントで外れています。下腹をへこませ、耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶように抱っこしましょう。",
+      "3ヵ所外れています。下腹をへこませ、耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶように抱っこしましょう。",
+      "2ケ所外れています。下腹をへこませ、耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶように抱っこしましょう。",
+      "1ヶ所外れています。下腹をへこませ、耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶように意識しましょう。",
+      "耳たぶ,肩峰,股関節,膝,外くるぶしの5点が一直線に並ぶ理想的な姿勢です。",
     ];
     List<String> advice_hugheight_list
     = ["",
-      "かなり低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
-      "やや低いため赤ちゃんと大人のほっぺがつくような、キスができるような高さをこころがけましょう",
-      "適切です",
+      "非常に低いため抱っこする人の肩に赤ちゃんの顔を乗せ、ほっぺにキスできる高さをこころがけましょう。",
+      "かなり低いため抱っこする人の肩に赤ちゃんの顔を乗せ、ほっぺにキスできる高さをこころがけましょう。",
+      "やや低いため抱っこする人の肩に赤ちゃんの顔を乗せ、ほっぺにキスできる高さをこころがけましょう。",
+      "ほぼ適切です。抱っこする人の肩に赤ちゃんの顔を乗せ、ほっぺにキスできる高さをこころがけましょう。",
+      "適切です。",
     ];
     List<String> advice_shoulderbalance_list
     = ["",
-      "とても差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "やや差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "まあ差があるため背中をまっすぐ伸ばし、肩を軽く下げる姿勢を保つことが重要です。",
-      "バランスが取れています",
+      "バランスが非常に崩れています。背筋を伸ばし、肩の力を抜き体全体で抱っこしましょう。",
+      "バランスが崩れています。背筋を伸ばし、肩の力を抜き体全体で抱っこしましょう。",
+      "バランスにやや差があります。背筋を伸ばし、肩の力を抜き体全体で抱きましょう。",
+      "バランスはほぼとれています。腕や肩の力を抜きましょう。",
+      "バランスが非常に取れています。",
+    ];
+    List<String> advice_armpitfit_list
+    = ["",
+      "非常に開いています。赤ちゃんの顔を肩に乗せ、肘～手首の間と体を使って抱っこしましょう。",
+      "かなり開いています。赤ちゃんの顔を肩に乗せ、肘～手首の間と体を使って抱っこしましょう。",
+      "やや開いています。肩の力を抜き、赤ちゃんを深く抱いてみましょう。",
+      "ほぼ適切です。赤ちゃんをもう少し深く抱いてみましょう。",
+      "適切です。",
+    ];
+    List<String> advice_closeness_list
+    = ["",
+      "非常に離れています。赤ちゃんと自分の体を密着させましょう。",
+      "かなり離れています。赤ちゃんと自分の体を密着させましょう。",
+      "やや離れています。赤ちゃんが寄りかかるように抱っこしましょう。",
+      "ほぼ適切です。",
+      "適切です。",
     ];
 
     //ケンダル分類指摘出力
-    if(summraize[1] == "ノーマル"){
+    if(score[2] == 0){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[1]);
     }
-    if(summraize[1] == "ロードシス"){
+    if(score[2] == 5){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[2]);
     }
-    if(summraize[1] == "スウェイバック"){
+    if(score[2] == 10){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[3]);
     }
-    if(summraize[1] == "カイホロードシス"){
+    if(score[2] == 15){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[4]);
     }
-    if(summraize[1] == "フラットバック"){
+    if(score[2] == 19){
       advicelist.add(advice_kendall_list[0]+advice_kendall_list[5]);
     }
-    else{
-      advicelist.add(advice_kendall_list[1]);
-    }
+
     //抱っこの高さ指摘出力
-    if(point[5]==3||point[5]==4){
+    if(score[3] == 0){
       advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[1]);
     }
-    if(point[5]==1||point[5]==2){
+    if(score[3] == 5){
       advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[2]);
     }
-    if(point[5]==0){
+    if(score[3] == 10){
       advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[3]);
     }
+    if(score[3] == 15){
+      advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[4]);
+    }
+    if(score[3] == 20){
+      advicelist.add(advice_hugheight_list[0]+advice_hugheight_list[5]);
+    }
     //肩のバランスの指摘出力
-    if(point[7]==3||point[7]==4){
+    if(score[1] == 0){
       advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[1]);
     }
-    if(point[7]==2){
+    if(score[1] == 5){
       advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[2]);
     }
-    if(point[7]==1){
+    if(score[1] == 10){
       advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[3]);
     }
-    if(point[7]==0){
+    if(score[1] == 15){
       advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[4]);
+    }
+    if(score[1] == 20){
+      advicelist.add(advice_shoulderbalance_list[0]+advice_shoulderbalance_list[5]);
+    }
+    //脇の開きの指摘出力
+    if(score[4] == 0){
+      advicelist.add(advice_armpitfit_list[0]+advice_armpitfit_list[1]);
+    }
+    if(score[4] == 5){
+      advicelist.add(advice_armpitfit_list[0]+advice_armpitfit_list[2]);
+    }
+    if(score[4] == 10){
+      advicelist.add(advice_armpitfit_list[0]+advice_armpitfit_list[3]);
+    }
+    if(score[4] == 15){
+      advicelist.add(advice_armpitfit_list[0]+advice_armpitfit_list[4]);
+    }
+    if(score[4] == 20){
+      advicelist.add(advice_armpitfit_list[0]+advice_armpitfit_list[5]);
+    }
+    //密着の指摘出力
+    if(score[5] == 0){
+      advicelist.add(advice_closeness_list[0]+advice_closeness_list[1]);
+    }
+    if(score[5] == 5){
+      advicelist.add(advice_closeness_list[0]+advice_closeness_list[2]);
+    }
+    if(score[5] == 10){
+      advicelist.add(advice_closeness_list[0]+advice_closeness_list[3]);
+    }
+    if(score[5] == 15){
+      advicelist.add(advice_closeness_list[0]+advice_closeness_list[4]);
+    }
+    if(score[5] == 20){
+      advicelist.add(advice_closeness_list[0]+advice_closeness_list[5]);
     }
 
     //リストを一つ吐き出したら改行を行う
@@ -1209,7 +1279,7 @@ Future<void> widgetToImage(wti) async {
               ),
             Container(
                   width: _devicesizeget()[0],
-                  height: _devicesizeget()[1]/12*4,
+                  height: _devicesizeget()[1]/12*4.8,
                   // color: Colors.blue,
                   child:Column(crossAxisAlignment: CrossAxisAlignment.start, children:[
                     Row(
@@ -1252,7 +1322,7 @@ Future<void> widgetToImage(wti) async {
                                   }
                                   if (index == 1){
                                     return RadarChartTitle(
-                                      text: '姿勢',
+                                      text: '脊柱',
                                       angle: 0
                                     );
                                   }
@@ -1316,8 +1386,13 @@ Future<void> widgetToImage(wti) async {
                               ),
                             ),
                           ),
-                          )
+                          ),
                       ],
+                    ),
+                    Visibility(visible:tf, 
+                    child:Center(
+                    child:Text(_scoretext(_score()),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,color: Colors.red)),
+                    ),
                     ),
         Visibility(visible:badtf, child:
         Container(
@@ -1336,23 +1411,31 @@ Future<void> widgetToImage(wti) async {
                     //BadPoint
     ),
         ),
-                Visibility(visible:advicetf, child:
-        Container(
+      Visibility(visible:advicetf, 
+      child:Expanded(
+      child:SingleChildScrollView(
+        child: Container(
             width: _devicesizeget()[0],
-            height: _devicesizeget()[1]/12*4,
+            height: _devicesizeget()[1]/12*5.6,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //アドバイス
-                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("横から見た姿勢：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("脊柱：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
                 Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[0],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
-                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの位置：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("抱っこの高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
                 Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[1],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
-                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("左右の肩の高さ：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("肩のバランス：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
                 Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[2],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("密着：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[3],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text("脇の開き：",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black))),visible: advicetf),
+                Visibility(child: Padding(padding: const EdgeInsets.only(left: 8.0,right: 8.0),child: Text(advicetxt[4],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.black54))),visible: advicetf),
               ],
             )
     ),
         ),
+      ),
+      ),
                   ]
           )
             ),
@@ -1462,7 +1545,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_1.withOpacity(0.6),//ボタン背景色
                         elevation: 16,
                       ),
-                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: main_text_colors)),
+                      child: Text("抱っこスコア",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: main_text_colors)),
                     ),
                  ),
                     ),
@@ -1523,7 +1606,7 @@ Future<void> widgetToImage(wti) async {
                         backgroundColor: downcolor_3.withOpacity(0.6),
                         elevation: 16,
                       ),
-                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: main_text_colors)),
+                      child: Text("アドバイス",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: main_text_colors)),
                       
                     ),
                       ),
@@ -1859,7 +1942,8 @@ class MyPainter extends CustomPainter{
     
     landmarks =  [];
     if(offsets.length!=7){
-      landmarks.add(offsets[0]);
+      // landmarks.add(offsets[0]);
+      landmarks.add(offsets[8]);//耳
       landmarks.add(offsets[12]);
       landmarks.add(offsets[14]);
       landmarks.add(offsets[16]);
@@ -2064,7 +2148,8 @@ class MyPainter extends CustomPainter{
 
     landmarks =  [];
     if(offsets.length!=7){
-      landmarks.add(offsets[0]);
+      // landmarks.add(offsets[0]);
+      landmarks.add(offsets[7]);
       landmarks.add(offsets[11]);
       landmarks.add(offsets[13]);
       landmarks.add(offsets[15]);
@@ -2333,5 +2418,28 @@ class SquarePainter extends CustomPainter {
     }
     else {
       return "△";
+    }
+  }
+
+//スコアに応じた文章を返す関数
+  String _scoretext(List<int> score){
+    //判定項目に一つでも0点があれば
+    if (score[1]==0 || score[2]==0 || score[3]==0 || score[4]==0 || score[5]==0){
+      return "改善の余地があります！";
+    }
+    if (100 > score[0] && score[0] >= 80){
+      return "あなたは抱っこの達人です！";
+    }
+    if (80 > score[0] && score[0] >= 70){
+      return "抱っこが上手ですね！";
+    }
+    if (70 > score[0] && score[0] >= 40){
+      return "改善の余地があります！";
+    }
+    if (40 > score[0] && score[0] >= 20){
+      return "改善の余地があります！";
+    }
+    else{
+      return "改善の余地があります！";
     }
   }

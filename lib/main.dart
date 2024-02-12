@@ -39,6 +39,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,//上向きを許可
+  ]);
 
   runApp(MyApp(camera: firstCamera));
 }
